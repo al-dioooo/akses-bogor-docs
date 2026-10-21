@@ -2,7 +2,7 @@
 
 Before creating a PR, ensure following this guideline:
 
-[Github Repository Guideline](/doc/554fde1d-0a79-405a-b9cb-b82a1e1ec880)
+[Github Repository Guideline](./github-repository-guideline.md)
 
 ## 1. Purpose
 
