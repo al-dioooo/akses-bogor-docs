@@ -5,7 +5,7 @@ Repositori ini mengikuti dua guideline tim:
 - [Github Repository Guideline](guidelines/github-repository-guideline.md)
 - [Pull Request & Code Review Guideline](guidelines/pull-request-code-review-guideline.md)
 
-Dokumen ini menjelaskan cara menerapkan kedua guideline tersebut pada repo dokumentasi.
+Dokumen ini menjelaskan cara menerapkan kedua guideline tersebut pada repo dokumentasi. Alasan di balik aturan ini dicatat di [ADR-0002](decisions/0002-bahasa-indonesia-untuk-dokumentasi.md) (bahasa) dan [ADR-0003](decisions/0003-github-issues-dan-alur-kontribusi.md) (ticket tracker dan alur kontribusi). Cara menulis ADR ada di [decisions/README.md](decisions/README.md).
 
 ## Alur Kerja
 
