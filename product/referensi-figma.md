@@ -23,10 +23,10 @@
 ## Kondisi File
 
 - **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795). Frame DS v1 tidak memuatnya.
-- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 26 ikon, 9 komponen inti, 22 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
+- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 26 ikon, 9 komponen inti, 23 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
 - **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" di halaman `Main` (lihat [Frame DS v1](#frame-ds-v1)). Frame asli dipindah tanpa diubah ke halaman `Archive · Lovable v0`.
 - **Hanya desktop.** Belum ada frame mobile atau tablet.
-- **Peta berupa tangkapan tile OpenStreetMap berpusat di Jakarta.** Frame asli memakai atribusi Leaflet. Map · DS v1 dan peta kecil di Detail · DS v1 masih memakai tangkapan yang sama, walau atribusinya sudah diganti ke Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
+- **Peta di frame asli berupa tangkapan tile OpenStreetMap berpusat di Jakarta**, dengan atribusi Leaflet. Frame DS v1 memakai komponen Map base, peta skematis Kota Bogor, dengan atribusi Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 
 ## Frame DS v1
 
@@ -46,7 +46,7 @@ Layar hasil migrasi ke design system kaca, di bagian atas halaman `Main`, beruru
 Perubahan dibanding frame asli:
 
 - Label status memakai istilah Status badge (Aksesibel, Sebagian) dan label tombol memakai sentence case.
-- Map: ditambah legenda status dan tombol "Lihat sebagai daftar" sebagai alternatif peta. Atribusi menjadi "© Mapbox © OpenStreetMap" dengan tempat logo Mapbox di kiri bawah ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
+- Map: ditambah legenda status dan tombol "Lihat sebagai daftar" sebagai alternatif peta. Atribusi menjadi "© Mapbox © OpenStreetMap" dengan tempat logo Mapbox di kiri bawah ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)). Tangkapan peta Jakarta diganti Map base, dan marker dipindah ke kecamatan lokasi contoh dengan status yang sama seperti kartu Explore.
 - Kategori di langkah 1 Laporkan memakai Radio tile dengan indikator radio agar jelas hanya satu pilihan.
 - Tombol mengambang "Laporkan Tempat" di Landing dan Explore dihapus karena menutupi footer dan sudah ada di nav bar.
 - Teks kartu "Apa selanjutnya?" di Laporan Berhasil tidak lagi meluber keluar kartu.
@@ -68,7 +68,7 @@ Data berikut di frame DS v1 adalah isian contoh dan tidak boleh dianggap sebagai
 - Jumlah lokasi per kategori: Kampus 25, Masjid 42, Halte 38, Rumah Sakit 20.
 - Lokasi contoh: Kampus contoh A (Tanah Sareal), Halte contoh (Bogor Tengah), Rumah sakit contoh (Bogor Barat), Kampus contoh B (Bogor Utara), dan Masjid contoh (Bogor Tengah) di ringkasan laporan. Nama sengaja fiktif agar tidak ada status aksesibilitas yang melekat pada tempat nyata; kecamatannya nyata.
 - Foto lokasi memakai ulang foto frame asli. Foto header dan galeri halte berupa bus antarkota, bukan halte.
-- Peta di Map dan Detail berupa tangkapan Jakarta (lihat [Kondisi File](#kondisi-file)). Peta di pemilih lokasi berupa gambar skematis.
+- Peta di Map, Detail, dan pemilih lokasi berupa gambar skematis. Letak jalan, sungai, dan kecamatan hanya perkiraan. Marker kelima di Bogor Timur tidak punya kartu di Explore.
 
 Frame arsip masih memuat data asli prototipe: Universitas Indonesia (Depok), Halte TransJakarta Bundaran HI, "RSUP Dr. Cipto…", Institut Pertanian Bogor (tertulis "Bandung"), "Menampilkan 8 lokasi", dan kontak Jakarta.
 
