@@ -51,3 +51,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0016](0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian lokasi memakai Mapbox | Accepted | 2026-10-21 |
 | [0017](0017-empat-jawaban-ketersediaan-fasilitas.md) | Empat jawaban untuk ketersediaan fasilitas | Accepted | 2026-10-21 |
 | [0018](0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md) | Status "pintu masuk dulu" dan ringkasan "X dari Y fasilitas" | Accepted | 2026-10-21 |
+| [0019](0019-verifikasi-tim-dan-mitra-terlatih.md) | Verifikasi oleh tim dan mitra terlatih | Accepted | 2026-10-21 |
