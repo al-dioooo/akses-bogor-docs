@@ -85,3 +85,4 @@ Opsi terpilih: "Tim inti dan mitra komunitas difabel yang dilatih".
 - [Pertanyaan Terbuka PT-09](../product/pertanyaan-terbuka.md#pt-09-proses-verifikasi-dan-moderasi)
 - [ADR-0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md), [ADR-0017](0017-empat-jawaban-ketersediaan-fasilitas.md), [ADR-0018](0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)
 - [PRD](../product/prd.md), FR-30 sampai FR-36
+- [Panduan Verifikasi](../operations/panduan-verifikasi.md)
