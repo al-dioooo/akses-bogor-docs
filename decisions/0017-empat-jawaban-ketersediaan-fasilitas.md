@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #22
 - Men-supersede: [ADR-0005](0005-empat-fasilitas-aksesibilitas.md)
+- Dilengkapi oleh: [ADR-0022](0022-tersedia-berarti-bisa-dipakai.md)
 
 ## Konteks dan Masalah
 
