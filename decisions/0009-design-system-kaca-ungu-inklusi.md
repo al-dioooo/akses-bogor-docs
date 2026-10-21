@@ -43,7 +43,7 @@ Rincian nilai ada di [Fondasi Visual](../design/fondasi-visual.md).
 - Positif: kontras AA terverifikasi untuk semua token teks di ketiga mode.
 - Positif: token dan komponen siap dipakai untuk mendesain ulang layar dan untuk kode (setiap variable punya nama CSS).
 - Positif: delapan layar sudah dibangun ulang sebagai frame "DS v1" dari komponen dan token ini (lihat [Referensi Figma](../product/referensi-figma.md#frame-ds-v1)).
-- Negatif: frame asli dengan palet biru masih ada di halaman Main sebagai referensi dan perlu diarsipkan setelah frame DS v1 disetujui.
+- Netral: frame asli berpalet biru dipindah ke halaman `Archive · Lovable v0` sebagai arsip; halaman Main hanya berisi frame DS v1.
 - Negatif: belum ada mode "Dark Solid". Pengguna mode gelap yang butuh tanpa transparansi jatuh ke mode Solid terang.
 - Negatif: `backdrop-filter` berat di ponsel kelas bawah; mode Solid juga perlu dipakai sebagai fallback performa.
 - Netral: ungu kurang terasa "resmi" dibanding biru; dikompensasi dengan copy yang jelas dan data yang terverifikasi.
