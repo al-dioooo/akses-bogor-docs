@@ -1,0 +1,11 @@
+{
+  "config": {
+    "default": true,
+    // Prosa bahasa Indonesia tidak dibatasi panjang baris.
+    "MD013": false,
+    // Heading kembar diperbolehkan selama tidak bersaudara (mis. "Pro"/"Kontra" per opsi di ADR).
+    "MD024": { "siblings_only": true },
+    "MD033": { "allowed_elements": ["br", "details", "summary"] }
+  },
+  "ignores": ["node_modules/**"]
+}
