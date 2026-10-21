@@ -1,6 +1,6 @@
 # ADR-0008: Peta Interaktif dengan Leaflet dan Tile Berbasis OpenStreetMap
 
-- Status: Proposed
+- Status: Superseded oleh [ADR-0016](0016-peta-dan-pencarian-mapbox.md)
 - Tanggal: 2026-10-21
 - Pengambil keputusan: belum ditentukan
 - Issue: #5
