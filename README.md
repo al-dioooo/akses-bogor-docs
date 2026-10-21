@@ -8,6 +8,15 @@ AksesBogor membantu difabel menemukan fasilitas publik yang ramah akses, seperti
 
 Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor)
 
+## Repositori Terkait
+
+| Repo | Isi |
+| --- | --- |
+| [akses-bogor-web](https://github.com/al-dioooo/akses-bogor-web) | Aplikasi web Next.js di Vercel, mobile-first dan bisa dipasang sebagai PWA |
+| [akses-bogor-api](https://github.com/al-dioooo/akses-bogor-api) | API Fastify di Azure App Service, dengan Neon Postgres + PostGIS |
+
+Keduanya mengikuti [guideline tim](guidelines/) dan [ADR-0013](decisions/0013-tech-stack-nextjs-fastify.md).
+
 ## Struktur Repositori
 
 | Path | Isi |
