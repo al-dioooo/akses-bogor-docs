@@ -3,7 +3,7 @@
 | | |
 | --- | --- |
 | Status | Draft |
-| Versi | 0.4 |
+| Versi | 0.5 |
 | Tanggal | 2026-10-21 |
 | Pemilik | Tim AksesBogor |
 | Issue | #14 |
@@ -29,7 +29,7 @@ AksesBogor adalah web mobile-first yang membantu difabel dan pendampingnya menge
 | G1 | Pengguna bisa menilai aksesibilitas sebuah tempat di Kota Bogor dalam waktu kurang dari satu menit sejak membuka situs. |
 | G2 | Warga bisa melaporkan tempat dari ponsel, langsung di lokasi, dalam waktu kurang dari tiga menit. |
 | G3 | Semua data yang tayang sudah diverifikasi tim, dan pengguna bisa melihat kapan terakhir diverifikasi. |
-| G4 | Produk sendiri memenuhi WCAG 2.2 level AA *(usulan target, lihat PT-05)*. |
+| G4 | Produk sendiri memenuhi WCAG 2.2 level AA ([ADR-0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md)). |
 
 ### Non-tujuan untuk MVP
 
@@ -79,7 +79,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-03 | Pengguna bisa memfilter berdasarkan kategori (boleh lebih dari satu), kecamatan, fasilitas yang tersedia, dan status. | Must |
 | FR-04 | Hasil tampil sebagai Location card; jumlah hasil sesuai data yang tampil. | Must |
 | FR-05 | Peta Kota Bogor menampilkan marker per status (warna, ikon, dan label di legenda), kontrol zoom, dan tombol ke tampilan daftar dengan filter yang sama. | Must |
-| FR-06 | Detail lokasi menampilkan nama, kategori, kecamatan, status, keempat fasilitas beserta ketersediaannya, deskripsi, foto, peta mini, dan tanggal verifikasi terakhir. | Must |
+| FR-06 | Detail lokasi menampilkan nama, kategori, kecamatan, status, keempat fasilitas beserta ketersediaan, alasan bila Tidak tersedia, dan catatannya, deskripsi, foto, peta mini, dan tanggal verifikasi terakhir. | Must |
 | FR-07 | Detail menampilkan ringkasan "X dari Y fasilitas tersedia" dan satu kalimat alasan status ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)). | Must |
 | FR-08 | Pengguna bisa membagikan tautan lokasi. | Could |
 
@@ -101,8 +101,8 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-21 | Langkah 1 meminta nama tempat, kategori (pilih satu), lokasi, dan patokan opsional. Lokasi ditentukan lewat peta dengan pin di tengah, tombol "Gunakan lokasi saya", atau pencarian tempat; yang disimpan adalah pin yang dikonfirmasi pelapor ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). | Must |
 | FR-22 | Kecamatan dihitung otomatis dari koordinat. Lokasi di luar Kota Bogor ditolak dengan pesan yang menjelaskan cakupan wilayah. | Must |
 | FR-23 | Sebelum lanjut, sistem menampilkan lokasi terdaftar dalam radius sekitar 50 m yang namanya mirip, dengan pilihan melaporkan kekurangan pada lokasi itu. | Should |
-| FR-24 | Langkah 2 meminta jawaban untuk keempat fasilitas: Tersedia, Tidak tersedia, Tidak perlu, atau Belum tahu, dengan bawaan Belum tahu ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). | Must |
-| FR-25 | Langkah 3 menerima foto JPG atau PNG maksimal 5 MB per foto *(usulan: hingga 3 foto)*, deskripsi tambahan, dan menampilkan ringkasan sebelum dikirim. | Must |
+| FR-24 | Langkah 2 meminta jawaban untuk keempat fasilitas: Tersedia, Tidak tersedia, Tidak perlu, atau Belum tahu, dengan bawaan Belum tahu ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). Tidak tersedia boleh diberi alasan (Tidak ada, Rusak, Terhalang, Terbatas, Tidak sesuai), dan setiap jawaban boleh diberi catatan maksimal 200 karakter ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)). | Must |
+| FR-25 | Langkah 3 menerima hingga 10 foto (JPEG, PNG, atau WebP, hingga 20 MB mentah) yang diperkecil di browser dan diberi tag objek, deskripsi tambahan, dan menampilkan ringkasan sebelum dikirim. Teks alternatif foto dibuat dari tag dan nama lokasi ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)). | Must |
 | FR-26 | Setelah kirim, pengguna melihat konfirmasi dan langkah selanjutnya. | Must |
 | FR-27 | "Edit lokasi" dan "Laporkan kekurangan" di halaman Detail membuka formulir yang sama, terisi data saat ini, dan masuk antrean verifikasi. | Must |
 
@@ -133,13 +133,13 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 
 | Area | Kebutuhan |
 | --- | --- |
-| Aksesibilitas | Target WCAG 2.2 AA *(usulan, PT-05)*: navigasi keyboard penuh, label dan landmark yang benar, cincin fokus terlihat, status selalu berupa teks + ikon + warna, peta punya alternatif daftar, tampilan tetap utuh di lebar 320 px dan zoom 200%, target sentuh minimal 44 × 44 px. |
+| Aksesibilitas | WCAG 2.2 AA sebagai syarat rilis, diuji di CI, di setiap PR, dengan pembaca layar setiap rilis, dan lewat audit sebelum alpha dan beta ([ADR-0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md)): navigasi keyboard penuh, label dan landmark yang benar, cincin fokus terlihat, status selalu berupa teks + ikon + warna, peta punya alternatif daftar, tampilan tetap utuh di lebar 320 px dan zoom 200%, target sentuh minimal 44 × 44 px. |
 | Preferensi pengguna | `prefers-reduced-transparency` memakai mode Solid, `prefers-color-scheme: dark` memakai mode Dark, `prefers-reduced-motion` dihormati ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). |
 | Pengujian aksesibilitas | Uji dengan TalkBack dan VoiceOver, plus uji kegunaan bersama pengguna difabel sebelum beta. |
 | Mobile dan performa | Dirancang mulai 360 px. *(usulan)* Largest Contentful Paint ≤ 2,5 detik di jaringan 4G pada ponsel kelas menengah; gambar dikompres dan dimuat bertahap; blur dimatikan pada perangkat lemah. |
 | PWA | Bisa dipasang ke layar utama. Halaman yang pernah dibuka tetap tampil saat offline (Could). |
 | Privasi dan keamanan | Sesuai UU No. 27 Tahun 2022: data pribadi minimal, HTTPS, metadata lokasi (EXIF) dihapus dari foto, dan akun bisa dihapus. |
-| Bahasa | Bahasa Indonesia *(usulan, PT-04)*. |
+| Bahasa | Bahasa Indonesia sederhana, string di berkas pesan agar siap i18n, `lang="id"` ([ADR-0020](../decisions/0020-antarmuka-bahasa-indonesia-siap-i18n.md)). |
 | Browser | Chrome Android dan Safari iOS dua versi terakhir; Chrome, Firefox, Safari, dan Edge versi terbaru di desktop. |
 | Peta | Mapbox GL JS dan pencarian Mapbox dengan token berumur pendek dari Fastify; logo Mapbox dan "© Mapbox © OpenStreetMap" selalu terlihat; perangkat tanpa WebGL diarahkan ke Explore ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)). |
 | Konsistensi UI | Semua layar memakai komponen dan token dari design system Figma ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). |
@@ -178,9 +178,9 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | --- | --- |
 | Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu persetujuan privasi |
 | Lokasi | id, nama, kategori, kecamatan, kota, koordinat, patokan, status dan ringkasan fasilitas (dihitung), deskripsi, tanggal verifikasi terakhir |
-| Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui) |
+| Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui), alasan, catatan |
 | Laporan | id, pelapor, jenis (baru, perubahan, kekurangan), lokasi terkait, isian, status (menunggu, klarifikasi, diterbitkan, ditolak), alasan, waktu |
-| Foto | id, laporan, lokasi, berkas, status moderasi |
+| Foto | id, laporan, lokasi, berkas, tag objek, teks alternatif, status moderasi |
 | Log audit | entitas, pengubah, waktu, perubahan |
 
 ## 10. Metrik Keberhasilan
@@ -235,14 +235,14 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md) | Empat fasilitas dengan empat jenis jawaban |
 | [0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md) | Status "pintu masuk dulu" dan ringkasan X dari Y |
 | [0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md) | Verifikasi oleh tim dan mitra terlatih |
+| [0020](../decisions/0020-antarmuka-bahasa-indonesia-siap-i18n.md) | Antarmuka berbahasa Indonesia, siap i18n |
+| [0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md) | WCAG 2.2 AA dan pengujian berlapis |
+| [0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md) | "Tersedia" berarti bisa dipakai, dengan alasan |
+| [0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md) | Hingga 10 foto bertag per laporan |
 
 ## 14. Pertanyaan Terbuka
 
-- **PT-04**: bahasa antarmuka.
-- **PT-05**: target WCAG resmi dan cara pengujian.
-- **PT-08**: pencatatan kondisi fasilitas.
 - **PT-12**: sumber data awal.
-- **Baru**: jumlah maksimum foto per laporan.
 
 Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
 
