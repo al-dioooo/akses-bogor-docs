@@ -12,6 +12,7 @@ Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1z
 
 | Path | Isi |
 | --- | --- |
+| `decisions/` | Decision log (ADR) format MADR, beserta template dan index |
 | `guidelines/` | Guideline tim: repositori GitHub serta pull request & code review |
 | `CONTRIBUTING.md` | Cara berkontribusi di repo ini (alur, branch, commit, PR, review) |
 | `.github/` | Template pull request, template issue, dan workflow CI |
