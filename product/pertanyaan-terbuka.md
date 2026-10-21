@@ -9,14 +9,14 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 | ID | Pertanyaan | Menghambat implementasi | ADR |
 | --- | --- | --- | --- |
 | [PT-01](#pt-01-cakupan-wilayah) | Cakupan wilayah: Kota Bogor atau Indonesia? | Ya | [0010](../decisions/0010-cakupan-wilayah-kota-bogor.md) |
-| [PT-02](#pt-02-status-dan-accessibility-score) | Bagaimana status dan Accessibility Score ditentukan? | Ya | |
+| [PT-02](#pt-02-status-dan-accessibility-score) | Bagaimana status dan Accessibility Score ditentukan? | Ya | [0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md), [0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md) |
 | [PT-03](#pt-03-akun-pengguna-dan-notifikasi) | Apakah pelapor perlu akun? Bagaimana notifikasi dikirim? | Ya | [0011](../decisions/0011-pelapor-wajib-login.md) |
 | [PT-04](#pt-04-bahasa-antarmuka) | Bahasa antarmuka aplikasi | Tidak | |
 | [PT-05](#pt-05-target-aksesibilitas-antarmuka) | Target aksesibilitas antarmuka (WCAG) | Ya | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md) (sebagian) |
 | [PT-06](#pt-06-tampilan-mobile) | Tampilan mobile | Ya | [0012](../decisions/0012-web-mobile-first-pwa.md) |
 | [PT-07](#pt-07-input-lokasi-pada-formulir-laporan) | Bagaimana lokasi dan kota diisi di formulir laporan? | Ya | [0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md), [0016](../decisions/0016-peta-dan-pencarian-mapbox.md) |
 | [PT-08](#pt-08-kondisi-fasilitas) | Apakah kondisi fasilitas dicatat, bukan hanya ada/tidak? | Tidak | |
-| [PT-09](#pt-09-proses-verifikasi-dan-moderasi) | Proses verifikasi dan moderasi laporan | Ya | |
+| [PT-09](#pt-09-proses-verifikasi-dan-moderasi) | Proses verifikasi dan moderasi laporan | Ya | [0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md) |
 | [PT-10](#pt-10-halaman-yang-belum-didesain) | Halaman mana yang masuk MVP? | Tidak | |
 | [PT-11](#pt-11-tech-stack-produksi) | Tech stack produksi | Ya | [0013](../decisions/0013-tech-stack-nextjs-fastify.md), [0014](../decisions/0014-login-google-dan-kode-email.md) |
 | [PT-12](#pt-12-data-awal) | Sumber data awal dan pengganti data placeholder | Tidak | |
@@ -39,6 +39,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
   - Apakah status diturunkan dari skor?
 - **Catatan**: OpenStreetMap memakai tag `wheelchair=yes|limited|no`, yang sejalan dengan Accessible, Partial, dan status ketiga. Menyamakan skema memudahkan impor atau berbagi data dengan OSM.
 - **Usulan**: skor diturunkan dari fasilitas yang sudah terverifikasi dengan bobot yang dipublikasikan, agar pengguna bisa memahami asal angkanya.
+- **Status**: diputuskan di [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md) (empat jawaban per fasilitas) dan [ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md): status dihitung dengan aturan "pintu masuk dulu", dan skor 0–100 diganti ringkasan "X dari Y fasilitas tersedia".
 
 ## PT-03: Akun Pengguna dan Notifikasi
 
@@ -88,6 +89,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
   - Berapa target waktu verifikasi?
   - Bagaimana perubahan dari "Edit Lokasi" dan "Laporkan Kekurangan" diverifikasi?
   - Bagaimana foto dimoderasi (wajah orang, pelat nomor)?
+- **Status**: diputuskan di [ADR-0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md): tim inti dan mitra komunitas difabel yang dilatih, bukti foto atau kunjungan lapangan, target median 3 hari kerja, satu antrean untuk laporan baru dan perubahan, serta moderasi foto.
 
 ## PT-10: Halaman yang Belum Didesain
 
