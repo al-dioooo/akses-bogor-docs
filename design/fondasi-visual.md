@@ -74,7 +74,7 @@ Tiga koleksi variable:
 | Koleksi | Mode | Isi |
 | --- | --- | --- |
 | `Primitives` | Value | 66 warna mentah (disembunyikan dari picker) |
-| `Color` | Glass, Solid, Dark | 55 token semantik: `color/bg/*`, `color/surface/*`, `color/border/*`, `color/text/*`, `color/icon/*`, `color/brand/*`, `color/status/*`, `color/shadow/*`, `color/focus/*`, `color/control/*`, `color/marker/*` |
+| `Color` | Glass, Solid, Dark | 57 token semantik: `color/bg/*`, `color/surface/*`, `color/border/*`, `color/text/*`, `color/icon/*`, `color/brand/*`, `color/danger/*`, `color/status/*`, `color/shadow/*`, `color/focus/*`, `color/control/*`, `color/marker/*` |
 | `Dimension` | Value | 22 token: `spacing/2xs`–`4xl` (4–96), `radius/sm`–`full` (8–999), `blur/glass` (24) dan `blur/glass-strong` (32), `border-width/*`, `size/*` |
 
 Setiap variable punya scope dan nama CSS. Nama CSS diturunkan dari nama variable: `color/text/primary` menjadi `var(--color-text-primary)`.
@@ -115,7 +115,7 @@ Warna bayangan dan radius blur terikat ke variable, sehingga ikut berubah per mo
 
 | Komponen | Varian | Properti utama |
 | --- | --- | --- |
-| Button | Style (Primary, Glass, Ghost) × Size (Medium 48 px, Small 36 px) × State (Default, Hover, Focus, Disabled) = 24 | Label, ikon depan/belakang (bisa diganti) |
+| Button | Style (Primary, Glass, Ghost, Danger) × Size (Medium 48 px, Small 36 px) × State (Default, Hover, Focus, Disabled) = 32 | Label, ikon depan/belakang (bisa diganti) |
 | Toggle | Checked × State = 6 | Label |
 | Checkbox | Checked × State = 6 | Label, deskripsi |
 | Input | State (Default, Focus, Filled, Error, Disabled) = 5 | Label, teks, ikon depan, helper, pesan error |
@@ -125,7 +125,7 @@ Warna bayangan dan radius blur terikat ke variable, sehingga ikut berubah per mo
 | Nav item | State (Default, Hover, Active, Focus) = 4 | Label |
 | Nav bar | 1 | — |
 
-Ditambah 26 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
+Ditambah 33 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
 
 ### Komponen pola
 
@@ -139,6 +139,8 @@ Dibuat saat migrasi delapan layar, di bagian Patterns halaman Design System:
 | Explore | Chip (terpilih atau tidak), Select, Location card (Default, Hover, Focus) |
 | Detail | Facility item (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui; baris alasan dan catatan opsional), Score ring (empat nada status, isi "X dari Y") |
 | Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Facility answer (Answer: Tersedia, Tidak tersedia, Tidak perlu, Belum tahu × Note: Closed, Open), Checkbox card, Textarea, Upload dropzone, Photo item |
+| Mobile | App bar (Home, Back), Bottom nav item (5 tab × Default, Active), Bottom nav, Form action bar, Footer mobile, Location row |
+| Akun | Google sign-in button, Report row (Menunggu, Klarifikasi, Diterbitkan, Ditolak) |
 
 Komponen yang mengikuti keputusan produk:
 
@@ -147,7 +149,26 @@ Komponen yang mengikuti keputusan produk:
 - **Score ring**: angka X (fasilitas relevan yang Tersedia), teks "dari Y", dan nama status; bukan skor 0–100 ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)). Busur hanya penguat visual dan diatur per instance.
 - **Picker pin** dan **Pan control**: pin tetap di tengah peta pemilih lokasi, dan tombol arah 48 px untuk pengguna yang tidak bisa menyeret peta ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). Ikon Locate dipakai di tombol "Gunakan lokasi saya".
 - **Map base**: peta skematis Kota Bogor (batas kota, enam kecamatan, Kebun Raya, Ciliwung, Cisadane, jalan utama, rel) yang digambar dari token warna, dipakai di Map dan peta kecil Detail. Untuk peta kecil, instance diperbesar dan layer label disembunyikan. Komponen ini hanya pengganti visual; di produk peta dirender Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
-- **Upload dropzone** dan **Photo item**: dropzone menerima hingga 10 foto JPEG, PNG, atau WebP. Setiap foto yang dipilih tampil sebagai Photo item berisi pratinjau, nama dan ukuran berkas, Select untuk tag, dan tombol hapus 44 px ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)).
+- **Upload dropzone** dan **Photo item**: dropzone menerima hingga 10 foto JPEG, PNG, atau WebP. Setiap foto yang dipilih tampil sebagai Photo item berisi pratinjau, nama dan ukuran berkas, Select untuk tag, dan tombol hapus 44 px, dalam dua baris sehingga Select selebar kartu di layar sempit ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)).
+
+### Akun
+
+- **Button Style=Danger**: untuk aksi yang menghapus data, mis. "Hapus akun saya". Isi memakai `color/danger/fill` (red-700) dan `color/danger/fill-hover` (red-800) dengan teks putih, tanpa glow ungu; Focus hanya memakai cincin fokus. Labelnya selalu menyebut apa yang dihapus.
+- **Google sign-in button**: pengganti visual tombol Google Identity Services ("Lanjutkan dengan Google"). Di produk tombol dirender Google, dan warna logonya mengikuti aturan merek Google, bukan token.
+- **Report row**: satu laporan di "Laporan saya". Nama, lalu status berupa ikon dan teks dengan warna status, tanggal, dan alasan atau pertanyaan verifikator bila ada.
+- Nav bar desktop kini punya tombol "Masuk" (atau "Akun saya" setelah login) di sebelah "Laporkan tempat". Ikon Clock, Trash, dan LogOut ditambahkan.
+
+### Navigasi mobile
+
+Di lebar 360 px, nav bar desktop (tujuh menu) diganti komponen berikut:
+
+- **App bar**: menempel di atas. Type=Home berisi logo dan tombol Masuk; Type=Back berisi tombol Kembali 44 px dan judul satu baris.
+- **Bottom nav**: menempel di bawah layar dengan lima tab, yaitu Beranda, Jelajahi, Peta, Laporkan, dan Lainnya. Menu lain dari nav desktop pindah ke Lainnya. Tab aktif ditandai indikator, warna brand, dan `aria-current="page"`, bukan warna saja. Halaman diberi ruang bawah setinggi nav supaya elemen yang difokus tidak tertutup (WCAG 2.4.11).
+- **Form action bar**: menggantikan Bottom nav selama mengisi formulir bertahap. Tombol utama ("Lanjut" atau "Kirim laporan") selebar sisa bar, dan "Kembali" muncul mulai langkah kedua; tombol Kembali di App bar keluar dari formulir.
+
+Komponen bersama menyesuaikan lebar 328 px: garis penghubung Stepper meregang, nilai Input dan Select dipotong satu baris, dan label, teks bantuan, label Checkbox, serta petunjuk dropzone membungkus.
+
+Ikon Home, Map, Menu, dan User ditambahkan untuk pola ini. Footer mobile menumpuk kolom footer desktop dengan tautan setinggi 44 px, dan Location row adalah kartu ringkas satu lokasi untuk Peta.
 
 Footer dan panel ajakan memakai `color/surface/inverse` (tinta gelap opak), bukan kaca gelap, karena kaca 72% di atas latar terang hanya memberi kontras sekitar 4.4:1 untuk teks sekunder.
 

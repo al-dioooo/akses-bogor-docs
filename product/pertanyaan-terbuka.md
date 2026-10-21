@@ -20,6 +20,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 | [PT-10](#pt-10-halaman-yang-belum-didesain) | Halaman mana yang masuk MVP? | Tidak | |
 | [PT-11](#pt-11-tech-stack-produksi) | Tech stack produksi | Ya | [0013](../decisions/0013-tech-stack-nextjs-fastify.md), [0014](../decisions/0014-login-google-dan-kode-email.md) |
 | [PT-12](#pt-12-data-awal) | Sumber data awal dan pengganti data placeholder | Tidak | |
+| [PT-13](#pt-13-data-setelah-akun-dihapus) | Data apa yang tetap tayang setelah akun dihapus? | Ya | [0024](../decisions/0024-data-setelah-akun-dihapus.md) |
 
 ## PT-01: Cakupan Wilayah
 
@@ -112,6 +113,15 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: semua data contoh adalah placeholder (lihat [Data Placeholder](referensi-figma.md#data-placeholder)).
 - **Opsi sumber data awal**: survei lapangan tim; data pemerintah kota; tag `wheelchair=*` di OpenStreetMap; kerja sama dengan komunitas difabel.
 - **Pertanyaan tambahan**: kontak resmi proyek, serta apakah statistik di Landing dihitung otomatis dari data.
+
+## PT-13: Data setelah Akun Dihapus
+
+- **Konteks**: FR-13 mewajibkan akun bisa dihapus beserta data pribadinya (UU No. 27 Tahun 2022), tetapi laporan yang sudah diterbitkan menjadi bagian dari data lokasi yang dipakai orang lain.
+- **Pertanyaan**: apa yang terjadi pada laporan dan foto saat pelapornya menghapus akun?
+- **Opsi**: hapus semua laporan dan foto, termasuk yang sudah tayang; pertahankan data lokasi dan foto yang sudah terbit tanpa nama pelapor; atau tanyakan ke pengguna saat menghapus.
+- **Usulan**: nama, email, dan sesi dihapus; laporan yang belum diverifikasi atau sedang diklarifikasi dibatalkan; informasi lokasi dan foto yang sudah diterbitkan tetap tayang tanpa nama pelapor. Layar Hapus Akun di Figma memakai usulan ini.
+- **Status**: diputuskan di [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md) sesuai usulan, dengan laporan yang ditolak ikut dihapus.
+- **Dampak**: isi Kebijakan Privasi, desain basis data (laporan perlu bisa dilepas dari akun), dan log audit verifikasi.
 
 [landing]: https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=13-2
 [map]: https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=13-351

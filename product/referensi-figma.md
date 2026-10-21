@@ -23,9 +23,9 @@
 ## Kondisi File
 
 - **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795). Frame DS v1 tidak memuatnya.
-- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 26 ikon, 9 komponen inti, 24 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
+- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 145 variable, 12 text style, 9 effect style, 33 ikon, 9 komponen inti, 32 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
 - **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" di halaman `Main` (lihat [Frame DS v1](#frame-ds-v1)). Frame asli dipindah tanpa diubah ke halaman `Archive · Lovable v0`.
-- **Hanya desktop.** Belum ada frame mobile atau tablet.
+- **Mobile (2026-10-21).** Kedelapan layar utama punya versi 360 px (lihat [Frame Mobile](#frame-mobile)), dan layar akun dibuat untuk desktop dan mobile sekaligus (lihat [Frame Akun](#frame-akun)). Panel verifikator belum didesain. Belum ada frame tablet.
 - **Peta di frame asli berupa tangkapan tile OpenStreetMap berpusat di Jakarta**, dengan atribusi Leaflet. Frame DS v1 memakai komponen Map base, peta skematis Kota Bogor, dengan atribusi Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 
 ## Frame DS v1
@@ -60,7 +60,55 @@ Perubahan dibanding frame asli:
 - Detail: fasilitas ditampilkan dalam satu kolom dengan baris alasan atau catatan, dan kalimat status menyebut alasannya: "Sebagian: Guiding Block tidak tersedia (tidak sesuai)" ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)).
 - Bahasa ([ADR-0020](../decisions/0020-antarmuka-bahasa-indonesia-siap-i18n.md)): nav bar menjadi Beranda, Jelajahi, Peta, Aksesibilitas, Difabel, Tips, Tentang; footer, judul Explore ("Jelajahi Lokasi"), dan tombol "Jelajahi lokasi" berbahasa Indonesia. Teks Laporan Berhasil tidak lagi menyebut "database".
 
-Belum digambar: keadaan lain pemilih lokasi (daftar hasil pencarian, akurasi GPS, titik di luar Kota Bogor, peringatan laporan ganda), keadaan unggah foto (sedang diunggah, gagal), galeri Detail yang dikelompokkan per tag, dan frame mobile.
+Belum digambar: keadaan lain pemilih lokasi (daftar hasil pencarian, akurasi GPS, titik di luar Kota Bogor, peringatan laporan ganda), keadaan unggah foto (sedang diunggah, gagal), dan galeri Detail yang dikelompokkan per tag. Frame mobile yang belum ada dicatat di [Frame Mobile](#frame-mobile).
+
+## Frame Mobile
+
+Versi 360 px ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)), di halaman `Main` tepat di bawah frame desktop pasangannya (y = 3400). Isinya instance komponen, token, dan text style yang sama dengan frame DS v1.
+
+| Frame | Node | Tinggi |
+| --- | --- | --- |
+| Landing · Mobile | [99:1734](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=99-1734) | 3477 px |
+| Jelajahi · Mobile | [100:1734](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=100-1734) | 2533 px |
+| Peta · Mobile | [101:1933](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=101-1933) | 800 px, satu layar |
+| Detail · Mobile | [102:2085](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=102-2085) | 2861 px |
+| Laporkan · Langkah 1 · Mobile | [105:2277](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-2277) | 1334 px |
+| Laporkan · Langkah 2 · Mobile | [105:2946](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-2946) | 1660 px |
+| Laporkan · Langkah 3 · Mobile | [105:3134](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-3134) | 1592 px |
+| Laporan Berhasil · Mobile | [105:3261](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-3261) | 1777 px |
+
+Pola yang dipakai:
+
+- App bar di atas (logo dan "Masuk", atau tombol Kembali) dan Bottom nav di bawah: Beranda, Jelajahi, Peta, Laporkan, Lainnya. Menu desktop lain (Aksesibilitas, Difabel, Tips, Tentang) pindah ke "Lainnya". Detail tidak memakai App bar; tombol Kembali mengambang di atas foto.
+- Tombol utama selebar layar dengan tinggi 48 px; target sentuh lain minimal 44 px ([ADR-0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md)). Frame panjang diberi ruang bawah setinggi Bottom nav supaya konten dan fokus tidak tertutup.
+- Jelajahi: tombol Filter (kecamatan dan fasilitas) dan chip kategori yang bisa digulir ke samping; hasil berupa Location card selebar layar.
+- Peta: peta penuh dengan pencarian mengambang, tombol Filter dan Daftar, kolom kontrol (legenda, zoom, lokasi saya), dan Location row untuk lokasi yang dipilih.
+- Detail: urutan nama dan status, ringkasan fasilitas, daftar fasilitas, tombol Edit dan Laporkan kekurangan, lalu deskripsi, galeri yang digulir ke samping, dan peta kecil.
+- Laporkan: App bar dengan judul "Laporkan tempat" dan tombol Kembali untuk keluar, stepper, dan isian selebar layar. Selama mengisi, Bottom nav diganti Form action bar yang menempel di bawah: "Lanjut" atau "Kirim laporan", dengan "Kembali" mulai langkah 2. Tombol "Gunakan lokasi saya" dan "Pakai lokasi ini" memakai ukuran 48 px.
+- Laporan Berhasil: Bottom nav kembali dengan tab Laporkan aktif, dan kedua tombol aksi ditumpuk.
+
+Belum digambar untuk mobile: lembar Filter, legenda yang terbuka, menu Lainnya, keadaan pencarian, keadaan lain pemilih lokasi dan unggah foto, serta panel verifikator.
+
+## Frame Akun
+
+Layar untuk FR-10 sampai FR-14 ([ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0014](../decisions/0014-login-google-dan-kode-email.md)), di sebelah kanan Laporan Berhasil: desktop di baris atas, mobile tepat di bawahnya.
+
+| Layar | Desktop | Mobile | Isi |
+| --- | --- | --- | --- |
+| Masuk | [112:2819](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-2819) | [112:2944](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-2944) | Tombol Google, atau email lalu "Kirim kode" |
+| Kode Masuk | [112:3517](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-3517) | [112:3649](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-3649) | Satu kolom kode 6 digit, "Ganti email", dan kirim ulang setelah hitung mundur |
+| Lengkapi Akun | [112:3697](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-3697) | [112:3817](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-3817) | Hanya saat masuk pertama: nama tampilan dan persetujuan Kebijakan Privasi (FR-11) |
+| Akun Saya | [112:3856](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-3856) | [112:4038](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-4038) | Laporan saya dengan status (FR-14), data akun (FR-12), Keluar, dan jalan ke Hapus akun |
+| Hapus Akun | [112:4175](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-4175) | [112:4304](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=112-4304) | Apa yang dihapus dan yang tetap tayang, centang konfirmasi, tombol Danger (FR-13) |
+
+Catatan:
+
+- Kolom kode adalah satu kolom yang menerima tempel, bukan enam kotak, dan petunjuknya menyebut masa berlaku 10 menit serta folder spam. Tidak ada CAPTCHA (WCAG 2.2 kriteria 3.3.8).
+- Tombol Google adalah pengganti visual tombol Google Identity Services; di produk tombol itu dirender Google.
+- Nav bar desktop menampilkan "Masuk" sebelum login dan "Akun saya" sesudahnya. Di mobile, Akun saya dibuka dari tab Lainnya.
+- Status laporan selalu berupa teks dan ikon: Menunggu verifikasi, Perlu klarifikasi, Diterbitkan, Ditolak. Alasan penolakan dan pertanyaan verifikator tampil di bawahnya.
+- Isi "Yang dihapus" dan "Yang tetap tayang" di Hapus Akun mengikuti [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md).
+- Belum digambar: keadaan galat kode (salah, kedaluwarsa, terlalu banyak percobaan), Lengkapi Akun dengan nama dari Google, dan menu Lainnya.
 
 ## Data Placeholder
 
