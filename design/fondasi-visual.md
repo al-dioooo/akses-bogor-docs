@@ -125,7 +125,7 @@ Warna bayangan dan radius blur terikat ke variable, sehingga ikut berubah per mo
 | Nav item | State (Default, Hover, Active, Focus) = 4 | Label |
 | Nav bar | 1 | — |
 
-Ditambah 25 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
+Ditambah 26 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
 
 ### Komponen pola
 
@@ -135,10 +135,16 @@ Dibuat saat migrasi delapan layar, di bagian Patterns halaman Design System:
 | --- | --- |
 | Umum | Logo (Default, Inverse), Tag (Brand, Glass), Check item, Footer |
 | Beranda | Category tile (Default, Hover, Focus), Stat item |
-| Peta | Zoom control, Map legend |
+| Peta | Zoom control, Pan control, Map legend, Picker pin |
 | Explore | Chip (terpilih atau tidak), Select, Location card (Default, Hover, Focus) |
-| Detail | Facility item (Tersedia, Tidak tersedia, Belum diketahui), Score ring (empat nada status) |
-| Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Checkbox card, Textarea, Upload dropzone |
+| Detail | Facility item (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui), Score ring (empat nada status, isi "X dari Y") |
+| Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Facility answer (Tersedia, Tidak tersedia, Tidak perlu, Belum tahu), Checkbox card, Textarea, Upload dropzone |
+
+Komponen yang mengikuti keputusan produk:
+
+- **Facility answer**: satu fasilitas dengan empat pilihan radio, bawaan "Belum tahu" ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). Di Detail, jawaban yang sama tampil lewat Facility item, dengan "Belum tahu" ditulis "Belum diketahui".
+- **Score ring**: angka X (fasilitas relevan yang Tersedia), teks "dari Y", dan nama status; bukan skor 0–100 ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)). Busur hanya penguat visual dan diatur per instance.
+- **Picker pin** dan **Pan control**: pin tetap di tengah peta pemilih lokasi, dan tombol arah 48 px untuk pengguna yang tidak bisa menyeret peta ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). Ikon Locate dipakai di tombol "Gunakan lokasi saya".
 
 Footer dan panel ajakan memakai `color/surface/inverse` (tinta gelap opak), bukan kaca gelap, karena kaca 72% di atas latar terang hanya memberi kontras sekitar 4.4:1 untuk teks sekunder.
 
