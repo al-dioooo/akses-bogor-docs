@@ -33,7 +33,7 @@ Opsi terpilih: **B · Ungu Inklusi**, dengan tiga mode warna dan komponen inti. 
 - **Teks sekunder**: ink-600 (`#4B5066`) menggantikan `#6A6E81`, yang hanya 3.8:1 di kaca.
 - **Fokus**: cincin 2 px celah + 2 px ungu, terlihat di semua gaya tombol.
 - **Latar aurora** membawa makna Bogor: ungu (inklusi), biru langit (Kota Hujan), mint (Kebun Raya).
-- **Cakupan v1**: 141 variable, 12 text style, 9 effect style, 14 ikon, dan komponen Button, Toggle, Checkbox, Input, Status badge, Map marker, Glass card, Nav item, dan Nav bar.
+- **Cakupan v1**: 141 variable, 12 text style, 9 effect style, 14 ikon, dan komponen Button, Toggle, Checkbox, Input, Status badge, Map marker, Glass card, Nav item, dan Nav bar. Saat migrasi layar (hari yang sama) bertambah 2 token permukaan inverse, 11 ikon, dan 19 komponen pola.
 
 Rincian nilai ada di [Fondasi Visual](../design/fondasi-visual.md).
 
@@ -42,7 +42,8 @@ Rincian nilai ada di [Fondasi Visual](../design/fondasi-visual.md).
 - Positif: identitas visual punya makna yang jelas dan selaras dengan isu disabilitas.
 - Positif: kontras AA terverifikasi untuk semua token teks di ketiga mode.
 - Positif: token dan komponen siap dipakai untuk mendesain ulang layar dan untuk kode (setiap variable punya nama CSS).
-- Negatif: delapan layar desain awal masih memakai palet biru lama dan belum memakai komponen; perlu dimigrasi.
+- Positif: delapan layar sudah dibangun ulang sebagai frame "DS v1" dari komponen dan token ini (lihat [Referensi Figma](../product/referensi-figma.md#frame-ds-v1)).
+- Negatif: frame asli dengan palet biru masih ada di halaman Main sebagai referensi dan perlu diarsipkan setelah frame DS v1 disetujui.
 - Negatif: belum ada mode "Dark Solid". Pengguna mode gelap yang butuh tanpa transparansi jatuh ke mode Solid terang.
 - Negatif: `backdrop-filter` berat di ponsel kelas bawah; mode Solid juga perlu dipakai sebagai fallback performa.
 - Netral: ungu kurang terasa "resmi" dibanding biru; dikompensasi dengan copy yang jelas dan data yang terverifikasi.
