@@ -2,6 +2,8 @@
 
 Disusun dari [desain Figma](referensi-figma.md) per 2026-10-21. Bagian yang merupakan tafsiran penulis, bukan isi desain, ditandai *(asumsi)*.
 
+Dokumen ini memotret prototipe awal, yang kini ada di halaman `Archive · Lovable v0`. Keputusan yang mengubahnya ada di [PRD](prd.md) dan [ADR](../decisions/README.md).
+
 ## Tujuan
 
 Berdasarkan copy di desain, AksesBogor bertujuan:
