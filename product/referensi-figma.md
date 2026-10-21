@@ -107,7 +107,7 @@ Catatan:
 - Tombol Google adalah pengganti visual tombol Google Identity Services; di produk tombol itu dirender Google.
 - Nav bar desktop menampilkan "Masuk" sebelum login dan "Akun saya" sesudahnya. Di mobile, Akun saya dibuka dari tab Lainnya.
 - Status laporan selalu berupa teks dan ikon: Menunggu verifikasi, Perlu klarifikasi, Diterbitkan, Ditolak. Alasan penolakan dan pertanyaan verifikator tampil di bawahnya.
-- Isi "Yang tetap tayang" di Hapus Akun masih usulan ([PT-13](pertanyaan-terbuka.md#pt-13-data-setelah-akun-dihapus)).
+- Isi "Yang dihapus" dan "Yang tetap tayang" di Hapus Akun mengikuti [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md).
 - Belum digambar: keadaan galat kode (salah, kedaluwarsa, terlalu banyak percobaan), Lengkapi Akun dengan nama dari Google, dan menu Lainnya.
 
 ## Data Placeholder

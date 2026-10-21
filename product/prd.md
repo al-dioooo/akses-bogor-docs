@@ -90,7 +90,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-10 | Pengguna bisa daftar dan masuk dengan Google atau kode 6 digit lewat email ([ADR-0014](../decisions/0014-login-google-dan-kode-email.md)), tanpa tes kognitif seperti CAPTCHA teka-teki. | Must |
 | FR-11 | Saat daftar, pengguna menyetujui Kebijakan Privasi. | Must |
 | FR-12 | Profil minimal: nama tampilan dan email. | Must |
-| FR-13 | Pengguna bisa menghapus akun beserta data pribadinya. | Must |
+| FR-13 | Pengguna bisa menghapus akun beserta data pribadinya. Laporan yang belum terbit ikut dihapus; data lokasi dan foto yang sudah terbit tetap tayang tanpa nama pelapor ([ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md)). | Must |
 | FR-14 | Halaman "Laporan saya" menampilkan status setiap laporan: menunggu verifikasi, diterbitkan, atau ditolak beserta alasannya. | Should |
 
 ### Pelaporan ([ADR-0006](../decisions/0006-laporan-warga-diverifikasi-sebelum-tayang.md))
@@ -179,7 +179,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu persetujuan privasi |
 | Lokasi | id, nama, kategori, kecamatan, kota, koordinat, patokan, status dan ringkasan fasilitas (dihitung), deskripsi, tanggal verifikasi terakhir |
 | Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui), alasan, catatan |
-| Laporan | id, pelapor, jenis (baru, perubahan, kekurangan), lokasi terkait, isian, status (menunggu, klarifikasi, diterbitkan, ditolak), alasan, waktu |
+| Laporan | id, pelapor (kosong bila akunnya dihapus), jenis (baru, perubahan, kekurangan), lokasi terkait, isian, status (menunggu, klarifikasi, diterbitkan, ditolak), alasan, waktu |
 | Foto | id, laporan, lokasi, berkas, tag objek, teks alternatif, status moderasi |
 | Log audit | entitas, pengubah, waktu, perubahan |
 
@@ -239,11 +239,11 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md) | WCAG 2.2 AA dan pengujian berlapis |
 | [0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md) | "Tersedia" berarti bisa dipakai, dengan alasan |
 | [0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md) | Hingga 10 foto bertag per laporan |
+| [0024](../decisions/0024-data-setelah-akun-dihapus.md) | Data setelah akun dihapus |
 
 ## 14. Pertanyaan Terbuka
 
 - **PT-12**: sumber data awal.
-- **PT-13**: data yang tetap tayang setelah akun dihapus.
 
 Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
 
