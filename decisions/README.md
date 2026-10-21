@@ -50,3 +50,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0015](0015-input-lokasi-peta-gps-pencarian.md) | Lokasi laporan diisi lewat peta, lokasi perangkat, atau pencarian | Accepted | 2026-10-21 |
 | [0016](0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian lokasi memakai Mapbox | Accepted | 2026-10-21 |
 | [0017](0017-empat-jawaban-ketersediaan-fasilitas.md) | Empat jawaban untuk ketersediaan fasilitas | Accepted | 2026-10-21 |
+| [0018](0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md) | Status "pintu masuk dulu" dan ringkasan "X dari Y fasilitas" | Accepted | 2026-10-21 |
