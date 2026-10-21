@@ -37,7 +37,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0002](0002-bahasa-indonesia-untuk-dokumentasi.md) | Bahasa Indonesia sebagai bahasa dokumentasi | Accepted | 2026-10-21 |
 | [0003](0003-github-issues-dan-alur-kontribusi.md) | GitHub Issues sebagai ticket tracker dan alur kontribusi repo docs | Accepted | 2026-10-21 |
 | [0004](0004-empat-kategori-lokasi-untuk-mvp.md) | Empat kategori lokasi untuk MVP | Accepted | 2026-10-21 |
-| [0005](0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas aksesibilitas dicatat sebagai tersedia atau tidak | Accepted | 2026-10-21 |
+| [0005](0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas aksesibilitas dicatat sebagai tersedia atau tidak | Superseded oleh 0017 | 2026-10-21 |
 | [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted | 2026-10-21 |
 | [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Superseded oleh 0009 | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Superseded oleh 0016 | 2026-10-21 |
