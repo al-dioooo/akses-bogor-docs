@@ -23,9 +23,9 @@
 ## Kondisi File
 
 - **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795). Frame DS v1 tidak memuatnya.
-- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 26 ikon, 9 komponen inti, 24 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
+- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 30 ikon, 9 komponen inti, 29 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
 - **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" di halaman `Main` (lihat [Frame DS v1](#frame-ds-v1)). Frame asli dipindah tanpa diubah ke halaman `Archive · Lovable v0`.
-- **Hanya desktop.** Belum ada frame mobile atau tablet.
+- **Mobile baru sebagian (2026-10-21).** Empat layar punya versi 360 px (lihat [Frame Mobile](#frame-mobile)); layar Laporkan, Laporan Berhasil, akun, dan panel verifikator belum. Belum ada frame tablet.
 - **Peta di frame asli berupa tangkapan tile OpenStreetMap berpusat di Jakarta**, dengan atribusi Leaflet. Frame DS v1 memakai komponen Map base, peta skematis Kota Bogor, dengan atribusi Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 
 ## Frame DS v1
@@ -60,7 +60,28 @@ Perubahan dibanding frame asli:
 - Detail: fasilitas ditampilkan dalam satu kolom dengan baris alasan atau catatan, dan kalimat status menyebut alasannya: "Sebagian: Guiding Block tidak tersedia (tidak sesuai)" ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)).
 - Bahasa ([ADR-0020](../decisions/0020-antarmuka-bahasa-indonesia-siap-i18n.md)): nav bar menjadi Beranda, Jelajahi, Peta, Aksesibilitas, Difabel, Tips, Tentang; footer, judul Explore ("Jelajahi Lokasi"), dan tombol "Jelajahi lokasi" berbahasa Indonesia. Teks Laporan Berhasil tidak lagi menyebut "database".
 
-Belum digambar: keadaan lain pemilih lokasi (daftar hasil pencarian, akurasi GPS, titik di luar Kota Bogor, peringatan laporan ganda), keadaan unggah foto (sedang diunggah, gagal), galeri Detail yang dikelompokkan per tag, dan frame mobile.
+Belum digambar: keadaan lain pemilih lokasi (daftar hasil pencarian, akurasi GPS, titik di luar Kota Bogor, peringatan laporan ganda), keadaan unggah foto (sedang diunggah, gagal), dan galeri Detail yang dikelompokkan per tag. Frame mobile yang belum ada dicatat di [Frame Mobile](#frame-mobile).
+
+## Frame Mobile
+
+Versi 360 px ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)), di halaman `Main` tepat di bawah frame desktop pasangannya (y = 3400). Isinya instance komponen, token, dan text style yang sama dengan frame DS v1.
+
+| Frame | Node | Tinggi |
+| --- | --- | --- |
+| Landing · Mobile | [99:1734](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=99-1734) | 3477 px |
+| Jelajahi · Mobile | [100:1734](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=100-1734) | 2533 px |
+| Peta · Mobile | [101:1933](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=101-1933) | 800 px, satu layar |
+| Detail · Mobile | [102:2085](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=102-2085) | 2861 px |
+
+Pola yang dipakai:
+
+- App bar di atas (logo dan "Masuk", atau tombol Kembali) dan Bottom nav di bawah: Beranda, Jelajahi, Peta, Laporkan, Lainnya. Menu desktop lain (Aksesibilitas, Difabel, Tips, Tentang) pindah ke "Lainnya". Detail tidak memakai App bar; tombol Kembali mengambang di atas foto.
+- Tombol utama selebar layar dengan tinggi 48 px; target sentuh lain minimal 44 px ([ADR-0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md)). Frame panjang diberi ruang bawah setinggi Bottom nav supaya konten dan fokus tidak tertutup.
+- Jelajahi: tombol Filter (kecamatan dan fasilitas) dan chip kategori yang bisa digulir ke samping; hasil berupa Location card selebar layar.
+- Peta: peta penuh dengan pencarian mengambang, tombol Filter dan Daftar, kolom kontrol (legenda, zoom, lokasi saya), dan Location row untuk lokasi yang dipilih.
+- Detail: urutan nama dan status, ringkasan fasilitas, daftar fasilitas, tombol Edit dan Laporkan kekurangan, lalu deskripsi, galeri yang digulir ke samping, dan peta kecil.
+
+Belum digambar untuk mobile: lembar Filter, legenda yang terbuka, menu Lainnya, keadaan pencarian, dan layar Laporkan, Laporan Berhasil, akun, serta panel verifikator.
 
 ## Data Placeholder
 
