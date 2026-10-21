@@ -2,9 +2,12 @@
 
 - File: [AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor) (file key `aTaMQUxVF2P1zQlJY3s4du`)
 - Diperiksa: 2026-10-21
-- Halaman: `Main` (8 frame desktop, lebar 1440 px) dan `Design System` (design system v1, lihat [Fondasi Visual](../design/fondasi-visual.md))
+- Halaman:
+  - `Main`: 8 frame DS v1 (desktop, lebar 1440 px), lihat [Frame DS v1](#frame-ds-v1)
+  - `Design System`: design system v1, lihat [Fondasi Visual](../design/fondasi-visual.md)
+  - `Archive · Lovable v0`: 8 frame asli hasil impor Lovable, disimpan tanpa diubah
 
-## Frame di Halaman Main
+## Frame Asli (Archive · Lovable v0)
 
 | Layar | Node | Tinggi | Isi singkat |
 | --- | --- | --- | --- |
@@ -19,15 +22,15 @@
 
 ## Kondisi File
 
-- **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795) yang harus dihapus sebelum desain dipakai sebagai acuan final.
+- **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795) ; frame DS v1 tidak memuatnya.
 - **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 25 ikon, 9 komponen inti, 19 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
-- **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" tepat di bawah frame aslinya (lihat [Frame DS v1](#frame-ds-v1)). Frame asli tidak diubah dan disimpan sebagai referensi.
+- **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" di halaman `Main` (lihat [Frame DS v1](#frame-ds-v1)). Frame asli dipindah tanpa diubah ke halaman `Archive · Lovable v0`.
 - **Hanya desktop.** Belum ada frame mobile atau tablet.
 - **Peta berupa tangkapan Leaflet + OpenStreetMap** (atribusi "Leaflet | © OpenStreetMap contributors"), berpusat di Jakarta.
 
 ## Frame DS v1
 
-Layar hasil migrasi ke design system kaca, di halaman `Main` pada baris kedua (y = 3400). Isinya hanya instance komponen, token warna, dan text style; foto memakai ulang gambar dari frame asli.
+Layar hasil migrasi ke design system kaca, di bagian atas halaman `Main`, berurutan sesuai alur pengguna. Isinya hanya instance komponen, token warna, dan text style; foto memakai ulang gambar dari frame asli.
 
 | Frame | Node |
 | --- | --- |
