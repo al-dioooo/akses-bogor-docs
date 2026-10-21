@@ -46,3 +46,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0011](0011-pelapor-wajib-login.md) | Pelapor wajib login | Accepted | 2026-10-21 |
 | [0012](0012-web-mobile-first-pwa.md) | Web mobile-first yang bisa dipasang (PWA) | Accepted | 2026-10-21 |
 | [0013](0013-tech-stack-nextjs-fastify.md) | Tech stack Next.js + Fastify, Neon, Azure, dan Cloudflare R2 | Accepted | 2026-10-21 |
+| [0014](0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email | Accepted | 2026-10-21 |
