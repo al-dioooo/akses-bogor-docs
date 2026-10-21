@@ -58,13 +58,13 @@ AksesBogor adalah web mobile-first yang membantu difabel dan pendampingnya menge
 | Explore | Pencarian, filter, daftar lokasi | Explore · DS v1 |
 | Peta | Marker per status, legenda, tampilan daftar | Map · DS v1 |
 | Detail lokasi | Status, fasilitas, ringkasan "X dari Y", foto, peta mini | Detail · DS v1 |
-| Akun | Daftar, masuk, keluar, profil, hapus akun | Belum ada |
+| Akun | Daftar, masuk, keluar, profil, hapus akun | Masuk, Kode Masuk, Lengkapi Akun, Akun Saya, Hapus Akun (desktop dan mobile) |
 | Laporkan tempat | Formulir tiga langkah, edit lokasi, laporkan kekurangan | Laporkan · Langkah 1–3 · DS v1, Laporan Berhasil · DS v1 |
 | Panel verifikator | Antrean, pemeriksaan, terbit atau tolak | Belum ada |
 | Notifikasi | Email status laporan | Belum ada |
 | Halaman statis | Tentang, Kebijakan Privasi, Syarat Layanan | Belum ada |
 
-Semua layar dirancang mulai dari lebar 360 px ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)). Kedelapan layar sudah punya versi mobile; layar akun dan panel verifikator belum didesain ([Referensi Figma](referensi-figma.md#frame-mobile)).
+Semua layar dirancang mulai dari lebar 360 px ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)). Kedelapan layar dan layar akun sudah punya versi mobile; panel verifikator belum didesain ([Referensi Figma](referensi-figma.md#frame-mobile)).
 
 ## 6. Kebutuhan Fungsional
 
@@ -243,6 +243,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 ## 14. Pertanyaan Terbuka
 
 - **PT-12**: sumber data awal.
+- **PT-13**: data yang tetap tayang setelah akun dihapus.
 
 Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
 
