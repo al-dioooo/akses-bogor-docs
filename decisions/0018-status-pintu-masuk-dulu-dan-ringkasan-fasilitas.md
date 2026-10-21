@@ -26,26 +26,26 @@ Desain menampilkan status (Accessible, Partial) dan Accessibility Score 65/100 b
 
 Opsi terpilih: "Aturan pintu masuk dulu, dengan ringkasan X dari Y fasilitas". Hanya jawaban yang sudah diverifikasi yang dihitung ([ADR-0017](0017-empat-jawaban-ketersediaan-fasilitas.md)).
 
-**Istilah**
+### Istilah
 
 - **Fasilitas relevan**: fasilitas dengan jawaban selain "Tidak perlu".
 - **Pintu masuk**: jawaban untuk Ramp / Jalur Landai. "Tidak perlu" berarti pintu masuk sudah rata.
 
-**Aturan status, diperiksa berurutan**
+### Aturan status, diperiksa berurutan
 
 1. Ramp "Tidak tersedia" → **Tidak aksesibel**. Bila tidak bisa masuk, fasilitas lain tidak membantu.
 2. Ramp "Belum tahu", atau setidaknya separuh fasilitas relevan "Belum tahu" → **Belum diketahui**.
 3. Semua fasilitas relevan "Tersedia" → **Aksesibel**.
 4. Selain itu → **Sebagian**.
 
-**Ringkasan di halaman Detail**
+### Ringkasan di halaman Detail
 
 - Angka yang ditampilkan adalah "X dari Y fasilitas tersedia": X = fasilitas relevan yang Tersedia, Y = jumlah fasilitas relevan. Bila ada yang Belum diketahui, jumlahnya disebutkan terpisah.
 - Komponen Score ring menampilkan X/Y dan nama status, bukan skor 0–100.
 - Satu kalimat alasan menyertai status, misalnya "Sebagian: Toilet Difabel tidak tersedia".
 - Tidak ada lagi Accessibility Score 0–100.
 
-**Lain-lain**
+### Lain-lain
 
 - Status dihitung ulang otomatis setiap kali jawaban terverifikasi berubah. Verifikator tidak menimpa status secara manual.
 - Pemetaan kasar ke OpenStreetMap: Aksesibel → `wheelchair=yes`, Sebagian → `limited`, Tidak aksesibel → `no`, Belum diketahui → tanpa tag. Status AksesBogor juga mempertimbangkan guiding block, jadi pemetaan ini hanya perkiraan.
