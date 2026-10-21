@@ -97,6 +97,8 @@ Diturunkan dari elemen UI; belum menjadi keputusan.
 
 ## Belum Ada di Desain
 
+Dibahas lebih lanjut di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
+
 - Login atau akun pengguna (padahal Laporan Berhasil menjanjikan notifikasi).
 - Panel admin atau verifikator.
 - Tampilan mobile dan tablet.
