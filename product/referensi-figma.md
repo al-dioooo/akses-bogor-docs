@@ -20,9 +20,35 @@
 ## Kondisi File
 
 - **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795) yang harus dihapus sebelum desain dipakai sebagai acuan final.
-- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 141 variable, 12 text style, 9 effect style, 14 ikon, 9 komponen, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). Delapan layar di halaman `Main` belum memakai token dan komponen tersebut.
+- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 25 ikon, 9 komponen inti, 19 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
+- **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" tepat di bawah frame aslinya (lihat [Frame DS v1](#frame-ds-v1)). Frame asli tidak diubah dan disimpan sebagai referensi.
 - **Hanya desktop.** Belum ada frame mobile atau tablet.
 - **Peta berupa tangkapan Leaflet + OpenStreetMap** (atribusi "Leaflet | © OpenStreetMap contributors"), berpusat di Jakarta.
+
+## Frame DS v1
+
+Layar hasil migrasi ke design system kaca, di halaman `Main` pada baris kedua (y = 3400). Isinya hanya instance komponen, token warna, dan text style; foto memakai ulang gambar dari frame asli.
+
+| Frame | Node |
+| --- | --- |
+| Landing · DS v1 | [56:2](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=56-2) |
+| Map · DS v1 | [59:182](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=59-182) |
+| Explore · DS v1 | [61:1203](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=61-1203) |
+| Detail · DS v1 | [63:541](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=63-541) |
+| Laporkan · Langkah 1 · DS v1 | [66:670](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=66-670) |
+| Laporkan · Langkah 2 · DS v1 | [66:839](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=66-839) |
+| Laporkan · Langkah 3 · DS v1 | [66:1004](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=66-1004) |
+| Laporan Berhasil · DS v1 | [68:1060](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=68-1060) |
+
+Perubahan dibanding frame asli:
+
+- Label status memakai istilah Status badge (Aksesibel, Sebagian) dan label tombol memakai sentence case.
+- Map: ditambah legenda status dan tombol "Lihat sebagai daftar" sebagai alternatif peta ([ADR-0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md)); atribusi OpenStreetMap tetap tampil.
+- Kategori di langkah 1 Laporkan memakai Radio tile dengan indikator radio agar jelas hanya satu pilihan.
+- Tombol mengambang "Laporkan Tempat" di Landing dan Explore dihapus karena menutupi footer dan sudah ada di nav bar.
+- Teks kartu "Apa selanjutnya?" di Laporan Berhasil tidak lagi meluber keluar kartu.
+- Landing memakai "Lift / elevator", bukan "Lift & eskalator" ([ADR-0005](../decisions/0005-empat-fasilitas-aksesibilitas.md)).
+- Data placeholder (kontak, statistik, nama dan kota lokasi) dibiarkan sama dengan aslinya.
 
 ## Data Placeholder
 
