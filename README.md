@@ -26,7 +26,7 @@ Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1z
 Prasyarat: Git dan Node.js 20 atau lebih baru (hanya untuk menjalankan lint).
 
 ```bash
-git clone git@github.com:al-dioooo/akses-bogor-docs.git
+git clone https://github.com/al-dioooo/akses-bogor-docs.git
 cd akses-bogor-docs
 npx --yes markdownlint-cli2@0.23.3 "**/*.md"
 ```
