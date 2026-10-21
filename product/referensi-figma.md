@@ -23,7 +23,7 @@
 ## Kondisi File
 
 - **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795). Frame DS v1 tidak memuatnya.
-- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 26 ikon, 9 komponen inti, 23 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
+- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 26 ikon, 9 komponen inti, 24 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
 - **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" di halaman `Main` (lihat [Frame DS v1](#frame-ds-v1)). Frame asli dipindah tanpa diubah ke halaman `Archive · Lovable v0`.
 - **Hanya desktop.** Belum ada frame mobile atau tablet.
 - **Peta di frame asli berupa tangkapan tile OpenStreetMap berpusat di Jakarta**, dengan atribusi Leaflet. Frame DS v1 memakai komponen Map base, peta skematis Kota Bogor, dengan atribusi Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
@@ -55,9 +55,12 @@ Perubahan dibanding frame asli:
 - Explore menulis "Menampilkan 4 lokasi", sesuai jumlah kartu.
 - Detail: daftar fasilitas memakai empat jawaban ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). Kartu "Accessibility Score" menjadi "Ringkasan fasilitas" berisi "2 dari 3", status Sebagian, dan kalimat alasannya ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)).
 - Laporkan langkah 1: ditambah pemilih lokasi ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)) berisi pencarian, tombol "Gunakan lokasi saya", peta dengan pin tetap di tengah, tombol arah dan zoom, kecamatan hasil hitung, tombol "Pakai lokasi ini", dan patokan opsional.
-- Laporkan langkah 2: setiap fasilitas dijawab dengan Facility answer (empat pilihan), bukan checkbox. Ringkasan di langkah 3 menampilkan jawaban tersebut.
+- Laporkan langkah 2: setiap fasilitas dijawab dengan Facility answer (empat pilihan), bukan checkbox. Toilet Difabel menunjukkan alasan yang dipilih, dan Lift menunjukkan kolom catatan yang terbuka ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)). Ringkasan di langkah 3 menampilkan jawaban dan alasannya.
+- Laporkan langkah 3: bagian foto berisi hitungan "3 dari 10 foto", daftar foto yang membantu verifikasi berdasarkan jawaban langkah 2, tiga Photo item bertag, dan dropzone ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)).
+- Detail: fasilitas ditampilkan dalam satu kolom dengan baris alasan atau catatan, dan kalimat status menyebut alasannya: "Sebagian: Guiding Block tidak tersedia (tidak sesuai)" ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)).
+- Bahasa ([ADR-0020](../decisions/0020-antarmuka-bahasa-indonesia-siap-i18n.md)): nav bar menjadi Beranda, Jelajahi, Peta, Aksesibilitas, Difabel, Tips, Tentang; footer, judul Explore ("Jelajahi Lokasi"), dan tombol "Jelajahi lokasi" berbahasa Indonesia. Teks Laporan Berhasil tidak lagi menyebut "database".
 
-Belum digambar: keadaan lain pemilih lokasi (daftar hasil pencarian, akurasi GPS, titik di luar Kota Bogor, peringatan laporan ganda) dan frame mobile.
+Belum digambar: keadaan lain pemilih lokasi (daftar hasil pencarian, akurasi GPS, titik di luar Kota Bogor, peringatan laporan ganda), keadaan unggah foto (sedang diunggah, gagal), galeri Detail yang dikelompokkan per tag, dan frame mobile.
 
 ## Data Placeholder
 
@@ -67,7 +70,7 @@ Data berikut di frame DS v1 adalah isian contoh dan tidak boleh dianggap sebagai
 - Statistik dampak: 125+ tempat dilaporkan, 80% memiliki ramp, 50+ kontributor aktif.
 - Jumlah lokasi per kategori: Kampus 25, Masjid 42, Halte 38, Rumah Sakit 20.
 - Lokasi contoh: Kampus contoh A (Tanah Sareal), Halte contoh (Bogor Tengah), Rumah sakit contoh (Bogor Barat), Kampus contoh B (Bogor Utara), dan Masjid contoh (Bogor Tengah) di ringkasan laporan. Nama sengaja fiktif agar tidak ada status aksesibilitas yang melekat pada tempat nyata; kecamatannya nyata.
-- Foto lokasi memakai ulang foto frame asli. Foto header dan galeri halte berupa bus antarkota, bukan halte.
+- Foto lokasi dan foto di langkah 3 memakai ulang foto frame asli; nama berkas foto di langkah 3 fiktif. Foto header dan galeri halte berupa bus antarkota, bukan halte.
 - Peta di Map, Detail, dan pemilih lokasi berupa gambar skematis. Letak jalan, sungai, dan kecamatan hanya perkiraan. Marker kelima di Bogor Timur tidak punya kartu di Explore.
 
 Frame arsip masih memuat data asli prototipe: Universitas Indonesia (Depok), Halte TransJakarta Bundaran HI, "RSUP Dr. Cipto…", Institut Pertanian Bogor (tertulis "Bandung"), "Menampilkan 8 lokasi", dan kontak Jakarta.
