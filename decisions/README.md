@@ -42,3 +42,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Superseded oleh 0009 | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Proposed | 2026-10-21 |
 | [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Accepted | 2026-10-21 |
+| [0010](0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah MVP adalah Kota Bogor | Accepted | 2026-10-21 |
