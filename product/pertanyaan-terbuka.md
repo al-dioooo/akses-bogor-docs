@@ -18,7 +18,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 | [PT-08](#pt-08-kondisi-fasilitas) | Apakah kondisi fasilitas dicatat, bukan hanya ada/tidak? | Tidak | |
 | [PT-09](#pt-09-proses-verifikasi-dan-moderasi) | Proses verifikasi dan moderasi laporan | Ya | |
 | [PT-10](#pt-10-halaman-yang-belum-didesain) | Halaman mana yang masuk MVP? | Tidak | |
-| [PT-11](#pt-11-tech-stack-produksi) | Tech stack produksi | Ya | |
+| [PT-11](#pt-11-tech-stack-produksi) | Tech stack produksi | Ya | [0013](../decisions/0013-tech-stack-nextjs-fastify.md), [0014](../decisions/0014-login-google-dan-kode-email.md) |
 | [PT-12](#pt-12-data-awal) | Sumber data awal dan pengganti data placeholder | Tidak | |
 
 ## PT-01: Cakupan Wilayah
@@ -45,7 +45,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: Laporan Berhasil menjanjikan "Anda akan mendapat notifikasi ketika lokasi telah dipublikasikan" ([Laporan Berhasil 13:1412][berhasil]), tetapi tidak ada layar login atau registrasi, dan formulir tidak meminta kontak. Landing menampilkan statistik "Kontributor Aktif".
 - **Opsi**: laporan anonim tanpa notifikasi; laporan anonim dengan email opsional untuk notifikasi; wajib login (email atau akun Google).
 - **Dampak**: spam dan moderasi, kewajiban pelindungan data pribadi (UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi), cara menghitung kontributor aktif.
-- **Status**: diputuskan di [ADR-0011](../decisions/0011-pelapor-wajib-login.md): pelapor wajib login; menjelajah tetap tanpa login. Metode login masih terbuka (lihat PT-11).
+- **Status**: diputuskan di [ADR-0011](../decisions/0011-pelapor-wajib-login.md): pelapor wajib login; menjelajah tetap tanpa login. Metode login diputuskan di [ADR-0014](../decisions/0014-login-google-dan-kode-email.md).
 
 ## PT-04: Bahasa Antarmuka
 
@@ -100,6 +100,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
   - Apakah kode prototipe Lovable dilanjutkan atau aplikasi dibangun ulang?
   - Framework frontend, backend dan database (termasuk dukungan data geospasial), penyimpanan foto, dan hosting.
   - Penyedia tile peta untuk produksi (lihat [ADR-0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md)).
+- **Status**: diputuskan di [ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md): aplikasi dibangun ulang dengan Next.js di Vercel, API Fastify di Azure App Service, Neon Postgres + PostGIS, dan Cloudflare R2. Metode login di [ADR-0014](../decisions/0014-login-google-dan-kode-email.md). Penyedia tile peta masih mengikuti ADR-0008 yang berstatus Proposed.
 
 ## PT-12: Data Awal
 
