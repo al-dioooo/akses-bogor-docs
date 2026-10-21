@@ -1,6 +1,6 @@
 # ADR-0005: Empat Fasilitas Aksesibilitas Dicatat sebagai Tersedia atau Tidak
 
-- Status: Accepted
+- Status: Superseded oleh [ADR-0017](0017-empat-jawaban-ketersediaan-fasilitas.md)
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #5

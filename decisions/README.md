@@ -37,7 +37,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0002](0002-bahasa-indonesia-untuk-dokumentasi.md) | Bahasa Indonesia sebagai bahasa dokumentasi | Accepted | 2026-10-21 |
 | [0003](0003-github-issues-dan-alur-kontribusi.md) | GitHub Issues sebagai ticket tracker dan alur kontribusi repo docs | Accepted | 2026-10-21 |
 | [0004](0004-empat-kategori-lokasi-untuk-mvp.md) | Empat kategori lokasi untuk MVP | Accepted | 2026-10-21 |
-| [0005](0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas aksesibilitas dicatat sebagai tersedia atau tidak | Accepted | 2026-10-21 |
+| [0005](0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas aksesibilitas dicatat sebagai tersedia atau tidak | Superseded oleh 0017 | 2026-10-21 |
 | [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted | 2026-10-21 |
 | [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Superseded oleh 0009 | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Superseded oleh 0016 | 2026-10-21 |
@@ -49,3 +49,6 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0014](0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email | Accepted | 2026-10-21 |
 | [0015](0015-input-lokasi-peta-gps-pencarian.md) | Lokasi laporan diisi lewat peta, lokasi perangkat, atau pencarian | Accepted | 2026-10-21 |
 | [0016](0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian lokasi memakai Mapbox | Accepted | 2026-10-21 |
+| [0017](0017-empat-jawaban-ketersediaan-fasilitas.md) | Empat jawaban untuk ketersediaan fasilitas | Accepted | 2026-10-21 |
+| [0018](0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md) | Status "pintu masuk dulu" dan ringkasan "X dari Y fasilitas" | Accepted | 2026-10-21 |
+| [0019](0019-verifikasi-tim-dan-mitra-terlatih.md) | Verifikasi oleh tim dan mitra terlatih | Accepted | 2026-10-21 |
