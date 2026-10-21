@@ -55,6 +55,16 @@ Target median keputusan adalah 3 hari kerja sejak laporan dikirim. Bila kamu rag
 
 Ukuran di bawah adalah perkiraan lapangan untuk menilai dari foto atau kunjungan singkat, bukan ukuran resmi. Untuk ketentuan teknis resmi, lihat Peraturan Menteri PUPR No. 14/PRT/M/2017 tentang Persyaratan Kemudahan Bangunan Gedung.
 
+"Tersedia" berarti fasilitas bisa dipakai saat diverifikasi. Setiap jawaban Tidak tersedia diberi satu alasan sebelum diterbitkan ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)):
+
+- **Tidak ada**: belum pernah dibangun.
+- **Rusak**: ada tetapi rusak. Tulis sejak kapan di catatan bila diketahui.
+- **Terhalang**: ada tetapi tertutup benda, misalnya parkir motor atau lapak.
+- **Terbatas**: ada tetapi tidak untuk umum, misalnya lift khusus staf.
+- **Tidak sesuai**: ada tetapi tidak memenuhi kriteria Tersedia di bawah, misalnya terlalu curam atau terlalu sempit.
+
+Pelapor mungkin sudah memilih alasan; periksa dan perbaiki bila tidak cocok dengan bukti. Catatan per fasilitas (maksimal 200 karakter) tampil di halaman Detail, jadi tulis untuk pengunjung dan tanpa data pribadi.
+
 #### Ramp / Jalur Landai (penentu pintu masuk)
 
 | Jawaban | Gunakan bila |
@@ -102,6 +112,8 @@ Bila guiding block mengarah ke bahaya, tandai Tidak tersedia dan beri tahu koord
 - Satu foto **pintu masuk utama** yang memperlihatkan jalan dari jalan atau parkir.
 - Satu foto untuk **setiap** fasilitas yang dijawab Tersedia atau Tidak perlu.
 - Bila foto tidak ada atau tidak cukup, minta klarifikasi atau pakai kunjungan lapangan atau konfirmasi pengelola. Catat sumber buktinya.
+
+Setiap laporan memuat 0 sampai 10 foto, masing-masing bertag: Pintu masuk dan ramp, Toilet difabel, Guiding block, Lift, atau Lainnya ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)). Perbaiki tag yang salah, dan tambahkan keterangan singkat bila teks alternatif bawaan belum cukup menjelaskan isi foto.
 
 ### 5.2 Foto yang Diterima dan yang Kurang
 
@@ -156,7 +168,7 @@ Laporan "Edit lokasi" dan "Laporkan kekurangan" masuk antrean yang sama. Data la
 
 - Bandingkan setiap jawaban baru dengan data saat ini dan tanggal verifikasi terakhir.
 - Perubahan yang **memperburuk** status (misalnya lift rusak, ramp dibongkar) tetap butuh bukti, tetapi prioritaskan karena berdampak langsung pada keselamatan pengguna.
-- Fasilitas yang rusak sementara ditandai **Tidak tersedia** dengan catatan sejak kapan. Setelah diperbaiki, laporan baru mengembalikannya ke Tersedia.
+- Fasilitas yang rusak sementara ditandai **Tidak tersedia** dengan alasan Rusak dan catatan sejak kapan. Setelah diperbaiki, laporan baru mengembalikannya ke Tersedia.
 - Lokasi yang terakhir diverifikasi lebih dari 12 bulan lalu ditandai perlu dicek ulang (FR-38).
 
 ## 8. Privasi dan Moderasi Foto
@@ -189,6 +201,8 @@ Untuk dibawa saat kunjungan lapangan atau dipakai berdampingan dengan panel veri
 - [ ] Guiding Block: jawaban sesuai bukti
 - [ ] Lift / Elevator: jawaban sesuai bukti
 - [ ] Jawaban tanpa bukti diubah menjadi Belum tahu
+- [ ] Setiap Tidak tersedia punya alasan; catatan aman untuk ditampilkan
+- [ ] Tag foto sesuai isinya
 - [ ] Foto aman: tanpa wajah, pelat nomor, atau data pribadi
 - [ ] Keputusan dipilih, dengan alasan baku bila menolak
 - [ ] Catatan untuk verifikator lain ditulis
@@ -196,11 +210,10 @@ Untuk dibawa saat kunjungan lapangan atau dipakai berdampingan dengan panel veri
 ## 11. Hal yang Belum Diatur
 
 - Tempat yang sudah tutup permanen belum punya alasan baku. Sementara itu, eskalasikan ke koordinator; bila perlu, ADR-0019 diperbarui.
-- Jumlah maksimum foto per laporan masih terbuka di PRD.
-- Pencatatan kondisi fasilitas yang lebih rinci ([PT-08](../product/pertanyaan-terbuka.md#pt-08-kondisi-fasilitas)) belum diputuskan.
+- Ukuran teknis fasilitas (kemiringan ramp, lebar pintu) belum dicatat di MVP ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)).
 
 ## 12. Referensi
 
-- [ADR-0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md), [ADR-0010](../decisions/0010-cakupan-wilayah-kota-bogor.md), [ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md), [ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md), [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md), [ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md), [ADR-0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md)
+- [ADR-0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md), [ADR-0010](../decisions/0010-cakupan-wilayah-kota-bogor.md), [ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md), [ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md), [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md), [ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md), [ADR-0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md), [ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md), [ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)
 - [PRD](../product/prd.md), FR-30 sampai FR-38
 - Peraturan Menteri PUPR No. 14/PRT/M/2017 tentang Persyaratan Kemudahan Bangunan Gedung
