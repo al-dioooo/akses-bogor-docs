@@ -23,9 +23,9 @@
 ## Kondisi File
 
 - **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795). Frame DS v1 tidak memuatnya.
-- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 30 ikon, 9 komponen inti, 29 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
+- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 143 variable, 12 text style, 9 effect style, 30 ikon, 9 komponen inti, 30 komponen pola, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)).
 - **Layar sudah dimigrasi (2026-10-21).** Kedelapan layar dibangun ulang sebagai frame "DS v1" di halaman `Main` (lihat [Frame DS v1](#frame-ds-v1)). Frame asli dipindah tanpa diubah ke halaman `Archive · Lovable v0`.
-- **Mobile baru sebagian (2026-10-21).** Empat layar punya versi 360 px (lihat [Frame Mobile](#frame-mobile)); layar Laporkan, Laporan Berhasil, akun, dan panel verifikator belum. Belum ada frame tablet.
+- **Mobile (2026-10-21).** Kedelapan layar punya versi 360 px (lihat [Frame Mobile](#frame-mobile)); layar akun dan panel verifikator belum didesain sama sekali. Belum ada frame tablet.
 - **Peta di frame asli berupa tangkapan tile OpenStreetMap berpusat di Jakarta**, dengan atribusi Leaflet. Frame DS v1 memakai komponen Map base, peta skematis Kota Bogor, dengan atribusi Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 
 ## Frame DS v1
@@ -72,6 +72,10 @@ Versi 360 px ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)), di halaman
 | Jelajahi · Mobile | [100:1734](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=100-1734) | 2533 px |
 | Peta · Mobile | [101:1933](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=101-1933) | 800 px, satu layar |
 | Detail · Mobile | [102:2085](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=102-2085) | 2861 px |
+| Laporkan · Langkah 1 · Mobile | [105:2277](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-2277) | 1334 px |
+| Laporkan · Langkah 2 · Mobile | [105:2946](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-2946) | 1660 px |
+| Laporkan · Langkah 3 · Mobile | [105:3134](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-3134) | 1592 px |
+| Laporan Berhasil · Mobile | [105:3261](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=105-3261) | 1777 px |
 
 Pola yang dipakai:
 
@@ -80,8 +84,10 @@ Pola yang dipakai:
 - Jelajahi: tombol Filter (kecamatan dan fasilitas) dan chip kategori yang bisa digulir ke samping; hasil berupa Location card selebar layar.
 - Peta: peta penuh dengan pencarian mengambang, tombol Filter dan Daftar, kolom kontrol (legenda, zoom, lokasi saya), dan Location row untuk lokasi yang dipilih.
 - Detail: urutan nama dan status, ringkasan fasilitas, daftar fasilitas, tombol Edit dan Laporkan kekurangan, lalu deskripsi, galeri yang digulir ke samping, dan peta kecil.
+- Laporkan: App bar dengan judul "Laporkan tempat" dan tombol Kembali untuk keluar, stepper, dan isian selebar layar. Selama mengisi, Bottom nav diganti Form action bar yang menempel di bawah: "Lanjut" atau "Kirim laporan", dengan "Kembali" mulai langkah 2. Tombol "Gunakan lokasi saya" dan "Pakai lokasi ini" memakai ukuran 48 px.
+- Laporan Berhasil: Bottom nav kembali dengan tab Laporkan aktif, dan kedua tombol aksi ditumpuk.
 
-Belum digambar untuk mobile: lembar Filter, legenda yang terbuka, menu Lainnya, keadaan pencarian, dan layar Laporkan, Laporan Berhasil, akun, serta panel verifikator.
+Belum digambar untuk mobile: lembar Filter, legenda yang terbuka, menu Lainnya, keadaan pencarian, keadaan lain pemilih lokasi dan unggah foto, serta layar akun dan panel verifikator.
 
 ## Data Placeholder
 
