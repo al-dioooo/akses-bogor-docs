@@ -170,6 +170,7 @@ Laporan "Edit lokasi" dan "Laporkan kekurangan" masuk antrean yang sama. Data la
 - Perubahan yang **memperburuk** status (misalnya lift rusak, ramp dibongkar) tetap butuh bukti, tetapi prioritaskan karena berdampak langsung pada keselamatan pengguna.
 - Fasilitas yang rusak sementara ditandai **Tidak tersedia** dengan alasan Rusak dan catatan sejak kapan. Setelah diperbaiki, laporan baru mengembalikannya ke Tersedia.
 - Lokasi yang terakhir diverifikasi lebih dari 12 bulan lalu ditandai perlu dicek ulang (FR-38).
+- Bila pelapor menghapus akun, laporannya yang belum terbit hilang dari antrean. Data yang sudah terbit tetap, tanpa nama pelapor ([ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md)).
 
 ## 8. Privasi dan Moderasi Foto
 
