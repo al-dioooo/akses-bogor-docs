@@ -125,7 +125,7 @@ Warna bayangan dan radius blur terikat ke variable, sehingga ikut berubah per mo
 | Nav item | State (Default, Hover, Active, Focus) = 4 | Label |
 | Nav bar | 1 | — |
 
-Ditambah 26 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
+Ditambah 30 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
 
 ### Komponen pola
 
@@ -139,6 +139,7 @@ Dibuat saat migrasi delapan layar, di bagian Patterns halaman Design System:
 | Explore | Chip (terpilih atau tidak), Select, Location card (Default, Hover, Focus) |
 | Detail | Facility item (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui; baris alasan dan catatan opsional), Score ring (empat nada status, isi "X dari Y") |
 | Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Facility answer (Answer: Tersedia, Tidak tersedia, Tidak perlu, Belum tahu × Note: Closed, Open), Checkbox card, Textarea, Upload dropzone, Photo item |
+| Mobile | App bar (Home, Back), Bottom nav item (5 tab × Default, Active), Bottom nav, Footer mobile, Location row |
 
 Komponen yang mengikuti keputusan produk:
 
@@ -148,6 +149,15 @@ Komponen yang mengikuti keputusan produk:
 - **Picker pin** dan **Pan control**: pin tetap di tengah peta pemilih lokasi, dan tombol arah 48 px untuk pengguna yang tidak bisa menyeret peta ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). Ikon Locate dipakai di tombol "Gunakan lokasi saya".
 - **Map base**: peta skematis Kota Bogor (batas kota, enam kecamatan, Kebun Raya, Ciliwung, Cisadane, jalan utama, rel) yang digambar dari token warna, dipakai di Map dan peta kecil Detail. Untuk peta kecil, instance diperbesar dan layer label disembunyikan. Komponen ini hanya pengganti visual; di produk peta dirender Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 - **Upload dropzone** dan **Photo item**: dropzone menerima hingga 10 foto JPEG, PNG, atau WebP. Setiap foto yang dipilih tampil sebagai Photo item berisi pratinjau, nama dan ukuran berkas, Select untuk tag, dan tombol hapus 44 px ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)).
+
+### Navigasi mobile
+
+Di lebar 360 px, nav bar desktop (tujuh menu) diganti dua komponen:
+
+- **App bar**: menempel di atas. Type=Home berisi logo dan tombol Masuk; Type=Back berisi tombol Kembali 44 px dan judul satu baris.
+- **Bottom nav**: menempel di bawah layar dengan lima tab, yaitu Beranda, Jelajahi, Peta, Laporkan, dan Lainnya. Menu lain dari nav desktop pindah ke Lainnya. Tab aktif ditandai indikator, warna brand, dan `aria-current="page"`, bukan warna saja. Halaman diberi ruang bawah setinggi nav supaya elemen yang difokus tidak tertutup (WCAG 2.4.11).
+
+Ikon Home, Map, Menu, dan User ditambahkan untuk pola ini. Footer mobile menumpuk kolom footer desktop dengan tautan setinggi 44 px, dan Location row adalah kartu ringkas satu lokasi untuk Peta.
 
 Footer dan panel ajakan memakai `color/surface/inverse` (tinta gelap opak), bukan kaca gelap, karena kaca 72% di atas latar terang hanya memberi kontras sekitar 4.4:1 untuk teks sekunder.
 
