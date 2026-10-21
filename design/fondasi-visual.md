@@ -1,68 +1,169 @@
 # Fondasi Visual
 
-Diekstrak dari [desain Figma](../product/referensi-figma.md) per 2026-10-21. File Figma belum punya variable atau style, jadi dokumen ini menjadi acuan sementara sampai design token diformalkan. Nama token di bawah adalah usulan.
+Ringkasan design system AksesBogor versi 1: gaya kaca (glassmorphism) dengan palet **Ungu Inklusi**, diputuskan di [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md). Sumber kebenarannya adalah variable dan style di [halaman Design System Figma](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=1-2); dokumen ini merangkumnya untuk pembaca yang tidak membuka Figma.
+
+## Prinsip
+
+- Permukaan kaca buram di atas latar aurora, dan semua teks tetap lulus WCAG AA di kasus terburuk.
+- Status tidak pernah dibedakan dengan warna saja: selalu warna, ikon, dan label.
+- Setiap permukaan kaca punya kembaran opak (mode Solid).
+- Efek harus bisa dibuat di CSS: `backdrop-filter: blur()` dan `box-shadow`.
+
+## Mode Warna
+
+| Mode | Kapan dipakai | Permukaan kaca |
+| --- | --- | --- |
+| Glass | Default | Putih 72% + blur 24 px |
+| Solid | `prefers-reduced-transparency`, kontras tinggi, atau ponsel yang berat menjalankan blur | Putih opak |
+| Dark | `prefers-color-scheme: dark` | Tinta gelap 56% + blur, di latar malam ungu |
+
+## Palet dan Maknanya
+
+### Ungu Inklusi (warna utama)
+
+Ungu dipakai gerakan hak penyandang disabilitas (#PurpleLightUp setiap 3 Desember, Hari Disabilitas Internasional). Maknanya martabat dan inklusi, sekaligus membedakan AksesBogor dari biru layanan pemerintah.
+
+| Tingkat | Nilai | Pemakaian |
+| --- | --- | --- |
+| 50 | `#F4F1FF` | Latar halaman (mode Glass) |
+| 100 | `#EAE4FF` | Tint terpilih (mode Solid) |
+| 200 | `#D5C9FF` | Gumpalan aurora "Inklusi" |
+| 300 | `#B8A4FF` | Teks brand dan cincin fokus di mode Dark |
+| 500 | `#7B5CFF` | Glow dan ilustrasi saja |
+| 600 | `#6440E8` | Isi tombol Primary (teks putih 6.1:1) |
+| 700 | `#5230C2` | Teks dan link brand (6.2:1 di kaca), hover tombol |
+| 800 | `#40259A` | Tombol ditekan |
+
+Tingkat 400, 900, dan 950 tersedia sebagai primitive untuk kebutuhan ilustrasi.
+
+### Status aksesibilitas
+
+| Status | Arti | Teks (fg) | Latar (bg) | Solid (marker) | Ikon |
+| --- | --- | --- | --- | --- | --- |
+| Aksesibel | Bisa dipakai mandiri (OSM `wheelchair=yes`) | `#0E6B41` | `#DFF8EE` | `#13804F` | Lingkaran centang |
+| Sebagian | Bisa dipakai dengan hambatan atau bantuan (`wheelchair=limited`) | `#7F4A00` | `#FFF7DE` | `#FFCC33` | Lingkaran setengah |
+| Tidak aksesibel | Ada hambatan utama (`wheelchair=no`) | `#A11D24` | `#FDE9E9` | `#C0262D` | Lingkaran silang |
+| Belum diketahui | Belum diverifikasi; bukan berarti tidak aksesibel | `#52607A` | `#EEF1F6` | `#52607A` | Lingkaran tanya |
+
+Di mode Dark, teks status memakai tingkat 300 dan latarnya tint 16%.
+
+### Tinta (netral)
+
+| Token | Nilai | Pemakaian |
+| --- | --- | --- |
+| ink-900 | `#1E2029` | Teks utama |
+| ink-600 | `#4B5066` | Teks sekunder dan placeholder |
+| ink-500 | `#6A6E81` | Border field (non-teks, 3.8:1); tidak untuk teks |
+| ink-200 | `#DEE1EC` | Pembatas |
+| ink-50 | `#F5F6FB` | Teks utama di mode Dark, latar mode Solid |
+
+### Latar aurora
+
+| Gumpalan | Nilai | Makna |
+| --- | --- | --- |
+| Inklusi | `#D5C9FF` | Nilai inti produk |
+| Hujan | `#C9E2FF` | Bogor, Kota Hujan |
+| Kebun Raya | `#BDF3DC` | Hijau Kebun Raya Bogor |
+
+Di mode Solid latar menjadi polos.
+
+## Token
+
+Tiga koleksi variable:
+
+| Koleksi | Mode | Isi |
+| --- | --- | --- |
+| `Primitives` | Value | 66 warna mentah (disembunyikan dari picker) |
+| `Color` | Glass, Solid, Dark | 55 token semantik: `color/bg/*`, `color/surface/*`, `color/border/*`, `color/text/*`, `color/icon/*`, `color/brand/*`, `color/status/*`, `color/shadow/*`, `color/focus/*`, `color/control/*`, `color/marker/*` |
+| `Dimension` | Value | 22 token: `spacing/2xs`–`4xl` (4–96), `radius/sm`–`full` (8–999), `blur/glass` (24) dan `blur/glass-strong` (32), `border-width/*`, `size/*` |
+
+Setiap variable punya scope dan nama CSS. Nama CSS diturunkan dari nama variable: `color/text/primary` menjadi `var(--color-text-primary)`.
 
 ## Tipografi
 
-| Peran | Font | Ukuran | Weight | Contoh |
-| --- | --- | --- | --- | --- |
-| Display | Plus Jakarta Sans | 60 px, tracking −1.5 px | Bold | "Akses untuk Semua" |
-| Heading halaman/section | Plus Jakarta Sans | 36 px | Bold | "Explore Lokasi", "Dampak AksesBogor" |
-| Angka statistik | Plus Jakarta Sans | 30 px | Bold | "125+", "80%" |
-| Judul kartu | Plus Jakarta Sans | 20 px | SemiBold | "Deskripsi", "Galeri Foto" |
-| Subjudul | Plus Jakarta Sans | 18 px | SemiBold | Nama kategori, judul kolom footer |
-| Lead | Inter | 20 px | Regular | Subjudul hero |
-| Body | Inter | 14–16 px | Regular | Paragraf, deskripsi |
-| Label dan tombol | Inter | 14–16 px | Medium, SemiBold | Navigasi, tombol |
-| Caption | Inter | 12 px | Regular, Medium | "25 lokasi", "PNG, JPG hingga 5MB" |
-
-## Warna
-
-| Token (usulan) | Nilai | Dipakai untuk |
+| Style | Font | Ukuran / tinggi baris |
 | --- | --- | --- |
-| `color-primary` | `#387AFF` | Tombol utama, link, menu navigasi aktif |
-| `color-primary-subtle` | `#387AFF` opasitas 10% | Latar ikon, latar menu aktif |
-| `color-text` | `#1E2029` | Teks utama, latar footer |
-| `color-text-muted` | `#6A6E81` | Teks sekunder |
-| `color-background` | `#F0F3FF` | Latar halaman |
-| `color-surface` | `#FFFFFF` | Kartu, header |
-| `color-surface-muted` | `#E8EDF7` | Placeholder peta, latar ilustrasi |
-| `color-border` | `#DEE3ED` | Border input dan kartu |
-| `color-status-accessible` | `#39D597` | Status Accessible, fasilitas tersedia, langkah selesai |
-| `color-status-partial` | `#FFCC33` | Status Partial, label skor "Baik" |
-| `color-status-partial-marker` | `#F5A623` | Marker Partial di peta |
-| `color-status-unavailable` | `#F37777` | Fasilitas tidak tersedia |
+| Display/XL | Plus Jakarta Sans Bold, −2.5% | 60/66 |
+| Heading/H1 | Plus Jakarta Sans Bold, −2.5% | 36/44 |
+| Heading/H2 | Plus Jakarta Sans Bold, −2% | 30/36 |
+| Heading/H3 | Plus Jakarta Sans SemiBold, −2.5% | 20/28 |
+| Heading/H4 | Plus Jakarta Sans SemiBold, −2.5% | 18/28 |
+| Body/Lead | Inter Regular | 20/30 |
+| Body/Base | Inter Regular | 16/24 |
+| Body/Small | Inter Regular | 14/20 |
+| Label/Base | Inter Semi Bold | 16/24 |
+| Label/Small | Inter Semi Bold | 14/20 |
+| Label/Nav | Inter Medium | 14/20 |
+| Caption | Inter Medium | 12/16 |
 
-## Kontras Warna (WCAG 2.2)
+Teks isi minimal 14 px; 12 px hanya untuk caption.
 
-Ambang AA: 4.5:1 untuk teks normal, 3:1 untuk teks besar dan komponen UI.
+## Efek
 
-| Kombinasi | Rasio | Teks normal | Teks besar / UI |
-| --- | --- | --- | --- |
-| `#1E2029` di putih | 16.23:1 | Lulus | Lulus |
-| `#1E2029` di `#F0F3FF` | 14.66:1 | Lulus | Lulus |
-| `#6A6E81` di putih | 5.05:1 | Lulus | Lulus |
-| `#6A6E81` di `#F0F3FF` | 4.56:1 | Lulus (tipis) | Lulus |
-| Putih di tombol `#387AFF` | 3.89:1 | **Gagal** | Lulus |
-| Link `#387AFF` di putih | 3.89:1 | **Gagal** | Lulus |
-| Link `#387AFF` di `#F0F3FF` | 3.52:1 | **Gagal** | Lulus |
-| Hijau `#39D597` di putih | 1.89:1 | **Gagal** | **Gagal** |
-| Hijau `#39D597` di latar hijau 10% | 1.76:1 | **Gagal** | **Gagal** |
-| Kuning `#FFCC33` di putih | 1.51:1 | **Gagal** | **Gagal** |
-| Merah `#F37777` di putih | 2.72:1 | **Gagal** | **Gagal** |
-| Merah `#F37777` di latar merah 10% | 2.47:1 | **Gagal** | **Gagal** |
+| Style | Isi | Padanan CSS |
+| --- | --- | --- |
+| Glass/Regular | Blur latar 24 px, bayangan 0 8 32 ungu 12%, highlight atas 1 px | `backdrop-filter: blur(24px)` |
+| Glass/Strong | Blur latar 32 px, bayangan 0 12 40 | `backdrop-filter: blur(32px)` |
+| Glow/Brand | Bayangan ungu 48% di bawah tombol Primary | `box-shadow: 0 8px 24px -4px` |
+| Focus/Ring | Celah 2 px + cincin 2 px ungu | `box-shadow: 0 0 0 2px <gap>, 0 0 0 4px <ring>` |
+| Elevation/Sm, Md, Lg | Bayangan netral | `box-shadow` |
+| Marker/Drop | Bayangan pin peta | `filter: drop-shadow()` |
 
-Semua warna status (Accessible, Partial, tidak tersedia) gagal AA sebagai warna teks, dan teks putih 14 px di tombol utama juga gagal. Untuk platform aksesibilitas, palet ini perlu disesuaikan sebelum implementasi. Status juga sebaiknya tidak dibedakan dengan warna saja; desain sudah memakai ikon ✓/✗ di daftar fasilitas, tetapi badge status dan marker peta hanya memakai warna.
+Warna bayangan dan radius blur terikat ke variable, sehingga ikut berubah per mode.
 
-## Bentuk dan Layout
+## Komponen v1
 
-| Elemen | Nilai |
+| Komponen | Varian | Properti utama |
+| --- | --- | --- |
+| Button | Style (Primary, Glass, Ghost) × Size (Medium 48 px, Small 36 px) × State (Default, Hover, Focus, Disabled) = 24 | Label, ikon depan/belakang (bisa diganti) |
+| Toggle | Checked × State = 6 | Label |
+| Checkbox | Checked × State = 6 | Label, deskripsi |
+| Input | State (Default, Focus, Filled, Error, Disabled) = 5 | Label, teks, ikon depan, helper, pesan error |
+| Status badge | Status (4) × Size (2) = 8 | Label tetap per status |
+| Map marker | Status (4) × State (Default, Selected) = 8 | — |
+| Glass card | Surface (Regular, Strong) = 2 | Judul, lokasi, isi, badge, aksi |
+| Nav item | State (Default, Hover, Active, Focus) = 4 | Label |
+| Nav bar | 1 | — |
+
+Ditambah 25 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
+
+### Komponen pola
+
+Dibuat saat migrasi delapan layar, di bagian Patterns halaman Design System:
+
+| Kelompok | Komponen |
 | --- | --- |
-| Radius kartu | 20 px |
-| Radius tombol, input, menu navigasi | 16 px |
-| Radius tombol ikon | 12 px |
-| Badge dan chip | Pill (9999 px) |
-| Bayangan tombol | `0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)` |
-| Lebar kontainer maksimum | 1280 px |
-| Lebar konten sempit | 768 px (hero), 672 px (formulir laporan) |
-| Lebar frame desain | 1440 px (desktop saja) |
+| Umum | Logo (Default, Inverse), Tag (Brand, Glass), Check item, Footer |
+| Beranda | Category tile (Default, Hover, Focus), Stat item |
+| Peta | Zoom control, Map legend |
+| Explore | Chip (terpilih atau tidak), Select, Location card (Default, Hover, Focus) |
+| Detail | Facility item (Tersedia, Tidak tersedia, Belum diketahui), Score ring (empat nada status) |
+| Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Checkbox card, Textarea, Upload dropzone |
+
+Footer dan panel ajakan memakai `color/surface/inverse` (tinta gelap opak), bukan kaca gelap, karena kaca 72% di atas latar terang hanya memberi kontras sekitar 4.4:1 untuk teks sekunder.
+
+## Kontras
+
+Kasus terburuk: kaca 72% di atas gumpalan latar paling pekat.
+
+| Kombinasi | Rasio | Mode |
+| --- | --- | --- |
+| Teks utama ink-900 | 12.2:1 | Glass |
+| Teks sekunder ink-600 | 6.0:1 | Glass |
+| Teks brand violet-700 | 6.2:1 | Glass |
+| Putih di tombol violet-600 | 6.1:1 | Semua mode |
+| Teks status tingkat 800 | 4.9–5.8:1 | Glass |
+| Border field ink-500 (non-teks) | 3.8:1 | Glass |
+| Teks utama ink-50 | 11.4:1 | Dark |
+| Teks sekunder ink-300 | 7.4:1 | Dark |
+| Teks brand violet-300 | 5.8:1 | Dark |
+
+## Riwayat: Palet Desain Awal
+
+Delapan layar desain awal memakai biru `#387AFF`, teks sekunder `#6A6E81`, dan warna status `#39D597`, `#FFCC33`, `#F37777`. Audit 2026-10-21 menemukan:
+
+- Semua warna status gagal AA sebagai teks (1.5–2.7:1).
+- Teks putih di tombol `#387AFF` hanya 3.9:1.
+- `#6A6E81` turun ke 3.8:1 di atas kaca.
+
+Palet itu digantikan design system di atas. Layar-layar tersebut belum dimigrasi ke token dan komponen baru.

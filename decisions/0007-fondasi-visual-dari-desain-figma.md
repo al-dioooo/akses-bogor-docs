@@ -1,6 +1,6 @@
 # ADR-0007: Fondasi Visual Mengikuti Desain Figma, Kecuali Warna Status
 
-- Status: Accepted
+- Status: Superseded oleh [ADR-0009](0009-design-system-kaca-ungu-inklusi.md)
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #5

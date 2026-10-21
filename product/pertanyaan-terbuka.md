@@ -12,7 +12,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 | [PT-02](#pt-02-status-dan-accessibility-score) | Bagaimana status dan Accessibility Score ditentukan? | Ya | |
 | [PT-03](#pt-03-akun-pengguna-dan-notifikasi) | Apakah pelapor perlu akun? Bagaimana notifikasi dikirim? | Ya | |
 | [PT-04](#pt-04-bahasa-antarmuka) | Bahasa antarmuka aplikasi | Tidak | |
-| [PT-05](#pt-05-target-aksesibilitas-antarmuka) | Target aksesibilitas antarmuka (WCAG) | Ya | |
+| [PT-05](#pt-05-target-aksesibilitas-antarmuka) | Target aksesibilitas antarmuka (WCAG) | Ya | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md) (sebagian) |
 | [PT-06](#pt-06-tampilan-mobile) | Tampilan mobile | Ya | |
 | [PT-07](#pt-07-input-lokasi-pada-formulir-laporan) | Bagaimana lokasi dan kota diisi di formulir laporan? | Ya | |
 | [PT-08](#pt-08-kondisi-fasilitas) | Apakah kondisi fasilitas dicatat, bukan hanya ada/tidak? | Tidak | |
@@ -56,6 +56,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: [audit kontras](../design/fondasi-visual.md#kontras-warna-wcag-22) menunjukkan semua warna status dan teks putih di tombol utama gagal WCAG AA. Badge status dan marker peta hanya dibedakan dengan warna.
 - **Pertanyaan**: standar apa yang menjadi syarat rilis, dan bagaimana pengujiannya (otomatis, screen reader, pengujian bersama pengguna difabel)?
 - **Usulan**: WCAG 2.2 level AA sebagai syarat minimum, dicatat sebagai ADR sebelum implementasi UI dimulai. Untuk produk aksesibilitas, kegagalan di sini merusak kepercayaan pengguna.
+- **Status**: kontras warna sudah diselesaikan di [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md); semua token teks lulus AA di mode Glass, Solid, dan Dark. Yang masih terbuka: standar resmi untuk rilis dan cara pengujiannya.
 
 ## PT-06: Tampilan Mobile
 

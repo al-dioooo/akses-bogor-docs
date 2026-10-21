@@ -39,5 +39,6 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0004](0004-empat-kategori-lokasi-untuk-mvp.md) | Empat kategori lokasi untuk MVP | Accepted | 2026-10-21 |
 | [0005](0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas aksesibilitas dicatat sebagai tersedia atau tidak | Accepted | 2026-10-21 |
 | [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted | 2026-10-21 |
-| [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Accepted | 2026-10-21 |
+| [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Superseded oleh 0009 | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Proposed | 2026-10-21 |
+| [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Accepted | 2026-10-21 |
