@@ -67,8 +67,8 @@ Common types:
 * `fix` – bug fix
 * `refactor` – code restructuring
 * `docs` – documentation updates
-* `chore` – maintenance tasks 
-* `test` – testing 
+* `chore` – maintenance tasks
+* `test` – testing
 
 Breaking changes should be marked:
 
@@ -86,7 +86,7 @@ Breaking changes should be marked:
 
 feat(auth): add JWT refresh token
 
-### Before commit:
+### Before commit
 
 * All tests must pass
 * Add new tests when introducing features
@@ -101,12 +101,12 @@ Gunakan model Trunk Based: <https://trunkbaseddevelopment.com/>
 
 ### Main branches
 
-* `main` → production-ready, siap rilis kapanpun, 
+* `main` → production-ready, siap rilis kapanpun,
 * `release` → current production version
 
 Tidak ada branch `develop`, `staging`, atau semacamnya
 
-### Naming branch:
+### Naming branch
 
 Sesuai perubahan yang dilakukan
 
@@ -126,7 +126,7 @@ Contoh:
 
 ## 4. Documentation Standard
 
-### README wajib ada:
+### README wajib ada
 
 * Project overview
 * Tech stack
@@ -134,7 +134,7 @@ Contoh:
 * Environment variables
 * Deployment (optional)
 
-### Docs tambahan:
+### Docs tambahan
 
 * Architecture diagram
 * API spec

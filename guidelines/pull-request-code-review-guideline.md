@@ -19,7 +19,6 @@ The typical development workflow follows a **branch / pull request model**.
 
 ### Standard Workflow
 
-
 1. **Create or identify an issue**
    * Discuss the problem or feature with maintainers before implementation.
    * Ensure the change aligns with project direction.
@@ -84,7 +83,7 @@ Each PR should include:
 * Description explaining the change
 * Linked issue
 * Tests and documentation when applicable
-* Env variable or production config changes needed before deployment 
+* Env variable or production config changes needed before deployment
 * Passing CI checks
 
 #### Recommended
@@ -131,13 +130,12 @@ A clear description helps reviewers understand the change without deeply analyzi
 
 The review process typically follows these stages:
 
-
 1. **Reviewer assignment**
 2. **Feedback**
 3. **Discussion**
 4. **Revision**
 5. **Repeat until approved**
-6. **Merge** 
+6. **Merge**
 
 This iterative cycle ensures improvements through collaboration.
 
@@ -217,11 +215,11 @@ Before merging, ensure:
 * Required reviewers approve
 * Commit messages follow guidelines
 
-If CI fails, the PR must be updated before merging. 
+If CI fails, the PR must be updated before merging.
 
 ## Best Practices Summary
 
-#### Authors
+### Authors
 
 * Communicate early
 * Keep PRs small
@@ -238,5 +236,5 @@ If CI fails, the PR must be updated before merging.
 
 ## Read More
 
-* <https://www.swarmia.com/blog/a-complete-guide-to-code-reviews> 
+* <https://www.swarmia.com/blog/a-complete-guide-to-code-reviews>
 * <https://google.github.io/eng-practices/review/reviewer/looking-for.html>
