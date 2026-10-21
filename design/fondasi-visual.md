@@ -74,7 +74,7 @@ Tiga koleksi variable:
 | Koleksi | Mode | Isi |
 | --- | --- | --- |
 | `Primitives` | Value | 66 warna mentah (disembunyikan dari picker) |
-| `Color` | Glass, Solid, Dark | 53 token semantik: `color/bg/*`, `color/surface/*`, `color/border/*`, `color/text/*`, `color/icon/*`, `color/brand/*`, `color/status/*`, `color/shadow/*`, `color/focus/*`, `color/control/*`, `color/marker/*` |
+| `Color` | Glass, Solid, Dark | 55 token semantik: `color/bg/*`, `color/surface/*`, `color/border/*`, `color/text/*`, `color/icon/*`, `color/brand/*`, `color/status/*`, `color/shadow/*`, `color/focus/*`, `color/control/*`, `color/marker/*` |
 | `Dimension` | Value | 22 token: `spacing/2xs`–`4xl` (4–96), `radius/sm`–`full` (8–999), `blur/glass` (24) dan `blur/glass-strong` (32), `border-width/*`, `size/*` |
 
 Setiap variable punya scope dan nama CSS. Nama CSS diturunkan dari nama variable: `color/text/primary` menjadi `var(--color-text-primary)`.
@@ -125,7 +125,22 @@ Warna bayangan dan radius blur terikat ke variable, sehingga ikut berubah per mo
 | Nav item | State (Default, Hover, Active, Focus) = 4 | Label |
 | Nav bar | 1 | — |
 
-Ditambah 14 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
+Ditambah 25 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
+
+### Komponen pola
+
+Dibuat saat migrasi delapan layar, di bagian Patterns halaman Design System:
+
+| Kelompok | Komponen |
+| --- | --- |
+| Umum | Logo (Default, Inverse), Tag (Brand, Glass), Check item, Footer |
+| Beranda | Category tile (Default, Hover, Focus), Stat item |
+| Peta | Zoom control, Map legend |
+| Explore | Chip (terpilih atau tidak), Select, Location card (Default, Hover, Focus) |
+| Detail | Facility item (Tersedia, Tidak tersedia, Belum diketahui), Score ring (empat nada status) |
+| Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Checkbox card, Textarea, Upload dropzone |
+
+Footer dan panel ajakan memakai `color/surface/inverse` (tinta gelap opak), bukan kaca gelap, karena kaca 72% di atas latar terang hanya memberi kontras sekitar 4.4:1 untuk teks sekunder.
 
 ## Kontras
 
