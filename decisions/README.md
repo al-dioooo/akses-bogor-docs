@@ -37,3 +37,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0002](0002-bahasa-indonesia-untuk-dokumentasi.md) | Bahasa Indonesia sebagai bahasa dokumentasi | Accepted | 2026-10-21 |
 | [0003](0003-github-issues-dan-alur-kontribusi.md) | GitHub Issues sebagai ticket tracker dan alur kontribusi repo docs | Accepted | 2026-10-21 |
 | [0004](0004-empat-kategori-lokasi-untuk-mvp.md) | Empat kategori lokasi untuk MVP | Accepted | 2026-10-21 |
+| [0005](0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas aksesibilitas dicatat sebagai tersedia atau tidak | Accepted | 2026-10-21 |
