@@ -3,7 +3,7 @@
 | | |
 | --- | --- |
 | Status | Draft |
-| Versi | 0.1 |
+| Versi | 0.2 |
 | Tanggal | 2026-10-21 |
 | Pemilik | Tim AksesBogor |
 | Issue | #14 |
@@ -87,7 +87,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 
 | ID | Kebutuhan | Prioritas |
 | --- | --- | --- |
-| FR-10 | Pengguna bisa daftar dan masuk dengan metode yang diputuskan bersama tech stack (PT-11), tanpa tes kognitif seperti CAPTCHA teka-teki. | Must |
+| FR-10 | Pengguna bisa daftar dan masuk dengan Google atau kode 6 digit lewat email ([ADR-0014](../decisions/0014-login-google-dan-kode-email.md)), tanpa tes kognitif seperti CAPTCHA teka-teki. | Must |
 | FR-11 | Saat daftar, pengguna menyetujui Kebijakan Privasi. | Must |
 | FR-12 | Profil minimal: nama tampilan dan email. | Must |
 | FR-13 | Pengguna bisa menghapus akun beserta data pribadinya. | Must |
@@ -141,6 +141,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | Browser | Chrome Android dan Safari iOS dua versi terakhir; Chrome, Firefox, Safari, dan Edge versi terbaru di desktop. |
 | Peta | Atribusi OpenStreetMap selalu tampil; tile dari penyedia yang sesuai kebijakan pemakaian ([ADR-0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md)). |
 | Konsistensi UI | Semua layar memakai komponen dan token dari design system Figma ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). |
+| Tech stack | Next.js di Vercel, API Fastify di Azure App Service B1, Neon Postgres + PostGIS, foto di Cloudflare R2 ([ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md)). |
 
 ## 8. Alur Utama
 
@@ -197,7 +198,7 @@ Target *(usulan)* tiga bulan setelah beta dibuka:
 
 Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 
-1. **Persiapan**: putuskan PT-02, PT-07, PT-09, dan PT-11; buat desain mobile untuk delapan layar serta layar akun dan panel verifikator; kumpulkan data awal lewat survei lapangan.
+1. **Persiapan**: putuskan PT-02, PT-07, dan PT-09; buat desain mobile untuk delapan layar serta layar akun dan panel verifikator; kumpulkan data awal lewat survei lapangan.
 2. **Alpha internal**: semua kebutuhan Must untuk penemuan, akun, pelaporan, dan verifikasi; diuji oleh tim.
 3. **Beta terbuka di Kota Bogor**: notifikasi dan kebutuhan Should; uji kegunaan bersama komunitas difabel.
 4. **Setelah MVP**: kebutuhan Could dan evaluasi perluasan wilayah lewat ADR baru.
@@ -213,6 +214,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | Efek kaca berat atau kontras turun di perangkat tertentu | Mode Solid dan audit kontras di setiap rilis |
 | Foto memuat data pribadi orang lain | Moderasi foto dan penghapusan EXIF |
 | Pemakaian tile OSM melanggar kebijakan | Penyedia tile pihak ketiga atau server sendiri |
+| Kredit Azure habis lebih cepat bila langganannya dipakai bersama lokerin | Budget alert di Azure dan pemantauan pemakaian bulanan |
 
 ## 13. Keputusan Terkait
 
@@ -226,6 +228,8 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0010](../decisions/0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah Kota Bogor |
 | [0011](../decisions/0011-pelapor-wajib-login.md) | Pelapor wajib login |
 | [0012](../decisions/0012-web-mobile-first-pwa.md) | Web mobile-first (PWA) |
+| [0013](../decisions/0013-tech-stack-nextjs-fastify.md) | Next.js + Fastify, Neon, Azure, Cloudflare R2 |
+| [0014](../decisions/0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email |
 
 ## 14. Pertanyaan Terbuka
 
@@ -235,7 +239,6 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 - **PT-07**: cara input lokasi di formulir.
 - **PT-08**: pencatatan kondisi fasilitas.
 - **PT-09**: proses dan target waktu verifikasi.
-- **PT-11**: tech stack dan metode login.
 - **PT-12**: sumber data awal.
 - **Baru**: pilihan tiga status per fasilitas di FR-24 mengubah [ADR-0005](../decisions/0005-empat-fasilitas-aksesibilitas.md). Bila disetujui, perlu ADR baru yang men-supersede ADR-0005.
 - **Baru**: jumlah maksimum foto per laporan.
