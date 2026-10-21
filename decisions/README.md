@@ -41,3 +41,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted | 2026-10-21 |
 | [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Accepted | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Proposed | 2026-10-21 |
+| [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Accepted | 2026-10-21 |
