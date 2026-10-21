@@ -49,3 +49,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0014](0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email | Accepted | 2026-10-21 |
 | [0015](0015-input-lokasi-peta-gps-pencarian.md) | Lokasi laporan diisi lewat peta, lokasi perangkat, atau pencarian | Accepted | 2026-10-21 |
 | [0016](0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian lokasi memakai Mapbox | Accepted | 2026-10-21 |
+| [0017](0017-empat-jawaban-ketersediaan-fasilitas.md) | Empat jawaban untuk ketersediaan fasilitas | Accepted | 2026-10-21 |
