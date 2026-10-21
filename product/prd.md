@@ -3,7 +3,7 @@
 | | |
 | --- | --- |
 | Status | Draft |
-| Versi | 0.3 |
+| Versi | 0.4 |
 | Tanggal | 2026-10-21 |
 | Pemilik | Tim AksesBogor |
 | Issue | #14 |
@@ -37,7 +37,7 @@ AksesBogor adalah web mobile-first yang membantu difabel dan pendampingnya menge
 - Aplikasi native Android atau iOS ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)).
 - Navigasi rute langkah demi langkah.
 - Ulasan bebas, rating bintang, komentar, atau forum.
-- Kategori dan fasilitas di luar daftar MVP ([ADR-0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md), [ADR-0005](../decisions/0005-empat-fasilitas-aksesibilitas.md)).
+- Kategori dan fasilitas di luar daftar MVP ([ADR-0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md), [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)).
 - Antarmuka dwibahasa.
 
 ## 4. Pengguna
@@ -57,7 +57,7 @@ AksesBogor adalah web mobile-first yang membantu difabel dan pendampingnya menge
 | Beranda | Kategori, edukasi singkat, statistik dampak, ajakan melapor | Landing · DS v1 |
 | Explore | Pencarian, filter, daftar lokasi | Explore · DS v1 |
 | Peta | Marker per status, legenda, tampilan daftar | Map · DS v1 |
-| Detail lokasi | Status, fasilitas, skor, foto, peta mini | Detail · DS v1 |
+| Detail lokasi | Status, fasilitas, ringkasan "X dari Y", foto, peta mini | Detail · DS v1 |
 | Akun | Daftar, masuk, keluar, profil, hapus akun | Belum ada |
 | Laporkan tempat | Formulir tiga langkah, edit lokasi, laporkan kekurangan | Laporkan · Langkah 1–3 · DS v1, Laporan Berhasil · DS v1 |
 | Panel verifikator | Antrean, pemeriksaan, terbit atau tolak | Belum ada |
@@ -80,7 +80,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-04 | Hasil tampil sebagai Location card; jumlah hasil sesuai data yang tampil. | Must |
 | FR-05 | Peta Kota Bogor menampilkan marker per status (warna, ikon, dan label di legenda), kontrol zoom, dan tombol ke tampilan daftar dengan filter yang sama. | Must |
 | FR-06 | Detail lokasi menampilkan nama, kategori, kecamatan, status, keempat fasilitas beserta ketersediaannya, deskripsi, foto, peta mini, dan tanggal verifikasi terakhir. | Must |
-| FR-07 | Detail menampilkan Accessibility Score setelah rumusnya diputuskan (PT-02). | Should |
+| FR-07 | Detail menampilkan ringkasan "X dari Y fasilitas tersedia" dan satu kalimat alasan status ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)). | Must |
 | FR-08 | Pengguna bisa membagikan tautan lokasi. | Could |
 
 ### Akun ([ADR-0011](../decisions/0011-pelapor-wajib-login.md))
@@ -101,7 +101,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-21 | Langkah 1 meminta nama tempat, kategori (pilih satu), lokasi, dan patokan opsional. Lokasi ditentukan lewat peta dengan pin di tengah, tombol "Gunakan lokasi saya", atau pencarian tempat; yang disimpan adalah pin yang dikonfirmasi pelapor ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). | Must |
 | FR-22 | Kecamatan dihitung otomatis dari koordinat. Lokasi di luar Kota Bogor ditolak dengan pesan yang menjelaskan cakupan wilayah. | Must |
 | FR-23 | Sebelum lanjut, sistem menampilkan lokasi terdaftar dalam radius sekitar 50 m yang namanya mirip, dengan pilihan melaporkan kekurangan pada lokasi itu. | Should |
-| FR-24 | Langkah 2 meminta ketersediaan keempat fasilitas. *(usulan)* Setiap fasilitas punya tiga pilihan: Tersedia, Tidak tersedia, Belum tahu, dengan bawaan Belum tahu. | Must |
+| FR-24 | Langkah 2 meminta jawaban untuk keempat fasilitas: Tersedia, Tidak tersedia, Tidak perlu, atau Belum tahu, dengan bawaan Belum tahu ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). | Must |
 | FR-25 | Langkah 3 menerima foto JPG atau PNG maksimal 5 MB per foto *(usulan: hingga 3 foto)*, deskripsi tambahan, dan menampilkan ringkasan sebelum dikirim. | Must |
 | FR-26 | Setelah kirim, pengguna melihat konfirmasi dan langkah selanjutnya. | Must |
 | FR-27 | "Edit lokasi" dan "Laporkan kekurangan" di halaman Detail membuka formulir yang sama, terisi data saat ini, dan masuk antrean verifikasi. | Must |
@@ -112,11 +112,13 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | --- | --- | --- |
 | FR-30 | Verifikator melihat antrean laporan baru dan laporan perubahan, diurutkan dari yang terlama. | Must |
 | FR-31 | Halaman laporan menampilkan semua isian, foto, titik di peta, dan data lokasi saat ini untuk dibandingkan. | Must |
-| FR-32 | Verifikator bisa menerbitkan, meminta klarifikasi, atau menolak dengan alasan dari daftar baku. | Must |
-| FR-33 | Verifikator menetapkan status aksesibilitas. Setelah PT-02 diputuskan, status dan skor dihitung sesuai aturannya. | Must |
+| FR-32 | Verifikator bisa menerbitkan, meminta klarifikasi, atau menolak dengan alasan dari daftar baku. Klarifikasi yang tidak dijawab dalam 7 hari membuat laporan ditolak ([ADR-0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md)). | Must |
+| FR-33 | Status dihitung otomatis dari jawaban fasilitas yang sudah diverifikasi dengan aturan "pintu masuk dulu" ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)). Verifikator memeriksa setiap jawaban dan mengubah jawaban tanpa bukti menjadi Belum tahu ([ADR-0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md)). | Must |
 | FR-34 | Verifikator bisa menyembunyikan atau mengaburkan foto yang memperlihatkan wajah atau pelat nomor. | Should |
 | FR-35 | Setiap perubahan data lokasi tercatat di log audit (siapa, kapan, apa). | Should |
 | FR-36 | Peran verifikator hanya bisa diberikan oleh admin. | Must |
+| FR-37 | Verifikator tidak bisa memverifikasi laporannya sendiri dan hanya melihat nama tampilan pelapor. | Must |
+| FR-38 | Lokasi yang terakhir diverifikasi lebih dari 12 bulan lalu ditandai perlu dicek ulang. | Could |
 
 ### Notifikasi dan konten
 
@@ -175,8 +177,8 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | Entitas | Atribut utama |
 | --- | --- |
 | Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu persetujuan privasi |
-| Lokasi | id, nama, kategori, kecamatan, kota, koordinat, patokan, status, skor, deskripsi, tanggal verifikasi terakhir |
-| Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Belum diketahui) |
+| Lokasi | id, nama, kategori, kecamatan, kota, koordinat, patokan, status dan ringkasan fasilitas (dihitung), deskripsi, tanggal verifikasi terakhir |
+| Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui) |
 | Laporan | id, pelapor, jenis (baru, perubahan, kekurangan), lokasi terkait, isian, status (menunggu, klarifikasi, diterbitkan, ditolak), alasan, waktu |
 | Foto | id, laporan, lokasi, berkas, status moderasi |
 | Log audit | entitas, pengubah, waktu, perubahan |
@@ -198,7 +200,7 @@ Target *(usulan)* tiga bulan setelah beta dibuka:
 
 Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 
-1. **Persiapan**: putuskan PT-02 dan PT-09; buat desain mobile untuk delapan layar serta layar akun dan panel verifikator; kumpulkan data awal lewat survei lapangan.
+1. **Persiapan**: buat desain mobile untuk delapan layar serta layar akun dan panel verifikator; rekrut dan latih verifikator mitra; kumpulkan data awal lewat survei lapangan.
 2. **Alpha internal**: semua kebutuhan Must untuk penemuan, akun, pelaporan, dan verifikasi; diuji oleh tim.
 3. **Beta terbuka di Kota Bogor**: notifikasi dan kebutuhan Should; uji kegunaan bersama komunitas difabel.
 4. **Setelah MVP**: kebutuhan Could dan evaluasi perluasan wilayah lewat ADR baru.
@@ -209,7 +211,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | --- | --- |
 | Data awal terlalu sedikit sehingga produk terasa kosong | Survei lapangan oleh tim, kerja sama komunitas, dan impor data `wheelchair=*` dari OpenStreetMap (PT-12) |
 | Kewajiban login menurunkan jumlah laporan | Login cepat, isian formulir tidak hilang saat diarahkan ke login |
-| Antrean verifikasi menumpuk | Target waktu verifikasi, jadwal verifikator, dan alasan penolakan baku |
+| Antrean verifikasi menumpuk | Verifikator mitra terlatih, target waktu verifikasi, dan alasan penolakan baku ([ADR-0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md)) |
 | Data cepat usang | Tanggal verifikasi terakhir di Detail dan alur "Laporkan kekurangan" |
 | Efek kaca berat atau kontras turun di perangkat tertentu | Mode Solid dan audit kontras di setiap rilis |
 | Foto memuat data pribadi orang lain | Moderasi foto dan penghapusan EXIF |
@@ -221,7 +223,6 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | ADR | Ringkasan |
 | --- | --- |
 | [0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md) | Empat kategori lokasi |
-| [0005](../decisions/0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas, tersedia atau tidak |
 | [0006](../decisions/0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga diverifikasi sebelum tayang |
 | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md) | Design system kaca, palet Ungu Inklusi |
 | [0010](../decisions/0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah Kota Bogor |
@@ -231,16 +232,16 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0014](../decisions/0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email |
 | [0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md) | Lokasi lewat peta, lokasi perangkat, atau pencarian |
 | [0016](../decisions/0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian Mapbox |
+| [0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md) | Empat fasilitas dengan empat jenis jawaban |
+| [0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md) | Status "pintu masuk dulu" dan ringkasan X dari Y |
+| [0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md) | Verifikasi oleh tim dan mitra terlatih |
 
 ## 14. Pertanyaan Terbuka
 
-- **PT-02**: rumus status dan Accessibility Score.
 - **PT-04**: bahasa antarmuka.
 - **PT-05**: target WCAG resmi dan cara pengujian.
 - **PT-08**: pencatatan kondisi fasilitas.
-- **PT-09**: proses dan target waktu verifikasi.
 - **PT-12**: sumber data awal.
-- **Baru**: pilihan tiga status per fasilitas di FR-24 mengubah [ADR-0005](../decisions/0005-empat-fasilitas-aksesibilitas.md). Bila disetujui, perlu ADR baru yang men-supersede ADR-0005.
 - **Baru**: jumlah maksimum foto per laporan.
 
 Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
