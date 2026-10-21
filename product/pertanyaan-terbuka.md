@@ -11,11 +11,11 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 | [PT-01](#pt-01-cakupan-wilayah) | Cakupan wilayah: Kota Bogor atau Indonesia? | Ya | [0010](../decisions/0010-cakupan-wilayah-kota-bogor.md) |
 | [PT-02](#pt-02-status-dan-accessibility-score) | Bagaimana status dan Accessibility Score ditentukan? | Ya | [0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md), [0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md) |
 | [PT-03](#pt-03-akun-pengguna-dan-notifikasi) | Apakah pelapor perlu akun? Bagaimana notifikasi dikirim? | Ya | [0011](../decisions/0011-pelapor-wajib-login.md) |
-| [PT-04](#pt-04-bahasa-antarmuka) | Bahasa antarmuka aplikasi | Tidak | |
-| [PT-05](#pt-05-target-aksesibilitas-antarmuka) | Target aksesibilitas antarmuka (WCAG) | Ya | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md) (sebagian) |
+| [PT-04](#pt-04-bahasa-antarmuka) | Bahasa antarmuka aplikasi | Tidak | [0020](../decisions/0020-antarmuka-bahasa-indonesia-siap-i18n.md) |
+| [PT-05](#pt-05-target-aksesibilitas-antarmuka) | Target aksesibilitas antarmuka (WCAG) | Ya | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md), [0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md) |
 | [PT-06](#pt-06-tampilan-mobile) | Tampilan mobile | Ya | [0012](../decisions/0012-web-mobile-first-pwa.md) |
 | [PT-07](#pt-07-input-lokasi-pada-formulir-laporan) | Bagaimana lokasi dan kota diisi di formulir laporan? | Ya | [0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md), [0016](../decisions/0016-peta-dan-pencarian-mapbox.md) |
-| [PT-08](#pt-08-kondisi-fasilitas) | Apakah kondisi fasilitas dicatat, bukan hanya ada/tidak? | Tidak | |
+| [PT-08](#pt-08-kondisi-fasilitas) | Apakah kondisi fasilitas dicatat, bukan hanya ada/tidak? | Tidak | [0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md) |
 | [PT-09](#pt-09-proses-verifikasi-dan-moderasi) | Proses verifikasi dan moderasi laporan | Ya | [0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md) |
 | [PT-10](#pt-10-halaman-yang-belum-didesain) | Halaman mana yang masuk MVP? | Tidak | |
 | [PT-11](#pt-11-tech-stack-produksi) | Tech stack produksi | Ya | [0013](../decisions/0013-tech-stack-nextjs-fastify.md), [0014](../decisions/0014-login-google-dan-kode-email.md) |
@@ -53,13 +53,14 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: copy bercampur. Bahasa Inggris: "Explore Locations", "Map View", "Accessibility Score", menu Home/Explore/Map/Accessibility/About. Bahasa Indonesia: "Laporkan Tempat", "Lihat Detail", "Kembali".
 - **Opsi**: Indonesia penuh; Inggris penuh; dwibahasa dengan pilihan bahasa.
 - **Usulan**: Indonesia penuh untuk MVP sesuai pengguna sasaran. Istilah seperti "ramp" dan "guiding block" dipertahankan bila lebih dikenal pengguna.
+- **Status**: diputuskan di [ADR-0020](../decisions/0020-antarmuka-bahasa-indonesia-siap-i18n.md): bahasa Indonesia penuh dan sederhana, dengan string di berkas pesan agar bahasa lain bisa ditambah setelah MVP.
 
 ## PT-05: Target Aksesibilitas Antarmuka
 
 - **Bukti di desain**: [audit kontras](../design/fondasi-visual.md#kontras-warna-wcag-22) menunjukkan semua warna status dan teks putih di tombol utama gagal WCAG AA. Badge status dan marker peta hanya dibedakan dengan warna.
 - **Pertanyaan**: standar apa yang menjadi syarat rilis, dan bagaimana pengujiannya (otomatis, screen reader, pengujian bersama pengguna difabel)?
 - **Usulan**: WCAG 2.2 level AA sebagai syarat minimum, dicatat sebagai ADR sebelum implementasi UI dimulai. Untuk produk aksesibilitas, kegagalan di sini merusak kepercayaan pengguna.
-- **Status**: kontras warna sudah diselesaikan di [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md); semua token teks lulus AA di mode Glass, Solid, dan Dark. Yang masih terbuka: standar resmi untuk rilis dan cara pengujiannya.
+- **Status**: kontras warna sudah diselesaikan di [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md); semua token teks lulus AA di mode Glass, Solid, dan Dark. Standar rilis dan cara pengujian diputuskan di [ADR-0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md): WCAG 2.2 level AA, diuji di CI, di setiap PR, dengan pembaca layar setiap rilis, lewat audit sebelum alpha dan beta, dan bersama mitra komunitas difabel.
 
 ## PT-06: Tampilan Mobile
 
@@ -80,6 +81,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: fasilitas hanya bernilai tersedia atau tidak ([Laporkan (2) 13:1002][lapor2], [Detail 13:1578][detail]). Kondisi hanya muncul di teks bebas ("guiding block masih perlu ditingkatkan kondisinya").
 - **Pertanyaan**: perlukah atribut kondisi (baik, rusak, terhalang), ukuran (lebar pintu, kemiringan ramp), dan foto per fasilitas?
 - **Inkonsistensi**: Landing menyebut "Lift & eskalator", sedangkan formulir menyebut "Lift / Elevator". Eskalator tidak bisa dipakai pengguna kursi roda, sehingga istilahnya perlu disamakan.
+- **Status**: diputuskan di [ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md): "Tersedia" berarti bisa dipakai; fasilitas yang tidak bisa dipakai menjadi "Tidak tersedia" dengan alasan (Tidak ada, Rusak, Terhalang, Terbatas, Tidak sesuai), dan setiap jawaban boleh diberi catatan. Ukuran teknis tidak dicatat di MVP. Istilah lift sudah disamakan di [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md).
 
 ## PT-09: Proses Verifikasi dan Moderasi
 

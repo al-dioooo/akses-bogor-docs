@@ -137,15 +137,17 @@ Dibuat saat migrasi delapan layar, di bagian Patterns halaman Design System:
 | Beranda | Category tile (Default, Hover, Focus), Stat item |
 | Peta | Map base (Kota Bogor skematis), Zoom control, Pan control, Map legend, Picker pin |
 | Explore | Chip (terpilih atau tidak), Select, Location card (Default, Hover, Focus) |
-| Detail | Facility item (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui), Score ring (empat nada status, isi "X dari Y") |
-| Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Facility answer (Tersedia, Tidak tersedia, Tidak perlu, Belum tahu), Checkbox card, Textarea, Upload dropzone |
+| Detail | Facility item (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui; baris alasan dan catatan opsional), Score ring (empat nada status, isi "X dari Y") |
+| Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Facility answer (Answer: Tersedia, Tidak tersedia, Tidak perlu, Belum tahu × Note: Closed, Open), Checkbox card, Textarea, Upload dropzone, Photo item |
 
 Komponen yang mengikuti keputusan produk:
 
-- **Facility answer**: satu fasilitas dengan empat pilihan radio, bawaan "Belum tahu" ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). Di Detail, jawaban yang sama tampil lewat Facility item, dengan "Belum tahu" ditulis "Belum diketahui".
+- **Facility answer**: satu fasilitas dengan empat pilihan radio, bawaan "Belum tahu" ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). Di Detail, jawaban yang sama tampil lewat Facility item, dengan "Belum tahu" ditulis "Belum diketahui". Varian Tidak tersedia menampilkan pilihan alasan (Tidak ada, Rusak, Terhalang, Terbatas, Tidak sesuai), dan Note=Open menampilkan kolom catatan; Note=Closed menampilkan tombol "Tambah catatan" ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)).
+- **Facility item**: properti Show detail menampilkan baris kedua berisi alasan dan catatan, misalnya "Tidak sesuai · Jalur terputus sebelum pintu masuk" ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)). Karena bisa dua baris, sudutnya memakai `radius/lg`, bukan bentuk pil.
 - **Score ring**: angka X (fasilitas relevan yang Tersedia), teks "dari Y", dan nama status; bukan skor 0–100 ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)). Busur hanya penguat visual dan diatur per instance.
 - **Picker pin** dan **Pan control**: pin tetap di tengah peta pemilih lokasi, dan tombol arah 48 px untuk pengguna yang tidak bisa menyeret peta ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). Ikon Locate dipakai di tombol "Gunakan lokasi saya".
 - **Map base**: peta skematis Kota Bogor (batas kota, enam kecamatan, Kebun Raya, Ciliwung, Cisadane, jalan utama, rel) yang digambar dari token warna, dipakai di Map dan peta kecil Detail. Untuk peta kecil, instance diperbesar dan layer label disembunyikan. Komponen ini hanya pengganti visual; di produk peta dirender Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
+- **Upload dropzone** dan **Photo item**: dropzone menerima hingga 10 foto JPEG, PNG, atau WebP. Setiap foto yang dipilih tampil sebagai Photo item berisi pratinjau, nama dan ukuran berkas, Select untuk tag, dan tombol hapus 44 px ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)).
 
 Footer dan panel ajakan memakai `color/surface/inverse` (tinta gelap opak), bukan kaca gelap, karena kaca 72% di atas latar terang hanya memberi kontras sekitar 4.4:1 untuk teks sekunder.
 
