@@ -14,7 +14,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 | [PT-04](#pt-04-bahasa-antarmuka) | Bahasa antarmuka aplikasi | Tidak | |
 | [PT-05](#pt-05-target-aksesibilitas-antarmuka) | Target aksesibilitas antarmuka (WCAG) | Ya | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md) (sebagian) |
 | [PT-06](#pt-06-tampilan-mobile) | Tampilan mobile | Ya | [0012](../decisions/0012-web-mobile-first-pwa.md) |
-| [PT-07](#pt-07-input-lokasi-pada-formulir-laporan) | Bagaimana lokasi dan kota diisi di formulir laporan? | Ya | |
+| [PT-07](#pt-07-input-lokasi-pada-formulir-laporan) | Bagaimana lokasi dan kota diisi di formulir laporan? | Ya | [0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md), [0016](../decisions/0016-peta-dan-pencarian-mapbox.md) |
 | [PT-08](#pt-08-kondisi-fasilitas) | Apakah kondisi fasilitas dicatat, bukan hanya ada/tidak? | Tidak | |
 | [PT-09](#pt-09-proses-verifikasi-dan-moderasi) | Proses verifikasi dan moderasi laporan | Ya | |
 | [PT-10](#pt-10-halaman-yang-belum-didesain) | Halaman mana yang masuk MVP? | Tidak | |
@@ -72,6 +72,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: langkah 1 hanya meminta Nama Tempat dan Kategori ([Laporkan 13:812][lapor1]), tetapi Ringkasan Laporan menampilkan "IPB, Dramaga" ([Laporkan (3) 13:1207][lapor3]). Explore memfilter berdasarkan Kota dan peta membutuhkan koordinat.
 - **Opsi**: pilih titik di peta; cari alamat (geocoding); pakai lokasi perangkat (GPS); kombinasi ketiganya.
 - **Pertanyaan tambahan**: bagaimana mencegah laporan ganda untuk tempat yang sama?
+- **Status**: diputuskan di [ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md): peta dengan pin, tombol lokasi perangkat, dan pencarian; kecamatan dihitung otomatis; lokasi dalam radius sekitar 50 m dengan nama mirip ditampilkan untuk mencegah laporan ganda. Peta dan pencarian memakai Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 
 ## PT-08: Kondisi Fasilitas
 
@@ -100,7 +101,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
   - Apakah kode prototipe Lovable dilanjutkan atau aplikasi dibangun ulang?
   - Framework frontend, backend dan database (termasuk dukungan data geospasial), penyimpanan foto, dan hosting.
   - Penyedia tile peta untuk produksi (lihat [ADR-0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md)).
-- **Status**: diputuskan di [ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md): aplikasi dibangun ulang dengan Next.js di Vercel, API Fastify di Azure App Service, Neon Postgres + PostGIS, dan Cloudflare R2. Metode login di [ADR-0014](../decisions/0014-login-google-dan-kode-email.md). Penyedia tile peta masih mengikuti ADR-0008 yang berstatus Proposed.
+- **Status**: diputuskan di [ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md): aplikasi dibangun ulang dengan Next.js di Vercel, API Fastify di Azure App Service, Neon Postgres + PostGIS, dan Cloudflare R2. Metode login di [ADR-0014](../decisions/0014-login-google-dan-kode-email.md). Peta dan pencarian memakai Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 
 ## PT-12: Data Awal
 

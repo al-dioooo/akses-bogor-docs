@@ -3,7 +3,7 @@
 | | |
 | --- | --- |
 | Status | Draft |
-| Versi | 0.2 |
+| Versi | 0.3 |
 | Tanggal | 2026-10-21 |
 | Pemilik | Tim AksesBogor |
 | Issue | #14 |
@@ -98,9 +98,9 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | ID | Kebutuhan | Prioritas |
 | --- | --- | --- |
 | FR-20 | Tombol "Laporkan tempat" ada di semua halaman. Pengguna yang belum login diarahkan ke login, lalu kembali ke formulir tanpa kehilangan isian. | Must |
-| FR-21 | Langkah 1 meminta nama tempat, kategori (pilih satu), dan lokasi. Cara input lokasi mengikuti PT-07; *(usulan)* pilih titik di peta dengan opsi memakai lokasi perangkat. | Must |
-| FR-22 | Lokasi di luar Kota Bogor ditolak dengan pesan yang menjelaskan cakupan wilayah. | Must |
-| FR-23 | Sebelum lanjut, sistem menampilkan lokasi terdaftar di dekatnya yang namanya mirip untuk mencegah laporan ganda. | Should |
+| FR-21 | Langkah 1 meminta nama tempat, kategori (pilih satu), lokasi, dan patokan opsional. Lokasi ditentukan lewat peta dengan pin di tengah, tombol "Gunakan lokasi saya", atau pencarian tempat; yang disimpan adalah pin yang dikonfirmasi pelapor ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). | Must |
+| FR-22 | Kecamatan dihitung otomatis dari koordinat. Lokasi di luar Kota Bogor ditolak dengan pesan yang menjelaskan cakupan wilayah. | Must |
+| FR-23 | Sebelum lanjut, sistem menampilkan lokasi terdaftar dalam radius sekitar 50 m yang namanya mirip, dengan pilihan melaporkan kekurangan pada lokasi itu. | Should |
 | FR-24 | Langkah 2 meminta ketersediaan keempat fasilitas. *(usulan)* Setiap fasilitas punya tiga pilihan: Tersedia, Tidak tersedia, Belum tahu, dengan bawaan Belum tahu. | Must |
 | FR-25 | Langkah 3 menerima foto JPG atau PNG maksimal 5 MB per foto *(usulan: hingga 3 foto)*, deskripsi tambahan, dan menampilkan ringkasan sebelum dikirim. | Must |
 | FR-26 | Setelah kirim, pengguna melihat konfirmasi dan langkah selanjutnya. | Must |
@@ -139,7 +139,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | Privasi dan keamanan | Sesuai UU No. 27 Tahun 2022: data pribadi minimal, HTTPS, metadata lokasi (EXIF) dihapus dari foto, dan akun bisa dihapus. |
 | Bahasa | Bahasa Indonesia *(usulan, PT-04)*. |
 | Browser | Chrome Android dan Safari iOS dua versi terakhir; Chrome, Firefox, Safari, dan Edge versi terbaru di desktop. |
-| Peta | Atribusi OpenStreetMap selalu tampil; tile dari penyedia yang sesuai kebijakan pemakaian ([ADR-0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md)). |
+| Peta | Mapbox GL JS dan pencarian Mapbox dengan token berumur pendek dari Fastify; logo Mapbox dan "© Mapbox © OpenStreetMap" selalu terlihat; perangkat tanpa WebGL diarahkan ke Explore ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)). |
 | Konsistensi UI | Semua layar memakai komponen dan token dari design system Figma ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). |
 | Tech stack | Next.js di Vercel, API Fastify di Azure App Service B1, Neon Postgres + PostGIS, foto di Cloudflare R2 ([ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md)). |
 
@@ -175,7 +175,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | Entitas | Atribut utama |
 | --- | --- |
 | Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu persetujuan privasi |
-| Lokasi | id, nama, kategori, kecamatan, kota, koordinat, status, skor, deskripsi, tanggal verifikasi terakhir |
+| Lokasi | id, nama, kategori, kecamatan, kota, koordinat, patokan, status, skor, deskripsi, tanggal verifikasi terakhir |
 | Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Belum diketahui) |
 | Laporan | id, pelapor, jenis (baru, perubahan, kekurangan), lokasi terkait, isian, status (menunggu, klarifikasi, diterbitkan, ditolak), alasan, waktu |
 | Foto | id, laporan, lokasi, berkas, status moderasi |
@@ -198,7 +198,7 @@ Target *(usulan)* tiga bulan setelah beta dibuka:
 
 Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 
-1. **Persiapan**: putuskan PT-02, PT-07, dan PT-09; buat desain mobile untuk delapan layar serta layar akun dan panel verifikator; kumpulkan data awal lewat survei lapangan.
+1. **Persiapan**: putuskan PT-02 dan PT-09; buat desain mobile untuk delapan layar serta layar akun dan panel verifikator; kumpulkan data awal lewat survei lapangan.
 2. **Alpha internal**: semua kebutuhan Must untuk penemuan, akun, pelaporan, dan verifikasi; diuji oleh tim.
 3. **Beta terbuka di Kota Bogor**: notifikasi dan kebutuhan Should; uji kegunaan bersama komunitas difabel.
 4. **Setelah MVP**: kebutuhan Could dan evaluasi perluasan wilayah lewat ADR baru.
@@ -213,7 +213,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | Data cepat usang | Tanggal verifikasi terakhir di Detail dan alur "Laporkan kekurangan" |
 | Efek kaca berat atau kontras turun di perangkat tertentu | Mode Solid dan audit kontras di setiap rilis |
 | Foto memuat data pribadi orang lain | Moderasi foto dan penghapusan EXIF |
-| Pemakaian tile OSM melanggar kebijakan | Penyedia tile pihak ketiga atau server sendiri |
+| Pemakaian Mapbox melewati kuota gratis | Pantau pemakaian bulanan, batasi token per domain, dan cache data peta yang tidak berubah |
 | Kredit Azure habis lebih cepat bila langganannya dipakai bersama lokerin | Budget alert di Azure dan pemantauan pemakaian bulanan |
 
 ## 13. Keputusan Terkait
@@ -223,20 +223,20 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md) | Empat kategori lokasi |
 | [0005](../decisions/0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas, tersedia atau tidak |
 | [0006](../decisions/0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga diverifikasi sebelum tayang |
-| [0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md) | Peta Leaflet + OpenStreetMap (Proposed) |
 | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md) | Design system kaca, palet Ungu Inklusi |
 | [0010](../decisions/0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah Kota Bogor |
 | [0011](../decisions/0011-pelapor-wajib-login.md) | Pelapor wajib login |
 | [0012](../decisions/0012-web-mobile-first-pwa.md) | Web mobile-first (PWA) |
 | [0013](../decisions/0013-tech-stack-nextjs-fastify.md) | Next.js + Fastify, Neon, Azure, Cloudflare R2 |
 | [0014](../decisions/0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email |
+| [0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md) | Lokasi lewat peta, lokasi perangkat, atau pencarian |
+| [0016](../decisions/0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian Mapbox |
 
 ## 14. Pertanyaan Terbuka
 
 - **PT-02**: rumus status dan Accessibility Score.
 - **PT-04**: bahasa antarmuka.
 - **PT-05**: target WCAG resmi dan cara pengujian.
-- **PT-07**: cara input lokasi di formulir.
 - **PT-08**: pencatatan kondisi fasilitas.
 - **PT-09**: proses dan target waktu verifikasi.
 - **PT-12**: sumber data awal.
