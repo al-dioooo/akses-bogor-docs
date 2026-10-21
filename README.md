@@ -15,6 +15,7 @@ Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1z
 | `decisions/` | Decision log (ADR) format MADR, beserta template dan index |
 | `product/` | PRD MVP, ringkasan produk, referensi desain Figma, dan pertanyaan terbuka |
 | `design/` | Fondasi visual (tipografi, warna, layout) dan audit kontras |
+| `operations/` | Panduan kerja operasional, mulai dari panduan verifikasi laporan |
 | `guidelines/` | Guideline tim: repositori GitHub serta pull request & code review |
 | `CONTRIBUTING.md` | Cara berkontribusi di repo ini (alur, branch, commit, PR, review) |
 | `.github/` | Template pull request, template issue, dan workflow CI |
