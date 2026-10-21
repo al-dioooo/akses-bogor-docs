@@ -8,12 +8,12 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 
 | ID | Pertanyaan | Menghambat implementasi | ADR |
 | --- | --- | --- | --- |
-| [PT-01](#pt-01-cakupan-wilayah) | Cakupan wilayah: Kota Bogor atau Indonesia? | Ya | |
+| [PT-01](#pt-01-cakupan-wilayah) | Cakupan wilayah: Kota Bogor atau Indonesia? | Ya | [0010](../decisions/0010-cakupan-wilayah-kota-bogor.md) |
 | [PT-02](#pt-02-status-dan-accessibility-score) | Bagaimana status dan Accessibility Score ditentukan? | Ya | |
-| [PT-03](#pt-03-akun-pengguna-dan-notifikasi) | Apakah pelapor perlu akun? Bagaimana notifikasi dikirim? | Ya | |
+| [PT-03](#pt-03-akun-pengguna-dan-notifikasi) | Apakah pelapor perlu akun? Bagaimana notifikasi dikirim? | Ya | [0011](../decisions/0011-pelapor-wajib-login.md) |
 | [PT-04](#pt-04-bahasa-antarmuka) | Bahasa antarmuka aplikasi | Tidak | |
 | [PT-05](#pt-05-target-aksesibilitas-antarmuka) | Target aksesibilitas antarmuka (WCAG) | Ya | [0009](../decisions/0009-design-system-kaca-ungu-inklusi.md) (sebagian) |
-| [PT-06](#pt-06-tampilan-mobile) | Tampilan mobile | Ya | |
+| [PT-06](#pt-06-tampilan-mobile) | Tampilan mobile | Ya | [0012](../decisions/0012-web-mobile-first-pwa.md) |
 | [PT-07](#pt-07-input-lokasi-pada-formulir-laporan) | Bagaimana lokasi dan kota diisi di formulir laporan? | Ya | |
 | [PT-08](#pt-08-kondisi-fasilitas) | Apakah kondisi fasilitas dicatat, bukan hanya ada/tidak? | Tidak | |
 | [PT-09](#pt-09-proses-verifikasi-dan-moderasi) | Proses verifikasi dan moderasi laporan | Ya | |
@@ -27,6 +27,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Opsi**: Kota Bogor; Bogor Raya (Kota dan Kabupaten); Jabodetabek; seluruh Indonesia.
 - **Dampak**: copy, pusat peta default, isi filter Kota, sumber data awal, dan beban verifikasi.
 - **Usulan**: mulai dari Kota Bogor sesuai nama produk, dengan model data yang tetap mendukung kota lain.
+- **Status**: diputuskan di [ADR-0010](../decisions/0010-cakupan-wilayah-kota-bogor.md): Kota Bogor (enam kecamatan).
 
 ## PT-02: Status dan Accessibility Score
 
@@ -44,6 +45,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: Laporan Berhasil menjanjikan "Anda akan mendapat notifikasi ketika lokasi telah dipublikasikan" ([Laporan Berhasil 13:1412][berhasil]), tetapi tidak ada layar login atau registrasi, dan formulir tidak meminta kontak. Landing menampilkan statistik "Kontributor Aktif".
 - **Opsi**: laporan anonim tanpa notifikasi; laporan anonim dengan email opsional untuk notifikasi; wajib login (email atau akun Google).
 - **Dampak**: spam dan moderasi, kewajiban pelindungan data pribadi (UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi), cara menghitung kontributor aktif.
+- **Status**: diputuskan di [ADR-0011](../decisions/0011-pelapor-wajib-login.md): pelapor wajib login; menjelajah tetap tanpa login. Metode login masih terbuka (lihat PT-11).
 
 ## PT-04: Bahasa Antarmuka
 
@@ -63,6 +65,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Bukti di desain**: semua frame berukuran desktop 1440 px.
 - **Pertanyaan**: apakah desain mobile-first, cukup responsif, berupa PWA, atau aplikasi native?
 - **Catatan** *(asumsi)*: pengguna kemungkinan besar membuka aplikasi dari ponsel saat bepergian atau saat melapor di lokasi.
+- **Status**: diputuskan di [ADR-0012](../decisions/0012-web-mobile-first-pwa.md): web responsif mobile-first yang bisa dipasang sebagai PWA.
 
 ## PT-07: Input Lokasi pada Formulir Laporan
 
