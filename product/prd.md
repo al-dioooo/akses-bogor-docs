@@ -252,4 +252,5 @@ Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
 - [Referensi Figma](referensi-figma.md)
 - [Fondasi Visual](../design/fondasi-visual.md)
 - [Decision log](../decisions/README.md)
+- [Panduan Verifikasi](../operations/panduan-verifikasi.md)
 - [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor)
