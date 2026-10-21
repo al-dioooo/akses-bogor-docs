@@ -12,6 +12,8 @@ Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1z
 
 | Path | Isi |
 | --- | --- |
+| `guidelines/` | Guideline tim: repositori GitHub serta pull request & code review |
+| `CONTRIBUTING.md` | Cara berkontribusi di repo ini (alur, branch, commit, PR, review) |
 | `.github/` | Template pull request, template issue, dan workflow CI |
 
 ## Tech Stack
@@ -26,7 +28,7 @@ Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1z
 Prasyarat: Git dan Node.js 20 atau lebih baru (hanya untuk menjalankan lint).
 
 ```bash
-git clone git@github.com:al-dioooo/akses-bogor-docs.git
+git clone https://github.com/al-dioooo/akses-bogor-docs.git
 cd akses-bogor-docs
 npx --yes markdownlint-cli2@0.23.3 "**/*.md"
 ```
@@ -41,3 +43,7 @@ Tidak ada proses deployment; dokumen dibaca langsung di GitHub.
 
 - `main`: versi terbaru yang sudah di-review dan di-merge.
 - `release`: versi dokumen yang sudah ditetapkan (mis. setelah review milestone).
+
+## Kontribusi
+
+Semua perubahan lewat issue, branch, dan pull request. Lihat [CONTRIBUTING.md](CONTRIBUTING.md).
