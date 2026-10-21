@@ -2,7 +2,7 @@
 
 - File: [AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor) (file key `aTaMQUxVF2P1zQlJY3s4du`)
 - Diperiksa: 2026-10-21
-- Halaman: `Main` (8 frame desktop, lebar 1440 px) dan `Design System` (kosong)
+- Halaman: `Main` (8 frame desktop, lebar 1440 px) dan `Design System` (design system v1, lihat [Fondasi Visual](../design/fondasi-visual.md))
 
 ## Frame di Halaman Main
 
@@ -20,7 +20,7 @@
 ## Kondisi File
 
 - **Hasil impor prototipe Lovable.** Struktur layer berupa frame "Container" berlapis dan teks bernama "Text". Lima frame masih memuat elemen "Complementary - Edit with Lovable" (node 13:989, 13:1194, 13:1399, 13:1565, 13:1795) yang harus dihapus sebelum desain dipakai sebagai acuan final.
-- **Belum ada komponen, style, atau variable.** Halaman `Design System` kosong. Acuan sementara dicatat di [Fondasi Visual](../design/fondasi-visual.md).
+- **Design system sudah dibangun (2026-10-21).** Halaman `Design System` berisi 141 variable, 12 text style, 9 effect style, 14 ikon, 9 komponen, serta bagian Foundations dan Preview ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). Delapan layar di halaman `Main` belum memakai token dan komponen tersebut.
 - **Hanya desktop.** Belum ada frame mobile atau tablet.
 - **Peta berupa tangkapan Leaflet + OpenStreetMap** (atribusi "Leaflet | © OpenStreetMap contributors"), berpusat di Jakarta.
 
