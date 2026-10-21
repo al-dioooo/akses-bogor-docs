@@ -56,3 +56,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0021](0021-wcag-22-aa-dan-pengujian-berlapis.md) | WCAG 2.2 level AA sebagai syarat rilis, dengan pengujian berlapis | Accepted | 2026-10-21 |
 | [0022](0022-tersedia-berarti-bisa-dipakai.md) | "Tersedia" berarti bisa dipakai, dengan alasan untuk "Tidak tersedia" | Accepted | 2026-10-21 |
 | [0023](0023-hingga-sepuluh-foto-bertag-per-laporan.md) | Hingga sepuluh foto bertag per laporan | Accepted | 2026-10-21 |
+| [0024](0024-data-setelah-akun-dihapus.md) | Data pribadi dihapus, data lokasi yang sudah terbit tetap tayang tanpa nama | Accepted | 2026-10-22 |
