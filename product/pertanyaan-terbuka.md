@@ -95,7 +95,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
 - **Pertanyaan**:
   - Apakah kode prototipe Lovable dilanjutkan atau aplikasi dibangun ulang?
   - Framework frontend, backend dan database (termasuk dukungan data geospasial), penyimpanan foto, dan hosting.
-  - Penyedia tile peta untuk produksi (lihat ADR peta).
+  - Penyedia tile peta untuk produksi (lihat [ADR-0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md)).
 
 ## PT-12: Data Awal
 
