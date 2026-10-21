@@ -33,3 +33,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 
 | No | Judul | Status | Tanggal |
 | --- | --- | --- | --- |
+| [0001](0001-mencatat-keputusan-dengan-madr.md) | Mencatat keputusan proyek dengan ADR format MADR | Accepted | 2026-10-21 |
