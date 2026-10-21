@@ -64,7 +64,7 @@ AksesBogor adalah web mobile-first yang membantu difabel dan pendampingnya menge
 | Notifikasi | Email status laporan | Belum ada |
 | Halaman statis | Tentang, Kebijakan Privasi, Syarat Layanan | Belum ada |
 
-Semua layar dirancang mulai dari lebar 360 px ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)). Versi mobile sudah ada untuk Landing, Jelajahi, Peta, dan Detail; layar lain masih desktop ([Referensi Figma](referensi-figma.md#frame-mobile)).
+Semua layar dirancang mulai dari lebar 360 px ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)). Kedelapan layar sudah punya versi mobile; layar akun dan panel verifikator belum didesain ([Referensi Figma](referensi-figma.md#frame-mobile)).
 
 ## 6. Kebutuhan Fungsional
 
