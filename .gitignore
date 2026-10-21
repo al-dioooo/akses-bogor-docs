@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+
+# Tooling
+node_modules/
+
+# Secrets & logs (lihat guideline keamanan)
+.env
+.env.*
+*.log
