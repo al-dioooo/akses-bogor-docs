@@ -38,7 +38,7 @@ Opsi terpilih: "Next.js + Fastify", mengikuti pola lokerin.
 | Foto | Cloudflare R2. Fastify memperkecil foto dan menghapus metadata EXIF sebelum mengunggah. |
 | Email | Penyedia email transaksional, dipilih saat implementasi. |
 | Peta | Mengikuti [ADR-0008](0008-peta-leaflet-dan-openstreetmap.md), yang masih Proposed. |
-| Repo | `akses-bogor-web` dan `akses-bogor-backend`, mengikuti guideline repositori tim. |
+| Repo | [`akses-bogor-web`](https://github.com/al-dioooo/akses-bogor-web) dan [`akses-bogor-api`](https://github.com/al-dioooo/akses-bogor-api), mengikuti guideline repositori tim. |
 
 Browser tidak pernah terhubung langsung ke database atau R2. Fastify memeriksa sesi dan peran di setiap request.
 
