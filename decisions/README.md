@@ -45,7 +45,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0010](0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah MVP adalah Kota Bogor | Accepted | 2026-10-21 |
 | [0011](0011-pelapor-wajib-login.md) | Pelapor wajib login | Accepted | 2026-10-21 |
 | [0012](0012-web-mobile-first-pwa.md) | Web mobile-first yang bisa dipasang (PWA) | Accepted | 2026-10-21 |
-| [0013](0013-tech-stack-nextjs-fastify.md) | Tech stack Next.js + Fastify, Neon, Azure, dan Cloudflare R2 | Accepted | 2026-10-21 |
+| [0013](0013-tech-stack-nextjs-fastify.md) | Tech stack Next.js + Fastify, Neon, Azure, dan Cloudflare R2 | Accepted, sebagian di-supersede oleh 0025 | 2026-10-21 |
 | [0014](0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email | Accepted | 2026-10-21 |
 | [0015](0015-input-lokasi-peta-gps-pencarian.md) | Lokasi laporan diisi lewat peta, lokasi perangkat, atau pencarian | Accepted | 2026-10-21 |
 | [0016](0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian lokasi memakai Mapbox | Accepted | 2026-10-21 |
@@ -57,3 +57,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0022](0022-tersedia-berarti-bisa-dipakai.md) | "Tersedia" berarti bisa dipakai, dengan alasan untuk "Tidak tersedia" | Accepted | 2026-10-21 |
 | [0023](0023-hingga-sepuluh-foto-bertag-per-laporan.md) | Hingga sepuluh foto bertag per laporan | Accepted | 2026-10-21 |
 | [0024](0024-data-setelah-akun-dihapus.md) | Data pribadi dihapus, data lokasi yang sudah terbit tetap tayang tanpa nama | Accepted | 2026-10-22 |
+| [0025](0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL berjalan di VPS milik tim | Accepted | 2026-10-26 |

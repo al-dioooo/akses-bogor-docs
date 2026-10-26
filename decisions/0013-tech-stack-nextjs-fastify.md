@@ -4,6 +4,7 @@
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #18
+- Di-supersede sebagian oleh: [ADR-0025](0025-api-dan-postgresql-di-vps-sendiri.md) (hosting API dan database)
 
 ## Konteks dan Masalah
 
