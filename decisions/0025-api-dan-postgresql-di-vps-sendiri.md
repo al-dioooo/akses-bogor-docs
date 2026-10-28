@@ -32,8 +32,8 @@ Opsi terpilih: "systemd + PostgreSQL dari paket Debian, dibuka lewat Cloudflare 
 | Lapisan | Pilihan |
 | --- | --- |
 | Server | VPS milik tim (YoRHa Garden), dikelola sendiri, di Indonesia. Debian 13. |
-| API | Fastify berjalan sebagai service systemd (`node dist/server.js`) dengan user sistem sendiri dan mendengar di `127.0.0.1:8080`. systemd menyalakan ulang proses yang mati. |
-| Akses dari luar | Cloudflare Tunnel meneruskan hostname API ke `localhost:8080`. TLS diurus Cloudflare, dan VPS tidak membuka port ke internet. |
+| API | Fastify berjalan sebagai service systemd (`node dist/server.js`) dengan user sistem sendiri dan hanya mendengar di `127.0.0.1`. Port diatur lewat `PORT`; port bawaan `8080` sudah dipakai layanan lain di VPS, jadi produksi memakai port lain. systemd menyalakan ulang proses yang mati. |
+| Akses dari luar | Cloudflare Tunnel meneruskan hostname API ke port lokal itu. TLS diurus Cloudflare, dan VPS tidak membuka port ke internet. |
 | Database | PostgreSQL 17 dengan PostGIS 3 dan `pg_trgm` dari paket Debian, hanya menerima koneksi dari localhost. Aplikasi dan migrasi memakai satu `DATABASE_URL`. |
 | Cadangan | Timer systemd menjalankan `pg_dump -Fc` setiap malam. Tujuh dump terakhir disimpan di VPS, dan setiap dump disalin ke bucket R2 privat yang terpisah dari bucket foto, disimpan 30 hari. |
 | Tidak berubah | Web Next.js di Vercel, foto di Cloudflare R2, dan bagian lain [ADR-0013](0013-tech-stack-nextjs-fastify.md). |
