@@ -13,9 +13,9 @@ Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1z
 | Repo | Isi |
 | --- | --- |
 | [akses-bogor-web](https://github.com/al-dioooo/akses-bogor-web) | Aplikasi web Next.js di Vercel, mobile-first dan bisa dipasang sebagai PWA |
-| [akses-bogor-api](https://github.com/al-dioooo/akses-bogor-api) | API Fastify di Azure App Service, dengan Neon Postgres + PostGIS |
+| [akses-bogor-api](https://github.com/al-dioooo/akses-bogor-api) | API Fastify dengan PostgreSQL + PostGIS, di VPS milik tim |
 
-Keduanya mengikuti [guideline tim](guidelines/) dan [ADR-0013](decisions/0013-tech-stack-nextjs-fastify.md).
+Keduanya mengikuti [guideline tim](guidelines/), [ADR-0013](decisions/0013-tech-stack-nextjs-fastify.md), dan [ADR-0025](decisions/0025-api-dan-postgresql-di-vps-sendiri.md).
 
 ## Struktur Repositori
 
