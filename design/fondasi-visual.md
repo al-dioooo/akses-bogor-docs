@@ -1,6 +1,6 @@
 # Fondasi Visual
 
-Ringkasan design system AksesBogor versi 2: permukaan datar, tipografi besar, palet **Ungu Inklusi**, dan ilustrasi lingkungan 3D, diputuskan di [ADR-0027](../decisions/0027-design-system-datar-dan-ilustrasi-3d.md). Versi 1 (kaca dan aurora, [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)) dicatat di bagian Riwayat. Sumber nilai saat ini adalah `design-tokens/figma-variables.json` di akses-bogor-web; variable di [halaman Design System Figma](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=1-2) masih versi 1 dan akan diperbarui menyusul.
+Ringkasan design system AksesBogor versi 2: permukaan datar, tipografi besar, palet **Ungu Inklusi**, dan ilustrasi lingkungan 3D, diputuskan di [ADR-0027](../decisions/0027-design-system-datar-dan-ilustrasi-3d.md). Versi 1 (kaca dan aurora, [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)) dicatat di [Riwayat](#riwayat). Sumber nilai saat ini adalah `design-tokens/figma-variables.json` di akses-bogor-web; variable di [halaman Design System Figma](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=1-2) masih versi 1 dan akan diperbarui menyusul.
 
 ## Prinsip
 
@@ -72,51 +72,54 @@ Nama CSS diturunkan dari nama variable: `color/text/primary` menjadi `var(--colo
 
 ## Tipografi
 
-| Style | Font | Ukuran / tinggi baris |
+| Peran | Font | Ukuran |
 | --- | --- | --- |
-| Display/XL | Plus Jakarta Sans Bold, −2.5% | 60/66 |
-| Heading/H1 | Plus Jakarta Sans Bold, −2.5% | 36/44 |
-| Heading/H2 | Plus Jakarta Sans Bold, −2% | 30/36 |
-| Heading/H3 | Plus Jakarta Sans SemiBold, −2.5% | 20/28 |
-| Heading/H4 | Plus Jakarta Sans SemiBold, −2.5% | 18/28 |
-| Body/Lead | Inter Regular | 20/30 |
-| Body/Base | Inter Regular | 16/24 |
-| Body/Small | Inter Regular | 14/20 |
-| Label/Base | Inter Semi Bold | 16/24 |
-| Label/Small | Inter Semi Bold | 14/20 |
-| Label/Nav | Inter Medium | 14/20 |
-| Caption | Inter Medium | 12/16 |
+| Display (judul hero) | Bricolage Grotesque ExtraBold, −3.5% | 45–83 px, tinggi baris 0.95 |
+| Judul bagian | Bricolage Grotesque ExtraBold, −3.5% | 37–61 px, tinggi baris 1 |
+| Judul kartu | Bricolage Grotesque Bold, −2% | 20–28 px |
+| Aksen | Instrument Serif Italic | Satu kata di akhir judul, warna brand |
+| Lead | Inter Regular | 19/30 |
+| Isi | Inter Regular | 16/26 |
+| Kecil | Inter Regular | 14/20 |
+| Label | IBM Plex Mono Medium, kapital, +8% | 12/16 |
 
-Teks isi minimal 14 px; 12 px hanya untuk caption.
+Teks isi minimal 14 px; 12 px hanya untuk label bernomor dan caption.
 
-## Efek
+## Bentuk dan Efek
 
-| Style | Isi | Padanan CSS |
-| --- | --- | --- |
-| Glass/Regular | Blur latar 24 px, bayangan 0 8 32 ungu 12%, highlight atas 1 px | `backdrop-filter: blur(24px)` |
-| Glass/Strong | Blur latar 32 px, bayangan 0 12 40 | `backdrop-filter: blur(32px)` |
-| Glow/Brand | Bayangan ungu 48% di bawah tombol Primary | `box-shadow: 0 8px 24px -4px` |
-| Focus/Ring | Celah 2 px + cincin 2 px ungu | `box-shadow: 0 0 0 2px <gap>, 0 0 0 4px <ring>` |
-| Elevation/Sm, Md, Lg | Bayangan netral | `box-shadow` |
-| Marker/Drop | Bayangan pin peta | `filter: drop-shadow()` |
+| Elemen | Aturan |
+| --- | --- |
+| Tombol | Pil, tinggi 44 px (kecil), 52 px (utama). Isi ungu, isi hitam, atau garis tinta 2 px |
+| Kartu | Putih, garis paper-200 1 px, sudut 20–24 px; panel besar 32 px |
+| Bayangan | Hanya untuk elemen yang mengambang di atas gambar (kolom cari, pin): bayangan lembut netral |
+| Fokus | Outline 2 px violet-600 dengan jarak 2 px, terlihat di semua tombol |
+| Judul bagian | Label bernomor, lalu judul dua ketukan di kiri dan satu kalimat pengantar di kanan |
 
-Warna bayangan dan radius blur terikat ke variable, sehingga ikut berubah per mode.
+## Ilustrasi
 
-## Komponen v1
+- **Hero "Halte ke pintu"**: lingkungan 3D jalan di Bogor. Angkot di halte, guiding block menyeberang zebra cross dengan kerb landai, tangga di samping ramp, toilet difabel, lift kaca, pohon Kebun Raya, dan hujan di atas gunung. Sisi kiri gambar sengaja tenang untuk judul.
+- **Empat close-up**: guiding block (01), ramp (02), toilet difabel (03), dan lift (04). Nomornya sama dengan pin di hero, dan dipakai lagi di bagian "Rute ke pintu" Beranda dan di kartu fasilitas Detail.
+- **Pembuatan**: `gpt-image-2` lewat Codex CLI, dengan hero sebagai acuan gaya untuk close-up. Prompt dicatat bersama gambar di repo web. Gambar ini ilustrasi, bukan foto lokasi.
+- **Lapisan 3D**: WebGL tanpa library. Bagian depan gambar bergeser lebih jauh daripada latar belakang saat pointer bergerak, hujan tipis turun di sisi gambar, dan pin bernomor menempel di fasilitas. Berhenti saat gerak dikurangi; gambar statis tampil bila WebGL tidak ada.
+- **Aksesibilitas**: gambar dan pin dekoratif (`alt=""`, `aria-hidden`); nama dan arti fasilitas tertulis di teks.
+
+## Komponen
+
+Daftar komponen Figma versi 1. Perilakunya tetap berlaku; tampilannya mengikuti aturan versi 2 di atas.
 
 | Komponen | Varian | Properti utama |
 | --- | --- | --- |
-| Button | Style (Primary, Glass, Ghost, Danger) × Size (Medium 48 px, Small 36 px) × State (Default, Hover, Focus, Disabled) = 32 | Label, ikon depan/belakang (bisa diganti) |
+| Button | Style (Primary, Ink, Outline, Ghost, Danger) × Size (Medium 52 px, Small 44 px) × State (Default, Hover, Focus, Disabled) | Label, ikon depan/belakang (bisa diganti) |
 | Toggle | Checked × State = 6 | Label |
 | Checkbox | Checked × State = 6 | Label, deskripsi |
 | Input | State (Default, Focus, Filled, Error, Disabled) = 5 | Label, teks, ikon depan, helper, pesan error |
 | Status badge | Status (4) × Size (2) = 8 | Label tetap per status |
 | Map marker | Status (4) × State (Default, Selected) = 8 | — |
-| Glass card | Surface (Regular, Strong) = 2 | Judul, lokasi, isi, badge, aksi |
+| Card | Raised, Sunken | Judul, lokasi, isi, badge, aksi |
 | Nav item | State (Default, Hover, Active, Focus) = 4 | Label |
 | Nav bar | 1 | — |
 
-Ditambah 33 ikon outline 24 px. Halaman Preview di Figma menyusun komponen ini menjadi satu layar contoh di ketiga mode.
+Ditambah 33 ikon outline 24 px. Halaman Preview di Figma masih menampilkan versi 1.
 
 ### Komponen pola
 
@@ -124,11 +127,11 @@ Dibuat saat migrasi delapan layar, di bagian Patterns halaman Design System:
 
 | Kelompok | Komponen |
 | --- | --- |
-| Umum | Logo (Default, Inverse), Tag (Brand, Glass), Check item, Footer |
+| Umum | Logo (Default, Inverse), Tag (Brand), Check item, Footer |
 | Beranda | Category tile (Default, Hover, Focus), Stat item |
 | Peta | Map base (Kota Bogor skematis), Zoom control, Pan control, Map legend, Picker pin |
 | Explore | Chip (terpilih atau tidak), Select, Location card (Default, Hover, Focus) |
-| Detail | Facility item (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui; baris alasan dan catatan opsional), Score ring (empat nada status, isi "X dari Y") |
+| Detail | Facility item (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui; baris alasan dan catatan opsional), Kartu status (angka besar "X dari Y", empat nada status; menggantikan Score ring) |
 | Laporkan | Stepper step, Stepper (langkah 1–3), Radio tile, Facility answer (Answer: Tersedia, Tidak tersedia, Tidak perlu, Belum tahu × Note: Closed, Open), Checkbox card, Textarea, Upload dropzone, Photo item |
 | Mobile | App bar (Home, Back), Bottom nav item (5 tab × Default, Active), Bottom nav, Form action bar, Footer mobile, Location row |
 | Akun | Google sign-in button, Report row (Menunggu, Klarifikasi, Diterbitkan, Ditolak) |
@@ -137,7 +140,7 @@ Komponen yang mengikuti keputusan produk:
 
 - **Facility answer**: satu fasilitas dengan empat pilihan radio, bawaan "Belum tahu" ([ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)). Di Detail, jawaban yang sama tampil lewat Facility item, dengan "Belum tahu" ditulis "Belum diketahui". Varian Tidak tersedia menampilkan pilihan alasan (Tidak ada, Rusak, Terhalang, Terbatas, Tidak sesuai), dan Note=Open menampilkan kolom catatan; Note=Closed menampilkan tombol "Tambah catatan" ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)).
 - **Facility item**: properti Show detail menampilkan baris kedua berisi alasan dan catatan, misalnya "Tidak sesuai · Jalur terputus sebelum pintu masuk" ([ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md)). Karena bisa dua baris, sudutnya memakai `radius/lg`, bukan bentuk pil.
-- **Score ring**: angka X (fasilitas relevan yang Tersedia), teks "dari Y", dan nama status; bukan skor 0–100 ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)). Busur hanya penguat visual dan diatur per instance.
+- **Kartu status** (pengganti Score ring): angka X (fasilitas relevan yang Tersedia) dan teks "dari Y fasilitas tersedia" di atas latar warna status, bersama nama status dan kalimat alasannya; bukan skor 0–100 ([ADR-0018](../decisions/0018-status-pintu-masuk-dulu-dan-ringkasan-fasilitas.md)).
 - **Picker pin** dan **Pan control**: pin tetap di tengah peta pemilih lokasi, dan tombol arah 48 px untuk pengguna yang tidak bisa menyeret peta ([ADR-0015](../decisions/0015-input-lokasi-peta-gps-pencarian.md)). Ikon Locate dipakai di tombol "Gunakan lokasi saya".
 - **Map base**: peta skematis Kota Bogor (batas kota, enam kecamatan, Kebun Raya, Ciliwung, Cisadane, jalan utama, rel) yang digambar dari token warna, dipakai di Map dan peta kecil Detail. Untuk peta kecil, instance diperbesar dan layer label disembunyikan. Komponen ini hanya pengganti visual; di produk peta dirender Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 - **Upload dropzone** dan **Photo item**: dropzone menerima hingga 10 foto JPEG, PNG, atau WebP. Setiap foto yang dipilih tampil sebagai Photo item berisi pratinjau, nama dan ukuran berkas, Select untuk tag, dan tombol hapus 44 px, dalam dua baris sehingga Select selebar kartu di layar sempit ([ADR-0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md)).
@@ -161,25 +164,32 @@ Komponen bersama menyesuaikan lebar 328 px: garis penghubung Stepper meregang, n
 
 Ikon Home, Map, Menu, dan User ditambahkan untuk pola ini. Footer mobile menumpuk kolom footer desktop dengan tautan setinggi 44 px, dan Location row adalah kartu ringkas satu lokasi untuk Peta.
 
-Footer dan panel ajakan memakai `color/surface/inverse` (tinta gelap opak), bukan kaca gelap, karena kaca 72% di atas latar terang hanya memberi kontras sekitar 4.4:1 untuk teks sekunder.
+Footer memakai `color/surface/inverse` (tinta gelap opak), dan angka di bawah hero memakai pita `color/bg/road` (aspal).
 
 ## Kontras
 
-Kasus terburuk: kaca 72% di atas gumpalan latar paling pekat.
+Diukur di permukaan opak, jadi tidak ada kasus terburuk yang bergantung pada latar.
 
 | Kombinasi | Rasio | Mode |
 | --- | --- | --- |
-| Teks utama ink-900 | 12.2:1 | Glass |
-| Teks sekunder ink-600 | 6.0:1 | Glass |
-| Teks brand violet-700 | 6.2:1 | Glass |
+| Teks utama ink-950 di latar paper-50 | 17.6:1 | Terang |
+| Teks sekunder ink-600 di paper-50 / di tint ungu | 7.6:1 / 6.5:1 | Terang |
+| Teks brand violet-700 di paper-50 | 7.8:1 | Terang |
 | Putih di tombol violet-600 | 6.1:1 | Semua mode |
-| Teks status tingkat 800 | 4.9–5.8:1 | Glass |
-| Border field ink-500 (non-teks) | 3.8:1 | Glass |
-| Teks utama ink-50 | 11.4:1 | Dark |
-| Teks sekunder ink-300 | 7.4:1 | Dark |
-| Teks brand violet-300 | 5.8:1 | Dark |
+| Teks status tingkat 800 di latar statusnya | 5.6–6.8:1 | Terang |
+| Putih / kuning di pita aspal | 10.4:1 / 6.2:1 | Terang |
+| Border field ink-500 (non-teks) di putih | 5.1:1 | Terang |
+| Teks utama ink-50 di latar ink-950 | 17.2:1 | Gelap |
+| Teks sekunder ink-300 di kartu ink-900 | 9.7:1 | Gelap |
+| Teks brand violet-300 di kartu ink-900 | 7.6:1 | Gelap |
 
-## Riwayat: Palet Desain Awal
+## Riwayat
+
+### Versi 1: kaca dan aurora
+
+Design system versi 1 ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)) memakai permukaan kaca putih 72% dengan blur 24 px di atas latar aurora (ungu, biru langit, mint), tombol berkilap dengan glow ungu, serta tiga mode: Glass, Solid, dan Dark. Kontrasnya dihitung untuk kasus terburuk kaca di atas gumpalan latar paling pekat. Versi ini diganti karena semua permukaan menjadi kartu kaca yang sama dan kontras teks bergantung pada latar yang bergeser.
+
+### Palet desain awal
 
 Delapan layar desain awal memakai biru `#387AFF`, teks sekunder `#6A6E81`, dan warna status `#39D597`, `#FFCC33`, `#F37777`. Audit 2026-10-21 menemukan:
 
