@@ -1,21 +1,23 @@
 # Fondasi Visual
 
-Ringkasan design system AksesBogor versi 1: gaya kaca (glassmorphism) dengan palet **Ungu Inklusi**, diputuskan di [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md). Sumber kebenarannya adalah variable dan style di [halaman Design System Figma](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=1-2); dokumen ini merangkumnya untuk pembaca yang tidak membuka Figma.
+Ringkasan design system AksesBogor versi 2: permukaan datar, tipografi besar, palet **Ungu Inklusi**, dan ilustrasi lingkungan 3D, diputuskan di [ADR-0027](../decisions/0027-design-system-datar-dan-ilustrasi-3d.md). Versi 1 (kaca dan aurora, [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)) dicatat di bagian Riwayat. Sumber nilai saat ini adalah `design-tokens/figma-variables.json` di akses-bogor-web; variable di [halaman Design System Figma](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=1-2) masih versi 1 dan akan diperbarui menyusul.
 
 ## Prinsip
 
-- Permukaan kaca buram di atas latar aurora, dan semua teks tetap lulus WCAG AA di kasus terburuk.
+- Permukaan opak. Kontras teks tidak boleh bergantung pada gambar atau warna yang bergeser di baliknya.
 - Status tidak pernah dibedakan dengan warna saja: selalu warna, ikon, dan label.
-- Setiap permukaan kaca punya kembaran opak (mode Solid).
-- Efek harus bisa dibuat di CSS: `backdrop-filter: blur()` dan `box-shadow`.
+- Satu warna aksi (ungu). Warna lain punya tugas: status, atau sorotan di pita gelap.
+- Ilustrasi menjelaskan fasilitas, tetapi informasinya selalu tertulis juga di teks.
+- Semua gerak bisa dihentikan dan tidak pernah menyembunyikan konten.
 
 ## Mode Warna
 
-| Mode | Kapan dipakai | Permukaan kaca |
-| --- | --- | --- |
-| Glass | Default | Putih 72% + blur 24 px |
-| Solid | `prefers-reduced-transparency`, kontras tinggi, atau ponsel yang berat menjalankan blur | Putih opak |
-| Dark | `prefers-color-scheme: dark` | Tinta gelap 56% + blur, di latar malam ungu |
+| Mode | Kapan dipakai |
+| --- | --- |
+| Terang | Bawaan |
+| Gelap | `prefers-color-scheme: dark` |
+
+Pengaturan tampilan di header bisa memaksa salah satu mode lewat `<html data-theme="terang|gelap">`.
 
 ## Palet dan Maknanya
 
@@ -25,16 +27,11 @@ Ungu dipakai gerakan hak penyandang disabilitas (#PurpleLightUp setiap 3 Desembe
 
 | Tingkat | Nilai | Pemakaian |
 | --- | --- | --- |
-| 50 | `#F4F1FF` | Latar halaman (mode Glass) |
-| 100 | `#EAE4FF` | Tint terpilih (mode Solid) |
-| 200 | `#D5C9FF` | Gumpalan aurora "Inklusi" |
-| 300 | `#B8A4FF` | Teks brand dan cincin fokus di mode Dark |
-| 500 | `#7B5CFF` | Glow dan ilustrasi saja |
-| 600 | `#6440E8` | Isi tombol Primary (teks putih 6.1:1) |
-| 700 | `#5230C2` | Teks dan link brand (6.2:1 di kaca), hover tombol |
+| 100 | `#EAE4FF` | Tint terpilih, kartu sorotan |
+| 300 | `#B8A4FF` | Teks brand dan cincin fokus di mode Gelap |
+| 600 | `#6440E8` | Isi tombol utama (teks putih 6.1:1), pin ilustrasi |
+| 700 | `#5230C2` | Teks dan link brand, hover tombol |
 | 800 | `#40259A` | Tombol ditekan |
-
-Tingkat 400, 900, dan 950 tersedia sebagai primitive untuk kebutuhan ilustrasi.
 
 ### Status aksesibilitas
 
@@ -45,39 +42,33 @@ Tingkat 400, 900, dan 950 tersedia sebagai primitive untuk kebutuhan ilustrasi.
 | Tidak aksesibel | Ada hambatan utama (`wheelchair=no`) | `#A11D24` | `#FDE9E9` | `#C0262D` | Lingkaran silang |
 | Belum diketahui | Belum diverifikasi; bukan berarti tidak aksesibel | `#52607A` | `#EEF1F6` | `#52607A` | Lingkaran tanya |
 
-Di mode Dark, teks status memakai tingkat 300 dan latarnya tint 16%.
+Di mode Gelap, teks status memakai tingkat 300 dan latarnya tint 16%.
 
-### Tinta (netral)
+### Kertas, tinta, dan aspal (netral)
 
 | Token | Nilai | Pemakaian |
 | --- | --- | --- |
-| ink-900 | `#1E2029` | Teks utama |
+| paper-50 | `#F9F9F7` | Latar halaman |
+| paper-100 | `#F0F0ED` | Latar cekung: panel filter, hover |
+| paper-200 | `#E6E5DF` | Garis pembatas kartu |
+| ink-950 | `#12131A` | Teks utama, garis tegas, tombol hitam; latar mode Gelap |
 | ink-600 | `#4B5066` | Teks sekunder dan placeholder |
-| ink-500 | `#6A6E81` | Border field (non-teks, 3.8:1); tidak untuk teks |
-| ink-200 | `#DEE1EC` | Pembatas |
-| ink-50 | `#F5F6FB` | Teks utama di mode Dark, latar mode Solid |
+| ink-500 | `#6A6E81` | Border field (non-teks); tidak untuk teks |
+| asphalt-700 | `#3C3F52` | Pita jalan di bawah hero, tempat angka |
 
-### Latar aurora
+### Kuning guiding block
 
-| Gumpalan | Nilai | Makna |
-| --- | --- | --- |
-| Inklusi | `#D5C9FF` | Nilai inti produk |
-| Hujan | `#C9E2FF` | Bogor, Kota Hujan |
-| Kebun Raya | `#BDF3DC` | Hijau Kebun Raya Bogor |
-
-Di mode Solid latar menjadi polos.
+`#F2C230`, warna ubin pemandu di Indonesia. Dipakai di ilustrasi dan untuk satu angka sorotan di pita jalan (6.2:1 di atas aspal). Tidak dipakai untuk status, supaya tidak tertukar dengan Sebagian.
 
 ## Token
 
-Tiga koleksi variable:
-
 | Koleksi | Mode | Isi |
 | --- | --- | --- |
-| `Primitives` | Value | 66 warna mentah (disembunyikan dari picker) |
-| `Color` | Glass, Solid, Dark | 57 token semantik: `color/bg/*`, `color/surface/*`, `color/border/*`, `color/text/*`, `color/icon/*`, `color/brand/*`, `color/danger/*`, `color/status/*`, `color/shadow/*`, `color/focus/*`, `color/control/*`, `color/marker/*` |
-| `Dimension` | Value | 22 token: `spacing/2xs`–`4xl` (4–96), `radius/sm`–`full` (8–999), `blur/glass` (24) dan `blur/glass-strong` (32), `border-width/*`, `size/*` |
+| `Primitives` | Value | Warna mentah: violet, ink, paper, asphalt, kuning, status, dan alpha |
+| `Color` | Terang, Gelap | Token semantik: `color/bg/*`, `color/surface/*`, `color/border/*`, `color/text/*`, `color/icon/*`, `color/brand/*`, `color/danger/*`, `color/status/*`, `color/shadow/*`, `color/focus/*`, `color/control/*`, `color/marker/*` |
+| `Dimension` | Value | `spacing/2xs`–`4xl` (4–96), `radius/sm`–`3xl` (8–32) dan `full`, `border-width/*`, `size/*` |
 
-Setiap variable punya scope dan nama CSS. Nama CSS diturunkan dari nama variable: `color/text/primary` menjadi `var(--color-text-primary)`.
+Nama CSS diturunkan dari nama variable: `color/text/primary` menjadi `var(--color-text-primary)`.
 
 ## Tipografi
 
