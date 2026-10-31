@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #39
 - Men-supersede sebagian: [ADR-0013](0013-tech-stack-nextjs-fastify.md) (hosting API dan database)
+- Di-supersede sebagian oleh: [ADR-0026](0026-api-dan-postgresql-di-evergarden-oci.md) (server produksi, versi PostgreSQL dan Node, dan cara deploy)
 
 ## Konteks dan Masalah
 
