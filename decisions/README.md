@@ -41,7 +41,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted | 2026-10-21 |
 | [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Superseded oleh 0009 | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Superseded oleh 0016 | 2026-10-21 |
-| [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Accepted | 2026-10-21 |
+| [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Superseded oleh 0027 | 2026-10-21 |
 | [0010](0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah MVP adalah Kota Bogor | Accepted | 2026-10-21 |
 | [0011](0011-pelapor-wajib-login.md) | Pelapor wajib login | Accepted | 2026-10-21 |
 | [0012](0012-web-mobile-first-pwa.md) | Web mobile-first yang bisa dipasang (PWA) | Accepted | 2026-10-21 |
@@ -59,3 +59,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0024](0024-data-setelah-akun-dihapus.md) | Data pribadi dihapus, data lokasi yang sudah terbit tetap tayang tanpa nama | Accepted | 2026-10-22 |
 | [0025](0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL berjalan di VPS milik tim | Accepted, sebagian di-supersede oleh 0026 | 2026-10-26 |
 | [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted | 2026-10-31 |
+| [0027](0027-design-system-datar-dan-ilustrasi-3d.md) | Design system datar dengan ilustrasi lingkungan 3D | Accepted | 2026-10-31 |
