@@ -8,10 +8,25 @@ AksesBogor membantu difabel menemukan fasilitas publik yang ramah akses, seperti
 
 Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor)
 
+## Repositori Terkait
+
+| Repo | Isi |
+| --- | --- |
+| [akses-bogor-web](https://github.com/al-dioooo/akses-bogor-web) | Aplikasi web Next.js di Vercel, mobile-first dan bisa dipasang sebagai PWA |
+| [akses-bogor-api](https://github.com/al-dioooo/akses-bogor-api) | API Fastify dengan PostgreSQL + PostGIS, di Evergarden (VM OCI region Batam) lewat Cloudflare Tunnel |
+
+Keduanya mengikuti [guideline tim](guidelines/), [ADR-0013](decisions/0013-tech-stack-nextjs-fastify.md), [ADR-0025](decisions/0025-api-dan-postgresql-di-vps-sendiri.md), dan [ADR-0026](decisions/0026-api-dan-postgresql-di-evergarden-oci.md).
+
 ## Struktur Repositori
 
 | Path | Isi |
 | --- | --- |
+| `decisions/` | Decision log (ADR) format MADR, beserta template dan index |
+| `product/` | PRD MVP, ringkasan produk, referensi desain Figma, dan pertanyaan terbuka |
+| `design/` | Fondasi visual (tipografi, warna, layout) dan audit kontras |
+| `operations/` | Panduan kerja operasional, mulai dari panduan verifikasi laporan |
+| `guidelines/` | Guideline tim: repositori GitHub serta pull request & code review |
+| `CONTRIBUTING.md` | Cara berkontribusi di repo ini (alur, branch, commit, PR, review) |
 | `.github/` | Template pull request, template issue, dan workflow CI |
 
 ## Tech Stack
@@ -26,7 +41,7 @@ Referensi desain: [Figma: AksesBogor](https://www.figma.com/design/aTaMQUxVF2P1z
 Prasyarat: Git dan Node.js 20 atau lebih baru (hanya untuk menjalankan lint).
 
 ```bash
-git clone git@github.com:al-dioooo/akses-bogor-docs.git
+git clone https://github.com/al-dioooo/akses-bogor-docs.git
 cd akses-bogor-docs
 npx --yes markdownlint-cli2@0.23.3 "**/*.md"
 ```
@@ -41,3 +56,7 @@ Tidak ada proses deployment; dokumen dibaca langsung di GitHub.
 
 - `main`: versi terbaru yang sudah di-review dan di-merge.
 - `release`: versi dokumen yang sudah ditetapkan (mis. setelah review milestone).
+
+## Kontribusi
+
+Semua perubahan lewat issue, branch, dan pull request. Lihat [CONTRIBUTING.md](CONTRIBUTING.md).
