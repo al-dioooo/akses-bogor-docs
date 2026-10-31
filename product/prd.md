@@ -143,7 +143,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | Browser | Chrome Android dan Safari iOS dua versi terakhir; Chrome, Firefox, Safari, dan Edge versi terbaru di desktop. |
 | Peta | Mapbox GL JS dan pencarian Mapbox dengan token berumur pendek dari Fastify; logo Mapbox dan "© Mapbox © OpenStreetMap" selalu terlihat; perangkat tanpa WebGL diarahkan ke Explore ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)). |
 | Konsistensi UI | Semua layar memakai komponen dan token dari design system Figma ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). |
-| Tech stack | Next.js di Vercel, API Fastify dan PostgreSQL + PostGIS di VPS milik tim yang dibuka lewat Cloudflare Tunnel, foto di Cloudflare R2 ([ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md), [ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md)). |
+| Tech stack | Next.js di Vercel, API Fastify dan PostgreSQL + PostGIS di Evergarden (VM OCI region Batam) yang dibuka lewat Cloudflare Tunnel, foto di Cloudflare R2 ([ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md), [ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md)). |
 
 ## 8. Alur Utama
 
@@ -216,7 +216,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | Efek kaca berat atau kontras turun di perangkat tertentu | Mode Solid dan audit kontras di setiap rilis |
 | Foto memuat data pribadi orang lain | Moderasi foto dan penghapusan EXIF |
 | Pemakaian Mapbox melewati kuota gratis | Pantau pemakaian bulanan, batasi token per domain, dan cache data peta yang tidak berubah |
-| VPS mati atau disknya rusak | Dump database setiap malam ke R2 privat, uji pemulihan sebelum beta, dan pemantauan disk |
+| Server mati, disknya rusak, atau memorinya habis | Dump database setiap malam ke R2 privat, uji pemulihan sebelum beta, batas memori API, dan pemantauan disk dan memori |
 
 ## 13. Keputusan Terkait
 
@@ -240,7 +240,8 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md) | "Tersedia" berarti bisa dipakai, dengan alasan |
 | [0023](../decisions/0023-hingga-sepuluh-foto-bertag-per-laporan.md) | Hingga 10 foto bertag per laporan |
 | [0024](../decisions/0024-data-setelah-akun-dihapus.md) | Data setelah akun dihapus |
-| [0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL di VPS milik tim |
+| [0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL di VPS milik tim; server produksi diganti 0026 |
+| [0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi di Evergarden (OCI Batam) |
 
 ## 14. Pertanyaan Terbuka
 

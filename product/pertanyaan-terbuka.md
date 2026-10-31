@@ -106,7 +106,7 @@ Keputusan yang belum diambil, atau yang saling bertentangan, di [desain Figma](r
   - Apakah kode prototipe Lovable dilanjutkan atau aplikasi dibangun ulang?
   - Framework frontend, backend dan database (termasuk dukungan data geospasial), penyimpanan foto, dan hosting.
   - Penyedia tile peta untuk produksi (lihat [ADR-0008](../decisions/0008-peta-leaflet-dan-openstreetmap.md)).
-- **Status**: diputuskan di [ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md): aplikasi dibangun ulang dengan Next.js di Vercel, API Fastify, Postgres + PostGIS, dan Cloudflare R2. API dan database berjalan di VPS milik tim ([ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md)), menggantikan Azure App Service dan Neon. Metode login di [ADR-0014](../decisions/0014-login-google-dan-kode-email.md). Peta dan pencarian memakai Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
+- **Status**: diputuskan di [ADR-0013](../decisions/0013-tech-stack-nextjs-fastify.md): aplikasi dibangun ulang dengan Next.js di Vercel, API Fastify, Postgres + PostGIS, dan Cloudflare R2. API dan database berjalan di server yang dikelola tim ([ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md)), menggantikan Azure App Service dan Neon; produksinya di Evergarden, VM OCI region Batam ([ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md)). Metode login di [ADR-0014](../decisions/0014-login-google-dan-kode-email.md). Peta dan pencarian memakai Mapbox ([ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md)).
 
 ## PT-12: Data Awal
 
