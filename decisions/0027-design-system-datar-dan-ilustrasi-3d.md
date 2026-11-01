@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #46
 - Men-supersede: [ADR-0009](0009-design-system-kaca-ungu-inklusi.md)
+- Di-supersede sebagian oleh: [ADR-0028](0028-adegan-3d-three-js-untuk-hero-dan-rute.md) (ilustrasi dan lapisan 3D)
 
 ## Konteks dan Masalah
 
