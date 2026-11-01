@@ -1,6 +1,6 @@
 # ADR-0009: Design System Kaca dengan Palet Ungu Inklusi
 
-- Status: Accepted
+- Status: Superseded oleh [ADR-0027](0027-design-system-datar-dan-ilustrasi-3d.md)
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #11
