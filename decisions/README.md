@@ -59,4 +59,5 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0024](0024-data-setelah-akun-dihapus.md) | Data pribadi dihapus, data lokasi yang sudah terbit tetap tayang tanpa nama | Accepted | 2026-10-22 |
 | [0025](0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL berjalan di VPS milik tim | Accepted, sebagian di-supersede oleh 0026 | 2026-10-26 |
 | [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted | 2026-10-31 |
-| [0027](0027-design-system-datar-dan-ilustrasi-3d.md) | Design system datar dengan ilustrasi lingkungan 3D | Accepted | 2026-10-31 |
+| [0027](0027-design-system-datar-dan-ilustrasi-3d.md) | Design system datar dengan ilustrasi lingkungan 3D | Accepted, sebagian di-supersede oleh 0028 | 2026-10-31 |
+| [0028](0028-adegan-3d-three-js-untuk-hero-dan-rute.md) | Adegan 3D three.js untuk hero dan Rute ke pintu, pengganti ilustrasi AI | Accepted | 2026-11-01 |

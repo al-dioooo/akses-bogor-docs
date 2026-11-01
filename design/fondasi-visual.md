@@ -1,6 +1,6 @@
 # Fondasi Visual
 
-Ringkasan design system AksesBogor versi 2: permukaan datar, tipografi besar, palet **Ungu Inklusi**, dan ilustrasi lingkungan 3D, diputuskan di [ADR-0027](../decisions/0027-design-system-datar-dan-ilustrasi-3d.md). Versi 1 (kaca dan aurora, [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)) dicatat di [Riwayat](#riwayat). Sumber nilai saat ini adalah `design-tokens/figma-variables.json` di akses-bogor-web; variable di [halaman Design System Figma](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=1-2) masih versi 1 dan akan diperbarui menyusul.
+Ringkasan design system AksesBogor versi 2: permukaan datar, tipografi besar, palet **Ungu Inklusi**, dan ilustrasi lingkungan 3D, diputuskan di [ADR-0027](../decisions/0027-design-system-datar-dan-ilustrasi-3d.md) dan [ADR-0028](../decisions/0028-adegan-3d-three-js-untuk-hero-dan-rute.md). Versi 1 (kaca dan aurora, [ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)) dicatat di [Riwayat](#riwayat). Sumber nilai saat ini adalah `design-tokens/figma-variables.json` di akses-bogor-web; variable di [halaman Design System Figma](https://www.figma.com/design/aTaMQUxVF2P1zQlJY3s4du/AksesBogor?node-id=1-2) masih versi 1 dan akan diperbarui menyusul.
 
 ## Prinsip
 
@@ -97,10 +97,11 @@ Teks isi minimal 14 px; 12 px hanya untuk label bernomor dan caption.
 
 ## Ilustrasi
 
-- **Hero "Halte ke pintu"**: lingkungan 3D jalan di Bogor. Angkot di halte, guiding block menyeberang zebra cross dengan kerb landai, tangga di samping ramp, toilet difabel, lift kaca, pohon Kebun Raya, dan hujan di atas gunung. Sisi kiri gambar sengaja tenang untuk judul.
-- **Empat close-up**: guiding block (01), ramp (02), toilet difabel (03), dan lift (04). Nomornya sama dengan pin di hero, dan dipakai lagi di bagian "Rute ke pintu" Beranda dan di kartu fasilitas Detail.
-- **Pembuatan**: `gpt-image-2` lewat Codex CLI, dengan hero sebagai acuan gaya untuk close-up. Prompt dicatat bersama gambar di repo web. Gambar ini ilustrasi, bukan foto lokasi.
-- **Lapisan 3D**: WebGL tanpa library. Bagian depan gambar bergeser lebih jauh daripada latar belakang saat pointer bergerak, hujan tipis turun di sisi gambar, dan pin bernomor menempel di fasilitas. Berhenti saat gerak dikurangi; gambar statis tampil bila WebGL tidak ada.
+- **Hero "Halte ke pintu"**: adegan 3D jalan di Bogor yang dirender di browser dengan three.js ([ADR-0028](../decisions/0028-adegan-3d-three-js-untuk-hero-dan-rute.md)). Angkot ngetem di halte, guiding block menyeberang zebra cross dengan kerb landai, tangga di samping ramp, toilet difabel, lift kaca, rumah kaca, pohon Kebun Raya, dan hujan di sisi kanan. Lanskap terbuka: jalan dan rumput sampai tepi, kabut menyatu dengan latar halaman, dan bukit di kejauhan. Sisi kiri sengaja tenang untuk judul.
+- **Empat titik**: guiding block (01), ramp (02), toilet difabel (03), dan lift (04) adalah empat posisi kamera di adegan yang sama. Nomornya sama dengan pin di hero. Di bagian "Rute ke pintu" Beranda kamera berpindah ke titik yang sedang dibaca; di ponsel dan di kartu fasilitas Detail tampil render diam dari titik itu.
+- **Pembuatan**: dibangun dari bentuk dasar di kode (`src/components/beranda/scene/` di repo web), tanpa berkas model dan tanpa gambar AI. Poster hero (Terang dan Gelap) dan keempat close-up dirender dari adegan oleh skrip di repo web. Ini ilustrasi, bukan foto lokasi.
+- **Gerak**: siklus 32 detik: angkot berhenti di halte, pejalan bertongkat putih mengikuti guiding block sampai pintu, pengguna kursi roda naik ramp, lift naik turun, pohon bergoyang, dan hujan turun. Berhenti saat gerak dikurangi, hero tidak terlihat, tab tidak aktif, atau tombol hentikan ditekan. Poster tampil sampai three.js siap, dan seterusnya bila gerak dikurangi atau WebGL tidak ada.
+- **Mode Gelap**: versi malam, dengan lampu jalan, jendela, halte, dan kabin lift yang menyala.
 - **Aksesibilitas**: gambar dan pin dekoratif (`alt=""`, `aria-hidden`); nama dan arti fasilitas tertulis di teks.
 
 ## Komponen
