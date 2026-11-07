@@ -255,6 +255,7 @@ Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
 
 - [Ringkasan Produk](ringkasan-produk.md)
 - [Referensi Figma](referensi-figma.md)
+- [Kebijakan Privasi (draf)](kebijakan-privasi.md)
 - [Fondasi Visual](../design/fondasi-visual.md)
 - [Decision log](../decisions/README.md)
 - [Panduan Verifikasi](../operations/panduan-verifikasi.md)
