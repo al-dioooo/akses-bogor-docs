@@ -61,3 +61,5 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted | 2026-10-31 |
 | [0027](0027-design-system-datar-dan-ilustrasi-3d.md) | Design system datar dengan ilustrasi lingkungan 3D | Accepted, sebagian di-supersede oleh 0028 | 2026-10-31 |
 | [0028](0028-adegan-3d-three-js-untuk-hero-dan-rute.md) | Adegan 3D three.js untuk hero dan Rute ke pintu, pengganti ilustrasi AI | Accepted | 2026-11-01 |
+| [0029](0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth di API, sesi disimpan server web | Accepted | 2026-11-07 |
+| [0030](0030-email-transaksional-resend.md) | Email transaksional lewat Resend | Accepted | 2026-11-07 |

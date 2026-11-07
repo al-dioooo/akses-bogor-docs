@@ -176,7 +176,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 
 | Entitas | Atribut utama |
 | --- | --- |
-| Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu persetujuan privasi |
+| Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu dan versi persetujuan Kebijakan Privasi |
 | Lokasi | id, nama, kategori, kecamatan, kota, koordinat, patokan, status dan ringkasan fasilitas (dihitung), deskripsi, tanggal verifikasi terakhir |
 | Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui), alasan, catatan |
 | Laporan | id, pelapor (kosong bila akunnya dihapus), jenis (baru, perubahan, kekurangan), lokasi terkait, isian, status (menunggu, klarifikasi, diterbitkan, ditolak), alasan, waktu |
@@ -242,6 +242,8 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0024](../decisions/0024-data-setelah-akun-dihapus.md) | Data setelah akun dihapus |
 | [0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL di VPS milik tim; server produksi diganti 0026 |
 | [0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi di Evergarden (OCI Batam) |
+| [0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth, sesi disimpan server web |
+| [0030](../decisions/0030-email-transaksional-resend.md) | Email transaksional lewat Resend |
 
 ## 14. Pertanyaan Terbuka
 
