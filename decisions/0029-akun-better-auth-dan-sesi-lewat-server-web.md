@@ -37,7 +37,7 @@ Opsi terpilih: "Better Auth di API". Library ini sudah menangani kode email, ver
 ### Tabel
 
 - `users` yang sudah ada dipakai sebagai tabel pengguna Better Auth, ditambah kolom `email_verified`, `image` (selalu kosong; foto profil Google tidak disimpan), dan `privacy_policy_version`.
-- Tabel baru: `sessions`, `accounts` (tautan ke Google), dan `verifications` (kode email). Baris `accounts` tidak menyimpan ID token atau access token Google. Alamat IP dan user agent tidak disimpan di sesi.
+- Tabel baru: `sessions`, `accounts` (tautan ke Google), dan `verifications` (kode email). Better Auth memeriksa bahwa semua kolomnya ada, jadi kolom token di `accounts` serta kolom IP dan user agent di `sessions` tetap dibuat, tetapi selalu kosong: hook database membuang token Google dan alamat IP sebelum disimpan.
 
 ### Sesi dan cookie
 
@@ -95,7 +95,7 @@ Client OAuth Google dibuat di Google Cloud Console dengan tipe "Web application"
 - Positif: cookie hanya milik domain web, jadi tidak terkena blokir cookie pihak ketiga dan tetap jalan di preview Vercel tanpa mengubah CORS.
 - Positif: Laporkan dan panel verifikator cukup memeriksa sesi lewat satu fungsi di API.
 - Negatif: dependensi runtime baru yang cukup besar (Better Auth beserta `jose`, `kysely`, dan lainnya). Pembaruan versinya perlu dibaca catatan rilisnya karena menyentuh keamanan.
-- Negatif: struktur tabel mengikuti Better Auth. Kolom yang tidak kita pakai (`image`) tetap ada, dan migrasi perlu dicek setiap Better Auth naik versi mayor.
+- Negatif: struktur tabel mengikuti Better Auth. Kolom yang tidak kita pakai (`image`, kolom token, IP, dan user agent) tetap ada dan selalu kosong, dan migrasi perlu dicek setiap Better Auth naik versi mayor.
 - Negatif: akun sudah dibuat sebelum persetujuan Kebijakan Privasi, berisi email saja. Ini diterima karena email memang dibutuhkan untuk mengirim kode, dan akun yang tidak dilengkapi dihapus dalam 24 jam.
 - Negatif: setiap halaman yang butuh data akun dirender di server Next.js dan memanggil API, bukan membaca sesi di browser.
 - Netral: `BETTER_AUTH_SECRET` yang bocor atau diganti membuat semua sesi dan kode yang sedang berjalan tidak berlaku.
