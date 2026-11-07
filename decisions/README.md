@@ -63,3 +63,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0028](0028-adegan-3d-three-js-untuk-hero-dan-rute.md) | Adegan 3D three.js untuk hero dan Rute ke pintu, pengganti ilustrasi AI | Accepted | 2026-11-01 |
 | [0029](0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth di API, sesi disimpan server web | Accepted | 2026-11-07 |
 | [0030](0030-email-transaksional-resend.md) | Email transaksional lewat Resend | Accepted | 2026-11-07 |
+| [0031](0031-foto-laporan-di-bucket-r2-privat.md) | Foto laporan diproses API dan disimpan di bucket R2 privat sampai terbit | Accepted | 2026-11-07 |
+| [0032](0032-pencarian-tempat-lewat-api-mapbox-search-box.md) | Pencarian tempat di formulir laporan lewat API dengan Mapbox Search Box | Accepted | 2026-11-07 |
+| [0033](0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md) | Formulir laporan diisi dulu, masuk saat kirim, dan draf disimpan di perangkat | Accepted | 2026-11-07 |
+| [0034](0034-batas-kecamatan-dari-openstreetmap.md) | Batas kecamatan Kota Bogor dari OpenStreetMap | Accepted | 2026-11-07 |

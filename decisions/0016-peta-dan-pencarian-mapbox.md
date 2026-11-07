@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #20
 - Men-supersede: [ADR-0008](0008-peta-leaflet-dan-openstreetmap.md)
+- Dilengkapi oleh: [ADR-0032](0032-pencarian-tempat-lewat-api-mapbox-search-box.md) (pencarian di formulir laporan)
 
 ## Konteks dan Masalah
 

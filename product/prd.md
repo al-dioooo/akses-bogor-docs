@@ -244,6 +244,10 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi di Evergarden (OCI Batam) |
 | [0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth, sesi disimpan server web |
 | [0030](../decisions/0030-email-transaksional-resend.md) | Email transaksional lewat Resend |
+| [0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md) | Foto laporan diproses API, disimpan di bucket R2 privat sampai terbit |
+| [0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md) | Pencarian tempat lewat API dengan Mapbox Search Box |
+| [0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md) | Laporan diisi dulu, masuk saat kirim, draf di perangkat |
+| [0034](../decisions/0034-batas-kecamatan-dari-openstreetmap.md) | Batas kecamatan dari OpenStreetMap |
 
 ## 14. Pertanyaan Terbuka
 
