@@ -24,7 +24,7 @@ Keduanya mengikuti [guideline tim](guidelines/), [ADR-0013](decisions/0013-tech-
 | `decisions/` | Decision log (ADR) format MADR, beserta template dan index |
 | `product/` | PRD MVP, ringkasan produk, referensi desain Figma, pertanyaan terbuka, Kebijakan Privasi, dan Syarat Layanan |
 | `design/` | Fondasi visual (tipografi, warna, layout) dan audit kontras |
-| `operations/` | Panduan kerja operasional, mulai dari panduan verifikasi laporan |
+| `operations/` | Panduan kerja operasional: panduan verifikasi laporan dan [daftar periksa rilis pertama](operations/rilis-pertama.md) |
 | `guidelines/` | Guideline tim: repositori GitHub serta pull request & code review |
 | `CONTRIBUTING.md` | Cara berkontribusi di repo ini (alur, branch, commit, PR, review) |
 | `.github/` | Template pull request, template issue, dan workflow CI |
