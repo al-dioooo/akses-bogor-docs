@@ -4,6 +4,7 @@
 - Tanggal: 2026-11-07
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #50
+- Dilengkapi oleh: [ADR-0039](0039-email-status-laporan.md) (email status laporan)
 
 ## Konteks dan Masalah
 

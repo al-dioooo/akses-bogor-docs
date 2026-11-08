@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #54
 - Melengkapi: [ADR-0023](0023-hingga-sepuluh-foto-bertag-per-laporan.md) (rincian penyimpanan dan pemrosesan)
+- Dilengkapi oleh: [ADR-0037](0037-foto-dikaburkan-di-api-dan-asli-dihapus.md) (moderasi foto saat terbit)
 
 ## Konteks dan Masalah
 

@@ -248,6 +248,11 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md) | Pencarian tempat lewat API dengan Mapbox Search Box |
 | [0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md) | Laporan diisi dulu, masuk saat kirim, draf di perangkat |
 | [0034](../decisions/0034-batas-kecamatan-dari-openstreetmap.md) | Batas kecamatan dari OpenStreetMap |
+| [0035](../decisions/0035-peran-dan-panel-verifikator-di-web-yang-sama.md) | Peran verifikator dan admin, panel verifikator di web yang sama |
+| [0036](../decisions/0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md) | Keputusan verifikasi per jawaban, klarifikasi dijawab di Laporan saya |
+| [0037](../decisions/0037-foto-dikaburkan-di-api-dan-asli-dihapus.md) | Foto dikaburkan API saat terbit, foto asli dihapus |
+| [0038](../decisions/0038-log-audit-perubahan-data.md) | Log audit tanpa data pribadi |
+| [0039](../decisions/0039-email-status-laporan.md) | Email status laporan dengan coba ulang |
 
 ## 14. Pertanyaan Terbuka
 

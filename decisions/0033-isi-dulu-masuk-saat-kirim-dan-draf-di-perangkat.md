@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #54
 - Melengkapi: [ADR-0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md), [ADR-0011](0011-pelapor-wajib-login.md)
+- Dilengkapi oleh: [ADR-0036](0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md) (penerbitan laporan perubahan dan kekurangan)
 
 ## Konteks dan Masalah
 
