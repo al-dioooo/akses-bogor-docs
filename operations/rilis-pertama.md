@@ -246,6 +246,42 @@ Migrasi tidak ikut dibatalkan. Kode `7a4fdb5` belum diuji dengan skema 0005, wal
 
 Web dan API di-rollback bersama, karena web baru tidak berfungsi dengan API lama.
 
+## 9. Bila Secret Belum Diisi
+
+API tetap jalan bila sebuah secret kosong; yang mati hanya fitur yang membutuhkannya. Yang membuat API tidak mau jalan adalah nilai yang formatnya salah atau pasangan yang tidak lengkap.
+
+| Belum diisi | Akibat di produksi |
+| --- | --- |
+| `BETTER_AUTH_SECRET` | Semua route yang butuh akun menjawab 503 `akun_belum_diatur`: `/auth/*`, `/me/*`, `/admin/*`, `/reports` (kirim laporan dan unggah foto), dan `/verifier/*`. Masuk, Laporkan, dan panel verifikator tidak bisa dipakai |
+| `BETTER_AUTH_URL` | Tidak ada 503; API memakai `http://localhost:<PORT>` sebagai alamatnya sendiri. Tetap isi alamat publik |
+| `RESEND_API_KEY` dan `EMAIL_FROM` | Permintaan kode menjawab 503 `email_belum_diatur`, jadi masuk dengan kode email mati; masuk dengan Google tetap bisa. Email konfirmasi hapus akun dilewati. Email status laporan tetap diantrekan, dicoba setiap jam, dan dibuang setelah 3 hari |
+| `GOOGLE_CLIENT_ID` (API) | `/auth/google` menjawab 503 `google_belum_diatur` |
+| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` (Vercel) | Tombol "Masuk dengan Google" tidak tampil |
+| Variabel `R2_*` | Unggah foto menjawab 503 `foto_belum_diatur`. Laporan tetap bisa dikirim tanpa foto, dan formulir menawarkan itu. Menerbitkan laporan yang punya foto tidak tersembunyi menjawab 503 |
+| `PHOTO_PUBLIC_URL` | Alamat foto di respons bernilai `null`, jadi web tidak menampilkan foto yang sudah terbit, walaupun berkasnya tetap disalin ke bucket publik |
+| `MAPBOX_SECRET_TOKEN` dan `MAPBOX_USERNAME` | Pencarian tempat menjawab **503** `pencarian_belum_diatur`, bukan 502. Peta menjawab 503 `peta_belum_diatur`, dan halaman Peta hanya menampilkan legenda dan daftar. Kode 502 (`pencarian_gagal`, `peta_tidak_tersedia`) berarti Mapbox sendiri yang galat |
+| `WEB_SERVER_SECRET` (salah satu sisi) | Header IP pengunjung diabaikan, jadi semua pengunjung web berbagi kuota rate limit beberapa IP Vercel. Batas kode masuk (10 per 15 menit) dan pencarian (30 per menit) cepat habis untuk semua orang |
+| `FRONTEND_ORIGINS` | Tautan di email status laporan mengarah ke `http://localhost:3000`. Web tidak terpengaruh CORS, karena web memanggil API dari server |
+| `API_URL` (Vercel) | Semua halaman yang memuat data dari API menampilkan pesan gagal memuat (galat `api_belum_diatur` di server web) |
+
+Sumber: `src/app.ts`, `src/routes/*.ts`, `src/verification/emails.ts`, dan `src/config/env.ts` di akses-bogor-api; `src/lib/api.ts` dan `src/app/masuk/page.tsx` di akses-bogor-web.
+
+## 10. Hasil Uji Migrasi
+
+Diuji pada 2026-11-08 dengan dump produksi `aksesbogor-20261107T193254Z.dump` (29 KB), dari `main` akses-bogor-api di `8fc65c2`.
+
+- Dump dipulihkan ke cluster PostgreSQL 17 sementara di folder kerja, terpisah dari cluster produksi. Migrasi dijalankan sebagai role `aksesbogor` tanpa hak superuser, sama seperti `deploy.sh`.
+- Sebelum migrasi, ada 2 migrasi tercatat (0000, 0001), 7 lokasi, 28 jawaban fasilitas, 0 foto, 0 laporan, 0 pengguna, dan 6 kecamatan tanpa batas wilayah.
+- `pnpm db:migrate` berhasil, dan 6 migrasi tercatat (0000 sampai 0005).
+- Ketujuh lokasi tidak berubah: nama, kategori, kecamatan, status, ringkasan fasilitas, tanggal verifikasi, titik, dan 28 jawaban fasilitasnya. Jumlah baris di tabel lain juga sama.
+- Keenam kecamatan mendapat batas wilayah (total 111,4 km²), dan setiap lokasi berada di dalam batas kecamatannya.
+- API dari `main` yang dijalankan di atas database itu:
+  - `/places` menjawab 7 lokasi;
+  - `/districts` menghitung lokasi per kecamatan;
+  - titik di Bogor Tengah dikenali sebagai Bogor Tengah;
+  - titik di luar kota menjawab 422 `di_luar_kota_bogor`.
+- Cluster sementara dan salinan dump sudah dihapus.
+
 ## Referensi
 
 - [PRD](../product/prd.md), [Kebijakan Privasi](../product/kebijakan-privasi.md), [Syarat Layanan](../product/syarat-layanan.md)
