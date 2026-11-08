@@ -3,9 +3,9 @@
 | | |
 | --- | --- |
 | Status | Draf, belum ditinjau |
-| Versi | 2026-11-09 |
+| Versi | 2026-11-10 |
 | Pemilik | Tim AksesBogor |
-| Issue | #51, #55, #59 |
+| Issue | #51, #55, #59, #62 |
 
 Dokumen ini adalah sumber teks halaman `/kebijakan-privasi` di akses-bogor-web. Pengguna menyetujui versi yang tertulis di atas saat Lengkapi Akun (FR-11), dan versi itu disimpan bersama waktu persetujuannya ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)). Setiap perubahan isi menaikkan versi, dan pengguna diminta menyetujui ulang saat masuk berikutnya.
 
@@ -14,8 +14,8 @@ Dokumen ini adalah sumber teks halaman `/kebijakan-privasi` di akses-bogor-web. 
 Bagian ini untuk tim dan tidak tampil di web.
 
 - [ ] Isi identitas pengendali data (nama tim dan kampus) dan alamat email kontak resmi. `info@aksesbogor.id` di Figma masih placeholder.
-- [ ] Tetapkan masa simpan log server di Evergarden. Saat ini journald hanya dibatasi ukuran, belum waktu; usulan 30 hari.
-- [ ] Minta dosen pembimbing atau unit hukum kampus meninjau teks ini, terutama dasar pemrosesan, transfer ke luar negeri, batas waktu 3 × 24 jam, dan bagian anak.
+- [x] Tetapkan masa simpan log server di Evergarden: 30 hari, diputuskan 2026-11-08 ([ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)). journald diatur saat rilis pertama.
+- [ ] Minta dosen pembimbing atau unit hukum kampus meninjau teks ini bersama [Syarat Layanan](syarat-layanan.md), terutama dasar pemrosesan, transfer ke luar negeri, batas waktu 3 × 24 jam, dan bagian anak.
 - [x] Tambahkan rincian foto dan lokasi laporan saat Laporkan (FR-20 sampai FR-27) dibangun.
 - [ ] Ubah status menjadi final, hapus kata "Draf" di judul halaman web, dan naikkan versi bila isinya berubah.
 
@@ -82,7 +82,7 @@ Vercel, Resend, Google, Mapbox, dan Cloudflare bisa memproses data di luar Indon
 | Laporan yang sudah terbit | Tetap tayang tanpa nama pelapor setelah akun dihapus |
 | Log audit perubahan data tempat | Tanpa batas waktu; akun verifikator yang dihapus ditulis "verifikator dihapus" |
 | Cadangan database | Paling lama 30 hari |
-| Log server | Belum ditetapkan |
+| Log server | 30 hari |
 
 ### Hak Anda
 
@@ -111,4 +111,5 @@ Email: (diisi tim sebelum rilis).
 
 - UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi
 - [PRD](prd.md), FR-11, FR-13, FR-20 sampai FR-27, FR-50, dan kebutuhan non-fungsional Privasi dan keamanan
-- [ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0014](../decisions/0014-login-google-dan-kode-email.md), [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md), [ADR-0030](../decisions/0030-email-transaksional-resend.md), [ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md)
+- [Syarat Layanan](syarat-layanan.md)
+- [ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0014](../decisions/0014-login-google-dan-kode-email.md), [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md), [ADR-0030](../decisions/0030-email-transaksional-resend.md), [ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md), [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)

@@ -253,6 +253,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0037](../decisions/0037-foto-dikaburkan-di-api-dan-asli-dihapus.md) | Foto dikaburkan API saat terbit, foto asli dihapus |
 | [0038](../decisions/0038-log-audit-perubahan-data.md) | Log audit tanpa data pribadi |
 | [0039](../decisions/0039-email-status-laporan.md) | Email status laporan dengan coba ulang |
+| [0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Izin luas atas isi laporan, Syarat Layanan disetujui lewat tombol Lengkapi Akun |
 
 ## 14. Pertanyaan Terbuka
 
@@ -265,6 +266,7 @@ Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
 - [Ringkasan Produk](ringkasan-produk.md)
 - [Referensi Figma](referensi-figma.md)
 - [Kebijakan Privasi (draf)](kebijakan-privasi.md)
+- [Syarat Layanan (draf)](syarat-layanan.md)
 - [Fondasi Visual](../design/fondasi-visual.md)
 - [Decision log](../decisions/README.md)
 - [Panduan Verifikasi](../operations/panduan-verifikasi.md)
