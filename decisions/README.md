@@ -67,3 +67,8 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0032](0032-pencarian-tempat-lewat-api-mapbox-search-box.md) | Pencarian tempat di formulir laporan lewat API dengan Mapbox Search Box | Accepted | 2026-11-07 |
 | [0033](0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md) | Formulir laporan diisi dulu, masuk saat kirim, dan draf disimpan di perangkat | Accepted | 2026-11-07 |
 | [0034](0034-batas-kecamatan-dari-openstreetmap.md) | Batas kecamatan Kota Bogor dari OpenStreetMap | Accepted | 2026-11-07 |
+| [0035](0035-peran-dan-panel-verifikator-di-web-yang-sama.md) | Peran disimpan di akun, admin pertama lewat skrip server, panel verifikator di web yang sama | Accepted | 2026-11-08 |
+| [0036](0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md) | Keputusan verifikasi per jawaban, dan klarifikasi dijawab di Laporan saya | Accepted | 2026-11-08 |
+| [0037](0037-foto-dikaburkan-di-api-dan-asli-dihapus.md) | Foto dikaburkan API saat terbit, dan foto asli dihapus | Accepted | 2026-11-08 |
+| [0038](0038-log-audit-perubahan-data.md) | Log audit mencatat perubahan data tanpa data pribadi | Accepted | 2026-11-08 |
+| [0039](0039-email-status-laporan.md) | Email status laporan dikirim setelah keputusan dan dicoba ulang selama 3 hari | Accepted | 2026-11-08 |

@@ -4,6 +4,7 @@
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #22
+- Dilengkapi oleh: [ADR-0035](0035-peran-dan-panel-verifikator-di-web-yang-sama.md) (peran dan panel), [ADR-0036](0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md) (keputusan dan klarifikasi)
 
 ## Konteks dan Masalah
 
