@@ -147,6 +147,105 @@ Bila nanti memakai domain sendiri, misalnya `aksesbogor.id` atau `aksesbogor.sit
   journalctl -u akses-bogor-backup -n 20
   ```
 
+## 6. Rilis
+
+### 6.1 Cadangan tepat sebelum rilis
+
+- [ ] Jalankan `sudo systemctl start akses-bogor-backup` dan catat nama dump terbaru dari `journalctl -u akses-bogor-backup -n 5`. Dump ini dipakai bila rollback butuh database lama (langkah 8).
+
+### 6.2 PR rilis
+
+Ketiga repo memakai PR dari `main` ke `release` dengan judul seperti `chore(release): bring main into release (#<issue>)`. PR ini di-merge dengan **merge commit, bukan squash**, supaya `release` membawa riwayat `main`:
+
+```bash
+gh pr create -R al-dioooo/<repo> --base release --head main --title "chore(release): bring main into release (#<issue>)"
+gh pr merge <nomor> -R al-dioooo/<repo> --merge
+```
+
+Urutannya:
+
+1. [ ] **akses-bogor-docs**, kapan saja.
+2. [ ] **akses-bogor-api**. Timer men-deploy paling lama 5 menit kemudian, atau langsung dengan `sudo systemctl start akses-bogor-deploy`. Deploy ini menjalankan migrasi 0002 sampai 0005.
+3. [ ] **akses-bogor-web**, segera setelah API sehat (langkah 6.3). Vercel membangun deployment produksi dari `release`.
+
+API rilis lebih dulu karena web lama tidak punya fitur akun, jadi tetap jalan dengan API baru. Sebaliknya, web baru butuh API baru: keduanya meminta Kebijakan Privasi 2026-11-10, dan Lengkapi Akun gagal dengan 409 bila versinya berbeda. Jarak antara keduanya sebaiknya hanya beberapa menit.
+
+### 6.3 Periksa API
+
+```bash
+journalctl -u akses-bogor-deploy -n 50     # harus berakhir dengan "rilis aktif: <sha>"
+systemctl status akses-bogor-api
+journalctl -u akses-bogor-api -n 50        # tidak ada "Konfigurasi environment tidak valid"
+curl https://akses-bogor-api.yorhagarden.xyz/healthz
+curl https://akses-bogor-api.yorhagarden.xyz/places
+```
+
+- [ ] `healthz` menjawab `{"status":"ok"}`, dan `/places` menjawab `"total":7`.
+- [ ] Bila API tidak mau jalan karena environment, perbaiki `/etc/akses-bogor/api.env` lalu `sudo systemctl restart akses-bogor-api`. Bila tidak bisa cepat diperbaiki, lakukan rollback (langkah 8).
+
+### 6.4 Periksa web
+
+- [ ] Deployment produksi di Vercel berstatus Ready dan dibangun dari commit `release` terbaru.
+- [ ] `https://akses-bogor.vercel.app` menampilkan Beranda, Jelajahi, Peta dengan peta Mapbox, Detail lokasi, Tentang, Kebijakan Privasi versi 10 November 2026, dan Syarat Layanan.
+
+## 7. Setelah rilis
+
+### 7.1 Admin pertama
+
+- [ ] Calon admin masuk di `https://akses-bogor.vercel.app/masuk` dan melengkapi akun.
+- [ ] Di Evergarden ([README akses-bogor-api, bagian Peran](https://github.com/al-dioooo/akses-bogor-api#peran)):
+
+  ```bash
+  sudo -u aksesbogor -H sh -c 'cd /srv/akses-bogor/current && COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
+    corepack pnpm exec tsx --env-file=/etc/akses-bogor/api.env scripts/peran.ts --email <email> --peran admin'
+  ```
+
+### 7.2 Verifikator
+
+- [ ] Setiap calon verifikator masuk dan melengkapi akun lebih dulu.
+- [ ] Admin membuka `/verifikasi/tim` dan memberi peran verifikator dengan email yang persis sama. Akun yang belum ada menjawab "akun tidak ditemukan", dan akun yang belum dilengkapi ditolak. Peran admin hanya bisa diberikan lewat skrip di langkah 7.1 ([ADR-0035](../decisions/0035-peran-dan-panel-verifikator-di-web-yang-sama.md)).
+
+### 7.3 Uji alur penuh di produksi
+
+Butuh dua akun: **A** sebagai pelapor dan **B** sebagai verifikator atau admin, karena verifikator tidak bisa memeriksa laporannya sendiri. Pakai tempat nyata yang benar-benar diperiksa penguji, karena laporan yang terbit tidak bisa dihapus dari web.
+
+1. [ ] A masuk dengan kode email. Email kode dari Resend sampai (periksa juga folder spam), dan Lengkapi Akun meminta persetujuan Kebijakan Privasi 10 November 2026.
+2. [ ] Masuk dengan Google juga berhasil, dengan akun ketiga atau akun A.
+3. [ ] A membuka Laporkan:
+   - mencari tempat lewat pencarian (Mapbox Search Box);
+   - memilih titik di peta, lalu kecamatan terisi otomatis;
+   - mengisi keempat fasilitas;
+   - menambah foto;
+   - menekan "Kirim laporan". Foto terunggah (bucket privat), dan halaman Laporan terkirim tampil.
+4. [ ] B membuka `/verifikasi`. Laporan A ada di antrean. Foto bisa dibuka, area kabur bisa ditandai, dan setiap jawaban bisa diperiksa.
+5. [ ] B menerbitkan laporan. A menerima email "Laporan Anda sudah terbit", dan tautan di email itu mengarah ke `https://akses-bogor.vercel.app`.
+6. [ ] Tempat itu tampil di Detail dengan foto yang sudah dikaburkan (dari `PHOTO_PUBLIC_URL`), di Jelajahi, dan sebagai marker di Peta.
+7. [ ] Kirim laporan kedua yang sengaja tidak lengkap. B meminta klarifikasi, dan A menerima email lalu bisa menjawab dari Laporan saya. Setelah itu B menolaknya, dan A menerima email beserta alasannya. Laporan yang ditolak tidak tampil di publik.
+8. [ ] Hapus akun uji yang tidak dipakai lagi dari Akun Saya. Email konfirmasi terakhir harus terkirim.
+
+### 7.4 Pantau
+
+- [ ] Hari pertama: `journalctl -u akses-bogor-api --since today` tanpa galat berulang, log pengiriman di dashboard Resend, dan pemakaian di dashboard Mapbox.
+- [ ] Malam pertama: cadangan pukul 02.30 WIB tersalin ke R2.
+
+## 8. Rollback
+
+**Web.** Di Vercel → Deployments, pilih deployment produksi sebelumnya lalu Instant Rollback. Setelah itu revert merge rilis di `release` web dengan tombol Revert di PR rilisnya, supaya push berikutnya tidak men-deploy ulang versi yang bermasalah.
+
+**API.** Hentikan timer supaya tidak men-deploy ulang, lalu kembalikan tautan `current` ke rilis sebelumnya. Rilis yang aktif sekarang adalah `7a4fdb5`, dan tiga rilis terakhir disimpan di `/srv/akses-bogor/releases`:
+
+```bash
+sudo systemctl stop akses-bogor-deploy.timer
+sudo -u aksesbogor ln -sfn releases/<sha-lama> /srv/akses-bogor/current
+sudo systemctl restart akses-bogor-api
+```
+
+Revert merge rilis di `release` API dengan tombol Revert di PR rilisnya, lalu nyalakan lagi timer dengan `sudo systemctl start akses-bogor-deploy.timer`.
+
+Migrasi tidak ikut dibatalkan. Kode `7a4fdb5` belum diuji dengan skema 0005, walaupun perubahan skemanya hanya menambah tabel dan kolom yang boleh kosong. Bila API lama tetap gagal, pulihkan dump dari langkah 6.1 dengan perintah di [README akses-bogor-api, bagian Cadangan dan Pemulihan](https://github.com/al-dioooo/akses-bogor-api#cadangan-dan-pemulihan). Akun dan laporan yang dibuat setelah dump itu ikut hilang.
+
+Web dan API di-rollback bersama, karena web baru tidak berfungsi dengan API lama.
+
 ## Referensi
 
 - [PRD](../product/prd.md), [Kebijakan Privasi](../product/kebijakan-privasi.md), [Syarat Layanan](../product/syarat-layanan.md)
