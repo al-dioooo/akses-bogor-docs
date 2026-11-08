@@ -4,6 +4,7 @@
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #13
+- Dilengkapi oleh: [ADR-0034](0034-batas-kecamatan-dari-openstreetmap.md) (data batas kecamatan)
 
 ## Konteks dan Masalah
 

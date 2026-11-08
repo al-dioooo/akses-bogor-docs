@@ -4,6 +4,7 @@
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #20
+- Dilengkapi oleh: [ADR-0032](0032-pencarian-tempat-lewat-api-mapbox-search-box.md) (pencarian), [ADR-0034](0034-batas-kecamatan-dari-openstreetmap.md) (batas kecamatan)
 
 ## Konteks dan Masalah
 
