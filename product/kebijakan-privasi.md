@@ -3,9 +3,9 @@
 | | |
 | --- | --- |
 | Status | Draf, belum ditinjau |
-| Versi | 2026-11-08 |
+| Versi | 2026-11-09 |
 | Pemilik | Tim AksesBogor |
-| Issue | #51, #55 |
+| Issue | #51, #55, #59 |
 
 Dokumen ini adalah sumber teks halaman `/kebijakan-privasi` di akses-bogor-web. Pengguna menyetujui versi yang tertulis di atas saat Lengkapi Akun (FR-11), dan versi itu disimpan bersama waktu persetujuannya ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)). Setiap perubahan isi menaikkan versi, dan pengguna diminta menyetujui ulang saat masuk berikutnya.
 
@@ -31,7 +31,7 @@ Anda bisa menjelajahi AksesBogor tanpa akun. Kami hanya mengumpulkan data pribad
 
 - **Akun**: alamat email, nama tampilan, peran (pengguna, verifikator, atau admin), serta waktu dan versi Kebijakan Privasi yang Anda setujui.
 - **Masuk**: kode 6 digit yang kami kirim ke email Anda, disimpan dalam bentuk acak (hash) selama 10 menit; sesi masuk (token, waktu dibuat, dan waktu terakhir dipakai). Bila Anda masuk dengan Google, kami menyimpan nomor akun Google Anda untuk menyambungkannya ke akun AksesBogor. Kami tidak menyimpan foto profil, kontak, atau token akses Google.
-- **Laporan**: isian laporan (nama tempat, kategori, patokan, jawaban fasilitas, catatan, dan deskripsi), titik yang Anda konfirmasi di peta, dan foto yang Anda kirim. Lokasi perangkat hanya dibaca saat Anda menekan "Gunakan lokasi saya" dan tidak disimpan. Foto diperkecil lalu disimpan ulang tanpa metadata (EXIF), termasuk lokasi GPS.
+- **Laporan**: isian laporan (nama tempat, kategori, patokan, jawaban fasilitas, catatan, dan deskripsi), titik yang Anda konfirmasi di peta, dan foto yang Anda kirim. Lokasi perangkat hanya dibaca saat Anda menekan "Gunakan lokasi saya" dan tidak disimpan. Foto diperkecil lalu disimpan ulang tanpa metadata (EXIF), termasuk lokasi GPS. Bila verifikator meminta klarifikasi, jawaban Anda dan foto tambahannya ikut disimpan sebagai bagian laporan.
 - **Pencarian tempat**: kata kunci yang Anda ketik di pencarian formulir laporan diteruskan ke Mapbox lewat server kami, tanpa alamat IP Anda, dan tidak kami simpan.
 - **Teknis**: alamat IP, alamat halaman yang dibuka, dan waktunya tercatat di log server untuk keamanan dan memperbaiki galat.
 - **Di perangkat Anda**: pilihan tampilan (mode terang atau gelap, gerak) disimpan di browser Anda dan tidak dikirim ke kami. Draf laporan yang belum dikirim, termasuk fotonya, juga disimpan di browser Anda dan baru dikirim ke kami saat Anda menekan "Kirim laporan". Cookie sesi hanya dipakai untuk menjaga Anda tetap masuk. Kami tidak memakai cookie iklan atau analitik.
@@ -39,15 +39,17 @@ Anda bisa menjelajahi AksesBogor tanpa akun. Kami hanya mengumpulkan data pribad
 ### Untuk apa data dipakai
 
 - Memasukkan Anda ke akun dan menjaga akun tetap aman.
-- Menampilkan "Laporan saya" dan mengirim email tentang status laporan Anda.
+- Menampilkan "Laporan saya" dan mengirim email saat laporan Anda diterbitkan, ditolak beserta alasannya, atau butuh klarifikasi.
 - Memeriksa laporan sebelum tayang, menghubungi Anda bila verifikator butuh klarifikasi, dan mencegah spam.
+- Mencatat siapa mengubah data tempat dan kapan (log audit), supaya perubahan bisa ditelusuri. Log ini berisi akun verifikator dan perubahan data tempat, tanpa email, nama pelapor, atau isi klarifikasi.
 - Menjaga layanan tetap berjalan dan aman.
 
 Dasar pemrosesannya adalah persetujuan yang Anda berikan saat melengkapi akun. Anda bisa menarik persetujuan kapan saja dengan menghapus akun.
 
 ### Siapa yang bisa melihat data Anda
 
-- **Verifikator AksesBogor** melihat nama tampilan pelapor, bukan email, beserta isian dan foto laporan saat memeriksanya. Sebelum diverifikasi, laporan dan foto tidak bisa dilihat publik.
+- **Verifikator AksesBogor** melihat nama tampilan pelapor, bukan email, beserta isian, foto, dan jawaban klarifikasi saat memeriksanya. Sebelum diverifikasi, laporan dan foto tidak bisa dilihat publik. Sebelum foto terbit, verifikator mengaburkan wajah dan pelat nomor atau menyembunyikan fotonya; hanya hasil yang sudah dikaburkan yang tayang.
+- **Admin AksesBogor** melihat nama tampilan dan email anggota tim verifikator untuk mengatur peran mereka.
 - **Pengunjung AksesBogor** melihat informasi tempat dan foto yang sudah diterbitkan, tanpa nama pelapor.
 - **Penyedia layanan** yang memproses data atas nama kami:
   - Oracle Cloud (server dan database di Batam, Indonesia).
@@ -71,10 +73,14 @@ Vercel, Resend, Google, Mapbox, dan Cloudflare bisa memproses data di luar Indon
 | Akun yang tidak dilengkapi | 24 jam |
 | Kode masuk | 10 menit, atau sampai dipakai |
 | Sesi masuk | 30 hari sejak terakhir dipakai, paling lama 90 hari |
-| Laporan yang belum terbit | Sampai diputuskan, atau sampai akun dihapus |
+| Laporan yang menunggu verifikasi atau klarifikasi | Sampai diputuskan, atau sampai akun dihapus |
+| Laporan yang ditolak | Isian dan alasan sampai akun dihapus; fotonya dihapus saat laporan ditolak |
+| Foto yang disembunyikan verifikator | Dihapus saat laporan diterbitkan |
+| Foto asli sebelum dikaburkan | Dihapus saat laporan diterbitkan; hanya versi yang dikaburkan yang tayang |
 | Foto yang terunggah tetapi laporannya tidak jadi terkirim | 24 jam |
 | Draf laporan di browser Anda | Sampai terkirim, sampai Anda keluar, atau 7 hari setelah terakhir diubah |
 | Laporan yang sudah terbit | Tetap tayang tanpa nama pelapor setelah akun dihapus |
+| Log audit perubahan data tempat | Tanpa batas waktu; akun verifikator yang dihapus ditulis "verifikator dihapus" |
 | Cadangan database | Paling lama 30 hari |
 | Log server | Belum ditetapkan |
 
