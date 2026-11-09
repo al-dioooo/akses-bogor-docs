@@ -65,7 +65,7 @@ Halaman hanya mengutip sumber yang teksnya sudah diperiksa di sumber primer:
 
 | Sumber | Yang dipakai |
 | --- | --- |
-| UU No. 8 Tahun 2016 tentang Penyandang Disabilitas (Lembaran Negara 2016 Nomor 69), teks di peraturan.go.id | Pasal 1 angka 1 (definisi penyandang disabilitas) dan angka 8 (aksesibilitas), Pasal 4 ayat (1) dan (2) (ragam), Pasal 5 ayat (1) huruf m (hak atas aksesibilitas), Pasal 18 (aksesibilitas untuk fasilitas publik), Pasal 97 (infrastruktur, termasuk bangunan gedung), dan Menimbang huruf d |
+| UU No. 8 Tahun 2016 tentang Penyandang Disabilitas (Lembaran Negara 2016 Nomor 69), teks di peraturan.go.id | Pasal 1 angka 1 (definisi penyandang disabilitas) dan angka 8 (aksesibilitas), Pasal 4 ayat (1) dan (2) (ragam), Pasal 18 (aksesibilitas untuk fasilitas publik), Pasal 97 (infrastruktur, termasuk bangunan gedung), dan Menimbang huruf d |
 | Peraturan Menteri PUPR No. 14/PRT/M/2017 tentang Persyaratan Kemudahan Bangunan Gedung | Hanya disebut sebagai tempat ketentuan teknis resmi, seperti di Panduan Verifikasi. Halaman tidak mengutip pasal atau ukurannya. |
 | ADR AksesBogor dan [Panduan Verifikasi](../operations/panduan-verifikasi.md) | Aturan produk: fasilitas, jawaban, status, foto, dan verifikasi |
 
