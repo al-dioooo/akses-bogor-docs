@@ -4,7 +4,7 @@
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #5
-- Dilengkapi oleh: [ADR-0019](0019-verifikasi-tim-dan-mitra-terlatih.md) (verifikasi), [ADR-0023](0023-hingga-sepuluh-foto-bertag-per-laporan.md) (foto)
+- Dilengkapi oleh: [ADR-0019](0019-verifikasi-tim-dan-mitra-terlatih.md) (verifikasi), [ADR-0023](0023-hingga-sepuluh-foto-bertag-per-laporan.md) (foto), [ADR-0033](0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md) (alur kirim dan draf)
 
 > Dicatat retroaktif dari desain Figma. Opsi alternatif di bawah adalah analisis penulis, bukan catatan diskusi tim.
 

@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #28
 - Melengkapi: [ADR-0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) (rincian foto)
+- Dilengkapi oleh: [ADR-0031](0031-foto-laporan-di-bucket-r2-privat.md) (penyimpanan dan pemrosesan)
 
 ## Konteks dan Masalah
 

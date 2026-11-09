@@ -176,7 +176,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 
 | Entitas | Atribut utama |
 | --- | --- |
-| Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu persetujuan privasi |
+| Pengguna | id, nama tampilan, email, peran (pengguna, verifikator, admin), waktu dan versi persetujuan Kebijakan Privasi |
 | Lokasi | id, nama, kategori, kecamatan, kota, koordinat, patokan, status dan ringkasan fasilitas (dihitung), deskripsi, tanggal verifikasi terakhir |
 | Fasilitas lokasi | lokasi, jenis fasilitas, ketersediaan (Tersedia, Tidak tersedia, Tidak perlu, Belum diketahui), alasan, catatan |
 | Laporan | id, pelapor (kosong bila akunnya dihapus), jenis (baru, perubahan, kekurangan), lokasi terkait, isian, status (menunggu, klarifikasi, diterbitkan, ditolak), alasan, waktu |
@@ -242,6 +242,18 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0024](../decisions/0024-data-setelah-akun-dihapus.md) | Data setelah akun dihapus |
 | [0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL di VPS milik tim; server produksi diganti 0026 |
 | [0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi di Evergarden (OCI Batam) |
+| [0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth, sesi disimpan server web |
+| [0030](../decisions/0030-email-transaksional-resend.md) | Email transaksional lewat Resend |
+| [0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md) | Foto laporan diproses API, disimpan di bucket R2 privat sampai terbit |
+| [0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md) | Pencarian tempat lewat API dengan Mapbox Search Box |
+| [0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md) | Laporan diisi dulu, masuk saat kirim, draf di perangkat |
+| [0034](../decisions/0034-batas-kecamatan-dari-openstreetmap.md) | Batas kecamatan dari OpenStreetMap |
+| [0035](../decisions/0035-peran-dan-panel-verifikator-di-web-yang-sama.md) | Peran verifikator dan admin, panel verifikator di web yang sama |
+| [0036](../decisions/0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md) | Keputusan verifikasi per jawaban, klarifikasi dijawab di Laporan saya |
+| [0037](../decisions/0037-foto-dikaburkan-di-api-dan-asli-dihapus.md) | Foto dikaburkan API saat terbit, foto asli dihapus |
+| [0038](../decisions/0038-log-audit-perubahan-data.md) | Log audit tanpa data pribadi |
+| [0039](../decisions/0039-email-status-laporan.md) | Email status laporan dengan coba ulang |
+| [0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Izin luas atas isi laporan, Syarat Layanan disetujui lewat tombol Lengkapi Akun |
 
 ## 14. Pertanyaan Terbuka
 
@@ -253,6 +265,8 @@ Rincian setiap pertanyaan ada di [Pertanyaan Terbuka](pertanyaan-terbuka.md).
 
 - [Ringkasan Produk](ringkasan-produk.md)
 - [Referensi Figma](referensi-figma.md)
+- [Kebijakan Privasi (draf)](kebijakan-privasi.md)
+- [Syarat Layanan (draf)](syarat-layanan.md)
 - [Fondasi Visual](../design/fondasi-visual.md)
 - [Decision log](../decisions/README.md)
 - [Panduan Verifikasi](../operations/panduan-verifikasi.md)

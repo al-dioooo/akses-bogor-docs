@@ -41,7 +41,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted | 2026-10-21 |
 | [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Superseded oleh 0009 | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Superseded oleh 0016 | 2026-10-21 |
-| [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Accepted | 2026-10-21 |
+| [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Superseded oleh 0027 | 2026-10-21 |
 | [0010](0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah MVP adalah Kota Bogor | Accepted | 2026-10-21 |
 | [0011](0011-pelapor-wajib-login.md) | Pelapor wajib login | Accepted | 2026-10-21 |
 | [0012](0012-web-mobile-first-pwa.md) | Web mobile-first yang bisa dipasang (PWA) | Accepted | 2026-10-21 |
@@ -59,3 +59,17 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0024](0024-data-setelah-akun-dihapus.md) | Data pribadi dihapus, data lokasi yang sudah terbit tetap tayang tanpa nama | Accepted | 2026-10-22 |
 | [0025](0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL berjalan di VPS milik tim | Accepted, sebagian di-supersede oleh 0026 | 2026-10-26 |
 | [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted | 2026-10-31 |
+| [0027](0027-design-system-datar-dan-ilustrasi-3d.md) | Design system datar dengan ilustrasi lingkungan 3D | Accepted, sebagian di-supersede oleh 0028 | 2026-10-31 |
+| [0028](0028-adegan-3d-three-js-untuk-hero-dan-rute.md) | Adegan 3D three.js untuk hero dan Rute ke pintu, pengganti ilustrasi AI | Accepted | 2026-11-01 |
+| [0029](0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth di API, sesi disimpan server web | Accepted | 2026-11-07 |
+| [0030](0030-email-transaksional-resend.md) | Email transaksional lewat Resend | Accepted | 2026-11-07 |
+| [0031](0031-foto-laporan-di-bucket-r2-privat.md) | Foto laporan diproses API dan disimpan di bucket R2 privat sampai terbit | Accepted | 2026-11-07 |
+| [0032](0032-pencarian-tempat-lewat-api-mapbox-search-box.md) | Pencarian tempat di formulir laporan lewat API dengan Mapbox Search Box | Accepted | 2026-11-07 |
+| [0033](0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md) | Formulir laporan diisi dulu, masuk saat kirim, dan draf disimpan di perangkat | Accepted | 2026-11-07 |
+| [0034](0034-batas-kecamatan-dari-openstreetmap.md) | Batas kecamatan Kota Bogor dari OpenStreetMap | Accepted | 2026-11-07 |
+| [0035](0035-peran-dan-panel-verifikator-di-web-yang-sama.md) | Peran disimpan di akun, admin pertama lewat skrip server, panel verifikator di web yang sama | Accepted | 2026-11-08 |
+| [0036](0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md) | Keputusan verifikasi per jawaban, dan klarifikasi dijawab di Laporan saya | Accepted | 2026-11-08 |
+| [0037](0037-foto-dikaburkan-di-api-dan-asli-dihapus.md) | Foto dikaburkan API saat terbit, dan foto asli dihapus | Accepted | 2026-11-08 |
+| [0038](0038-log-audit-perubahan-data.md) | Log audit mencatat perubahan data tanpa data pribadi | Accepted | 2026-11-08 |
+| [0039](0039-email-status-laporan.md) | Email status laporan dikirim setelah keputusan dan dicoba ulang selama 3 hari | Accepted | 2026-11-08 |
+| [0040](0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Pelapor memberi izin luas atas laporan, dan Syarat Layanan disetujui lewat tombol Lengkapi Akun | Accepted | 2026-11-08 |
