@@ -127,7 +127,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-40 | Email dikirim saat laporan diterbitkan atau ditolak (beserta alasan). | Must |
 | FR-41 | Email dikirim saat verifikator meminta klarifikasi. | Should |
 | FR-50 | Halaman Tentang, Kebijakan Privasi, dan Syarat Layanan tersedia sebelum peluncuran. | Must |
-| FR-51 | Halaman edukasi (Accessibility, Difabel, Tips). | Could |
+| FR-51 | Halaman edukasi Aksesibilitas, Disabilitas, dan Tips, tayang sebagai draf sampai ditinjau komunitas penyandang disabilitas ([ADR-0041](../decisions/0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md)). | Could |
 
 ## 7. Kebutuhan Non-fungsional
 
@@ -254,6 +254,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0038](../decisions/0038-log-audit-perubahan-data.md) | Log audit tanpa data pribadi |
 | [0039](../decisions/0039-email-status-laporan.md) | Email status laporan dengan coba ulang |
 | [0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Izin luas atas isi laporan, Syarat Layanan disetujui lewat tombol Lengkapi Akun |
+| [0041](../decisions/0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi sebagai draf sampai ditinjau komunitas, label "Disabilitas" |
 
 ## 14. Pertanyaan Terbuka
 
