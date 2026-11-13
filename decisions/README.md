@@ -73,3 +73,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0038](0038-log-audit-perubahan-data.md) | Log audit mencatat perubahan data tanpa data pribadi | Accepted | 2026-11-08 |
 | [0039](0039-email-status-laporan.md) | Email status laporan dikirim setelah keputusan dan dicoba ulang selama 3 hari | Accepted | 2026-11-08 |
 | [0040](0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Pelapor memberi izin luas atas laporan, dan Syarat Layanan disetujui lewat tombol Lengkapi Akun | Accepted | 2026-11-08 |
+| [0041](0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi Aksesibilitas, Disabilitas, dan Tips tayang sebagai draf sampai ditinjau komunitas | Accepted | 2026-11-09 |
