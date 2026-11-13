@@ -1,6 +1,6 @@
 # ADR-0041: Halaman Edukasi Aksesibilitas, Disabilitas, dan Tips Tayang sebagai Draf sampai Ditinjau Komunitas
 
-- Status: Proposed
+- Status: Accepted
 - Tanggal: 2026-11-09
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #69
