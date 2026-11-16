@@ -35,7 +35,7 @@ AksesBogor adalah web mobile-first yang membantu difabel dan pendampingnya menge
 
 - Wilayah di luar Kota Bogor ([ADR-0010](../decisions/0010-cakupan-wilayah-kota-bogor.md)).
 - Aplikasi native Android atau iOS ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)).
-- Navigasi rute langkah demi langkah.
+- Navigasi langsung belokan demi belokan yang mengikuti posisi pengguna. Agen rute (FR-60) hanya memberi rute jalan kaki ke pintu masuk dan informasi aksesibilitas ([ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md)).
 - Ulasan bebas, rating bintang, komentar, atau forum.
 - Kategori dan fasilitas di luar daftar MVP ([ADR-0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md), [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)).
 - Antarmuka dwibahasa.
@@ -129,6 +129,12 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-50 | Halaman Tentang, Kebijakan Privasi, dan Syarat Layanan tersedia sebelum peluncuran. | Must |
 | FR-51 | Halaman edukasi Aksesibilitas, Disabilitas, dan Tips, tayang sebagai draf sampai ditinjau komunitas penyandang disabilitas ([ADR-0041](../decisions/0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md)). | Could |
 
+### Agen rute ([ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md))
+
+| ID | Kebutuhan | Prioritas |
+| --- | --- | --- |
+| FR-60 | Pengguna yang sudah masuk memilih tujuan dari lokasi AksesBogor dan bertanya kepada agen cara ke sana dari posisinya. Agen menjawab dengan rute jalan kaki ke pin tujuan, status dan jawaban fasilitas yang sudah diverifikasi beserta tanggalnya, hambatan yang tercatat di OpenStreetMap di dekat rute, dan sumber yang dikutip. Agen tidak pernah menyebut rute aksesibel, dan jawaban "Belum tahu" tetap belum diketahui. Ini bukan navigasi langsung. | Could |
+
 ## 7. Kebutuhan Non-fungsional
 
 | Area | Kebutuhan |
@@ -216,6 +222,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | Efek kaca berat atau kontras turun di perangkat tertentu | Mode Solid dan audit kontras di setiap rilis |
 | Foto memuat data pribadi orang lain | Moderasi foto dan penghapusan EXIF |
 | Pemakaian Mapbox melewati kuota gratis | Pantau pemakaian bulanan, batasi token per domain, dan cache data peta yang tidak berubah |
+| Agen rute memberi rasa aman palsu, mis. rute yang melewati tangga | Peringatan tetap di setiap rute, rute tidak pernah disebut aksesibel, dan hambatan OSM disebut bersama batas datanya ([ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md)) |
 | Server mati, disknya rusak, atau memorinya habis | Dump database setiap malam ke R2 privat, uji pemulihan sebelum beta, batas memori API, dan pemantauan disk dan memori |
 
 ## 13. Keputusan Terkait
@@ -255,6 +262,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0039](../decisions/0039-email-status-laporan.md) | Email status laporan dengan coba ulang |
 | [0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Izin luas atas isi laporan, Syarat Layanan disetujui lewat tombol Lengkapi Akun |
 | [0041](../decisions/0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi sebagai draf sampai ditinjau komunitas, label "Disabilitas" |
+| [0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Agen rute: rute jalan kaki ke pintu masuk dan informasi aksesibilitas, penyedia model belum dipilih (Proposed) |
 
 ## 14. Pertanyaan Terbuka
 
