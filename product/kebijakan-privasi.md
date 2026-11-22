@@ -3,9 +3,9 @@
 | | |
 | --- | --- |
 | Status | Draf, belum ditinjau |
-| Versi | 2026-11-22 |
+| Versi | 2026-11-23 |
 | Pemilik | Tim AksesBogor |
-| Issue | #51, #55, #59, #62, #89 |
+| Issue | #51, #55, #59, #62, #89, #99 |
 
 Dokumen ini adalah sumber teks halaman `/kebijakan-privasi` di akses-bogor-web. Pengguna menyetujui versi yang tertulis di atas saat Lengkapi Akun (FR-11), dan versi itu disimpan bersama waktu persetujuannya ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)). Setiap perubahan isi menaikkan versi, dan pengguna diminta menyetujui ulang saat masuk berikutnya.
 
@@ -18,7 +18,21 @@ Bagian ini untuk tim dan tidak tampil di web.
 - [ ] Minta dosen pembimbing atau unit hukum kampus meninjau teks ini bersama [Syarat Layanan](syarat-layanan.md), terutama dasar pemrosesan, transfer ke luar negeri, batas waktu 3 × 24 jam, dan bagian anak.
 - [x] Tambahkan rincian foto dan lokasi laporan saat Laporkan (FR-20 sampai FR-27) dibangun.
 - [ ] Ubah status menjadi final, hapus kata "Draf" di judul halaman web, dan naikkan versi bila isinya berubah.
-- [ ] Rilis versi 2026-11-22 (agen Bantu memetakan dengan Anthropic, [ADR-0047](../decisions/0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md)) di API dan web bersamaan: `PRIVACY_POLICY_VERSION` di keduanya harus sama, karena API menolak persetujuan untuk versi lain.
+- [x] Rilis versi 2026-11-22 (agen Bantu memetakan dengan Anthropic, [ADR-0047](../decisions/0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md)) di API dan web bersamaan: `PRIVACY_POLICY_VERSION` di keduanya harus sama, karena API menolak persetujuan untuk versi lain.
+- [ ] Rilis versi 2026-11-23 (web di Evergarden, [ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md), dan Lokasi saya di Peta): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian. Bila API lebih dulu, semua akun diminta menyetujui ulang di web lama, yang masih mengirim versi 2026-11-22 dan ditolak dengan 409.
+
+## Riwayat Versi
+
+Bagian ini untuk tim dan tidak tampil di web. Setiap versi baru meminta persetujuan ulang saat pengguna masuk berikutnya.
+
+| Versi | Perubahan | Issue |
+| --- | --- | --- |
+| 2026-11-07 | Draf pertama untuk persetujuan saat Lengkapi Akun | #51 |
+| 2026-11-08 | Foto laporan, draf laporan di perangkat, dan pencarian tempat lewat Mapbox | #55 |
+| 2026-11-09 | Klarifikasi, moderasi foto, email status laporan, dan log audit | #59 |
+| 2026-11-10 | Masa simpan log server 30 hari | #62 |
+| 2026-11-22 | Bantu memetakan dengan Anthropic (Claude API), dan rute jalan kaki lewat Mapbox untuk kartu rute | #89 |
+| 2026-11-23 | Situs web pindah dari Vercel ke server kami di Oracle Cloud (Batam); Cloudflare mem-proxy situs web dan API; Tampilkan lokasi saya di Peta | #99 |
 
 ## Teks Kebijakan
 
@@ -32,7 +46,8 @@ Anda bisa menjelajahi AksesBogor tanpa akun. Kami hanya mengumpulkan data pribad
 
 - **Akun**: alamat email, nama tampilan, peran (pengguna, verifikator, atau admin), serta waktu dan versi Kebijakan Privasi yang Anda setujui.
 - **Masuk**: kode 6 digit yang kami kirim ke email Anda, disimpan dalam bentuk acak (hash) selama 10 menit; sesi masuk (token, waktu dibuat, dan waktu terakhir dipakai). Bila Anda masuk dengan Google, kami menyimpan nomor akun Google Anda untuk menyambungkannya ke akun AksesBogor. Kami tidak menyimpan foto profil, kontak, atau token akses Google.
-- **Laporan**: isian laporan (nama tempat, kategori, patokan, jawaban fasilitas, catatan, dan deskripsi), titik yang Anda konfirmasi di peta, dan foto yang Anda kirim. Lokasi perangkat hanya dibaca saat Anda menekan "Gunakan lokasi saya" dan tidak disimpan. Foto diperkecil lalu disimpan ulang tanpa metadata (EXIF), termasuk lokasi GPS. Bila verifikator meminta klarifikasi, jawaban Anda dan foto tambahannya ikut disimpan sebagai bagian laporan.
+- **Laporan**: isian laporan (nama tempat, kategori, patokan, jawaban fasilitas, catatan, dan deskripsi), titik yang Anda konfirmasi di peta, dan foto yang Anda kirim. Lokasi perangkat hanya dibaca saat Anda menekan "Gunakan lokasi saya" di formulir laporan dan tidak disimpan. Foto diperkecil lalu disimpan ulang tanpa metadata (EXIF), termasuk lokasi GPS. Bila verifikator meminta klarifikasi, jawaban Anda dan foto tambahannya ikut disimpan sebagai bagian laporan.
+- **Lokasi saya di Peta**: lokasi perangkat hanya dibaca setelah Anda menekan "Tampilkan lokasi saya". Bila izin lokasi belum diberikan, kami menjelaskan dulu kegunaannya, lalu browser meminta izin Anda. Lokasi itu hanya dipakai di browser Anda untuk menggeser peta dan menaruh titik di posisi Anda. Lokasi tidak dikirim ke server AksesBogor atau ke Anthropic, dan tidak disimpan. Bila Anda berada di luar wilayah peta Kota Bogor, peta tidak digeser. Seperti setiap tampilan peta, Mapbox menerima area peta yang dimuat, jadi setelah peta digeser, Mapbox menerima area di sekitar lokasi Anda.
 - **Pencarian tempat**: kata kunci yang Anda ketik di pencarian formulir laporan diteruskan ke Mapbox lewat server kami, tanpa alamat IP Anda, dan tidak kami simpan.
 - **Bantu memetakan**: pertanyaan yang Anda ketik ke agen, beserta paling banyak 6 giliran sebelumnya di halaman itu, dikirim lewat server kami ke Anthropic (Claude API) untuk dijawab. Bersama pertanyaan ikut data terverifikasi tempat yang Anda pilih dan hasil pencarian agen di data AksesBogor, OpenStreetMap, dan basis pengetahuan. Kami tidak mengirim posisi, rute, email, nama, atau alamat IP Anda ke Anthropic, dan tidak menyimpan pertanyaan maupun jawabannya. Untuk kartu rute, titik awal yang Anda pilih di peta atau lokasi perangkat Anda dibulatkan sampai sekitar 11 m, lalu dikirim lewat server kami ke Mapbox hanya untuk menghitung rute jalan kaki. Titik dan rutenya tidak kami simpan dan tidak dikirim ke Anthropic.
 - **Teknis**: alamat IP, alamat halaman yang dibuka, dan waktunya tercatat di log server untuk keamanan dan memperbaiki galat.
@@ -55,19 +70,18 @@ Dasar pemrosesannya adalah persetujuan yang Anda berikan saat melengkapi akun. A
 - **Admin AksesBogor** melihat nama tampilan dan email anggota tim verifikator untuk mengatur peran mereka.
 - **Pengunjung AksesBogor** melihat informasi tempat dan foto yang sudah diterbitkan, tanpa nama pelapor.
 - **Penyedia layanan** yang memproses data atas nama kami:
-  - Oracle Cloud (server dan database di Batam, Indonesia).
-  - Cloudflare (jaringan menuju server, dan penyimpanan foto di Cloudflare R2).
-  - Vercel (menjalankan situs web).
+  - Oracle Cloud (menyediakan server di region Indonesia North, Batam, tempat situs web, API, database, dan log server AksesBogor berjalan; tim kami yang mengelola server dan database). Menurut [Kebijakan Privasi Layanan Oracle](https://www.oracle.com/legal/privacy/services-privacy-policy.html), Oracle memproses data di layanannya atas nama kami untuk menjalankan layanan itu.
+  - Cloudflare (semua halaman dan permintaan ke API AksesBogor melewati jaringan Cloudflare, lalu diteruskan lewat Cloudflare Tunnel ke server kami. Cloudflare menerima alamat IP Anda dan data tentang permintaan, mis. halaman yang dibuka dan waktunya. Cloudflare juga menyimpan foto laporan di Cloudflare R2). Menurut [Kebijakan Privasi Cloudflare](https://www.cloudflare.com/privacypolicy/) dan [perjanjian pemrosesan datanya](https://www.cloudflare.com/cloudflare-customer-dpa/), Cloudflare memproses data ini atas nama kami dan tidak boleh memakainya untuk pemasaran atau iklan.
   - Resend (mengirim email kode masuk dan pemberitahuan).
   - Google (hanya bila Anda memakai tombol "Masuk dengan Google"; halaman Masuk memuat tombol dari Google).
-  - Mapbox (menampilkan peta, mencari tempat, dan menghitung rute jalan kaki untuk kartu rute; menerima alamat IP dan area peta yang dilihat dari browser Anda, serta kata kunci pencarian dan titik awal rute yang sudah dibulatkan dari server kami).
+  - Mapbox (menampilkan peta, mencari tempat, dan menghitung rute jalan kaki untuk kartu rute; menerima alamat IP dan area peta yang dilihat dari browser Anda, termasuk area di sekitar lokasi Anda setelah "Tampilkan lokasi saya", serta kata kunci pencarian dan titik awal rute yang sudah dibulatkan dari server kami).
   - Anthropic (menjawab pertanyaan di Bantu memetakan lewat Claude API; menerima pertanyaan, giliran sebelumnya, data terverifikasi tempat yang dipilih, dan hasil pencarian agen, tanpa posisi, email, nama, atau alamat IP Anda). Menurut [Ketentuan Komersial Anthropic](https://www.anthropic.com/legal/commercial-terms), Anthropic tidak boleh memakai data ini untuk melatih model.
 
 Kami tidak menjual data pribadi dan tidak membagikannya untuk iklan.
 
 ### Data yang diproses di luar Indonesia
 
-Vercel, Resend, Google, Mapbox, Cloudflare, dan Anthropic bisa memproses data di luar Indonesia, termasuk di Amerika Serikat. Anthropic menyimpan data di Amerika Serikat dan bisa menjalankan modelnya di negara lain. Kami hanya mengirim data yang dibutuhkan layanan itu: email dan isi email ke Resend, alamat IP ke penyedia jaringan dan peta, kata kunci pencarian dan titik awal rute ke Mapbox, pertanyaan Bantu memetakan ke Anthropic, dan foto laporan ke Cloudflare R2.
+Resend, Google, Mapbox, Cloudflare, dan Anthropic bisa memproses data di luar Indonesia, termasuk di Amerika Serikat. Anthropic menyimpan data di Amerika Serikat dan bisa menjalankan modelnya di negara lain. Situs web, API, database, dan log server kami berjalan di Batam, Indonesia, tetapi menurut kebijakan privasinya, Oracle bisa memproses data di layanannya di negara lain bila diperlukan untuk menjalankan layanan itu. Kami hanya mengirim data yang dibutuhkan layanan itu: email dan isi email ke Resend, lalu lintas situs web dan API lewat Cloudflare, alamat IP, area peta, kata kunci pencarian, dan titik awal rute ke Mapbox, pertanyaan Bantu memetakan ke Anthropic, dan foto laporan ke Cloudflare R2.
 
 ### Berapa lama data disimpan
 
@@ -85,6 +99,7 @@ Vercel, Resend, Google, Mapbox, Cloudflare, dan Anthropic bisa memproses data di
 | Draf laporan di browser Anda | Sampai terkirim, sampai Anda keluar, atau 7 hari setelah terakhir diubah |
 | Pertanyaan dan jawaban Bantu memetakan | Tidak disimpan di server kami; percakapan hilang saat halaman ditutup. Anthropic menghapusnya paling lama 30 hari setelah diterima, kecuali ditandai melanggar kebijakan penggunaannya (sampai 2 tahun) atau diwajibkan hukum |
 | Titik awal dan rute jalan kaki | Tidak disimpan |
+| Lokasi perangkat untuk Tampilkan lokasi saya di Peta | Tidak dikirim ke kami dan tidak disimpan |
 | Laporan yang sudah terbit | Tetap tayang tanpa nama pelapor setelah akun dihapus |
 | Log audit perubahan data tempat | Tanpa batas waktu; akun verifikator yang dihapus ditulis "verifikator dihapus" |
 | Cadangan database | Paling lama 30 hari |
@@ -118,5 +133,7 @@ Email: (diisi tim sebelum rilis).
 - UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi
 - [PRD](prd.md), FR-11, FR-13, FR-20 sampai FR-27, FR-50, dan kebutuhan non-fungsional Privasi dan keamanan
 - [Syarat Layanan](syarat-layanan.md)
+- Oracle: [Kebijakan Privasi Layanan Oracle](https://www.oracle.com/legal/privacy/services-privacy-policy.html), [daftar region OCI](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm) (Indonesia North, Batam, `ap-batam-1`)
+- Cloudflare: [Kebijakan Privasi](https://www.cloudflare.com/privacypolicy/), [perjanjian pemrosesan data (DPA)](https://www.cloudflare.com/cloudflare-customer-dpa/), [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/)
 - Anthropic: [Ketentuan Komersial](https://www.anthropic.com/legal/commercial-terms), [lama penyimpanan data organisasi](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data), [data residency](https://platform.claude.com/docs/en/manage-claude/data-residency)
-- [ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0014](../decisions/0014-login-google-dan-kode-email.md), [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md), [ADR-0030](../decisions/0030-email-transaksional-resend.md), [ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md), [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md), [ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md), [ADR-0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md), [ADR-0047](../decisions/0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md)
+- [ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0014](../decisions/0014-login-google-dan-kode-email.md), [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md), [ADR-0030](../decisions/0030-email-transaksional-resend.md), [ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md), [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md), [ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md), [ADR-0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md), [ADR-0047](../decisions/0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md), [ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md)
