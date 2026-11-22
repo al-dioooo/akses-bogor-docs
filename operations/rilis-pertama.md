@@ -9,9 +9,9 @@
 
 Produksi masih menjalankan rilis pertama: API dengan 7 lokasi contoh dan web tanpa akun. Rilis ini membawa akun ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md), [ADR-0030](../decisions/0030-email-transaksional-resend.md)), Laporkan ([ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md) sampai [ADR-0034](../decisions/0034-batas-kecamatan-dari-openstreetmap.md)), verifikasi ([ADR-0035](../decisions/0035-peran-dan-panel-verifikator-di-web-yang-sama.md) sampai [ADR-0039](../decisions/0039-email-status-laporan.md)), dan halaman Tentang, Kebijakan Privasi, serta Syarat Layanan ([ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)).
 
-Kerjakan dari atas ke bawah. Nilai dalam `<…>` diisi sendiri. Secret hanya ditulis di `/etc/akses-bogor/*.env` dan di pengaturan Vercel, tidak pernah di chat, issue, PR, atau repo. Perintah `sudo` dijalankan admin Evergarden.
+Kerjakan dari atas ke bawah. Nilai dalam `<…>` diisi sendiri. Secret hanya ditulis di `/etc/akses-bogor/*.env`, tidak pernah di chat, issue, PR, atau repo. Perintah `sudo` dijalankan admin Evergarden.
 
-Alamat di daftar ini sudah diperbarui ke alamat staging di aldio.dev ([ADR-0045](../decisions/0045-alamat-staging-di-aldio-dev.md)). `akses-bogor.vercel.app` tetap jalan sebagai alias, dan alamat API serta foto di yorhagarden.xyz sudah dihapus.
+Alamat di daftar ini sudah diperbarui ke alamat staging di aldio.dev ([ADR-0045](../decisions/0045-alamat-staging-di-aldio-dev.md)), dan alamat API serta foto di yorhagarden.xyz sudah dihapus. Sejak 2026-11-22 web juga berjalan di Evergarden, bukan di Vercel ([ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md)), jadi `akses-bogor.vercel.app` tidak bisa dibuka lagi.
 
 ## 1. Sebelum mulai
 
@@ -60,9 +60,9 @@ Cadangan malam ini belum disalin ke R2. Log `akses-bogor-backup` setiap malam me
 ### 2.3 Klien OAuth Google
 
 - [ ] Google Cloud Console → APIs & Services → Credentials → Create OAuth client ID, tipe "Web application" ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)).
-- [ ] Authorized JavaScript origins: `https://akses-bogor.aldio.dev`, alias `https://akses-bogor.vercel.app`, dan `http://localhost:3000`. Tidak perlu redirect URI dan client secret, karena tombol Google mengirim ID token yang diperiksa API.
+- [ ] Authorized JavaScript origins: `https://akses-bogor.aldio.dev` dan `http://localhost:3000`. `https://akses-bogor.vercel.app` boleh dihapus. Tidak perlu redirect URI dan client secret, karena tombol Google mengirim ID token yang diperiksa API.
 - [ ] OAuth consent screen: nama aplikasi AksesBogor, tautan `https://akses-bogor.aldio.dev/kebijakan-privasi` dan `https://akses-bogor.aldio.dev/syarat`, dan publishing status "In production". Dalam status "Testing", hanya akun test user yang bisa masuk.
-- [ ] Client ID yang sama dipakai di dua tempat: `GOOGLE_CLIENT_ID` di API dan `NEXT_PUBLIC_GOOGLE_CLIENT_ID` di Vercel.
+- [ ] Client ID yang sama dipakai di dua tempat: `GOOGLE_CLIENT_ID` di API dan `NEXT_PUBLIC_GOOGLE_CLIENT_ID` di `/etc/akses-bogor/web.env`.
 
 ### 2.4 Resend
 
@@ -84,7 +84,7 @@ Ubah dengan `sudo -e /etc/akses-bogor/api.env`. Berkas ini milik `root:aksesbogo
 | Variabel | Nilai | Catatan |
 | --- | --- | --- |
 | `NODE_ENV` | `production` | Sudah ada. Tanpa ini API berjalan sebagai development: rahasia akun tetap, kode masuk dicetak ke log, dan foto disimpan di folder lokal |
-| `FRONTEND_ORIGINS` | `https://akses-bogor.aldio.dev,https://akses-bogor.vercel.app` | Origin web utama harus di urutan pertama, karena dipakai untuk tautan di email status laporan. Alias dan domain lain ditambahkan sesudahnya, dipisah koma |
+| `FRONTEND_ORIGINS` | `https://akses-bogor.aldio.dev` | Origin web utama harus di urutan pertama, karena dipakai untuk tautan di email status laporan. Alias dan domain lain ditambahkan sesudahnya, dipisah koma |
 | `BETTER_AUTH_SECRET` | hasil `openssl rand -base64 48` | Minimal 32 karakter. Mengganti nilainya mengakhiri semua sesi |
 | `BETTER_AUTH_URL` | `https://akses-bogor-api.aldio.dev` | Alamat publik API |
 | `GOOGLE_CLIENT_ID` | `<…>.apps.googleusercontent.com` | Dari langkah 2.3 |
@@ -97,7 +97,7 @@ Ubah dengan `sudo -e /etc/akses-bogor/api.env`. Berkas ini milik `root:aksesbogo
 | `PHOTO_PUBLIC_URL` | `https://akses-bogor-foto.aldio.dev` | Custom domain bucket publik |
 | `MAPBOX_SECRET_TOKEN` | `sk.…` | Diisi bersama `MAPBOX_USERNAME` |
 | `MAPBOX_USERNAME` | username akun Mapbox | |
-| `WEB_SERVER_SECRET` | hasil `openssl rand -hex 32` | Minimal 32 karakter, sama persis dengan nilai di Vercel |
+| `WEB_SERVER_SECRET` | hasil `openssl rand -hex 32` | Minimal 32 karakter, sama persis dengan nilai di `web.env` (langkah 4) |
 
 - [ ] Semua variabel di atas terisi.
 - [ ] Nilai yang berisi spasi atau `<` `>` diberi tanda kutip ganda. `deploy.sh` membaca berkas ini dengan `bash`, jadi `EMAIL_FROM=AksesBogor <masuk@…>` tanpa kutip membuat deploy gagal. Periksa dengan:
@@ -110,28 +110,32 @@ Ubah dengan `sudo -e /etc/akses-bogor/api.env`. Berkas ini milik `root:aksesbogo
 
 Rilis lama mengabaikan variabel baru, jadi berkas ini aman diubah sebelum rilis.
 
-## 4. Vercel
+## 4. Web di Evergarden
 
-Proyek `akses-bogor-web`, Settings:
+Web berjalan sebagai `akses-bogor-web.service` di `127.0.0.1:8091` dan di-deploy dari `release` oleh `akses-bogor-web-deploy.timer` ([ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md)). Langkah pasangnya ada di [README akses-bogor-web, bagian Deployment](https://github.com/al-dioooo/akses-bogor-web#deployment). Ubah environment-nya dengan `sudo -e /etc/akses-bogor/web.env`. Berkas ini milik `root:aksesbogor-web` dengan mode `0640`, dan contohnya ada di `deploy/web.env.example` di akses-bogor-web.
 
-| Pengaturan | Nilai |
+| Variabel | Nilai |
 | --- | --- |
-| Environments → Production → Branch | `release` |
-| Node.js Version | 24.x |
-| Domains | `akses-bogor.aldio.dev` sebagai domain utama, dan `akses-bogor.vercel.app` tetap sebagai alias |
-| Environment Variables, untuk Production dan Preview | `API_URL` = `https://akses-bogor-api.aldio.dev`, `ENABLE_EXPERIMENTAL_COREPACK` = `1`, `NEXT_PUBLIC_GOOGLE_CLIENT_ID` = client ID dari langkah 2.3, dan `WEB_SERVER_SECRET` = nilai yang sama dengan API, bertipe Sensitive |
+| `NODE_ENV` | `production` |
+| `PORT` | `8091` |
+| `API_URL` | `https://akses-bogor-api.aldio.dev` |
+| `SITE_URL` | `https://akses-bogor.aldio.dev` |
+| `SITE_INDEXABLE` | `false` sampai domain produksi dipilih |
+| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` | Client ID dari langkah 2.3 |
+| `WEB_SERVER_SECRET` | Nilai yang sama dengan API (langkah 3) |
 
-- [ ] Semua pengaturan di atas sudah benar.
-- [ ] `NEXT_PUBLIC_GOOGLE_CLIENT_ID` dibaca saat build. Bila diisi setelah deploy terakhir, deploy ulang supaya tombol Google muncul.
-- [ ] Preview deployment memakai API produksi. Masuk dengan Google tidak jalan di alamat preview karena alamat itu tidak terdaftar sebagai origin Google; masuk dengan kode email tetap jalan dan membuat akun di database produksi.
+- [ ] Semua variabel di atas terisi.
+- [ ] Public hostname `akses-bogor.aldio.dev` di tunnel Evergarden diarahkan ke `http://127.0.0.1:8091`.
+- [ ] `NEXT_PUBLIC_*` dan `SITE_URL` ditanam saat build. Setelah `web.env` diubah, timer berikutnya membangun rilis baru dari commit yang sama, atau jalankan langsung `sudo systemctl start akses-bogor-web-deploy`.
 
-Langkah berikut dipakai saat memasang `akses-bogor.aldio.dev`, dan dipakai lagi saat domain produksi dipilih ([ADR-0045](../decisions/0045-alamat-staging-di-aldio-dev.md)):
+Langkah berikut dipakai saat domain produksi dipilih ([ADR-0045](../decisions/0045-alamat-staging-di-aldio-dev.md)):
 
-1. Tambahkan domainnya di Vercel → Domains.
+1. Tambahkan public hostname domain itu di tunnel Evergarden, diarahkan ke `http://127.0.0.1:8091`.
 2. Tambahkan juga di origin JavaScript klien Google.
 3. Tambahkan di `FRONTEND_ORIGINS`, di urutan pertama bila domain itu menjadi alamat utama.
 4. Ganti tautan di OAuth consent screen.
-5. Bila alamat API dan foto ikut pindah, ubah juga `BETTER_AUTH_URL` dan `PHOTO_PUBLIC_URL` di API, serta `API_URL` di Vercel.
+5. Ganti `SITE_URL` di `web.env`, dan isi `SITE_INDEXABLE=true` bila situs sudah boleh diindeks.
+6. Bila alamat API dan foto ikut pindah, ubah juga `BETTER_AUTH_URL` dan `PHOTO_PUBLIC_URL` di API, serta `API_URL` di `web.env`.
 
 ## 5. Evergarden: log dan cadangan
 
@@ -169,7 +173,7 @@ Urutannya:
 
 1. [ ] **akses-bogor-docs**, kapan saja.
 2. [ ] **akses-bogor-api**. Timer men-deploy paling lama 5 menit kemudian, atau langsung dengan `sudo systemctl start akses-bogor-deploy`. Deploy ini menjalankan migrasi 0002 sampai 0005.
-3. [ ] **akses-bogor-web**, segera setelah API sehat (langkah 6.3). Vercel membangun deployment produksi dari `release`.
+3. [ ] **akses-bogor-web**, segera setelah API sehat (langkah 6.3). Timer web men-deploy paling lama 5 menit kemudian, atau langsung dengan `sudo systemctl start akses-bogor-web-deploy`.
 
 API rilis lebih dulu karena web lama tidak punya fitur akun, jadi tetap jalan dengan API baru. Sebaliknya, web baru butuh API baru: keduanya meminta Kebijakan Privasi 2026-11-10, dan Lengkapi Akun gagal dengan 409 bila versinya berbeda. Jarak antara keduanya sebaiknya hanya beberapa menit.
 
@@ -188,7 +192,12 @@ curl https://akses-bogor-api.aldio.dev/places
 
 ### 6.4 Periksa web
 
-- [ ] Deployment produksi di Vercel berstatus Ready dan dibangun dari commit `release` terbaru.
+```bash
+journalctl -u akses-bogor-web-deploy -n 50   # harus berakhir dengan "web sehat di port 8091: releases/<sha>-<hash>"
+journalctl -u akses-bogor-web -n 50          # log Next.js
+```
+
+- [ ] Rilis aktif dibangun dari commit `release` terbaru, dan unit deploy tidak berstatus gagal.
 - [ ] `https://akses-bogor.aldio.dev` menampilkan Beranda, Jelajahi, Peta dengan peta Mapbox, Detail lokasi, Tentang, Kebijakan Privasi versi 10 November 2026, dan Syarat Layanan.
 
 ## 7. Setelah rilis
@@ -233,7 +242,15 @@ Butuh dua akun: **A** sebagai pelapor dan **B** sebagai verifikator atau admin, 
 
 ## 8. Rollback
 
-**Web.** Di Vercel → Deployments, pilih deployment produksi sebelumnya lalu Instant Rollback. Setelah itu revert merge rilis di `release` web dengan tombol Revert di PR rilisnya, supaya push berikutnya tidak men-deploy ulang versi yang bermasalah.
+**Web.** Bila health check gagal saat deploy, skrip sudah kembali ke rilis sebelumnya sendiri. Untuk masalah yang tidak tertangkap health check, hentikan timer lalu kembalikan tautan `current`. Rilis yang disimpan ada di `/srv/akses-bogor-web/releases`:
+
+```bash
+sudo systemctl stop akses-bogor-web-deploy.timer
+sudo -u aksesbogor-web ln -sfn releases/<rilis-lama> /srv/akses-bogor-web/current
+sudo systemctl restart akses-bogor-web
+```
+
+Revert merge rilis di `release` web dengan tombol Revert di PR rilisnya, lalu nyalakan lagi timer dengan `sudo systemctl start akses-bogor-web-deploy.timer`.
 
 **API.** Hentikan timer supaya tidak men-deploy ulang, lalu kembalikan tautan `current` ke rilis sebelumnya. Rilis yang aktif sekarang adalah `7a4fdb5`, dan tiga rilis terakhir disimpan di `/srv/akses-bogor/releases`:
 
@@ -259,13 +276,13 @@ API tetap jalan bila sebuah secret kosong; yang mati hanya fitur yang membutuhka
 | `BETTER_AUTH_URL` | Tidak ada 503; API memakai `http://localhost:<PORT>` sebagai alamatnya sendiri. Tetap isi alamat publik |
 | `RESEND_API_KEY` dan `EMAIL_FROM` | Permintaan kode menjawab 503 `email_belum_diatur`, jadi masuk dengan kode email mati; masuk dengan Google tetap bisa. Email konfirmasi hapus akun dilewati. Email status laporan tetap diantrekan, dicoba setiap jam, dan dibuang setelah 3 hari |
 | `GOOGLE_CLIENT_ID` (API) | `/auth/google` menjawab 503 `google_belum_diatur` |
-| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` (Vercel) | Tombol "Masuk dengan Google" tidak tampil |
+| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` (web) | Tombol "Masuk dengan Google" tidak tampil |
 | Variabel `R2_*` | Unggah foto menjawab 503 `foto_belum_diatur`. Laporan tetap bisa dikirim tanpa foto, dan formulir menawarkan itu. Menerbitkan laporan yang punya foto tidak tersembunyi menjawab 503 |
 | `PHOTO_PUBLIC_URL` | Alamat foto di respons bernilai `null`, jadi web tidak menampilkan foto yang sudah terbit, walaupun berkasnya tetap disalin ke bucket publik |
 | `MAPBOX_SECRET_TOKEN` dan `MAPBOX_USERNAME` | Pencarian tempat menjawab **503** `pencarian_belum_diatur`, bukan 502. Peta menjawab 503 `peta_belum_diatur`, dan halaman Peta hanya menampilkan legenda dan daftar. Kode 502 (`pencarian_gagal`, `peta_tidak_tersedia`) berarti Mapbox sendiri yang galat |
-| `WEB_SERVER_SECRET` (salah satu sisi) | Header IP pengunjung diabaikan, jadi semua pengunjung web berbagi kuota rate limit beberapa IP Vercel. Batas kode masuk (10 per 15 menit) dan pencarian (30 per menit) cepat habis untuk semua orang |
+| `WEB_SERVER_SECRET` (salah satu sisi) | Header IP pengunjung diabaikan, jadi semua pengunjung web berbagi kuota rate limit satu IP server web. Batas kode masuk (10 per 15 menit) dan pencarian (30 per menit) cepat habis untuk semua orang |
 | `FRONTEND_ORIGINS` | Tautan di email status laporan mengarah ke `http://localhost:3000`. Web tidak terpengaruh CORS, karena web memanggil API dari server |
-| `API_URL` (Vercel) | Semua halaman yang memuat data dari API menampilkan pesan gagal memuat (galat `api_belum_diatur` di server web) |
+| `API_URL` (web) | Deploy web menolak build. Pada rilis yang sudah berjalan, semua halaman yang memuat data dari API menampilkan pesan gagal memuat (galat `api_belum_diatur` di server web) |
 
 Sumber: `src/app.ts`, `src/routes/*.ts`, `src/verification/emails.ts`, dan `src/config/env.ts` di akses-bogor-api; `src/lib/api.ts` dan `src/app/masuk/page.tsx` di akses-bogor-web.
 
@@ -288,5 +305,5 @@ Diuji pada 2026-11-08 dengan dump produksi `aksesbogor-20261107T193254Z.dump` (2
 ## Referensi
 
 - [PRD](../product/prd.md), [Kebijakan Privasi](../product/kebijakan-privasi.md), [Syarat Layanan](../product/syarat-layanan.md)
-- README dan `deploy/` di [akses-bogor-api](https://github.com/al-dioooo/akses-bogor-api); README di [akses-bogor-web](https://github.com/al-dioooo/akses-bogor-web)
-- [ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md), [ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md) sampai [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)
+- README dan `deploy/` di [akses-bogor-api](https://github.com/al-dioooo/akses-bogor-api) dan [akses-bogor-web](https://github.com/al-dioooo/akses-bogor-web)
+- [ADR-0016](../decisions/0016-peta-dan-pencarian-mapbox.md), [ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md) sampai [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md), [ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md)
