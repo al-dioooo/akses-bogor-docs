@@ -53,7 +53,7 @@ Route baca publik `GET /places/candidates`, tanpa akun:
 - Kandidat digambar sebagai satu lapisan GL Mapbox: lingkaran abu-abu berlubang yang lebih kecil dari marker status, di bawah marker lokasi terverifikasi. Bentuk dan warnanya berbeda dari keempat status. Lapisan GL dipilih karena 644 marker HTML terlalu berat di ponsel, dan ratusan tombol di peta membuat urutan Tab tidak terpakai.
 - Lapisan menyala bila ada kandidat. Tombol untuk mematikan dan menyalakannya ada di legenda panel daftar, bersama entri "Belum ada data · OpenStreetMap, belum diperiksa tim". Tombol tidak ditaruh di atas peta, karena pita atas di layar 320 px sudah penuh.
 - Atribusi "© kontributor OpenStreetMap", yang menaut ke halaman hak cipta OSM, tampil di atribusi peta selama lapisan menyala.
-- Kartu kandidat di panel berisi nama (atau "<kategori> tanpa nama"), kategori, kecamatan, dan "Belum ada data aksesibilitas", ditambah tag `wheelchair` OSM bila ada. Tombol utamanya "Laporkan tempat ini", dan ada tautan ke tempat itu di OSM.
+- Kartu kandidat di panel berisi nama (atau kategori dengan "tanpa nama", mis. "Halte tanpa nama"), kategori, kecamatan, dan "Belum ada data aksesibilitas", ditambah tag `wheelchair` OSM bila ada. Tombol utamanya "Laporkan tempat ini", dan ada tautan ke tempat itu di OSM.
 - Alternatif untuk peta: bagian "Belum ada data (n)" di panel daftar, setelah daftar lokasi terverifikasi. Bagian ini mengikuti bagian peta yang terlihat, seperti daftar lokasi, dan setiap baris punya tombol "Laporkan tempat ini" dan "Tunjukkan di peta". Baris ditampilkan bertahap supaya urutan Tab tetap pendek.
 
 ### Laporkan dari kandidat
