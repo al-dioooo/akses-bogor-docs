@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #81
 - Men-supersede sebagian: [ADR-0026](0026-api-dan-postgresql-di-evergarden-oci.md) (hostname publik API)
+- Di-supersede sebagian oleh: [ADR-0048](0048-web-di-host-sendiri-di-evergarden-oci.md) (web di Vercel dan alias `akses-bogor.vercel.app`)
 
 Dicatat secara retroaktif: perpindahan sudah dijalankan pada tanggal yang sama sebelum ADR ini ditulis.
 
