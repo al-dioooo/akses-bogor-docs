@@ -81,4 +81,5 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0046](0046-dasbor-akun-di-route-group-dengan-ringkasan-per-peran.md) | Dasbor akun di route group yang sama, dengan Ringkasan per peran dan URL lama tetap | Proposed | 2026-11-22 |
 | [0047](0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md) | Model agen kontributor: Claude Haiku 5.5 lewat Claude API, OpenRouter tetap bisa dipilih tanpa cadangan otomatis | Accepted | 2026-11-22 |
 | [0048](0048-web-di-host-sendiri-di-evergarden-oci.md) | Web di-host sendiri di Evergarden dengan systemd dan `next start`, di-deploy dari `release` seperti API, dengan rollback otomatis | Accepted | 2026-11-22 |
+| [0049](0049-lapisan-kandidat-openstreetmap-belum-ada-data.md) | Tempat OpenStreetMap tampil di Peta sebagai kandidat "Belum ada data" yang terpisah, tanpa status, dengan atribusi ODbL dan ajakan melapor | Accepted | 2026-11-22 |
 | [0050](0050-asisten-rute-publik.md) | Asisten rute publik untuk semua pengunjung, dengan kartu rute dari aplikasi dan jatah per IP | Accepted | 2026-11-23 |
