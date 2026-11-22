@@ -11,6 +11,8 @@ Produksi masih menjalankan rilis pertama: API dengan 7 lokasi contoh dan web tan
 
 Kerjakan dari atas ke bawah. Nilai dalam `<…>` diisi sendiri. Secret hanya ditulis di `/etc/akses-bogor/*.env` dan di pengaturan Vercel, tidak pernah di chat, issue, PR, atau repo. Perintah `sudo` dijalankan admin Evergarden.
 
+Alamat di daftar ini sudah diperbarui ke alamat staging di aldio.dev ([ADR-0045](../decisions/0045-alamat-staging-di-aldio-dev.md)). `akses-bogor.vercel.app` tetap jalan sebagai alias, dan alamat API serta foto di yorhagarden.xyz sudah dihapus.
+
 ## 1. Sebelum mulai
 
 ### PR yang harus sudah ada di `main`
@@ -36,7 +38,7 @@ Butir ini tidak menghalangi deploy, tetapi harus selesai sebelum AksesBogor dium
 ### 2.1 Cloudflare R2 untuk foto
 
 - [ ] Bucket privat untuk foto yang belum terbit, misalnya `akses-bogor-foto-laporan`. Tanpa akses publik.
-- [ ] Bucket publik untuk foto yang sudah terbit, misalnya `akses-bogor-foto`. Pasang custom domain, misalnya `foto.yorhagarden.xyz`. Alamat `r2.dev` dibatasi Cloudflare dan tidak untuk produksi. Alamat ini menjadi `PHOTO_PUBLIC_URL`.
+- [ ] Bucket publik untuk foto yang sudah terbit, misalnya `akses-bogor-foto`. Pasang custom domain, saat ini `akses-bogor-foto.aldio.dev`. Alamat `r2.dev` dibatasi Cloudflare dan tidak untuk produksi. Alamat ini menjadi `PHOTO_PUBLIC_URL`.
 - [ ] Jangan pasang lifecycle rule di kedua bucket foto. API sendiri yang menghapus foto yang tidak terpakai, ditolak, atau disembunyikan ([ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md)).
 - [ ] Token R2 (R2 → Manage API tokens) dengan izin "Object Read & Write" untuk kedua bucket ini saja. Catat Access Key ID, Secret Access Key, dan Account ID (32 karakter heksadesimal).
 
@@ -58,8 +60,8 @@ Cadangan malam ini belum disalin ke R2. Log `akses-bogor-backup` setiap malam me
 ### 2.3 Klien OAuth Google
 
 - [ ] Google Cloud Console → APIs & Services → Credentials → Create OAuth client ID, tipe "Web application" ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)).
-- [ ] Authorized JavaScript origins: `https://akses-bogor.vercel.app` dan `http://localhost:3000`. Tidak perlu redirect URI dan client secret, karena tombol Google mengirim ID token yang diperiksa API.
-- [ ] OAuth consent screen: nama aplikasi AksesBogor, tautan `https://akses-bogor.vercel.app/kebijakan-privasi` dan `https://akses-bogor.vercel.app/syarat`, dan publishing status "In production". Dalam status "Testing", hanya akun test user yang bisa masuk.
+- [ ] Authorized JavaScript origins: `https://akses-bogor.aldio.dev`, alias `https://akses-bogor.vercel.app`, dan `http://localhost:3000`. Tidak perlu redirect URI dan client secret, karena tombol Google mengirim ID token yang diperiksa API.
+- [ ] OAuth consent screen: nama aplikasi AksesBogor, tautan `https://akses-bogor.aldio.dev/kebijakan-privasi` dan `https://akses-bogor.aldio.dev/syarat`, dan publishing status "In production". Dalam status "Testing", hanya akun test user yang bisa masuk.
 - [ ] Client ID yang sama dipakai di dua tempat: `GOOGLE_CLIENT_ID` di API dan `NEXT_PUBLIC_GOOGLE_CLIENT_ID` di Vercel.
 
 ### 2.4 Resend
@@ -82,9 +84,9 @@ Ubah dengan `sudo -e /etc/akses-bogor/api.env`. Berkas ini milik `root:aksesbogo
 | Variabel | Nilai | Catatan |
 | --- | --- | --- |
 | `NODE_ENV` | `production` | Sudah ada. Tanpa ini API berjalan sebagai development: rahasia akun tetap, kode masuk dicetak ke log, dan foto disimpan di folder lokal |
-| `FRONTEND_ORIGINS` | `https://akses-bogor.vercel.app` | Origin web produksi harus di urutan pertama, karena dipakai untuk tautan di email status laporan. Domain lain ditambahkan sesudahnya, dipisah koma |
+| `FRONTEND_ORIGINS` | `https://akses-bogor.aldio.dev,https://akses-bogor.vercel.app` | Origin web utama harus di urutan pertama, karena dipakai untuk tautan di email status laporan. Alias dan domain lain ditambahkan sesudahnya, dipisah koma |
 | `BETTER_AUTH_SECRET` | hasil `openssl rand -base64 48` | Minimal 32 karakter. Mengganti nilainya mengakhiri semua sesi |
-| `BETTER_AUTH_URL` | `https://akses-bogor-api.yorhagarden.xyz` | Alamat publik API |
+| `BETTER_AUTH_URL` | `https://akses-bogor-api.aldio.dev` | Alamat publik API |
 | `GOOGLE_CLIENT_ID` | `<…>.apps.googleusercontent.com` | Dari langkah 2.3 |
 | `RESEND_API_KEY` | `re_…` | Dari langkah 2.4 |
 | `EMAIL_FROM` | `"AksesBogor <masuk@kirim.yorhagarden.xyz>"` | Wajib diberi tanda kutip, lihat di bawah |
@@ -92,7 +94,7 @@ Ubah dengan `sudo -e /etc/akses-bogor/api.env`. Berkas ini milik `root:aksesbogo
 | `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` | dari token langkah 2.1 | |
 | `R2_BUCKET_LAPORAN` | `akses-bogor-foto-laporan` | Bucket privat |
 | `R2_BUCKET_PUBLIK` | `akses-bogor-foto` | Bucket publik |
-| `PHOTO_PUBLIC_URL` | `https://foto.yorhagarden.xyz` | Custom domain bucket publik |
+| `PHOTO_PUBLIC_URL` | `https://akses-bogor-foto.aldio.dev` | Custom domain bucket publik |
 | `MAPBOX_SECRET_TOKEN` | `sk.…` | Diisi bersama `MAPBOX_USERNAME` |
 | `MAPBOX_USERNAME` | username akun Mapbox | |
 | `WEB_SERVER_SECRET` | hasil `openssl rand -hex 32` | Minimal 32 karakter, sama persis dengan nilai di Vercel |
@@ -116,19 +118,20 @@ Proyek `akses-bogor-web`, Settings:
 | --- | --- |
 | Environments → Production → Branch | `release` |
 | Node.js Version | 24.x |
-| Domains | `akses-bogor.vercel.app` sebagai domain produksi |
-| Environment Variables, untuk Production dan Preview | `API_URL` = `https://akses-bogor-api.yorhagarden.xyz`, `ENABLE_EXPERIMENTAL_COREPACK` = `1`, `NEXT_PUBLIC_GOOGLE_CLIENT_ID` = client ID dari langkah 2.3, dan `WEB_SERVER_SECRET` = nilai yang sama dengan API, bertipe Sensitive |
+| Domains | `akses-bogor.aldio.dev` sebagai domain utama, dan `akses-bogor.vercel.app` tetap sebagai alias |
+| Environment Variables, untuk Production dan Preview | `API_URL` = `https://akses-bogor-api.aldio.dev`, `ENABLE_EXPERIMENTAL_COREPACK` = `1`, `NEXT_PUBLIC_GOOGLE_CLIENT_ID` = client ID dari langkah 2.3, dan `WEB_SERVER_SECRET` = nilai yang sama dengan API, bertipe Sensitive |
 
 - [ ] Semua pengaturan di atas sudah benar.
 - [ ] `NEXT_PUBLIC_GOOGLE_CLIENT_ID` dibaca saat build. Bila diisi setelah deploy terakhir, deploy ulang supaya tombol Google muncul.
 - [ ] Preview deployment memakai API produksi. Masuk dengan Google tidak jalan di alamat preview karena alamat itu tidak terdaftar sebagai origin Google; masuk dengan kode email tetap jalan dan membuat akun di database produksi.
 
-Bila nanti memakai domain sendiri, misalnya `aksesbogor.id` atau `aksesbogor.site`:
+Langkah berikut dipakai saat memasang `akses-bogor.aldio.dev`, dan dipakai lagi saat domain produksi dipilih ([ADR-0045](../decisions/0045-alamat-staging-di-aldio-dev.md)):
 
 1. Tambahkan domainnya di Vercel → Domains.
 2. Tambahkan juga di origin JavaScript klien Google.
 3. Tambahkan di `FRONTEND_ORIGINS`, di urutan pertama bila domain itu menjadi alamat utama.
 4. Ganti tautan di OAuth consent screen.
+5. Bila alamat API dan foto ikut pindah, ubah juga `BETTER_AUTH_URL` dan `PHOTO_PUBLIC_URL` di API, serta `API_URL` di Vercel.
 
 ## 5. Evergarden: log dan cadangan
 
@@ -176,8 +179,8 @@ API rilis lebih dulu karena web lama tidak punya fitur akun, jadi tetap jalan de
 journalctl -u akses-bogor-deploy -n 50     # harus berakhir dengan "rilis aktif: <sha>"
 systemctl status akses-bogor-api
 journalctl -u akses-bogor-api -n 50        # tidak ada "Konfigurasi environment tidak valid"
-curl https://akses-bogor-api.yorhagarden.xyz/healthz
-curl https://akses-bogor-api.yorhagarden.xyz/places
+curl https://akses-bogor-api.aldio.dev/healthz
+curl https://akses-bogor-api.aldio.dev/places
 ```
 
 - [ ] `healthz` menjawab `{"status":"ok"}`, dan `/places` menjawab `"total":7`.
@@ -186,13 +189,13 @@ curl https://akses-bogor-api.yorhagarden.xyz/places
 ### 6.4 Periksa web
 
 - [ ] Deployment produksi di Vercel berstatus Ready dan dibangun dari commit `release` terbaru.
-- [ ] `https://akses-bogor.vercel.app` menampilkan Beranda, Jelajahi, Peta dengan peta Mapbox, Detail lokasi, Tentang, Kebijakan Privasi versi 10 November 2026, dan Syarat Layanan.
+- [ ] `https://akses-bogor.aldio.dev` menampilkan Beranda, Jelajahi, Peta dengan peta Mapbox, Detail lokasi, Tentang, Kebijakan Privasi versi 10 November 2026, dan Syarat Layanan.
 
 ## 7. Setelah rilis
 
 ### 7.1 Admin pertama
 
-- [ ] Calon admin masuk di `https://akses-bogor.vercel.app/masuk` dan melengkapi akun.
+- [ ] Calon admin masuk di `https://akses-bogor.aldio.dev/masuk` dan melengkapi akun.
 - [ ] Di Evergarden ([README akses-bogor-api, bagian Peran](https://github.com/al-dioooo/akses-bogor-api#peran)):
 
   ```bash
@@ -218,7 +221,7 @@ Butuh dua akun: **A** sebagai pelapor dan **B** sebagai verifikator atau admin, 
    - menambah foto;
    - menekan "Kirim laporan". Foto terunggah (bucket privat), dan halaman Laporan terkirim tampil.
 4. [ ] B membuka `/verifikasi`. Laporan A ada di antrean. Foto bisa dibuka, area kabur bisa ditandai, dan setiap jawaban bisa diperiksa.
-5. [ ] B menerbitkan laporan. A menerima email "Laporan Anda sudah terbit", dan tautan di email itu mengarah ke `https://akses-bogor.vercel.app`.
+5. [ ] B menerbitkan laporan. A menerima email "Laporan Anda sudah terbit", dan tautan di email itu mengarah ke `https://akses-bogor.aldio.dev`.
 6. [ ] Tempat itu tampil di Detail dengan foto yang sudah dikaburkan (dari `PHOTO_PUBLIC_URL`), di Jelajahi, dan sebagai marker di Peta.
 7. [ ] Kirim laporan kedua yang sengaja tidak lengkap. B meminta klarifikasi, dan A menerima email lalu bisa menjawab dari Laporan saya. Setelah itu B menolaknya, dan A menerima email beserta alasannya. Laporan yang ditolak tidak tampil di publik.
 8. [ ] Hapus akun uji yang tidak dipakai lagi dari Akun Saya. Email konfirmasi terakhir harus terkirim.
