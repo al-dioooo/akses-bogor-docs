@@ -45,7 +45,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0010](0010-cakupan-wilayah-kota-bogor.md) | Cakupan wilayah MVP adalah Kota Bogor | Accepted | 2026-10-21 |
 | [0011](0011-pelapor-wajib-login.md) | Pelapor wajib login | Accepted | 2026-10-21 |
 | [0012](0012-web-mobile-first-pwa.md) | Web mobile-first yang bisa dipasang (PWA) | Accepted | 2026-10-21 |
-| [0013](0013-tech-stack-nextjs-fastify.md) | Tech stack Next.js + Fastify, Neon, Azure, dan Cloudflare R2 | Accepted, sebagian di-supersede oleh 0025 | 2026-10-21 |
+| [0013](0013-tech-stack-nextjs-fastify.md) | Tech stack Next.js + Fastify, Neon, Azure, dan Cloudflare R2 | Accepted, sebagian di-supersede oleh 0025 dan 0048 | 2026-10-21 |
 | [0014](0014-login-google-dan-kode-email.md) | Login dengan Google atau kode email | Accepted | 2026-10-21 |
 | [0015](0015-input-lokasi-peta-gps-pencarian.md) | Lokasi laporan diisi lewat peta, lokasi perangkat, atau pencarian | Accepted | 2026-10-21 |
 | [0016](0016-peta-dan-pencarian-mapbox.md) | Peta dan pencarian lokasi memakai Mapbox | Accepted | 2026-10-21 |
@@ -58,7 +58,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0023](0023-hingga-sepuluh-foto-bertag-per-laporan.md) | Hingga sepuluh foto bertag per laporan | Accepted | 2026-10-21 |
 | [0024](0024-data-setelah-akun-dihapus.md) | Data pribadi dihapus, data lokasi yang sudah terbit tetap tayang tanpa nama | Accepted | 2026-10-22 |
 | [0025](0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL berjalan di VPS milik tim | Accepted, sebagian di-supersede oleh 0026 | 2026-10-26 |
-| [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted, sebagian di-supersede oleh 0045 | 2026-10-31 |
+| [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted, sebagian di-supersede oleh 0045 dan 0048 | 2026-10-31 |
 | [0027](0027-design-system-datar-dan-ilustrasi-3d.md) | Design system datar dengan ilustrasi lingkungan 3D | Accepted, sebagian di-supersede oleh 0028 | 2026-10-31 |
 | [0028](0028-adegan-3d-three-js-untuk-hero-dan-rute.md) | Adegan 3D three.js untuk hero dan Rute ke pintu, pengganti ilustrasi AI | Accepted | 2026-11-01 |
 | [0029](0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth di API, sesi disimpan server web | Accepted | 2026-11-07 |
@@ -77,6 +77,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0042](0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Aplikasi menampilkan rute jalan kaki ke pintu masuk, dan agen dengan model gratis OpenRouter menjawab soal aksesibilitas tujuan | Accepted, sebagian di-supersede oleh 0047 | 2026-11-22 |
 | [0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md) | Agen AksesBogor membantu kontributor menemukan tempat yang belum dipetakan, dengan model gratis OpenRouter, prioritas kecamatan, dan kartu dinamis | Proposed, sebagian di-supersede oleh 0047 | 2026-11-22 |
 | [0044](0044-retrieval-dengan-stemmer-dan-padanan-kata.md) | Retrieval basis pengetahuan memakai stemmer bahasa Indonesia, padanan kata, dan peringkat yang diperbaiki | Proposed | 2026-11-22 |
-| [0045](0045-alamat-staging-di-aldio-dev.md) | Alamat staging web, API, dan foto pindah ke aldio.dev, dengan `akses-bogor.vercel.app` sebagai alias | Accepted | 2026-11-22 |
+| [0045](0045-alamat-staging-di-aldio-dev.md) | Alamat staging web, API, dan foto pindah ke aldio.dev, dengan `akses-bogor.vercel.app` sebagai alias | Accepted, sebagian di-supersede oleh 0048 | 2026-11-22 |
 | [0046](0046-dasbor-akun-di-route-group-dengan-ringkasan-per-peran.md) | Dasbor akun di route group yang sama, dengan Ringkasan per peran dan URL lama tetap | Proposed | 2026-11-22 |
 | [0047](0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md) | Model agen kontributor: Claude Haiku 5.5 lewat Claude API, OpenRouter tetap bisa dipilih tanpa cadangan otomatis | Accepted | 2026-11-22 |
+| [0048](0048-web-di-host-sendiri-di-evergarden-oci.md) | Web di-host sendiri di Evergarden dengan systemd dan `next start`, di-deploy dari `release` seperti API, dengan rollback otomatis | Accepted | 2026-11-22 |
