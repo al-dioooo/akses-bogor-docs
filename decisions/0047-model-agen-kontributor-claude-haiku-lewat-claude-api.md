@@ -170,5 +170,5 @@ Dari empat kali evaluasi (67 permintaan):
 
 - [ADR-0042](0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md), [ADR-0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md)
 - [Kebijakan Privasi](../product/kebijakan-privasi.md) versi 2026-11-22
-- Kode: al-dioooo/akses-bogor-api#83 (`src/agent/anthropic.ts`, `src/agent/provider.ts`), Kebijakan Privasi di akses-bogor-web
+- Kode: al-dioooo/akses-bogor-api#86 (adapter `src/agent/anthropic.ts`) dan al-dioooo/akses-bogor-api#85 (`src/agent/provider.ts`, variabel env, evaluasi); versi Kebijakan Privasi di al-dioooo/akses-bogor-api#87 dan al-dioooo/akses-bogor-web#128
 - Anthropic: [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms), [Privacy Policy](https://www.anthropic.com/legal/privacy), [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention), [lama penyimpanan data organisasi](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data), [data residency](https://platform.claude.com/docs/en/manage-claude/data-residency), [harga](https://platform.claude.com/docs/en/about-claude/pricing), [galat](https://platform.claude.com/docs/en/api/errors)
