@@ -4,6 +4,7 @@
 - Tanggal: 2026-11-22 (diusulkan 2026-11-16)
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #73
+- Audiens dan tujuan agen di bagian Cakupan diubah oleh [ADR-0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md): agen membantu kontributor
 - Melengkapi: [ADR-0016](0016-peta-dan-pencarian-mapbox.md), [ADR-0017](0017-empat-jawaban-ketersediaan-fasilitas.md), [ADR-0022](0022-tersedia-berarti-bisa-dipakai.md), [ADR-0032](0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0034](0034-batas-kecamatan-dari-openstreetmap.md)
 
 ## Konteks dan Masalah
