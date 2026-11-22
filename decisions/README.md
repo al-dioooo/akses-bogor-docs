@@ -76,3 +76,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0041](0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi Aksesibilitas, Disabilitas, dan Tips tayang sebagai draf sampai ditinjau komunitas | Accepted | 2026-11-09 |
 | [0042](0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Aplikasi menampilkan rute jalan kaki ke pintu masuk, dan agen dengan model gratis OpenRouter menjawab soal aksesibilitas tujuan | Accepted | 2026-11-22 |
 | [0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md) | Agen AksesBogor membantu kontributor menemukan tempat yang belum dipetakan, dengan model gratis OpenRouter, prioritas kecamatan, dan kartu dinamis | Proposed | 2026-11-22 |
+| [0045](0045-alamat-staging-di-aldio-dev.md) | Alamat staging web, API, dan foto pindah ke aldio.dev, dengan `akses-bogor.vercel.app` sebagai alias | Accepted | 2026-11-22 |
