@@ -133,7 +133,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 
 | ID | Kebutuhan | Prioritas |
 | --- | --- | --- |
-| FR-60 | Pengguna yang sudah masuk memilih tujuan dari lokasi AksesBogor dan bertanya kepada agen cara ke sana dari posisinya. Agen menjawab dengan rute jalan kaki ke pin tujuan, status dan jawaban fasilitas yang sudah diverifikasi beserta tanggalnya, hambatan yang tercatat di OpenStreetMap di dekat rute, dan sumber yang dikutip. Agen tidak pernah menyebut rute aksesibel, dan jawaban "Belum tahu" tetap belum diketahui. Ini bukan navigasi langsung. | Could |
+| FR-60 | Pengguna yang sudah masuk memilih tujuan dari lokasi AksesBogor. Aplikasi menampilkan rute jalan kaki dari posisinya ke pin tujuan dan hambatan yang tercatat di OpenStreetMap di dekat rute, dengan peringatan tetap dan atribusi. Pengguna bisa bertanya kepada agen tentang status dan jawaban fasilitas yang sudah diverifikasi beserta tanggalnya, regulasi, aturan AksesBogor, dan angkutan umum, dan agen mengutip sumbernya. Agen tidak menerima posisi atau rute pengguna, tidak pernah menyebut rute aksesibel, dan jawaban "Belum tahu" tetap belum diketahui. Ini bukan navigasi langsung. | Could |
 
 ## 7. Kebutuhan Non-fungsional
 
@@ -262,7 +262,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0039](../decisions/0039-email-status-laporan.md) | Email status laporan dengan coba ulang |
 | [0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Izin luas atas isi laporan, Syarat Layanan disetujui lewat tombol Lengkapi Akun |
 | [0041](../decisions/0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi sebagai draf sampai ditinjau komunitas, label "Disabilitas" |
-| [0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Agen rute: rute jalan kaki ke pintu masuk dan informasi aksesibilitas, penyedia model belum dipilih (Proposed) |
+| [0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Agen rute: aplikasi menampilkan rute jalan kaki, model gratis OpenRouter menjawab soal aksesibilitas tujuan |
 
 ## 14. Pertanyaan Terbuka
 
