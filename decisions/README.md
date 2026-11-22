@@ -74,3 +74,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0039](0039-email-status-laporan.md) | Email status laporan dikirim setelah keputusan dan dicoba ulang selama 3 hari | Accepted | 2026-11-08 |
 | [0040](0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Pelapor memberi izin luas atas laporan, dan Syarat Layanan disetujui lewat tombol Lengkapi Akun | Accepted | 2026-11-08 |
 | [0041](0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi Aksesibilitas, Disabilitas, dan Tips tayang sebagai draf sampai ditinjau komunitas | Accepted | 2026-11-09 |
+| [0042](0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Aplikasi menampilkan rute jalan kaki ke pintu masuk, dan agen dengan model gratis OpenRouter menjawab soal aksesibilitas tujuan | Accepted | 2026-11-22 |
