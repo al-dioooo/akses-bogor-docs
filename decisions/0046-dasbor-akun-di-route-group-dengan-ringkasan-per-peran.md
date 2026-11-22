@@ -58,13 +58,14 @@ Isi `/akun` mengikuti peran. Setiap bagian dimuat sendiri, punya keadaan memuat,
 | --- | --- | --- | --- |
 | Yang menunggu Anda: pertanyaan klarifikasi dengan tenggat, laporan antrean yang lewat target 3 hari kerja, dan laporan yang sudah dijawab pelapor | Semua; bagian antrean untuk verifikator dan admin | `GET /me/reports`, `GET /verifier/reports` | "Tidak ada yang menunggu Anda" |
 | Meja verifikasi: jumlah antrean dan umur laporan terlama, menunggu jawaban dan tenggat terdekat, perlu dicek ulang | Verifikator dan admin | `GET /verifier/reports?status=menunggu`, `?status=klarifikasi`, `GET /verifier/places/recheck` | Angka 0 dengan kalimat yang menjelaskannya |
-| Tim verifikator: jumlah verifikator dan admin | Admin | `GET /admin/team` | Ajakan menambah verifikator |
+| Tim verifikator: jumlah verifikator dan admin, dan nama lima anggota pertama tanpa email | Admin | `GET /admin/team` | Ajakan menambah verifikator |
 | Laporan saya: jumlah per status dan tiga laporan terbaru | Semua | `GET /me/reports` | Rute pertama: empat langkah dari akun baru sampai tempat tayang |
 | Petakan berikutnya: tiga kecamatan dengan prioritas tertinggi | Semua | `GET /districts/priority`, `GET /agent/tools` tanpa token | Bila prioritas 503 atau agen mati, hanya ajakan Laporkan tempat |
 
 - Prioritas kecamatan selalu tampil dengan kalimat batas data dan sumbernya ([ADR-0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md)). Selama `DISABILITY_DATA_ENABLED` mati di production, bagian ini hanya mengajak melapor.
 - Tidak ada route API baru. `GET /me/summary` sempat dipertimbangkan, tetapi semua angka sudah tersedia dari route yang ada, setiap route sudah memeriksa peran, dan web tidak perlu menunggu rilis API. Batasnya: `GET /me/reports` memuat 100 laporan terbaru, jadi jumlah per status dihitung dari 100 laporan itu; jumlah antrean dan cek ulang memakai `total` dari API sehingga tetap tepat. Bila ada kontributor yang mendekati 100 laporan, route ringkasan dipertimbangkan lagi.
-- Kerangka dan halaman berbagi satu `GET /me` per request, dan setiap daftar dimuat sekali per request walaupun dipakai lebih dari satu bagian.
+- Kerangka dan halaman berbagi satu `GET /me` per request, dan setiap daftar serta pemeriksaan agen dimuat sekali per request walaupun dipakai lebih dari satu bagian.
+- Akun baru yang belum pernah melapor mendapat Rute pertama: empat halte dari akun siap sampai verifikator memeriksa, digambar seperti rute di ilustrasi [ADR-0027](0027-design-system-datar-dan-ilustrasi-3d.md). Halte berikutnya ditandai `aria-current="step"`, dan keadaan setiap halte ditulis sebagai teks.
 
 ## Konsekuensi
 
@@ -72,7 +73,7 @@ Isi `/akun` mengikuti peran. Setiap bagian dimuat sendiri, punya keadaan memuat,
 - Positif: verifikator dan admin berpindah antarbagian meja dan laporannya sendiri tanpa kembali ke Akun saya.
 - Positif: tidak ada redirect, URL baru hanya `/akun/laporan` dan `/akun/pengaturan`, dan tautan di email tetap sama.
 - Negatif: footer publik tetap tampil di bawah dasbor, dan header publik tetap di atasnya. Bila Peta layar penuh menambah cara menyembunyikan footer, dasbor bisa memakainya.
-- Negatif: halaman Ringkasan verifikator memanggil sampai enam route API per kunjungan (me, laporan saya, dua antrean, cek ulang, prioritas), ditambah tim untuk admin. Dengan tim kecil dan daftar paling banyak 100 baris, bebannya kecil.
+- Negatif: halaman Ringkasan verifikator memanggil sampai tujuh route API per kunjungan (me, laporan saya, dua antrean, cek ulang, prioritas, dan pemeriksaan agen), ditambah tim untuk admin. Dengan tim kecil dan daftar paling banyak 100 baris, bebannya kecil.
 - Negatif: menu di sidebar dibaca saat halaman pertama dibuka; peran yang berubah baru terlihat di menu setelah halaman dimuat ulang. Datanya tetap dijaga API.
 
 ## Pro & Kontra tiap Opsi
