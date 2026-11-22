@@ -76,3 +76,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0041](0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi Aksesibilitas, Disabilitas, dan Tips tayang sebagai draf sampai ditinjau komunitas | Accepted | 2026-11-09 |
 | [0042](0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Aplikasi menampilkan rute jalan kaki ke pintu masuk, dan agen dengan model gratis OpenRouter menjawab soal aksesibilitas tujuan | Accepted | 2026-11-22 |
 | [0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md) | Agen AksesBogor membantu kontributor menemukan tempat yang belum dipetakan, dengan model gratis OpenRouter, prioritas kecamatan, dan kartu dinamis | Proposed | 2026-11-22 |
+| [0044](0044-retrieval-dengan-stemmer-dan-padanan-kata.md) | Retrieval basis pengetahuan memakai stemmer bahasa Indonesia, padanan kata, dan peringkat yang diperbaiki | Proposed | 2026-11-22 |
