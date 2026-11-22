@@ -35,7 +35,7 @@ AksesBogor adalah web mobile-first yang membantu difabel dan pendampingnya menge
 
 - Wilayah di luar Kota Bogor ([ADR-0010](../decisions/0010-cakupan-wilayah-kota-bogor.md)).
 - Aplikasi native Android atau iOS ([ADR-0012](../decisions/0012-web-mobile-first-pwa.md)).
-- Navigasi rute langkah demi langkah.
+- Navigasi langsung belokan demi belokan yang mengikuti posisi pengguna. Agen (FR-60) membantu kontributor menemukan tempat yang belum dipetakan dan hanya menampilkan rute jalan kaki ke sana ([ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md), [ADR-0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md)).
 - Ulasan bebas, rating bintang, komentar, atau forum.
 - Kategori dan fasilitas di luar daftar MVP ([ADR-0004](../decisions/0004-empat-kategori-lokasi-untuk-mvp.md), [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md)).
 - Antarmuka dwibahasa.
@@ -129,6 +129,12 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | FR-50 | Halaman Tentang, Kebijakan Privasi, dan Syarat Layanan tersedia sebelum peluncuran. | Must |
 | FR-51 | Halaman edukasi Aksesibilitas, Disabilitas, dan Tips, tayang sebagai draf sampai ditinjau komunitas penyandang disabilitas ([ADR-0041](../decisions/0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md)). | Could |
 
+### Agen rute ([ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md), [ADR-0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md))
+
+| ID | Kebutuhan | Prioritas |
+| --- | --- | --- |
+| FR-60 | Kontributor yang sudah masuk bisa bertanya kepada agen AksesBogor tempat umum mana (kampus, masjid, halte, rumah sakit) yang belum punya data, urut menurut prioritas kecamatan, lalu melihat kartu tempat dan kartu rute jalan kaki ke sana. Aplikasi menampilkan rute dari posisi pengguna dengan peringatan tetap, hambatan OpenStreetMap, dan atribusi. Agen tidak menerima posisi atau rute, tidak pernah menyebut rute aksesibel, dan kepada penyandang disabilitas yang meminta rute aksesibel atau bertanya tentang tempat tanpa data terverifikasi, agen menjawab bahwa datanya belum tersedia ([ADR-0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md)). Ini bukan navigasi langsung. | Could |
+
 ## 7. Kebutuhan Non-fungsional
 
 | Area | Kebutuhan |
@@ -216,6 +222,7 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | Efek kaca berat atau kontras turun di perangkat tertentu | Mode Solid dan audit kontras di setiap rilis |
 | Foto memuat data pribadi orang lain | Moderasi foto dan penghapusan EXIF |
 | Pemakaian Mapbox melewati kuota gratis | Pantau pemakaian bulanan, batasi token per domain, dan cache data peta yang tidak berubah |
+| Agen rute memberi rasa aman palsu, mis. rute yang melewati tangga | Peringatan tetap di setiap rute, rute tidak pernah disebut aksesibel, dan hambatan OSM disebut bersama batas datanya ([ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md)) |
 | Server mati, disknya rusak, atau memorinya habis | Dump database setiap malam ke R2 privat, uji pemulihan sebelum beta, batas memori API, dan pemantauan disk dan memori |
 
 ## 13. Keputusan Terkait
@@ -255,6 +262,8 @@ Jadwal ada di rencana proyek terpisah; dokumen ini hanya mengatur urutan.
 | [0039](../decisions/0039-email-status-laporan.md) | Email status laporan dengan coba ulang |
 | [0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md) | Izin luas atas isi laporan, Syarat Layanan disetujui lewat tombol Lengkapi Akun |
 | [0041](../decisions/0041-halaman-edukasi-sebagai-draf-sampai-ditinjau-komunitas.md) | Halaman edukasi sebagai draf sampai ditinjau komunitas, label "Disabilitas" |
+| [0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md) | Agen rute: aplikasi menampilkan rute jalan kaki, model gratis OpenRouter menjawab soal aksesibilitas tujuan |
+| [0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md) | Agen untuk kontributor: tempat tanpa data per prioritas kecamatan, kartu dinamis, data Dinsos di balik flag, model gratis OpenRouter (Proposed) |
 
 ## 14. Pertanyaan Terbuka
 
