@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #75
 - Melengkapi: [ADR-0042](0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md). Mengganti audiens dan tujuan agen di bagian Cakupan ADR-0042; bagian lain ADR-0042 (rute yang ditampilkan aplikasi, sumber data, retrieval, OpenRouter, privasi) tetap berlaku.
+- Digantikan sebagian oleh [ADR-0047](0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md): model dan penyedianya (bagian "Model dan cadangan"), baris permintaan OpenRouter di "Batas" (sekarang `AGENT_REQUESTS_PER_DAY`, bawaan 45), dan "Jawaban sibuk". Daftar model gratis di bawah hanya berlaku bila `AGENT_PROVIDER=openrouter`
 
 ## Konteks dan Masalah
 
