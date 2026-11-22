@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #73
 - Audiens dan tujuan agen di bagian Cakupan diubah oleh [ADR-0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md): agen membantu kontributor
+- Digantikan sebagian oleh [ADR-0047](0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md): penyedia model sekarang Claude Haiku 5.5 lewat Claude API; pilihan "Model gratis lewat OpenRouter" dan bagian "Penyedia model" di bawah tidak lagi berlaku sebagai bawaan
 - Melengkapi: [ADR-0016](0016-peta-dan-pencarian-mapbox.md), [ADR-0017](0017-empat-jawaban-ketersediaan-fasilitas.md), [ADR-0022](0022-tersedia-berarti-bisa-dipakai.md), [ADR-0032](0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0034](0034-batas-kecamatan-dari-openstreetmap.md)
 
 ## Konteks dan Masalah
