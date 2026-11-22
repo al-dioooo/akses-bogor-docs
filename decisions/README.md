@@ -78,3 +78,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0043](0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md) | Agen AksesBogor membantu kontributor menemukan tempat yang belum dipetakan, dengan model gratis OpenRouter, prioritas kecamatan, dan kartu dinamis | Proposed | 2026-11-22 |
 | [0044](0044-retrieval-dengan-stemmer-dan-padanan-kata.md) | Retrieval basis pengetahuan memakai stemmer bahasa Indonesia, padanan kata, dan peringkat yang diperbaiki | Proposed | 2026-11-22 |
 | [0045](0045-alamat-staging-di-aldio-dev.md) | Alamat staging web, API, dan foto pindah ke aldio.dev, dengan `akses-bogor.vercel.app` sebagai alias | Accepted | 2026-11-22 |
+| [0047](0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md) | Model agen kontributor: Claude Haiku 5.5 lewat Claude API, OpenRouter tetap bisa dipilih tanpa cadangan otomatis | Accepted | 2026-11-22 |
