@@ -1,4 +1,4 @@
-# ADR-0050: Kelola Tempat oleh Admin dan Terbit Langsung
+# ADR-0051: Kelola Tempat oleh Admin dan Terbit Langsung
 
 - Status: Proposed
 - Tanggal: 2026-11-23
