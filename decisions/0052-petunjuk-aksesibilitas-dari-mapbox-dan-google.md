@@ -36,7 +36,7 @@ Opsi terpilih: "Petunjuk langsung, cache memori singkat", karena hanya opsi ini 
 ### API
 
 - `GET /places/{id}/hints` untuk lokasi AksesBogor dan `GET /places/candidates/{osmType}/{osmId}/hints` untuk kandidat OSM ([ADR-0049](0049-lapisan-kandidat-openstreetmap-belum-ada-data.md)), keduanya publik.
-- Saklar `PROVIDER_HINTS_ENABLED`, mati bawaan. Mapbox memakai `MAPBOX_SECRET_TOKEN` yang sudah ada. Google hanya menyala bila `GOOGLE_MAPS_API_KEY` diisi. Selama mati, jawabannya `{ "hints": [] }` dan web tidak menampilkan bagiannya.
+- Saklar `PROVIDER_HINTS_ENABLED`, mati bawaan. Mapbox memakai `MAPBOX_SECRET_TOKEN` yang sudah ada. Google hanya menyala bila `GOOGLE_MAPS_API_KEY` diisi. Selama mati, jawabannya `{ "hints": [] }` dan web tidak menampilkan bagiannya. Saklar ini juga berlaku untuk salinan tersimpan (lihat di bawah).
 - Jawaban hanya berisi nama penyedia, nama tempat di penyedia, jaraknya, tanda aksesibilitas, dan tautan ke halaman tempat itu bila ada (Google Maps). Mapbox tidak punya halaman tempat publik.
 - Header `cache-control: private, no-store`, supaya browser dan Cloudflare tidak menyimpan isi penyedia.
 - Batas 30 permintaan per menit per pengunjung, dan batas harian per penyedia. Setelah batas harian tercapai, penyedia itu dilaporkan tidak tersedia sampai tengah malam WIB.
@@ -49,25 +49,37 @@ Opsi terpilih: "Petunjuk langsung, cache memori singkat", karena hanya opsi ini 
 
 ### Tidak disimpan
 
-- Tidak ada hasil penyedia di database.
+- Hasil pencarian langsung ke penyedia tidak pernah ditulis ke database.
 - Mapbox: hasil di memori proses API selama 10 menit, paling banyak 500 entri, lalu hilang saat proses berhenti.
 - Google: hanya `place_id` yang di-cache di memori (syarat Places API mengizinkan `place_id` disimpan). Isi lain, termasuk `accessibilityOptions`, diambil ulang lewat Place Details setiap kali diminta dan tidak di-cache.
+
+### Salinan tersimpan untuk kandidat OSM
+
+Pengecualian dari aturan di atas: pada 2026-11-23, 38 baris kandidat di `osm_places` diberi salinan Google Maps di tag `aksesbogor:google_maps` (`nama`, `url`, `place_id`, opsi aksesibilitas yang ada di `aksesibilitas`, yang tidak ada di `tidak_tersedia`, tanggal `diambil`, `metode`, dan `jarak_titik_m`), dan 8 baris diberi keterangan OSM di `aksesbogor:osm_aksesibilitas` (`wheelchair` dan `arti`).
+
+- `GET /places/candidates/{osmType}/{osmId}/hints` ikut mengirim salinan ini dengan `result: "stored"`, selama saklar menyala. Salinan Google tidak dipakai bila Google langsung menemukan tempat itu.
+- Salinan Google tanpa tanggal atau tanpa satu pun tanda aksesibilitas tidak dikirim. Tautannya hanya diteruskan bila berupa https ke Google Maps.
+- Keterangan OSM hanya dikirim bila nilainya berbeda dari tag `wheelchair` tempat itu sendiri, yang sudah ditampilkan kartu kandidat.
+- Memuat ulang data OSM (`pnpm pengetahuan:fasilitas`) mengganti semua baris `osm_places`, jadi kedua tag ini ikut hilang.
 
 ### Tampilan
 
 - Bagian "Petunjuk dari sumber lain (belum diperiksa tim)" ada di Detail lokasi dan di kartu lokasi serta kartu kandidat Peta, terpisah dari status dan fasilitas.
 - Setiap baris menyebut penyedianya, mis. "Menurut Mapbox: bisa dimasuki kursi roda" dan "Menurut Google: pintu masuk ramah kursi roda · toilet ramah kursi roda: tidak diketahui", lengkap dengan nama tempat di penyedia dan atribusinya ("© Mapbox"; "Google Maps" yang menaut ke halaman tempat itu).
+- Salinan tersimpan menyebut tanggalnya, mis. "Menurut Google Maps (diambil 23 Nov 2026): …", dan keterangan OSM ditulis "Menurut OpenStreetMap: …" dengan "© kontributor OpenStreetMap". Keduanya ada di bagian yang sama, dengan label "belum diperiksa tim" yang sama.
 - Petunjuk tidak pernah mengubah warna status, jawaban fasilitas, ringkasan "X dari Y", atau urutan daftar, dan tidak pernah ditulis sebagai data terverifikasi.
 - Ada keadaan memuat, galat, dan "tidak ada petunjuk".
 - Di Peta, petunjuk baru diminta 400 ms setelah kartu terbuka dan dibatalkan bila kartu ditutup lebih dulu, jadi tidak pernah ada permintaan per marker.
 
 ### Tidak diberikan ke AI
 
-Agen kontributor dan asisten rute publik tidak menerima petunjuk ini. Modul petunjuk tidak dipakai alat agen mana pun, dan tes API memeriksa bahwa tidak ada alat yang memakainya. Mapbox dilarang oleh §1.5, dan Google ikut dikeluarkan supaya aturannya sama untuk semua penyedia.
+Agen kontributor dan asisten rute publik tidak menerima petunjuk ini, termasuk salinan tersimpan. Modul petunjuk tidak dipakai alat agen mana pun, alat asisten tidak pernah membaca tag `aksesbogor:*`, dan tes API memeriksa keduanya. Mapbox dilarang oleh §1.5, dan Google ikut dikeluarkan supaya aturannya sama untuk semua penyedia.
 
 ### Syarat tampilan Google
 
 Pengguna menyatakan kemitraan kampusnya dengan Google mencakup tampilan ini. Syarat Google Maps Platform yang perlu tetap dipatuhi: atribusi Google Maps di dekat isinya, tidak menyimpan isi selain yang diizinkan, dan batasan pemakaian isi Google bersama peta non-Google. Kartu Peta memakai peta Mapbox, jadi batasan terakhir itu harus dipastikan masuk cakupan kemitraan. Bila tidak, Google dimatikan dengan mengosongkan `GOOGLE_MAPS_API_KEY`.
+
+Salinan tersimpan di `aksesbogor:google_maps` menyimpan isi Google selain `place_id`, sesuatu yang biasanya tidak diizinkan syarat Places API. Salinan ini juga harus dipastikan masuk cakupan kemitraan. Bila tidak, isi tag dikurangi menjadi `place_id` saja, dan petunjuk Google diambil langsung.
 
 ## Konsekuensi
 
@@ -76,6 +88,7 @@ Pengguna menyatakan kemitraan kampusnya dengan Google mencakup tampilan ini. Sya
 - Negatif: setiap kartu yang dibuka berarti satu sampai dua panggilan berbayar per penyedia, dan Google tidak bisa di-cache selain `place_id`.
 - Negatif: pencocokan nama dan jarak bisa meleset, terutama untuk nama yang sangat umum. Karena itu batasnya ketat, dan tempat tanpa nama tidak dicocokkan.
 - Negatif: petunjuk penyedia bisa bertentangan dengan data AksesBogor. Data AksesBogor tetap yang utama, dan petunjuk selalu diberi label belum diperiksa.
+- Negatif: salinan Google yang tersimpan bisa usang. Karena itu tanggal pengambilannya selalu ditampilkan, dan salinan ini hilang saat data OSM dimuat ulang.
 
 ## Pro & Kontra tiap Opsi
 
