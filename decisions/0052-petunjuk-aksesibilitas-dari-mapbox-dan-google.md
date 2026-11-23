@@ -39,12 +39,19 @@ Opsi terpilih: "Petunjuk langsung, cache memori singkat", karena hanya opsi ini 
 - Saklar `PROVIDER_HINTS_ENABLED`, mati bawaan. Mapbox memakai `MAPBOX_SECRET_TOKEN` yang sudah ada. Google hanya menyala bila `GOOGLE_MAPS_API_KEY` diisi. Selama mati, jawabannya `{ "hints": [] }` dan web tidak menampilkan bagiannya. Saklar ini juga berlaku untuk salinan tersimpan (lihat di bawah).
 - Jawaban hanya berisi nama penyedia, nama tempat di penyedia, jaraknya, tanda aksesibilitas, dan tautan ke halaman tempat itu bila ada (Google Maps). Mapbox tidak punya halaman tempat publik.
 - Header `cache-control: private, no-store`, supaya browser dan Cloudflare tidak menyimpan isi penyedia.
-- Batas 30 permintaan per menit per pengunjung, dan batas harian per penyedia. Setelah batas harian tercapai, penyedia itu dilaporkan tidak tersedia sampai tengah malam WIB.
+- Batas 30 permintaan per menit per pengunjung, dan batas harian per penyedia (`PROVIDER_HINTS_MAPBOX_PER_DAY` dan `PROVIDER_HINTS_GOOGLE_PER_DAY`, bawaan 1.000). Setelah batas harian tercapai, penyedia itu dilaporkan tidak tersedia sampai tengah malam WIB.
+- Galat penyedia dicatat dengan nama penyedia dan status HTTP saja, tanpa body, URL, atau kunci.
 
 ### Pencocokan
 
-- Penyedia dicari dengan nama tempat di sekitar titiknya: Mapbox lewat `forward` lalu `retrieve`, Google lewat Text Search dengan field mask `places.id`, `places.displayName`, `places.location`, `places.googleMapsUri`, dan `places.accessibilityOptions`.
-- Tempat penyedia diterima hanya bila jaraknya 75 m atau kurang dan namanya cocok: setelah kata umum (mis. "rumah sakit", "RS", "masjid", "kampus", "halte", "Bogor") dibuang, minimal satu kata sama, dan minimal separuh kata nama yang lebih pendek ada di nama lain. Bila beberapa cocok, yang paling mirip lalu paling dekat menang. Selain itu tidak ada petunjuk.
+- Penyedia dicari dengan nama tempat di sekitar titiknya: Mapbox lewat `forward` lalu `retrieve`, Google lewat Text Search dengan field mask `places.id`, `places.displayName`, `places.location`, `places.types`, `places.googleMapsUri`, dan `places.accessibilityOptions`.
+- Tempat penyedia diterima hanya bila semua syarat ini terpenuhi:
+  - jaraknya 75 m atau kurang;
+  - namanya mirip terhadap kedua nama: setelah kata umum (mis. "rumah sakit", "RS", "masjid", "kampus", "halte", "Bogor") dibuang, minimal satu kata sama, dan kata yang sama itu minimal separuh kata nama yang lebih panjang;
+  - angka dan huruf tunggalnya sama persis, jadi "Puskesmas X 1" tidak cocok dengan "Puskesmas X 2";
+  - setiap kata jenis tempat di nama penyedia (mis. "RS", "terminal", "klinik", "ATM") adalah jenis kategori kita atau juga ada di nama kita, jadi "Halte Baranangsiang" tidak cocok dengan "Terminal Baranangsiang", dan "Halte Pajajaran" tidak cocok dengan "RS Pajajaran";
+  - kategori penyedia (Mapbox `poi_category_ids`, Google `types`) sesuai dengan kategori kita: rumah sakit untuk rumah sakit, masjid atau tempat ibadah untuk masjid, universitas atau college untuk kampus, dan halte atau stasiun bus untuk halte. Tempat penyedia tanpa kategori ditolak.
+- Bila beberapa cocok, yang paling mirip lalu paling dekat menang. Selain itu tidak ada petunjuk. Syarat jenis di nama diperlukan karena Mapbox mengategorikan sebagian terminal sebagai halte.
 - Tempat tanpa nama (banyak halte OSM) tidak dicocokkan.
 
 ### Tidak disimpan
@@ -64,11 +71,11 @@ Pengecualian dari aturan di atas: pada 2026-11-23, 38 baris kandidat di `osm_pla
 
 ### Tampilan
 
-- Bagian "Petunjuk dari sumber lain (belum diperiksa tim)" ada di Detail lokasi dan di kartu lokasi serta kartu kandidat Peta, terpisah dari status dan fasilitas.
+- Bagian "Petunjuk dari sumber lain (belum diperiksa tim)" ada di Detail lokasi (sebagai bagian tersendiri, bukan di bawah "Fasilitas") dan di kartu lokasi serta kartu kandidat Peta, terpisah dari status dan fasilitas.
 - Setiap baris menyebut penyedianya, mis. "Menurut Mapbox: bisa dimasuki kursi roda" dan "Menurut Google: pintu masuk ramah kursi roda · toilet ramah kursi roda: tidak diketahui", lengkap dengan nama tempat di penyedia dan atribusinya ("© Mapbox"; "Google Maps" yang menaut ke halaman tempat itu).
 - Salinan tersimpan menyebut tanggalnya, mis. "Menurut Google Maps (diambil 23 Nov 2026): …", dan keterangan OSM ditulis "Menurut OpenStreetMap: …" dengan "© kontributor OpenStreetMap". Keduanya ada di bagian yang sama, dengan label "belum diperiksa tim" yang sama.
 - Petunjuk tidak pernah mengubah warna status, jawaban fasilitas, ringkasan "X dari Y", atau urutan daftar, dan tidak pernah ditulis sebagai data terverifikasi.
-- Ada keadaan memuat, galat, dan "tidak ada petunjuk".
+- Ada keadaan memuat, galat, dan "tidak ada petunjuk", diumumkan pembaca layar lewat `role="status"`. Bagian ini tidak dirender, juga di HTML server, sampai jawaban pertama di halaman itu menyatakan petunjuk menyala. Jadi saat petunjuk mati, judul dan "Memuat…" tidak pernah muncul. Tempat yang tidak dikenal API (mis. kandidat usang) hanya berarti tidak ada petunjuk untuk tempat itu.
 - Di Peta, petunjuk baru diminta 400 ms setelah kartu terbuka dan dibatalkan bila kartu ditutup lebih dulu, jadi tidak pernah ada permintaan per marker.
 
 ### Tidak diberikan ke AI
