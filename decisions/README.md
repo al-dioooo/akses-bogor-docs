@@ -83,4 +83,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0048](0048-web-di-host-sendiri-di-evergarden-oci.md) | Web di-host sendiri di Evergarden dengan systemd dan `next start`, di-deploy dari `release` seperti API, dengan rollback otomatis | Accepted | 2026-11-22 |
 | [0049](0049-lapisan-kandidat-openstreetmap-belum-ada-data.md) | Tempat OpenStreetMap tampil di Peta sebagai kandidat "Belum ada data" yang terpisah, tanpa status, dengan atribusi ODbL dan ajakan melapor | Accepted | 2026-11-22 |
 | [0050](0050-asisten-rute-publik.md) | Asisten rute publik untuk semua pengunjung, dengan kartu rute dari aplikasi dan jatah per IP | Accepted | 2026-11-23 |
-| [0051](0051-kelola-tempat-oleh-admin-dan-terbit-langsung.md) | Admin mengelola tempat dan boleh menerbitkan laporannya sendiri, dengan label publik "Diterbitkan langsung oleh admin" | Proposed | 2026-11-23 |
+| [0051](0051-kelola-tempat-oleh-admin-dan-terbit-langsung.md) | Admin mengelola tempat dan boleh menerbitkan laporannya sendiri, dengan label publik "Diterbitkan langsung oleh admin" | Accepted | 2026-11-23 |

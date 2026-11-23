@@ -1,6 +1,6 @@
 # ADR-0051: Kelola Tempat oleh Admin dan Terbit Langsung
 
-- Status: Proposed
+- Status: Accepted
 - Tanggal: 2026-11-23
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #107
@@ -59,10 +59,12 @@ Opsi terpilih: "Kelola tempat dengan label publik", karena tim bisa memperbaiki 
 
 - "Hapus" menurunkan tempat dari tayang dengan alasan wajib. Tempat yang diturunkan hilang dari semua route publik, angka, prioritas kecamatan, agen dan asisten rute, dan pencarian lokasi mirip, dan kandidat OpenStreetMap di dekatnya kembali tampil. Admin bisa menayangkannya lagi.
 - Hapus permanen tidak tersedia: laporan perubahan dan kekurangan merujuk tempat, dan aturan skema laporan tidak mengizinkan rujukan itu kosong.
+- Foto tempat yang diturunkan tidak lagi dirujuk route mana pun, tetapi berkasnya tetap ada di bucket publik pada alamat lamanya, karena foto asli di bucket privat sudah dihapus saat terbit. Memindahkannya ke bucket privat saat diturunkan dan mengembalikannya saat ditayangkan lagi dicatat sebagai pekerjaan lanjutan.
 
 ### Log audit
 
 - Setiap tindakan admin ditulis ke log audit di transaksi yang sama: dibuat, diubah, diturunkan, ditayangkan lagi, dan terbit langsung, dengan perbedaan sebelum dan sesudah dan alasan 5 sampai 500 karakter. Alasan wajib untuk semua tindakan itu. Isi log tetap tanpa email dan nama pelapor ([ADR-0038](0038-log-audit-perubahan-data.md)).
+- Riwayat tempat menyebut foto yang ditambah atau dihapus; rincian setiap foto ada di entri foto.
 
 ### API
 
