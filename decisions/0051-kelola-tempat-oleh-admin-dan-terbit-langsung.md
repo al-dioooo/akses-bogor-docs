@@ -53,10 +53,11 @@ Opsi terpilih: "Kelola tempat dengan label publik", karena tim bisa memperbaiki 
 
 - Tempat yang dibuat, diubah, atau diterbitkan langsung oleh admin menyimpan waktu dan akun admin itu. Detail, Jelajahi, dan Peta menulis "Diterbitkan langsung oleh admin · tanggal", tidak pernah "Diverifikasi" atau kalimat verifikasi lain. Nama admin tidak tampil untuk publik.
 - Bila laporan warga tentang tempat itu kemudian diterbitkan verifikator, tempat kembali berlabel verifikasi biasa.
+- Agen kontributor dan asisten rute publik ([ADR-0050](0050-asisten-rute-publik.md)) menerima asal datanya (`verifiedBy`) dan menyebutnya "diterbitkan langsung oleh admin", bukan "diverifikasi".
 
 ### Menurunkan, bukan menghapus
 
-- "Hapus" menurunkan tempat dari tayang dengan alasan wajib. Tempat yang diturunkan hilang dari semua route publik, angka, prioritas kecamatan, agen, dan pencarian lokasi mirip, dan kandidat OpenStreetMap di dekatnya kembali tampil. Admin bisa menayangkannya lagi.
+- "Hapus" menurunkan tempat dari tayang dengan alasan wajib. Tempat yang diturunkan hilang dari semua route publik, angka, prioritas kecamatan, agen dan asisten rute, dan pencarian lokasi mirip, dan kandidat OpenStreetMap di dekatnya kembali tampil. Admin bisa menayangkannya lagi.
 - Hapus permanen tidak tersedia: laporan perubahan dan kekurangan merujuk tempat, dan aturan skema laporan tidak mengizinkan rujukan itu kosong.
 
 ### Log audit
@@ -112,6 +113,6 @@ Semua route `/admin/*` memeriksa sesi dan peran admin. Data publik mendapat `ver
 
 ## Referensi
 
-- [ADR-0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md), [ADR-0019](0019-verifikasi-tim-dan-mitra-terlatih.md), [ADR-0022](0022-tersedia-berarti-bisa-dipakai.md), [ADR-0031](0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0035](0035-peran-dan-panel-verifikator-di-web-yang-sama.md), [ADR-0036](0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md), [ADR-0038](0038-log-audit-perubahan-data.md), [ADR-0046](0046-dasbor-akun-di-route-group-dengan-ringkasan-per-peran.md), [ADR-0049](0049-lapisan-kandidat-openstreetmap-belum-ada-data.md)
+- [ADR-0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md), [ADR-0019](0019-verifikasi-tim-dan-mitra-terlatih.md), [ADR-0022](0022-tersedia-berarti-bisa-dipakai.md), [ADR-0031](0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0035](0035-peran-dan-panel-verifikator-di-web-yang-sama.md), [ADR-0036](0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md), [ADR-0038](0038-log-audit-perubahan-data.md), [ADR-0046](0046-dasbor-akun-di-route-group-dengan-ringkasan-per-peran.md), [ADR-0049](0049-lapisan-kandidat-openstreetmap-belum-ada-data.md), [ADR-0050](0050-asisten-rute-publik.md)
 - [PRD](../product/prd.md), FR-35 sampai FR-37
 - [Panduan Verifikasi](../operations/panduan-verifikasi.md), bagian 2 dan 5
