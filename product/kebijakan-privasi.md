@@ -5,7 +5,7 @@
 | Status | Draf, belum ditinjau |
 | Versi | 2026-11-26 |
 | Pemilik | Tim AksesBogor |
-| Issue | #51, #55, #59, #62, #89, #99, #106, #124 |
+| Issue | #51, #55, #59, #62, #89, #99, #106, #124, #130 |
 
 Dokumen ini adalah sumber teks halaman `/kebijakan-privasi` di akses-bogor-web. Pengguna menyetujui versi yang tertulis di atas saat Lengkapi Akun (FR-11), dan versi itu disimpan bersama waktu persetujuannya ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)). Setiap perubahan isi menaikkan versi, dan pengguna diminta menyetujui ulang saat masuk berikutnya.
 
@@ -22,6 +22,7 @@ Bagian ini untuk tim dan tidak tampil di web.
 - [x] Rilis versi 2026-11-23 (web di Evergarden, [ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md), dan Lokasi saya di Peta): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian. Bila API lebih dulu, semua akun diminta menyetujui ulang di web lama, yang masih mengirim versi 2026-11-22 dan ditolak dengan 409.
 - [ ] Rilis versi 2026-11-24 (asisten Tanya rute untuk semua pengunjung, [ADR-0050](../decisions/0050-asisten-rute-publik.md)): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian, lalu `ROUTE_ASSISTANT_ENABLED=true` di API. Versi 2026-11-23 sudah dipakai, jadi versi ini bertanggal 2026-11-24 walaupun dirilis lebih awal.
 - [ ] Rilis versi 2026-11-26 (Agen AI menggantikan Bantu memetakan dan Tanya rute, [ADR-0054](../decisions/0054-agen-ai-satu-pintu.md)): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian.
+- [ ] Rute dari data OpenStreetMap ([ADR-0055](../decisions/0055-rute-pejalan-kaki-aksesibel-dengan-valhalla.md)) ikut versi 2026-11-26 yang sama, karena versi itu belum dirilis. Bila 2026-11-26 sudah dirilis sebelum teks ini masuk, naikkan versinya ke 2026-11-27 di dokumen ini, web, dan API. `ACCESSIBLE_ROUTER_URL` di API baru diisi setelah web dengan teks ini dirilis.
 
 ## Riwayat Versi
 
@@ -36,7 +37,7 @@ Bagian ini untuk tim dan tidak tampil di web. Setiap versi baru meminta persetuj
 | 2026-11-22 | Bantu memetakan dengan Anthropic (Claude API), dan rute jalan kaki lewat Mapbox untuk kartu rute | #89 |
 | 2026-11-23 | Situs web pindah dari Vercel ke server kami di Oracle Cloud (Batam); Cloudflare mem-proxy situs web dan API; Tampilkan lokasi saya di Peta | #99 |
 | 2026-11-24 | Tanya rute: asisten rute untuk semua pengunjung, juga tanpa akun, dengan Anthropic (Claude API), titik awal yang hanya dipakai server kami dan Mapbox, dan jatah pertanyaan per alamat IP | #106 |
-| 2026-11-26 | Bantu memetakan dan Tanya rute menjadi satu Agen AI; percakapan disimpan di tab browser sampai tab ditutup | #124 |
+| 2026-11-26 | Bantu memetakan dan Tanya rute menjadi satu Agen AI; percakapan disimpan di tab browser sampai tab ditutup; rute kartu rute dihitung di server kami dengan data OpenStreetMap, dan Mapbox hanya bila rute itu belum tersedia | #124, #130 |
 
 ## Teks Kebijakan
 
@@ -54,7 +55,7 @@ Anda bisa menjelajahi AksesBogor tanpa akun. Kami hanya mengumpulkan data pribad
 - **Lokasi saya di Peta**: lokasi perangkat hanya dibaca setelah Anda menekan "Tampilkan lokasi saya". Bila izin lokasi belum diberikan, kami menjelaskan dulu kegunaannya, lalu browser meminta izin Anda. Lokasi itu hanya dipakai di browser Anda untuk menggeser peta dan menaruh titik di posisi Anda. Lokasi tidak dikirim ke server AksesBogor atau ke Anthropic, dan tidak disimpan. Bila Anda berada di luar wilayah peta Kota Bogor, peta tidak digeser. Seperti setiap tampilan peta, Mapbox menerima area peta yang dimuat, jadi setelah peta digeser, Mapbox menerima area di sekitar lokasi Anda.
 - **Pencarian tempat**: kata kunci yang Anda ketik di pencarian formulir laporan diteruskan ke Mapbox lewat server kami, tanpa alamat IP Anda, dan tidak kami simpan.
 - **Agen AI**: siapa pun, juga tanpa akun, bisa bertanya kepada Agen AI tentang tempat, rute, dan aksesibilitas di Kota Bogor. Bila Anda masuk, Agen AI juga membantu mencari tempat yang perlu dipetakan. Pertanyaan Anda, beserta paling banyak 6 giliran sebelumnya dalam percakapan itu, dikirim lewat server kami ke Anthropic (Claude API) untuk dijawab. Bersama pertanyaan ikut data tempat yang Anda pilih dan hasil pencarian agen di data AksesBogor, OpenStreetMap, dan basis pengetahuan.
-  - Titik awal: lokasi perangkat hanya dibaca setelah kami menjelaskan kegunaannya dan browser meminta izin Anda; Anda juga bisa memilih titik di peta. Titik itu dikirim ke server kami bersama pertanyaan dan saat kartu rute dimuat, dibulatkan sampai sekitar 11 m, dan hanya dipakai untuk mencari tempat terdekat dan, lewat Mapbox, menghitung rute jalan kaki untuk kartu rute.
+  - Titik awal: lokasi perangkat hanya dibaca setelah kami menjelaskan kegunaannya dan browser meminta izin Anda; Anda juga bisa memilih titik di peta. Titik itu dikirim ke server kami bersama pertanyaan dan saat kartu rute dimuat, dibulatkan sampai sekitar 11 m, dan hanya dipakai untuk mencari tempat terdekat dan menghitung rute untuk kartu rute. Rute dihitung di server kami sendiri dengan data OpenStreetMap; bila rute itu belum tersedia, rute jalan kaki dihitung lewat Mapbox.
   - Anthropic tidak menerima titik awal, rute, email, nama, atau alamat IP Anda. Agen hanya menerima jarak garis lurus dari titik awal ke paling banyak 5 tempat, dibulatkan ke 100 m.
   - Untuk membatasi pemakaian, server kami menghitung jumlah pertanyaan per akun, atau per alamat IP bila Anda tidak masuk. Hitungan itu hanya ada di memori server sampai hari berganti.
   - Percakapan disimpan di browser Anda, hanya di tab itu, supaya tidak hilang saat halaman dimuat ulang atau saat Anda kembali dari tautan di percakapan. Percakapan hilang saat tab ditutup atau Anda memilih "Percakapan baru". Bila Anda memakai perangkat bersama, pilih "Percakapan baru" setelah selesai. Titik awal tidak ikut disimpan.
@@ -84,14 +85,14 @@ Dasar pemrosesannya adalah persetujuan yang Anda berikan saat melengkapi akun. A
   - Cloudflare (semua halaman dan permintaan ke API AksesBogor melewati jaringan Cloudflare, lalu diteruskan lewat Cloudflare Tunnel ke server kami. Cloudflare menerima alamat IP Anda dan data tentang permintaan, mis. halaman yang dibuka dan waktunya. Cloudflare juga menyimpan foto laporan di Cloudflare R2). Menurut [Kebijakan Privasi Cloudflare](https://www.cloudflare.com/privacypolicy/) dan [perjanjian pemrosesan datanya](https://www.cloudflare.com/cloudflare-customer-dpa/), Cloudflare memproses data ini atas nama kami dan tidak boleh memakainya untuk pemasaran atau iklan.
   - Resend (mengirim email kode masuk dan pemberitahuan).
   - Google (hanya bila Anda memakai tombol "Masuk dengan Google"; halaman Masuk memuat tombol dari Google).
-  - Mapbox (menampilkan peta, mencari tempat, dan menghitung rute jalan kaki untuk kartu rute di Agen AI; menerima alamat IP dan area peta yang dilihat dari browser Anda, termasuk area di sekitar lokasi Anda setelah "Tampilkan lokasi saya", serta kata kunci pencarian dan titik awal rute yang sudah dibulatkan dari server kami).
+  - Mapbox (menampilkan peta, mencari tempat, dan menghitung rute jalan kaki untuk kartu rute di Agen AI bila rute dari data OpenStreetMap di server kami belum tersedia; menerima alamat IP dan area peta yang dilihat dari browser Anda, termasuk area di sekitar lokasi Anda setelah "Tampilkan lokasi saya", serta kata kunci pencarian dan, untuk rute yang dihitung Mapbox, titik awal rute yang sudah dibulatkan dari server kami).
   - Anthropic (menjawab pertanyaan di Agen AI lewat Claude API; menerima pertanyaan, giliran sebelumnya, data tempat yang dipilih, hasil pencarian agen, dan jarak garis lurus yang dibulatkan ke tempat terdekat, tanpa posisi, email, nama, atau alamat IP Anda, juga bila Anda tidak punya akun). Menurut [Ketentuan Komersial Anthropic](https://www.anthropic.com/legal/commercial-terms), Anthropic tidak boleh memakai data ini untuk melatih model.
 
 Kami tidak menjual data pribadi dan tidak membagikannya untuk iklan.
 
 ### Data yang diproses di luar Indonesia
 
-Resend, Google, Mapbox, Cloudflare, dan Anthropic bisa memproses data di luar Indonesia, termasuk di Amerika Serikat. Anthropic menyimpan data di Amerika Serikat dan bisa menjalankan modelnya di negara lain. Situs web, API, database, dan log server kami berjalan di Batam, Indonesia, tetapi menurut kebijakan privasinya, Oracle bisa memproses data di layanannya di negara lain bila diperlukan untuk menjalankan layanan itu. Kami hanya mengirim data yang dibutuhkan layanan itu: email dan isi email ke Resend, lalu lintas situs web dan API lewat Cloudflare, alamat IP, area peta, kata kunci pencarian, dan titik awal rute ke Mapbox, pertanyaan Agen AI ke Anthropic, dan foto laporan ke Cloudflare R2.
+Resend, Google, Mapbox, Cloudflare, dan Anthropic bisa memproses data di luar Indonesia, termasuk di Amerika Serikat. Anthropic menyimpan data di Amerika Serikat dan bisa menjalankan modelnya di negara lain. Situs web, API, database, dan log server kami berjalan di Batam, Indonesia, tetapi menurut kebijakan privasinya, Oracle bisa memproses data di layanannya di negara lain bila diperlukan untuk menjalankan layanan itu. Kami hanya mengirim data yang dibutuhkan layanan itu: email dan isi email ke Resend, lalu lintas situs web dan API lewat Cloudflare, alamat IP, area peta, kata kunci pencarian, dan titik awal rute yang dihitung Mapbox ke Mapbox, pertanyaan Agen AI ke Anthropic, dan foto laporan ke Cloudflare R2.
 
 ### Berapa lama data disimpan
 
