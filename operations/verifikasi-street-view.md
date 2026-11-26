@@ -4,7 +4,7 @@
 | --- | --- |
 | Status | Draft |
 | Tanggal | 2026-11-27 |
-| Berlaku untuk | Memeriksa data yang belum diperiksa dengan bukti Street View, lalu menerapkan atau membatalkan hasilnya di production ([ADR-0057](../decisions/0057-verifikasi-dengan-bukti-street-view.md)) |
+| Berlaku untuk | Memeriksa data yang belum diperiksa dengan bukti Street View, lalu menerapkan atau membatalkan hasilnya di production ([ADR-0057](../decisions/0057-verifikasi-dengan-bukti-street-view.md), label publik [ADR-0058](../decisions/0058-tempat-street-view-tampil-sebagai-terverifikasi-tim.md)) |
 | Issue | #140 |
 
 Ada dua host:
@@ -29,7 +29,7 @@ api() { sudo -u aksesbogor -H sh -c "cd /srv/akses-bogor/current && COREPACK_ENA
   sudo -u postgres psql -p 5433 aksesbogor -Atc "SELECT column_name FROM information_schema.columns WHERE table_name = 'places' AND column_name IN ('verification_source', 'street_view_image_date')"
   ```
 
-- [ ] PR web ADR-0057 sudah ter-deploy. Web lama menulis "Diverifikasi" untuk tempat Street View, jadi **jangan menerapkan apa pun sebelum web baru tayang**.
+- [ ] Web tidak butuh versi khusus: tempat Street View tampil dengan label tim biasa ([ADR-0058](../decisions/0058-tempat-street-view-tampil-sebagai-terverifikasi-tim.md)).
 - [ ] Cadangan lewat timer biasa: `sudo systemctl start akses-bogor-backup`, lalu `journalctl -u akses-bogor-backup -n 5`.
 - [ ] Cadangan tambahan yang mudah ditemukan, khusus putaran ini:
 
@@ -181,7 +181,8 @@ Semua perubahan database ada di satu transaksi. Foto diunggah ke bucket publik R
   sudo -u postgres psql -p 5433 aksesbogor -c "SELECT count(*) FILTER (WHERE tags ? 'aksesbogor:google_maps') AS google, count(*) FILTER (WHERE tags ? 'aksesbogor:osm_aksesibilitas') AS osm, count(*) FILTER (WHERE tags ? 'aksesbogor:disembunyikan') AS disembunyikan FROM osm_places"
   ```
 
-- [ ] Buka Detail satu tempat yang terjawab: tertulis "Diverifikasi dari Street View · gambar" diikuti bulan dan tahun gambarnya, dan foto pintu masuk berketerangan "Sumber: Google Street View, gambar …".
+- [ ] Buka Detail satu tempat yang terjawab: tertulis "Terakhir diverifikasi" dengan tanggal awal bulan gambarnya, sama seperti tempat lain (ADR-0058), dan foto pintu masuk berketerangan "Sumber: Google Street View, gambar …".
+- [ ] Buka tempat itu di Kelola tempat: asalnya "Dari Street View", dan riwayatnya menyebut "Dibuat dari bukti Street View".
 - [ ] Buka kartu kandidat yang salinannya disembunyikan di Peta: bagian "Petunjuk dari sumber lain" tidak lagi menampilkan salinan Google Maps atau OSM.
 - [ ] Jalankan langkah 2 lagi. Jumlah `petunjuk_google`, `petunjuk_osm`, dan `tempat_admin` turun sebanyak yang diterapkan. Jumlah `laporan` tidak berubah.
 
