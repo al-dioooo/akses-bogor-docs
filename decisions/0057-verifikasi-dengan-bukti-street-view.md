@@ -1,6 +1,6 @@
 # ADR-0057: Verifikasi dengan Bukti Street View
 
-- Status: Accepted
+- Status: Accepted, sebagian di-supersede oleh [ADR-0058](0058-tempat-street-view-tampil-sebagai-terverifikasi-tim.md) (label publik)
 - Tanggal: 2026-11-27
 - Pengambil keputusan: pemilik produk
 - Issue: #140
