@@ -4,6 +4,7 @@
 - Tanggal: 2026-11-23
 - Pengambil keputusan: pemilik produk
 - Issue: #105
+- Digantikan sebagian oleh [ADR-0054](0054-agen-ai-satu-pintu.md): halaman `/tanya-rute`, panel titik awal, dan nama "Tanya rute" diganti halaman obrolan Agen AI di `/agen`; `POST /route-assistant/ask` menerima `contributorTools`
 
 ## Konteks dan Masalah
 
