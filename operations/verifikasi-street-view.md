@@ -9,19 +9,20 @@
 
 Ada dua host:
 
-- **Evergarden**, server production. Database dan R2 hanya disentuh di sini, lewat skrip API.
+- **Server produksi (fatir-mitya)**. Database dan R2 hanya disentuh di sini, lewat skrip API. Production pindah ke sini dari Evergarden pada 2026-11-26, dengan tata letak yang sama: `/srv/akses-bogor/current`, `/etc/akses-bogor/api.env`, user `aksesbogor`, dan timer `akses-bogor-backup`.
 - **Host pekerja**, tempat gambar Street View diambil: host dengan gosom/google-maps-scraper dan Chrome untuk Playwright. Pada 2026-11-27 itu YoRHa Garden. Host ini tidak punya akses ke database production.
 
-Kerjakan dari atas ke bawah. Nilai dalam `<…>` diisi sendiri. Perintah `sudo` di Evergarden dijalankan admin Evergarden. Satu putaran diberi nama `<putaran>`, mis. `2026-12-01`, dan dipakai sebagai nama folder dan isian `round` di manifest.
+Kerjakan dari atas ke bawah. Nilai dalam `<…>` diisi sendiri. Perintah `sudo` di server produksi (fatir-mitya) dijalankan admin server itu. Satu putaran diberi nama `<putaran>`, mis. `2026-12-01`, dan dipakai sebagai nama folder dan isian `round` di manifest.
 
-Di Evergarden, semua perintah skrip memakai bentuk yang sama dengan skrip API lain. Buat dulu fungsi ini di shell admin:
+Di server produksi (fatir-mitya), semua perintah skrip memakai bentuk yang sama dengan skrip API lain. Buat dulu fungsi ini di shell admin:
 
 ```bash
 api() { sudo -u aksesbogor -H sh -c "cd /srv/akses-bogor/current && COREPACK_ENABLE_DOWNLOAD_PROMPT=0 corepack pnpm exec tsx --env-file=/etc/akses-bogor/api.env $*"; }
 ```
 
-## 1. Sebelum Mulai (Evergarden)
+## 1. Sebelum Mulai (Server Produksi)
 
+- [ ] Port PostgreSQL. Perintah `psql` dan `pg_dump` di runbook ini memakai `-p 5433` seperti di Evergarden, dan port di fatir-mitya belum dipastikan. Periksa dulu dengan `pg_lsclusters` atau `sudo -u postgres psql -Atc 'SHOW port'`, lalu ganti `5433` di setiap perintah bila berbeda.
 - [ ] PR API ADR-0057 sudah di `release` dan ter-deploy: `ls /srv/akses-bogor/current/scripts/verifikasi/` menampilkan `daftar.ts` dan `street-view.ts`, dan migrasi `0011` sudah jalan:
 
   ```bash
@@ -37,7 +38,7 @@ api() { sudo -u aksesbogor -H sh -c "cd /srv/akses-bogor/current && COREPACK_ENA
   sudo -u postgres pg_dump -p 5433 -Fc aksesbogor -f /var/backups/akses-bogor/street-view/sebelum-<putaran>.dump
   ```
 
-## 2. Daftar Data yang Belum Diperiksa (Evergarden)
+## 2. Daftar Data yang Belum Diperiksa (Server Produksi)
 
 ```bash
 api scripts/verifikasi/daftar.ts > ~/verifikasi-daftar-<putaran>.csv
@@ -56,7 +57,7 @@ Skrip berjalan di transaksi read-only, jadi tidak ada yang berubah. CSV masuk ke
 
 Baris laporan hanya berisi id, jenis laporan, dan status: tanpa pelapor, nama tempat, titik, atau isian teks. Laporan tidak pernah diproses alat ini; laporan tetap diperiksa verifikator lewat antrean biasa.
 
-Salin CSV ke host pekerja, mis. `scp ~/verifikasi-daftar-<putaran>.csv <host-pekerja>:`. Hapus salinannya di Evergarden setelah tersalin.
+Salin CSV ke host pekerja, mis. `scp ~/verifikasi-daftar-<putaran>.csv <host-pekerja>:`. Hapus salinannya di server produksi (fatir-mitya) setelah tersalin.
 
 ## 3. Ambil Gambar dan Nilai (Host Pekerja)
 
@@ -131,13 +132,13 @@ Alat menolak manifest yang melanggar aturan ADR-0057, sebelum membuka transaksi:
 
 Bulan gambar tempat diambil dari gambar terlama yang dipasang.
 
-## 4. Pindahkan ke Evergarden
+## 4. Pindahkan ke Server Produksi
 
 ```bash
-rsync -a <folder-putaran>/ <evergarden>:street-view-<putaran>/
+rsync -a <folder-putaran>/ <fatir-mitya>:street-view-<putaran>/
 ```
 
-Lalu di Evergarden:
+Lalu di server produksi (fatir-mitya):
 
 ```bash
 sudo install -d -m 0750 -o aksesbogor -g aksesbogor /srv/akses-bogor/data/street-view
@@ -145,7 +146,7 @@ sudo mv ~/street-view-<putaran> /srv/akses-bogor/data/street-view/<putaran>
 sudo chown -R aksesbogor:aksesbogor /srv/akses-bogor/data/street-view/<putaran>
 ```
 
-## 5. Dry Run (Evergarden)
+## 5. Dry Run (Server Produksi)
 
 ```bash
 api scripts/verifikasi/street-view.ts /srv/akses-bogor/data/street-view/<putaran>/manifest.json --dry-run 2>&1 | tee ~/street-view-dry-run-<putaran>.txt
@@ -161,7 +162,7 @@ Dry run membaca dan memproses semua gambar, lalu mencetak setiap perubahan tanpa
 
 Kandidat OSM hanya disembunyikan bila pemilik produk sudah memutuskannya: tambahkan `--sembunyikan-kandidat` di langkah ini dan langkah 6. Tanpa opsi itu, kandidat tetap tampil di Peta sebagai "Belum ada data", tetapi tanpa petunjuk.
 
-## 6. Terapkan (Evergarden)
+## 6. Terapkan (Server Produksi)
 
 Perintah yang sama tanpa `--dry-run`:
 
