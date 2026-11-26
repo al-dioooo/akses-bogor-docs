@@ -32,11 +32,11 @@ Opsi terpilih: "Label tim biasa", sesuai keputusan pemilik produk.
 
 - Kartu Jelajahi, Detail lokasi, kartu Peta, gambar berbagi, deskripsi halaman, dan kartu serta sumber Agen AI memakai teks dan ikon yang sama dengan tempat yang diverifikasi tim, mis. "Terakhir diverifikasi 1 Januari 2026" di Detail.
 - Tanggalnya adalah `last_verified_at`, yang untuk tempat Street View diisi awal bulan gambarnya (ADR-0057). Tanda "Perlu dicek ulang" tetap muncul 12 bulan setelah tanggal itu.
-- Keterangan foto tetap "Sumber: Google Street View, gambar <bulan tahun>". Keterangan ini jejak asal data yang jujur, dan atribusi yang dibutuhkan Google.
+- Keterangan foto tetap "Sumber: Google Street View, gambar Januari 2026". Keterangan ini jejak asal data yang jujur, dan atribusi yang dibutuhkan Google.
 
 ### Agen AI
 
-- Agen dan asisten rute memperlakukan tempat Street View seperti tempat terverifikasi lain, dengan sumber "data AksesBogor yang diperiksa tim, diverifikasi <tanggal>". Alat agen tidak lagi menerima sumber verifikasi atau bulan gambar.
+- Agen dan asisten rute memperlakukan tempat Street View seperti tempat terverifikasi lain, dengan sumber "data AksesBogor yang diperiksa tim, diverifikasi 1 Januari 2026". Alat agen tidak lagi menerima sumber verifikasi atau bulan gambar.
 - Agen tidak pernah mengatakan ada orang yang datang atau memeriksa di lokasi, untuk tempat mana pun. Bila pengunjung bertanya bagaimana data diperiksa, agen menjawab bahwa tim memeriksanya dari foto.
 
 ### Yang tetap
