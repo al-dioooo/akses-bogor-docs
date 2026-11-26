@@ -38,7 +38,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0003](0003-github-issues-dan-alur-kontribusi.md) | GitHub Issues sebagai ticket tracker dan alur kontribusi repo docs | Accepted | 2026-10-21 |
 | [0004](0004-empat-kategori-lokasi-untuk-mvp.md) | Empat kategori lokasi untuk MVP | Accepted | 2026-10-21 |
 | [0005](0005-empat-fasilitas-aksesibilitas.md) | Empat fasilitas aksesibilitas dicatat sebagai tersedia atau tidak | Superseded oleh 0017 | 2026-10-21 |
-| [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted | 2026-10-21 |
+| [0006](0006-laporan-warga-diverifikasi-sebelum-tayang.md) | Laporan warga lewat formulir tiga langkah, diverifikasi sebelum tayang | Accepted, sebagian di-supersede oleh 0057 | 2026-10-21 |
 | [0007](0007-fondasi-visual-dari-desain-figma.md) | Fondasi visual mengikuti desain Figma, kecuali warna status | Superseded oleh 0009 | 2026-10-21 |
 | [0008](0008-peta-leaflet-dan-openstreetmap.md) | Peta interaktif dengan Leaflet dan tile berbasis OpenStreetMap | Superseded oleh 0016 | 2026-10-21 |
 | [0009](0009-design-system-kaca-ungu-inklusi.md) | Design system kaca dengan palet Ungu Inklusi | Superseded oleh 0027 | 2026-10-21 |
@@ -84,8 +84,10 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0049](0049-lapisan-kandidat-openstreetmap-belum-ada-data.md) | Tempat OpenStreetMap tampil di Peta sebagai kandidat "Belum ada data" yang terpisah, tanpa status, dengan atribusi ODbL dan ajakan melapor | Accepted | 2026-11-22 |
 | [0050](0050-asisten-rute-publik.md) | Asisten rute publik untuk semua pengunjung, dengan kartu rute dari aplikasi dan jatah per IP | Accepted, sebagian di-supersede oleh 0054 | 2026-11-23 |
 | [0051](0051-kelola-tempat-oleh-admin-dan-terbit-langsung.md) | Admin mengelola tempat dan boleh menerbitkan laporannya sendiri, dengan label publik "Diterbitkan langsung oleh admin" | Accepted | 2026-11-23 |
-| [0052](0052-petunjuk-aksesibilitas-dari-mapbox-dan-google.md) | Petunjuk aksesibilitas Mapbox dan Google tampil langsung dengan label "belum diperiksa tim", tanpa disimpan, tanpa diberikan ke AI, dan bisa dimatikan | Accepted | 2026-11-23 |
+| [0052](0052-petunjuk-aksesibilitas-dari-mapbox-dan-google.md) | Petunjuk aksesibilitas Mapbox dan Google tampil langsung dengan label "belum diperiksa tim", tanpa disimpan, tanpa diberikan ke AI, dan bisa dimatikan | Accepted, sebagian di-supersede oleh 0057 | 2026-11-23 |
 | [0053](0053-peta-tematik-dan-batas-kota.md) | Peta menampilkan batas Kota Bogor, ikon kategori di setiap marker, dan pemilih peta tematik per kecamatan yang selalu menyebut sumber datanya | Accepted | 2026-11-26 |
 | [0054](0054-agen-ai-satu-pintu.md) | Satu Agen AI di `/agen` untuk semua pengunjung, dengan alat kontributor bagi akun yang sudah masuk | Accepted | 2026-11-26 |
 | [0055](0055-rute-pejalan-kaki-aksesibel-dengan-valhalla.md) | Rute pejalan kaki dari data OpenStreetMap lewat Valhalla di server sendiri, dengan profil kursi roda dan peringatan kelengkapan data | Accepted | 2026-11-26 |
 | [0056](0056-impor-atribut-aksesibilitas-google-maps-lewat-apify.md) | Atribut aksesibilitas Google Maps untuk kandidat OSM diambil lewat aktor Apify, dicocokkan per titik, dan disimpan sebagai salinan pihak ketiga | Accepted | 2026-11-26 |
+| [0057](0057-verifikasi-dengan-bukti-street-view.md) | Data yang belum diperiksa diverifikasi dari bukti Street View dengan label "Diverifikasi dari Street View", dan yang tidak terjawab disembunyikan tanpa dihapus | Accepted, sebagian di-supersede oleh 0058 | 2026-11-27 |
+| [0058](0058-tempat-street-view-tampil-sebagai-terverifikasi-tim.md) | Tempat dari Street View tampil di publik dan di Agen AI sebagai terverifikasi tim; asal datanya tetap di database, log audit, Kelola tempat, dan keterangan foto | Accepted | 2026-11-27 |

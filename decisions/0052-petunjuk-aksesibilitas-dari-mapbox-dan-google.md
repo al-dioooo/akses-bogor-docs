@@ -1,6 +1,6 @@
 # ADR-0052: Petunjuk Aksesibilitas dari Mapbox dan Google
 
-- Status: Accepted
+- Status: Accepted, sebagian di-supersede oleh [ADR-0057](0057-verifikasi-dengan-bukti-street-view.md)
 - Tanggal: 2026-11-23
 - Pengambil keputusan: pemilik produk
 - Issue: #113
