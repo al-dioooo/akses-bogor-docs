@@ -51,7 +51,7 @@ Skrip berjalan di transaksi read-only, jadi tidak ada yang berubah. CSV masuk ke
 | `id` | Kandidat dan petunjuk: `node/123`, `way/456`. Tempat dan laporan: UUID |
 | `status` | Petunjuk: `belum_diperiksa_tim`. Tempat: status aksesibilitas. Laporan: `menunggu` atau `klarifikasi`. Kandidat: `tayang` |
 | `nama`, `kategori`, `kecamatan`, `lat`, `lng` | Dari tempat atau kandidat. Kosong untuk laporan |
-| `klaim` | Isi petunjuk (mis. opsi aksesibilitas Google atau `wheelchair=yes`), jawaban fasilitas tempat admin, atau tag `wheelchair` kandidat |
+| `klaim` | Isi petunjuk (mis. opsi aksesibilitas Google atau `wheelchair=yes`), jawaban fasilitas tempat admin, jenis laporan (`baru`, `perubahan`, `kekurangan`), atau tag `wheelchair` kandidat |
 | `tayang_di_peta` | Kandidat dan petunjuk: apakah kandidatnya sedang tampil sebagai "Belum ada data" |
 
 Baris laporan hanya berisi id, jenis laporan, dan status: tanpa pelapor, nama tempat, titik, atau isian teks. Laporan tidak pernah diproses alat ini; laporan tetap diperiksa verifikator lewat antrean biasa.
@@ -153,8 +153,8 @@ api scripts/verifikasi/street-view.ts /srv/akses-bogor/data/street-view/<putaran
 
 Dry run membaca dan memproses semua gambar, lalu mencetak setiap perubahan tanpa menulis apa pun ke database atau R2. Periksa:
 
-- [ ] Tidak ada baris `galat`. Bila ada, perbaiki manifest dan ulangi.
-- [ ] Setiap `buat tempat` dan `ubah tempat` menyebut nama, kategori, kecamatan, status, jawaban fasilitas, dan foto yang sesuai penilaian.
+- [ ] Skrip tidak berhenti dengan `Manifest tidak valid:`. Bila berhenti, daftar di bawahnya menyebut masalah setiap data (mis. kandidat yang tidak ada, titik di luar Kota Bogor, atau aturan penilaian yang dilanggar), dan tidak ada yang ditulis. Perbaiki manifest dan ulangi.
+- [ ] Setiap `buat tempat` dan `ubah tempat` menyebut nama, kategori, kecamatan, status, jawaban fasilitas, dan bulan gambar yang sesuai penilaian, diikuti `akan unggah foto` untuk setiap gambar.
 - [ ] `lewati` hanya untuk tempat yang sudah diverifikasi lewat laporan, dan untuk yang sudah diterapkan sebelumnya tanpa perubahan.
 - [ ] `sembunyikan salinan` dan `turunkan tempat` sesuai daftar data yang tidak terjawab.
 - [ ] Ringkasan di akhir: jumlah tempat dibuat, diubah, diturunkan, salinan ditandai, dan salinan disembunyikan. Baris `laporan: tidak disentuh` selalu ada.
