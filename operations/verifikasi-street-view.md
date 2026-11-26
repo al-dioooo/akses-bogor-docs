@@ -180,7 +180,7 @@ Semua perubahan database ada di satu transaksi. Foto diunggah ke bucket publik R
   sudo -u postgres psql -p 5433 aksesbogor -c "SELECT count(*) FILTER (WHERE tags ? 'aksesbogor:google_maps') AS google, count(*) FILTER (WHERE tags ? 'aksesbogor:osm_aksesibilitas') AS osm, count(*) FILTER (WHERE tags ? 'aksesbogor:disembunyikan') AS disembunyikan FROM osm_places"
   ```
 
-- [ ] Buka Detail satu tempat yang terjawab: tertulis "Diverifikasi dari Street View · gambar <bulan tahun>", dan foto pintu masuk berketerangan "Sumber: Google Street View, gambar …".
+- [ ] Buka Detail satu tempat yang terjawab: tertulis "Diverifikasi dari Street View · gambar" diikuti bulan dan tahun gambarnya, dan foto pintu masuk berketerangan "Sumber: Google Street View, gambar …".
 - [ ] Buka kartu kandidat yang salinannya disembunyikan di Peta: bagian "Petunjuk dari sumber lain" tidak lagi menampilkan salinan Google Maps atau OSM.
 - [ ] Jalankan langkah 2 lagi. Jumlah `petunjuk_google`, `petunjuk_osm`, dan `tempat_admin` turun sebanyak yang diterapkan. Jumlah `laporan` tidak berubah.
 
