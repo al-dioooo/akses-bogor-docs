@@ -1,6 +1,6 @@
 # ADR-0006: Laporan Warga Lewat Formulir Tiga Langkah, Diverifikasi Sebelum Tayang
 
-- Status: Accepted
+- Status: Accepted, sebagian di-supersede oleh [ADR-0057](0057-verifikasi-dengan-bukti-street-view.md)
 - Tanggal: 2026-10-21
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #5
