@@ -200,6 +200,8 @@ Target *(usulan)* tiga bulan setelah beta dibuka:
 | Median waktu dari laporan dikirim sampai diputuskan | ≤ 3 hari kerja |
 | Proporsi laporan yang diterbitkan | ≥ 70% |
 | Keberhasilan tugas "temukan tempat X dan sebutkan fasilitasnya" dalam uji kegunaan dengan minimal lima pengguna difabel | ≥ 80% |
+| Skor SUS (System Usability Scale) dari peserta uji kegunaan yang sama | ≥ 75 |
+| Rata-rata SEQ (Single Ease Question, skala 1–7) per tugas | ≥ 5,5 |
 | Temuan WCAG level A atau AA yang kritis saat audit sebelum rilis | 0 |
 
 ## 11. Tahapan Rilis
