@@ -63,3 +63,104 @@ Satu jenis per catatan. Email yang meminta dua hal, mis. salinan data sekaligus 
 Skrip mencetak nomor permintaan, id akun, dan tenggatnya. Bila skrip menjawab "Tidak ada akun dengan email atau id itu", catat tanpa `--akun` lalu pakai templat "tidak ada akun". Pakai nomor itu di subjek setiap balasan: `[Permintaan #<nomor>]`.
 
 Skrip lain menolak nomor permintaan yang sudah ditutup, untuk akun lain, atau berjenis lain, supaya salah ketik nomor tidak menjalankan tindakan untuk orang lain.
+
+## 5. Menjalankan Permintaan
+
+Semua skrip di bawah mencatat admin yang menjalankannya dan nomor permintaannya di log audit, dan hanya mencetak id akun serta jumlah.
+
+### 5.1 Salinan data
+
+```bash
+hak scripts/hak-subjek/ekspor.ts --akun <id akun> --permintaan <nomor> --oleh <email admin> --keluar /tmp/ekspor-<nomor>.json
+```
+
+Berkasnya JSON baru bermode 600 milik user `aksesbogor`; berkas yang sudah ada tidak ditimpa. Isinya akun (termasuk waktu dan versi persetujuan), tautan Google, sesi tanpa kuncinya, waktu kode masuk, laporan dengan isian, titik, foto, dan klarifikasinya, foto yang belum dipasang, antrean email status laporan, permintaan hak subjek data, log audit tentang akun dan laporannya, dan, untuk anggota tim, keputusan dan pertanyaan klarifikasi yang pernah dibuat. Setiap bagian dijelaskan di `catatan` di awal berkas.
+
+Yang sengaja tidak ikut: kunci sesi dan hash kode masuk (bisa dipakai untuk masuk), catatan internal verifikator ([ADR-0036](../decisions/0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md)), dan siapa anggota tim yang memproses laporan (data pribadi orang lain). Berkas foto juga tidak ikut. Bila pemilik akun memintanya, unduh foto laporannya dari R2 lewat id foto di berkas ekspor dan kirim dengan cara yang sama.
+
+Kirim berkasnya dengan langkah 6.
+
+### 5.2 Perbaikan data
+
+Mengganti email:
+
+```bash
+ hak scripts/hak-subjek/ganti-email.ts --akun <id akun> --email-baru <email baru> --permintaan <nomor> --oleh <email admin>
+```
+
+Skrip menolak email yang sudah dipakai akun lain. Semua sesi berakhir dan tautan Google dilepas, karena tautan itu dibuat untuk email lama. Pemilik akun lalu masuk dengan kode yang dikirim ke email baru. Setelah itu, masuk dengan Google untuk email baru menaut lagi seperti biasa, sesuai cara Better Auth menautkan akun. Masuk dengan Google untuk email lama membuat akun baru yang kosong.
+
+Data lain:
+
+- **Nama tampilan**: pemilik akun bisa mengubahnya sendiri di Akun Saya. Sebutkan itu di balasan.
+- **Laporan yang belum diperiksa**: isian laporan tidak bisa diubah, tetapi verifikator menetapkan nama, titik, deskripsi, dan jawaban fasilitas akhir saat menerbitkan. Teruskan koreksinya ke verifikator di diskusi tim tanpa menyebut email pelapor, balas pelapor bahwa koreksinya akan dipakai saat laporan diperiksa, lalu tutup permintaannya.
+- **Data tempat yang sudah terbit**: perbaiki lewat Kelola tempat ([ADR-0051](../decisions/0051-kelola-tempat-oleh-admin-dan-terbit-langsung.md)), atau minta pengirim memakai "Laporkan perubahan" di halaman tempat itu.
+
+### 5.3 Pembatasan pemrosesan
+
+Menahan laporan yang belum diperiksa:
+
+```bash
+hak scripts/hak-subjek/tahan.ts --akun <id akun> --permintaan <nomor> --oleh <email admin> --alasan "Permintaan pembatasan #<nomor>"
+```
+
+Laporan berstatus menunggu atau klarifikasi tidak muncul di antrean, verifikator yang membuka tautannya mendapat "Laporan ini sedang ditahan", dan laporan klarifikasi tidak ditutup otomatis saat tenggatnya lewat. Laporan yang dikirim setelah ini tidak ikut ditahan; jalankan lagi bila diminta. Alasan hanya dibaca tim dan tidak boleh berisi data pribadi.
+
+Melepas tahanan, bila pemilik akun memintanya. Catat dulu permintaan `pembatasan` baru, lalu:
+
+```bash
+hak scripts/hak-subjek/tahan.ts --akun <id akun> --permintaan <nomor baru> --oleh <email admin> --lepas
+```
+
+Laporan kembali ke antrean di posisi semula, dan tenggat klarifikasinya diperpanjang selama masa tahan.
+
+Berhenti mengirim email status laporan:
+
+```bash
+hak scripts/hak-subjek/email.ts --akun <id akun> --permintaan <nomor> --oleh <email admin> --mati
+```
+
+Email terbit, ditolak, dan klarifikasi tidak dikirim lagi ke akun itu, dan yang masih antre dibuang. Kode masuk tetap dikirim karena diminta pemilik akun sendiri. `--nyala` menyalakannya lagi, juga dengan nomor permintaan baru. Sampaikan di balasan bahwa pertanyaan klarifikasi tetap muncul di Akun Saya, dan laporan ditutup bila pertanyaannya tidak dijawab dalam 7 hari.
+
+### 5.4 Penghapusan dan penarikan persetujuan
+
+Pemilik akun bisa menghapus akunnya sendiri lewat Hapus akun di Akun Saya, dan mendapat email konfirmasi otomatis. Bila ia meminta kami yang menghapus, jalankan:
+
+```bash
+hak scripts/hak-subjek/hapus.ts --akun <id akun> --permintaan <nomor> --oleh <email admin>
+```
+
+Hasilnya sama dengan Hapus akun ([ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md)). Berkas foto yang ikut terhapus dibersihkan dari R2 oleh tugas berkala API dalam satu jam. Skrip tidak mengirim email; balasan "akun dihapus" dari kotak kontak menjadi konfirmasinya. Akun admin tidak bisa dihapus dengan skrip ini; turunkan perannya dulu dengan `scripts/peran.ts`.
+
+### 5.5 Keberatan dan pertanyaan
+
+Tidak ada skrip. Jawab isi emailnya, catat permintaannya, dan tutup setelah dijawab. Untuk keberatan atas keputusan otomatis, jelaskan bahwa status tempat dihitung dari jawaban fasilitas dan bukan penilaian tentang orang. Bila jawabannya butuh keputusan tim, bawa ke diskusi tim sebelum tenggat.
+
+## 6. Mengirim Salinan Data dengan Aman
+
+Salinan dikirim sebagai lampiran balasan ke email akun itu sendiri, tidak ke alamat lain walaupun diminta, lalu semua salinan lokal dihapus.
+
+1. Pindahkan berkas dari `/tmp` ke folder rumah admin:
+
+   ```bash
+   sudo install -m 600 -o "$USER" -g "$USER" /tmp/ekspor-<nomor>.json ~/ekspor-<nomor>.json && sudo rm /tmp/ekspor-<nomor>.json
+   ```
+
+2. Di laptop, salin lalu hapus dari server:
+
+   ```bash
+   scp <server>:ekspor-<nomor>.json ./aksesbogor-data-akun.json && ssh <server> rm ekspor-<nomor>.json
+   ```
+
+3. Buka berkasnya sekali dan pastikan `akun.email` sama dengan alamat yang akan dikirimi.
+4. Balas email permintaan dari <aliceevrasaldio@apps.ipb.ac.id> dengan templat "salinan data" dan berkas itu sebagai lampiran. Periksa kolom Kepada (langkah 3).
+5. Setelah terkirim, hapus `aksesbogor-data-akun.json` dari laptop dan kosongkan Sampah. Hapus juga email keluar itu dari Terkirim dan Sampah di kotak kontak setelah pemilik akun mengonfirmasi, atau paling lambat 7 hari kemudian.
+
+## 7. Menutup Permintaan
+
+```bash
+hak scripts/hak-subjek/catat.ts --selesai <nomor> --oleh <email admin>
+hak scripts/hak-subjek/catat.ts --tolak <nomor> --alasan "<alasan tanpa data pribadi>" --oleh <email admin>
+```
+
+Tutup setelah balasan "selesai" atau "ditolak" terkirim. Penolakan wajib menyebut alasannya, dan alasan yang sama ditulis di balasan.
