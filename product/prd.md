@@ -141,7 +141,7 @@ Prioritas memakai MoSCoW: Must (wajib untuk MVP), Should (sebaiknya ada), Could 
 | --- | --- |
 | Aksesibilitas | WCAG 2.2 AA sebagai syarat rilis, diuji di CI, di setiap PR, dengan pembaca layar setiap rilis, dan lewat audit sebelum alpha dan beta ([ADR-0021](../decisions/0021-wcag-22-aa-dan-pengujian-berlapis.md)): navigasi keyboard penuh, label dan landmark yang benar, cincin fokus terlihat, status selalu berupa teks + ikon + warna, peta punya alternatif daftar, tampilan tetap utuh di lebar 320 px dan zoom 200%, target sentuh minimal 44 × 44 px. |
 | Preferensi pengguna | `prefers-reduced-transparency` memakai mode Solid, `prefers-color-scheme: dark` memakai mode Dark, `prefers-reduced-motion` dihormati ([ADR-0009](../decisions/0009-design-system-kaca-ungu-inklusi.md)). |
-| Pengujian aksesibilitas | Uji dengan TalkBack dan VoiceOver, plus uji kegunaan bersama pengguna difabel sebelum beta. |
+| Pengujian aksesibilitas | Uji dengan TalkBack dan VoiceOver, plus uji kegunaan bersama pengguna difabel sebelum beta. Uji kegunaan mencatat keberhasilan tugas, SEQ setelah tiap tugas, dan SUS di akhir sesi (target di [bagian 10](#10-metrik-keberhasilan)). Kuesioner SEQ dan SUS bisa diisi semua peserta: versi Bahasa Indonesia yang terbaca pembaca layar atau dibacakan fasilitator untuk peserta netra, serta teks tertulis atau juru bahasa isyarat untuk peserta Tuli. |
 | Mobile dan performa | Dirancang mulai 360 px. *(usulan)* Largest Contentful Paint ≤ 2,5 detik di jaringan 4G pada ponsel kelas menengah; gambar dikompres dan dimuat bertahap; blur dimatikan pada perangkat lemah. |
 | PWA | Bisa dipasang ke layar utama. Halaman yang pernah dibuka tetap tampil saat offline (Could). |
 | Privasi dan keamanan | Sesuai UU No. 27 Tahun 2022: data pribadi minimal, HTTPS, metadata lokasi (EXIF) dihapus dari foto, dan akun bisa dihapus. |
@@ -200,6 +200,8 @@ Target *(usulan)* tiga bulan setelah beta dibuka:
 | Median waktu dari laporan dikirim sampai diputuskan | ≤ 3 hari kerja |
 | Proporsi laporan yang diterbitkan | ≥ 70% |
 | Keberhasilan tugas "temukan tempat X dan sebutkan fasilitasnya" dalam uji kegunaan dengan minimal lima pengguna difabel | ≥ 80% |
+| Skor SUS (System Usability Scale) dari peserta uji kegunaan yang sama | ≥ 75 |
+| Rata-rata SEQ (Single Ease Question, skala 1–7) per tugas | ≥ 5,5 |
 | Temuan WCAG level A atau AA yang kritis saat audit sebelum rilis | 0 |
 
 ## 11. Tahapan Rilis
