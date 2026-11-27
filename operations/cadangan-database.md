@@ -5,13 +5,15 @@
 | Status | Berlaku |
 | Tanggal | 2026-11-27 |
 | Berlaku untuk | Server produksi akses-bogor-api (fatir-mitya) |
-| Issue | #148 |
+| Issue | #148, #154 |
 
-Setiap malam database AksesBogor di-dump dan dua salinannya disimpan: tujuh dump terakhir di server, dan satu salinan di bucket R2 privat selama 30 hari ([ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md)). Dokumen ini mencatat keadaan salinan R2, cara melihatnya, dan cara menguji bahwa salinan itu bisa dipulihkan. Perintah `sudo` dijalankan admin server. Nilai dalam `<…>` diisi sendiri.
+Setiap malam database AksesBogor di-dump dan dua salinannya disimpan: tujuh dump terakhir di server, dan satu salinan di bucket R2 privat selama 30 hari ([ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md)). Salinan R2 dienkripsi dengan `age` sebelum meninggalkan server. Dokumen ini mencatat keadaan salinan R2, cara enkripsinya, cara melihatnya, dan cara menguji bahwa salinan itu bisa dipulihkan. Perintah `sudo` dijalankan admin server. Nilai dalam `<…>` diisi sendiri.
 
 ## 1. Keadaan Sekarang
 
 Salinan R2 aktif di server produksi sejak 2026-11-27. Sebelumnya log `akses-bogor-backup` setiap malam menulis "BACKUP_R2_REMOTE kosong; salinan R2 dilewati".
+
+Enkripsi salinan R2 berlaku setelah langkah [3.3](#33-memasang-di-server) dijalankan di server produksi. Selama `BACKUP_AGE_RECIPIENT` kosong, dump masih disalin tanpa enkripsi dan log menulis "PERINGATAN: BACKUP_AGE_RECIPIENT kosong; dump disalin ke R2 tanpa enkripsi".
 
 | Hal | Nilai |
 | --- | --- |
@@ -22,6 +24,8 @@ Salinan R2 aktif di server produksi sejak 2026-11-27. Sebelumnya log `akses-bogo
 | Remote rclone | `r2:akses-bogor-backup/postgres` |
 | Masa simpan di R2 | Lifecycle rule menghapus objek setelah 30 hari, ditambah aturan bawaan R2 yang membatalkan unggahan multipart yang tidak selesai |
 | Token R2 | Object Read & Write untuk bucket `akses-bogor-backup` saja |
+| Enkripsi salinan R2 | `age` ke kunci publik di `BACKUP_AGE_RECIPIENT`. Objeknya bernama `aksesbogor-<waktu UTC>.dump.age` |
+| Kunci privat | `~/credentials/akses-bogor/age-cadangan.key` di mesin tim. Tidak di `backup.env` dan tidak di Cloudflare |
 | Konfigurasi | `/etc/akses-bogor/backup.env`, pemilik `root:root`, mode `0600`. Contohnya `deploy/backup.env.example` di akses-bogor-api |
 | rclone | 1.60.1 dari paket Debian, dikonfigurasi lewat variabel `RCLONE_CONFIG_R2_*`, tanpa `rclone.conf` |
 
@@ -31,9 +35,72 @@ Cakupan token dijelaskan di komentar `deploy/backup.env.example` dan di [langkah
 
 rclone 1.60 memanggil `HEAD …?versionId=` setelah setiap unggahan, dan R2 menjawab 501 NotImplemented. Akibatnya percobaan pertama gagal dan hanya percobaan ulang yang lolos. `RCLONE_CONFIG_R2_NO_HEAD=true` di `backup.env` menghilangkan panggilan itu. Keutuhan unggahan tetap diperiksa lewat Content-MD5. Baris ini sudah ada di `deploy/backup.env.example` (akses-bogor-api#181). Server yang `backup.env`-nya dibuat sebelum itu perlu menambahkannya sendiri.
 
-Skrip `backup.sh` yang sudah memuat perbaikan #181 menulis nama objek di log: `disalin ke r2:akses-bogor-backup/postgres/aksesbogor-<waktu UTC>.dump`. Versi sebelumnya hanya menulis nama remote.
+Skrip `backup.sh` yang sudah memuat perbaikan #181 menulis nama objek di log: `disalin ke r2:akses-bogor-backup/postgres/aksesbogor-<waktu UTC>.dump`. Versi sebelumnya hanya menulis nama remote. Dengan enkripsi, nama objeknya berakhiran `.dump.age`.
 
-## 3. Melihat Salinan di R2
+## 3. Enkripsi Salinan R2
+
+Pemeriksaan UU PDP (Pasal 35 dan 39) menemukan bahwa salinan R2 berisi seluruh data pribadi tanpa enkripsi. Token R2 yang hanya berlaku untuk satu bucket melindungi dari token yang bocor, tetapi tidak dari akun Cloudflare yang diambil alih. Karena itu dump dienkripsi dengan [age](https://age-encryption.org) sebelum diunggah, dan kunci untuk membukanya disimpan di luar Cloudflare.
+
+### 3.1 Cara Kerja
+
+1. `pg_dump` menulis dump ke `/var/backups/akses-bogor` seperti biasa. Tujuh dump di server tetap tidak dienkripsi, karena server itu sendiri sudah memegang databasenya.
+2. Bila `BACKUP_R2_REMOTE` dan `BACKUP_AGE_RECIPIENT` diisi, `backup.sh` menjalankan `age -r "$BACKUP_AGE_RECIPIENT"` dan menulis hasilnya ke berkas sementara di folder yang sama.
+3. Bila `age` berhasil, berkas itu diunggah sebagai `<dump>.age`. Dump polos tidak diunggah. Berkas sementara dihapus, baik skrip berhasil maupun gagal.
+4. Bila `age` gagal atau belum terpasang, skrip berhenti dengan kode bukan nol sebelum `rclone` dipanggil. Tidak ada yang diunggah, dan unit `akses-bogor-backup` tercatat gagal di `journalctl`.
+5. Bila `BACKUP_AGE_RECIPIENT` kosong, dump disalin tanpa enkripsi seperti sebelumnya, dan log menulis peringatan.
+
+Server hanya memegang kunci publik (diawali `age1`). Kunci publik hanya bisa mengenkripsi, jadi `backup.env` yang bocor tidak membuka isi salinan R2, dan Cloudflare hanya menyimpan berkas yang tidak bisa dibacanya.
+
+### 3.2 Kunci
+
+| Berkas | Isi |
+| --- | --- |
+| `~/credentials/akses-bogor/age-cadangan.pub` | Kunci publik, sama dengan nilai `BACKUP_AGE_RECIPIENT` |
+| `~/credentials/akses-bogor/age-cadangan.key` | Kunci privat dari `age-keygen`, mode `0600` |
+
+- Kunci privat hanya ada di `~/credentials/akses-bogor/` di mesin tim, dan admin yang menyalinnya antarmesin. Kunci ini tidak pernah diunggah ke Cloudflare, tidak ditaruh di `backup.env`, dan tidak masuk repo, issue, PR, atau chat.
+- Tanpa kunci privat, salinan R2 tidak bisa dipulihkan. Simpan di lebih dari satu mesin.
+- Mengganti kunci: buat pasangan baru dengan `age-keygen -o <berkas>`, ganti `BACKUP_AGE_RECIPIENT`, dan simpan kunci privat lama 30 hari lagi, sampai salinan terakhir yang dienkripsi dengannya dihapus lifecycle. Bila kunci lama bocor, hapus juga salinan R2 yang dienkripsi dengannya.
+
+### 3.3 Memasang di Server
+
+- [ ] Pasang `age` dari paket Debian:
+
+  ```bash
+  sudo apt install -y age
+  age --version
+  ```
+
+- [ ] Pasang `backup.sh` yang sudah memuat enkripsi (akses-bogor-api#187). Skrip ini tidak ikut diperbarui oleh deploy otomatis, jadi salin dari rilis aktif setelah perubahannya masuk ke `release`:
+
+  ```bash
+  sudo install -m 0755 /srv/akses-bogor/current/deploy/backup.sh /usr/local/lib/akses-bogor/backup.sh
+  ```
+
+- [ ] Tambahkan kunci publik ke `backup.env`. Nilainya isi `~/credentials/akses-bogor/age-cadangan.pub`:
+
+  ```bash
+  sudo -e /etc/akses-bogor/backup.env   # BACKUP_AGE_RECIPIENT=age1…
+  ```
+
+- [ ] Jalankan cadangan sekarang. Log harus menulis `disalin ke r2:akses-bogor-backup/postgres/aksesbogor-<waktu UTC>.dump.age` tanpa peringatan:
+
+  ```bash
+  sudo systemctl start akses-bogor-backup
+  journalctl -u akses-bogor-backup -n 5
+  ```
+
+- [ ] Jalankan [uji pemulihan](#5-uji-pemulihan-dari-r2) dengan salinan `.age` itu.
+
+Dump `.dump` lama yang belum dienkripsi tetap di R2 sampai lifecycle menghapusnya setelah 30 hari. Setelah uji pemulihan salinan `.age` lulus, dump lama itu boleh dihapus lebih awal. Lihat dulu daftarnya dengan `--dry-run`:
+
+```bash
+sudo bash -c 'set -a; . /etc/akses-bogor/backup.env; set +a; rclone delete --dry-run --include "*.dump" "$BACKUP_R2_REMOTE"'
+```
+
+Bila daftarnya hanya berisi `.dump` lama, jalankan lagi tanpa `--dry-run`.
+
+## 4. Melihat Salinan di R2
 
 `backup.env` hanya bisa dibaca root, jadi baca lewat shell root dan ekspor isinya ke rclone:
 
@@ -41,9 +108,9 @@ Skrip `backup.sh` yang sudah memuat perbaikan #181 menulis nama objek di log: `d
 sudo bash -c 'set -a; . /etc/akses-bogor/backup.env; set +a; rclone lsl "$BACKUP_R2_REMOTE"'
 ```
 
-Keluarannya satu baris per dump: ukuran, waktu, dan nama berkas. Karena dump dibuat tiap malam dan lifecycle menghapus yang lebih dari 30 hari, jumlahnya naik sampai sekitar 30. Dump yang hilang di tengah deretan berarti cadangan malam itu gagal. Cek `journalctl -u akses-bogor-backup`.
+Keluarannya satu baris per dump: ukuran, waktu, dan nama berkas. Salinan terenkripsi berakhiran `.dump.age`. Karena dump dibuat tiap malam dan lifecycle menghapus yang lebih dari 30 hari, jumlahnya naik sampai sekitar 30. Dump yang hilang di tengah deretan berarti cadangan malam itu gagal. Cek `journalctl -u akses-bogor-backup`.
 
-## 4. Uji Pemulihan dari R2
+## 5. Uji Pemulihan dari R2
 
 Salinan baru berguna bila pemulihannya pernah dicoba. Dump berisi data pribadi (akun dan laporan), jadi simpan berkas unduhannya di folder yang hanya bisa dibaca `postgres` dan hapus bersama database ujinya di akhir.
 
