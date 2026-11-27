@@ -58,7 +58,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0023](0023-hingga-sepuluh-foto-bertag-per-laporan.md) | Hingga sepuluh foto bertag per laporan | Accepted | 2026-10-21 |
 | [0024](0024-data-setelah-akun-dihapus.md) | Data pribadi dihapus, data lokasi yang sudah terbit tetap tayang tanpa nama | Accepted | 2026-10-22 |
 | [0025](0025-api-dan-postgresql-di-vps-sendiri.md) | API dan PostgreSQL berjalan di VPS milik tim | Accepted, sebagian di-supersede oleh 0026 | 2026-10-26 |
-| [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted, sebagian di-supersede oleh 0045 dan 0048 | 2026-10-31 |
+| [0026](0026-api-dan-postgresql-di-evergarden-oci.md) | API dan PostgreSQL produksi pindah ke Evergarden (OCI Batam) | Accepted, sebagian di-supersede oleh 0045, 0048, dan 0059 | 2026-10-31 |
 | [0027](0027-design-system-datar-dan-ilustrasi-3d.md) | Design system datar dengan ilustrasi lingkungan 3D | Accepted, sebagian di-supersede oleh 0028 | 2026-10-31 |
 | [0028](0028-adegan-3d-three-js-untuk-hero-dan-rute.md) | Adegan 3D three.js untuk hero dan Rute ke pintu, pengganti ilustrasi AI | Accepted | 2026-11-01 |
 | [0029](0029-akun-better-auth-dan-sesi-lewat-server-web.md) | Akun dengan Better Auth di API, sesi disimpan server web | Accepted | 2026-11-07 |
@@ -80,7 +80,7 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0045](0045-alamat-staging-di-aldio-dev.md) | Alamat staging web, API, dan foto pindah ke aldio.dev, dengan `akses-bogor.vercel.app` sebagai alias | Accepted, sebagian di-supersede oleh 0048 | 2026-11-22 |
 | [0046](0046-dasbor-akun-di-route-group-dengan-ringkasan-per-peran.md) | Dasbor akun di route group yang sama, dengan Ringkasan per peran dan URL lama tetap | Proposed | 2026-11-22 |
 | [0047](0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md) | Model agen kontributor: Claude Haiku 5.5 lewat Claude API, OpenRouter tetap bisa dipilih tanpa cadangan otomatis | Accepted | 2026-11-22 |
-| [0048](0048-web-di-host-sendiri-di-evergarden-oci.md) | Web di-host sendiri di Evergarden dengan systemd dan `next start`, di-deploy dari `release` seperti API, dengan rollback otomatis | Accepted | 2026-11-22 |
+| [0048](0048-web-di-host-sendiri-di-evergarden-oci.md) | Web di-host sendiri di Evergarden dengan systemd dan `next start`, di-deploy dari `release` seperti API, dengan rollback otomatis | Accepted, sebagian di-supersede oleh 0059 | 2026-11-22 |
 | [0049](0049-lapisan-kandidat-openstreetmap-belum-ada-data.md) | Tempat OpenStreetMap tampil di Peta sebagai kandidat "Belum ada data" yang terpisah, tanpa status, dengan atribusi ODbL dan ajakan melapor | Accepted | 2026-11-22 |
 | [0050](0050-asisten-rute-publik.md) | Asisten rute publik untuk semua pengunjung, dengan kartu rute dari aplikasi dan jatah per IP | Accepted, sebagian di-supersede oleh 0054 | 2026-11-23 |
 | [0051](0051-kelola-tempat-oleh-admin-dan-terbit-langsung.md) | Admin mengelola tempat dan boleh menerbitkan laporannya sendiri, dengan label publik "Diterbitkan langsung oleh admin" | Accepted | 2026-11-23 |
@@ -91,3 +91,4 @@ ADR yang sudah `Accepted` tidak diubah isinya. Mengubah keputusan berarti menuli
 | [0056](0056-impor-atribut-aksesibilitas-google-maps-lewat-apify.md) | Atribut aksesibilitas Google Maps untuk kandidat OSM diambil lewat aktor Apify, dicocokkan per titik, dan disimpan sebagai salinan pihak ketiga | Accepted | 2026-11-26 |
 | [0057](0057-verifikasi-dengan-bukti-street-view.md) | Data yang belum diperiksa diverifikasi dari bukti Street View dengan label "Diverifikasi dari Street View", dan yang tidak terjawab disembunyikan tanpa dihapus | Accepted, sebagian di-supersede oleh 0058 | 2026-11-27 |
 | [0058](0058-tempat-street-view-tampil-sebagai-terverifikasi-tim.md) | Tempat dari Street View tampil di publik dan di Agen AI sebagai terverifikasi tim; asal datanya tetap di database, log audit, Kelola tempat, dan keterangan foto | Accepted | 2026-11-27 |
+| [0059](0059-produksi-pindah-ke-server-tim-di-karawang.md) | Produksi (API, web, PostgreSQL, Valhalla, dan cadangan) pindah dari Evergarden OCI ke server milik tim di Karawang, dengan tata letak dan alur rilis yang sama | Accepted | 2026-11-27 |

@@ -5,7 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #41
 - Men-supersede sebagian: [ADR-0025](0025-api-dan-postgresql-di-vps-sendiri.md) (server produksi, versi PostgreSQL dan Node, dan cara deploy)
-- Di-supersede sebagian oleh: [ADR-0045](0045-alamat-staging-di-aldio-dev.md) (hostname publik API), [ADR-0048](0048-web-di-host-sendiri-di-evergarden-oci.md) (web di Vercel)
+- Di-supersede sebagian oleh: [ADR-0045](0045-alamat-staging-di-aldio-dev.md) (hostname publik API), [ADR-0048](0048-web-di-host-sendiri-di-evergarden-oci.md) (web di Vercel), [ADR-0059](0059-produksi-pindah-ke-server-tim-di-karawang.md) (server produksi di Evergarden dan tunnel Evergarden)
 
 ## Konteks dan Masalah
 
