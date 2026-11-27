@@ -5,6 +5,7 @@
 - Pengambil keputusan: Tim AksesBogor
 - Issue: #95
 - Men-supersede sebagian: [ADR-0013](0013-tech-stack-nextjs-fastify.md) (web di Vercel), [ADR-0026](0026-api-dan-postgresql-di-evergarden-oci.md) (web tetap di Vercel dan Vercel membangun `release`), [ADR-0045](0045-alamat-staging-di-aldio-dev.md) (web sebagai custom domain Vercel dan alias `akses-bogor.vercel.app`)
+- Di-supersede sebagian oleh: [ADR-0059](0059-produksi-pindah-ke-server-tim-di-karawang.md) (server web di Evergarden, dan izin folder konfigurasi lewat ACL)
 
 ## Konteks dan Masalah
 
