@@ -3,9 +3,9 @@
 | | |
 | --- | --- |
 | Status | Draf, belum ditinjau |
-| Versi | 2026-11-10 |
+| Versi | 2026-11-27 |
 | Pemilik | Tim AksesBogor |
-| Issue | #62 |
+| Issue | #62, #150 |
 
 Dokumen ini adalah sumber teks halaman `/syarat` di akses-bogor-web. Pengguna menyetujuinya dengan menekan "Simpan dan lanjut" di Lengkapi Akun; kotak centang di layar itu khusus untuk Kebijakan Privasi ([ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)). Setiap perubahan isi menaikkan versi. Perubahan yang mengubah hak atau kewajiban pelapor dirilis bersama kenaikan versi Kebijakan Privasi, supaya pengguna diminta menyetujui ulang.
 
@@ -13,7 +13,7 @@ Dokumen ini adalah sumber teks halaman `/syarat` di akses-bogor-web. Pengguna me
 
 Bagian ini untuk tim dan tidak tampil di web.
 
-- [ ] Isi nama tim, kampus, dan alamat email kontak resmi, sama dengan [Kebijakan Privasi](kebijakan-privasi.md#sebelum-rilis).
+- [x] Isi nama tim, kampus, dan alamat email kontak resmi, sama dengan [Kebijakan Privasi](kebijakan-privasi.md#sebelum-rilis). Diisi di versi 2026-11-27.
 - [ ] Minta dosen pembimbing atau unit hukum kampus meninjau teks ini bersama Kebijakan Privasi, terutama izin atas isi laporan, batas tanggung jawab, usia pengguna, dan hukum yang berlaku.
 - [ ] Putuskan cara menghentikan akses akun yang melanggar. Belum ada fitur untuk itu; sampai ada, admin server menghapus akunnya langsung di database.
 - [ ] Ubah status menjadi final, hapus kata "Draf" di judul halaman web, dan naikkan versi bila isinya berubah.
@@ -22,7 +22,7 @@ Bagian ini untuk tim dan tidak tampil di web.
 
 ### Tentang syarat ini
 
-AksesBogor adalah web yang mencatat aksesibilitas fasilitas publik di Kota Bogor bagi penyandang disabilitas dan pendampingnya. AksesBogor dikelola Tim AksesBogor sebagai proyek mahasiswa.
+AksesBogor adalah web yang mencatat aksesibilitas fasilitas publik di Kota Bogor bagi penyandang disabilitas dan pendampingnya. AksesBogor dikelola Tim AksesBogor, kelompok mahasiswa Program Studi Teknologi Rekayasa Perangkat Lunak, Sekolah Vokasi IPB University, sebagai proyek mahasiswa.
 
 Syarat ini berlaku saat Anda memakai AksesBogor. Cara kami mengelola data pribadi Anda dijelaskan di Kebijakan Privasi. Saat melengkapi akun, Anda menyetujui syarat ini dengan menekan "Simpan dan lanjut".
 
@@ -64,6 +64,8 @@ Laporan, foto, dan jawaban klarifikasi tetap milik Anda. Dengan mengirimnya, And
 
 Izin ini tetap berlaku untuk bagian yang sudah terbit setelah Anda menghapus akun, sehingga informasi tempat tetap bisa dipakai orang lain. Anda menyatakan bahwa Anda berhak memberi izin ini, misalnya karena foto itu Anda ambil sendiri.
 
+Izin ini hanya untuk laporan dan foto sebagai informasi tempat. Izin ini bukan persetujuan atas data pribadi Anda: pemrosesan data pribadi diatur di Kebijakan Privasi, dan persetujuan itu bisa Anda tarik kapan saja. Bila laporan atau foto yang sudah terbit ternyata memuat data pribadi Anda atau orang lain, mis. wajah, pelat nomor, nama, atau nomor telepon, hubungi kami dan kami mengaburkan atau menghapus bagian itu.
+
 ### Yang tidak boleh
 
 - Mengirim laporan palsu, laporan untuk tempat yang tidak Anda kenal, atau laporan yang sengaja menyesatkan.
@@ -87,6 +89,8 @@ Peta dan pencarian tempat memakai Mapbox dan data OpenStreetMap. Batas kecamatan
 
 AksesBogor dikerjakan tim mahasiswa. Kami berusaha menjaganya tetap berjalan, tetapi layanan bisa terhenti sementara, berubah, atau dihentikan.
 
+Bila AksesBogor dihentikan, kami memberi tahu pemilik akun lewat email paling lambat 30 hari sebelumnya. Apa yang terjadi pada data Anda dijelaskan di Kebijakan Privasi.
+
 ### Batas tanggung jawab
 
 AksesBogor disediakan sebagaimana adanya. Sejauh diizinkan hukum, Tim AksesBogor tidak bertanggung jawab atas kerugian yang timbul karena mengandalkan informasi di AksesBogor yang ternyata tidak lengkap, sudah berubah, atau keliru.
@@ -101,10 +105,11 @@ Syarat ini tunduk pada hukum Republik Indonesia.
 
 ### Kontak
 
-Email: (diisi tim sebelum rilis).
+Email: <aliceevrasaldio@apps.ipb.ac.id>. Alamat surat: Tim AksesBogor, d.a. Sekolah Vokasi IPB University, Jl. Kumbang No. 14, Kelurahan Babakan, Kecamatan Bogor Tengah, Kota Bogor, Jawa Barat 16128.
 
 ## Referensi
 
 - [PRD](prd.md), FR-10 sampai FR-13, FR-20 sampai FR-27, FR-30 sampai FR-41, dan FR-50
 - [Kebijakan Privasi](kebijakan-privasi.md)
+- [Pemeriksaan UU PDP 2026-11-27](pemeriksaan-uu-pdp-2026-11-27.md), temuan S1 sampai S4
 - [ADR-0006](../decisions/0006-laporan-warga-diverifikasi-sebelum-tayang.md), [ADR-0010](../decisions/0010-cakupan-wilayah-kota-bogor.md), [ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0017](../decisions/0017-empat-jawaban-ketersediaan-fasilitas.md), [ADR-0019](../decisions/0019-verifikasi-tim-dan-mitra-terlatih.md), [ADR-0022](../decisions/0022-tersedia-berarti-bisa-dipakai.md), [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md), [ADR-0034](../decisions/0034-batas-kecamatan-dari-openstreetmap.md), [ADR-0036](../decisions/0036-keputusan-verifikasi-dan-klarifikasi-di-laporan-saya.md), [ADR-0037](../decisions/0037-foto-dikaburkan-di-api-dan-asli-dihapus.md), [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)
