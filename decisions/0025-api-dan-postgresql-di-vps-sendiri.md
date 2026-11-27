@@ -83,8 +83,13 @@ flowchart LR
 - Pro: server dan database dikelola penyedia; Neon punya branch database untuk pengembangan.
 - Kontra: sekitar US$13 per bulan untuk B1 dari kredit Azure for Students; compute Neon tertidur saat sepi sehingga pool harus siap menerima koneksi yang diputus.
 
+## Catatan 2026-11-27
+
+Pemeriksaan UU PDP (Pasal 35 dan 39) menemukan bahwa salinan cadangan di R2 berisi seluruh data pribadi tanpa enkripsi. Token R2 yang hanya berlaku untuk bucket cadangan melindungi dari token yang bocor, tetapi tidak dari akun Cloudflare yang diambil alih. Karena itu setiap dump dienkripsi dengan `age` ke kunci publik tim sebelum meninggalkan server, dan R2 hanya menerima `<dump>.age`. Kunci privatnya disimpan tim di luar Cloudflare. Tujuh dump di server tetap tidak dienkripsi, karena server itu sendiri memegang databasenya. Bagian lain keputusan ini tidak berubah. Cara kerja, tempat kunci, dan prosedur pemulihannya ada di [runbook cadangan database](../operations/cadangan-database.md#3-enkripsi-salinan-r2).
+
 ## Referensi
 
 - [ADR-0013](0013-tech-stack-nextjs-fastify.md) (di-supersede sebagian)
 - [ADR-0024](0024-data-setelah-akun-dihapus.md) (masa simpan cadangan)
 - Issue #39
+- Issue #154 (enkripsi salinan R2), akses-bogor-api#187

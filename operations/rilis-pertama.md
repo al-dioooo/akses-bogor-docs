@@ -57,6 +57,8 @@ Di server produksi salinan R2 sudah aktif sejak 2026-11-27, lihat [runbook cadan
 
   Isi `BACKUP_R2_REMOTE=r2:akses-bogor-backup/postgres`, `RCLONE_CONFIG_R2_ENDPOINT` (dari dashboard R2), dan kedua kunci token. `rclone` sudah terpasang di Evergarden.
 
+- [ ] Enkripsi salinan R2: pasang `age` (`sudo apt install -y age`) dan isi `BACKUP_AGE_RECIPIENT` di `backup.env` dengan kunci publik dari `~/credentials/akses-bogor/age-cadangan.pub`. Langkahnya ada di [runbook cadangan database, bagian 3](cadangan-database.md#3-enkripsi-salinan-r2).
+
 ### 2.3 Klien OAuth Google
 
 - [ ] Google Cloud Console → APIs & Services → Credentials → Create OAuth client ID, tipe "Web application" ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)).
