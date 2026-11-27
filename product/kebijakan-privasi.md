@@ -3,9 +3,9 @@
 | | |
 | --- | --- |
 | Status | Draf, belum ditinjau |
-| Versi | 2026-11-26 |
+| Versi | 2026-11-27 |
 | Pemilik | Tim AksesBogor |
-| Issue | #51, #55, #59, #62, #89, #99, #106, #124, #130 |
+| Issue | #51, #55, #59, #62, #89, #99, #106, #124, #130, #150 |
 
 Dokumen ini adalah sumber teks halaman `/kebijakan-privasi` di akses-bogor-web. Pengguna menyetujui versi yang tertulis di atas saat Lengkapi Akun (FR-11), dan versi itu disimpan bersama waktu persetujuannya ([ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md)). Setiap perubahan isi menaikkan versi, dan pengguna diminta menyetujui ulang saat masuk berikutnya.
 
@@ -13,16 +13,19 @@ Dokumen ini adalah sumber teks halaman `/kebijakan-privasi` di akses-bogor-web. 
 
 Bagian ini untuk tim dan tidak tampil di web.
 
-- [ ] Isi identitas pengendali data (nama tim dan kampus) dan alamat email kontak resmi. `info@aksesbogor.id` di Figma masih placeholder.
-- [x] Tetapkan masa simpan log server di Evergarden: 30 hari, diputuskan 2026-11-08 ([ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)). journald diatur saat rilis pertama.
-- [ ] Minta dosen pembimbing atau unit hukum kampus meninjau teks ini bersama [Syarat Layanan](syarat-layanan.md), terutama dasar pemrosesan, transfer ke luar negeri, batas waktu 3 × 24 jam, dan bagian anak.
+- [x] Isi identitas pengendali data (nama tim dan kampus) dan alamat email kontak resmi. Diisi di versi 2026-11-27, bersama anggota tim, penanggung jawab pelindungan data pribadi, dan alamat surat. `info@aksesbogor.id` di Figma masih placeholder dan bukan alamat kontak.
+- [x] Tetapkan masa simpan log server: 30 hari, diputuskan 2026-11-08 ([ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md)). journald diatur saat rilis pertama, waktu itu di Evergarden.
+- [ ] Pastikan journald di server tim di Karawang (fatir-mitya), tempat produksi berjalan sejak 2026-11-26, juga menyimpan log server paling lama 30 hari.
+- [ ] Minta dosen pembimbing atau unit hukum kampus meninjau teks ini bersama [Syarat Layanan](syarat-layanan.md), terutama dasar pemrosesan, transfer ke luar negeri, batas waktu 3 × 24 jam, dan bagian anak. Bawa juga [pemeriksaan UU PDP 2026-11-27](pemeriksaan-uu-pdp-2026-11-27.md) beserta catatan untuk peninjaunya, termasuk apakah kampus ikut menjadi pengendali bersama (Pasal 18) karena namanya kini disebut.
 - [x] Tambahkan rincian foto dan lokasi laporan saat Laporkan (FR-20 sampai FR-27) dibangun.
 - [ ] Ubah status menjadi final, hapus kata "Draf" di judul halaman web, dan naikkan versi bila isinya berubah.
 - [x] Rilis versi 2026-11-22 (agen Bantu memetakan dengan Anthropic, [ADR-0047](../decisions/0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md)) di API dan web bersamaan: `PRIVACY_POLICY_VERSION` di keduanya harus sama, karena API menolak persetujuan untuk versi lain.
 - [x] Rilis versi 2026-11-23 (web di Evergarden, [ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md), dan Lokasi saya di Peta): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian. Bila API lebih dulu, semua akun diminta menyetujui ulang di web lama, yang masih mengirim versi 2026-11-22 dan ditolak dengan 409.
-- [ ] Rilis versi 2026-11-24 (asisten Tanya rute untuk semua pengunjung, [ADR-0050](../decisions/0050-asisten-rute-publik.md)): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian, lalu `ROUTE_ASSISTANT_ENABLED=true` di API. Versi 2026-11-23 sudah dipakai, jadi versi ini bertanggal 2026-11-24 walaupun dirilis lebih awal.
-- [ ] Rilis versi 2026-11-26 (Agen AI menggantikan Bantu memetakan dan Tanya rute, [ADR-0054](../decisions/0054-agen-ai-satu-pintu.md)): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian.
-- [ ] Rute dari data OpenStreetMap ([ADR-0055](../decisions/0055-rute-pejalan-kaki-aksesibel-dengan-valhalla.md)) ikut versi 2026-11-26 yang sama, karena versi itu belum dirilis. Bila 2026-11-26 sudah dirilis sebelum teks ini masuk, naikkan versinya ke 2026-11-27 di dokumen ini, web, dan API. `ACCESSIBLE_ROUTER_URL` di API baru diisi setelah web dengan teks ini dirilis.
+- [x] Rilis versi 2026-11-24 (asisten Tanya rute untuk semua pengunjung, [ADR-0050](../decisions/0050-asisten-rute-publik.md)): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian, lalu `ROUTE_ASSISTANT_ENABLED=true` di API. Versi 2026-11-23 sudah dipakai, jadi versi ini bertanggal 2026-11-24 walaupun dirilis lebih awal.
+- [x] Rilis versi 2026-11-26 (Agen AI menggantikan Bantu memetakan dan Tanya rute, [ADR-0054](../decisions/0054-agen-ai-satu-pintu.md)): web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian.
+- [x] Rute dari data OpenStreetMap ([ADR-0055](../decisions/0055-rute-pejalan-kaki-aksesibel-dengan-valhalla.md)) ikut versi 2026-11-26 yang sama, karena versi itu belum dirilis. Bila 2026-11-26 sudah dirilis sebelum teks ini masuk, naikkan versinya ke 2026-11-27 di dokumen ini, web, dan API. `ACCESSIBLE_ROUTER_URL` di API baru diisi setelah web dengan teks ini dirilis.
+- [ ] Rilis versi 2026-11-27 ([pemeriksaan UU PDP](pemeriksaan-uu-pdp-2026-11-27.md)) bersama Syarat Layanan 2026-11-27: web dulu, lalu `PRIVACY_POLICY_VERSION` di API beberapa menit kemudian. Pada hari yang sama, kirim email penjelasan ke semua pemilik akun, karena pemindahan server dan cadangan R2 sudah berlaku sebelum diberitahukan (Pasal 21 ayat (2)).
+- [ ] Sebelum versi 2026-11-27 dirilis, siapkan orang dan skrip untuk janji 3 × 24 jam di bagian Hak Anda: ekspor JSON per akun, ganti email, tahan laporan, dan matikan email pemberitahuan per akun.
 
 ## Riwayat Versi
 
@@ -38,6 +41,12 @@ Bagian ini untuk tim dan tidak tampil di web. Setiap versi baru meminta persetuj
 | 2026-11-23 | Situs web pindah dari Vercel ke server kami di Oracle Cloud (Batam); Cloudflare mem-proxy situs web dan API; Tampilkan lokasi saya di Peta | #99 |
 | 2026-11-24 | Tanya rute: asisten rute untuk semua pengunjung, juga tanpa akun, dengan Anthropic (Claude API), titik awal yang hanya dipakai server kami dan Mapbox, dan jatah pertanyaan per alamat IP | #106 |
 | 2026-11-26 | Bantu memetakan dan Tanya rute menjadi satu Agen AI; percakapan disimpan di tab browser sampai tab ditutup; rute kartu rute dihitung di server kami dengan data OpenStreetMap, dan Mapbox hanya bila rute itu belum tersedia | #124, #130 |
+| 2026-11-27 | Server pindah dari Oracle Cloud ke server tim di Karawang; cadangan harian database di Cloudflare R2; dasar pemrosesan per jenis data; hak subjek data lengkap dengan tenggat 3 × 24 jam; pemberitahuan kegagalan pelindungan ke lembaga; dasar transfer ke luar negeri; persetujuan orang tua atau wali; penyandang disabilitas dan pendamping; identitas pengendali, penanggung jawab, dan kontak. Syarat Layanan ikut naik ke 2026-11-27 | #150 |
+
+Label kotak persetujuan di Lengkapi Akun berubah di versi 2026-11-27. Versi yang disimpan bersama persetujuan menunjukkan label mana yang dicentang:
+
+- Sampai 2026-11-26: "Saya sudah membaca dan menyetujui Kebijakan Privasi AksesBogor."
+- Mulai 2026-11-27: "Saya sudah membaca dan menyetujui Kebijakan Privasi AksesBogor, termasuk pengiriman data ke penyedia layanan di luar Indonesia. Bila saya berusia di bawah 18 tahun, orang tua atau wali saya ikut menyetujuinya."
 
 ## Teks Kebijakan
 
@@ -183,10 +192,13 @@ Untuk permintaan atas data Anda, kirim email dari alamat email akun AksesBogor A
 
 ## Referensi
 
-- UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi
+- UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi ([peraturan.go.id](https://peraturan.go.id/id/uu-no-27-tahun-2022))
+- [Pemeriksaan UU PDP 2026-11-27](pemeriksaan-uu-pdp-2026-11-27.md): temuan K1 sampai K18 dan teks pengganti untuk versi 2026-11-27 (dokumen internal, bukan nasihat hukum)
 - [PRD](prd.md), FR-11, FR-13, FR-20 sampai FR-27, FR-50, dan kebutuhan non-fungsional Privasi dan keamanan
 - [Syarat Layanan](syarat-layanan.md)
-- Oracle: [Kebijakan Privasi Layanan Oracle](https://www.oracle.com/legal/privacy/services-privacy-policy.html), [daftar region OCI](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm) (Indonesia North, Batam, `ap-batam-1`)
-- Cloudflare: [Kebijakan Privasi](https://www.cloudflare.com/privacypolicy/), [perjanjian pemrosesan data (DPA)](https://www.cloudflare.com/cloudflare-customer-dpa/), [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/)
-- Anthropic: [Ketentuan Komersial](https://www.anthropic.com/legal/commercial-terms), [lama penyimpanan data organisasi](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data), [data residency](https://platform.claude.com/docs/en/manage-claude/data-residency)
-- [ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0014](../decisions/0014-login-google-dan-kode-email.md), [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md), [ADR-0030](../decisions/0030-email-transaksional-resend.md), [ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md), [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md), [ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md), [ADR-0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md), [ADR-0047](../decisions/0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md), [ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md), [ADR-0050](../decisions/0050-asisten-rute-publik.md)
+- Cloudflare: [Kebijakan Privasi](https://www.cloudflare.com/privacypolicy/), [perjanjian pemrosesan data (DPA)](https://www.cloudflare.com/cloudflare-customer-dpa/), [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/), [Self-Serve Subscription Agreement](https://www.cloudflare.com/terms/) (pasal 6.1 memasukkan DPA hanya untuk data pribadi subjek Eropa dan Inggris serta informasi pribadi menurut CCPA, jadi Cloudflare tidak disebut sebagai penyedia dengan DPA di bagian luar negeri)
+- Anthropic: [Ketentuan Komersial](https://www.anthropic.com/legal/commercial-terms), [Data Processing Addendum](https://www.anthropic.com/legal/data-processing-addendum) (bagian dari Ketentuan Komersial), [lama penyimpanan data organisasi](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data), [data residency](https://platform.claude.com/docs/en/manage-claude/data-residency)
+- Resend: [Data Processing Addendum](https://resend.com/legal/dpa), [Ketentuan Layanan](https://resend.com/legal/terms-of-service), [halaman GDPR](https://resend.com/security/gdpr) (DPA berlaku untuk setiap akun di semua paket), [kuota dan batas akun](https://resend.com/docs/knowledge-base/account-quotas-and-limits) (data email disimpan 30 hari di paket Free, Pro, dan Scale)
+- Mapbox: [Ketentuan Layanan](https://www.mapbox.com/legal/tos) (memasukkan DPA lewat rujukan), [Data Processing Addendum](https://www.mapbox.com/legal/dpa)
+- Google: [Kebijakan Privasi Google](https://policies.google.com/privacy)
+- [ADR-0011](../decisions/0011-pelapor-wajib-login.md), [ADR-0014](../decisions/0014-login-google-dan-kode-email.md), [ADR-0024](../decisions/0024-data-setelah-akun-dihapus.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md), [ADR-0029](../decisions/0029-akun-better-auth-dan-sesi-lewat-server-web.md), [ADR-0030](../decisions/0030-email-transaksional-resend.md), [ADR-0031](../decisions/0031-foto-laporan-di-bucket-r2-privat.md), [ADR-0032](../decisions/0032-pencarian-tempat-lewat-api-mapbox-search-box.md), [ADR-0033](../decisions/0033-isi-dulu-masuk-saat-kirim-dan-draf-di-perangkat.md), [ADR-0040](../decisions/0040-syarat-layanan-lisensi-laporan-dan-persetujuan.md), [ADR-0042](../decisions/0042-agen-rute-jalan-kaki-dan-informasi-aksesibilitas.md), [ADR-0043](../decisions/0043-agen-untuk-kontributor-dengan-model-gratis-openrouter.md), [ADR-0047](../decisions/0047-model-agen-kontributor-claude-haiku-lewat-claude-api.md), [ADR-0048](../decisions/0048-web-di-host-sendiri-di-evergarden-oci.md), [ADR-0050](../decisions/0050-asisten-rute-publik.md), [ADR-0054](../decisions/0054-agen-ai-satu-pintu.md), [ADR-0055](../decisions/0055-rute-pejalan-kaki-aksesibel-dengan-valhalla.md), [ADR-0057](../decisions/0057-verifikasi-dengan-bukti-street-view.md)
