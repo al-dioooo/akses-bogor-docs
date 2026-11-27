@@ -44,7 +44,7 @@ Butir ini tidak menghalangi deploy, tetapi harus selesai sebelum AksesBogor dium
 
 ### 2.2 Cloudflare R2 untuk cadangan
 
-Cadangan malam ini belum disalin ke R2. Log `akses-bogor-backup` setiap malam menulis "BACKUP_R2_REMOTE kosong; salinan R2 dilewati".
+Di server produksi salinan R2 sudah aktif sejak 2026-11-27, lihat [runbook cadangan database](cadangan-database.md). Langkah di bawah dipakai untuk server baru. Selama `BACKUP_R2_REMOTE` kosong, log `akses-bogor-backup` setiap malam menulis "BACKUP_R2_REMOTE kosong; salinan R2 dilewati".
 
 - [ ] Bucket privat terpisah, misalnya `akses-bogor-backup`, dengan lifecycle rule yang menghapus objek setelah 30 hari ([ADR-0025](../decisions/0025-api-dan-postgresql-di-vps-sendiri.md), [ADR-0026](../decisions/0026-api-dan-postgresql-di-evergarden-oci.md)).
 - [ ] Token R2 terpisah dengan izin "Object Read & Write" untuk bucket itu saja.
