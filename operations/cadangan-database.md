@@ -112,9 +112,9 @@ Keluarannya satu baris per dump: ukuran, waktu, dan nama berkas. Salinan terenkr
 
 ## 5. Uji Pemulihan dari R2
 
-Salinan baru berguna bila pemulihannya pernah dicoba. Dump berisi data pribadi (akun dan laporan), jadi simpan berkas unduhannya di folder yang hanya bisa dibaca `postgres` dan hapus bersama database ujinya di akhir.
+Salinan baru berguna bila pemulihannya pernah dicoba. Salinan `.age` hanya bisa dibuka dengan kunci privat, jadi uji ini dijalankan admin yang menyimpan `~/credentials/akses-bogor/age-cadangan.key` di server itu. Hasil dekripsi langsung diteruskan ke `pg_restore` lewat pipa, jadi dump polos tidak pernah ditulis ke disk. Database ujinya tetap berisi data pribadi (akun dan laporan), jadi hapus di akhir.
 
-- [ ] Buat dump baru supaya hitungan bisa dibandingkan dengan database hidup, lalu pastikan log menulis "disalin ke r2:…":
+- [ ] Buat dump baru supaya hitungan bisa dibandingkan dengan database hidup, lalu pastikan log menulis `disalin ke r2:…/aksesbogor-<waktu UTC>.dump.age`:
 
   ```bash
   sudo systemctl start akses-bogor-backup
@@ -127,24 +127,26 @@ Salinan baru berguna bila pemulihannya pernah dicoba. Dump berisi data pribadi (
   systemctl show -p Environment akses-bogor-backup
   ```
 
-- [ ] Unduh dump terbaru dari R2 ke folder yang hanya bisa dibaca `postgres`:
+- [ ] Unduh salinan `.age` terbaru dari R2 ke folder milik admin. Berkas ini terenkripsi, jadi boleh disimpan di luar folder `postgres`. `--include` memastikan yang diambil salinan terenkripsi, bukan dump `.dump` lama:
 
   ```bash
-  sudo install -d -m 0700 -o postgres -g postgres /var/tmp/uji-pulih
+  mkdir -m 0700 ~/uji-pulih
   sudo bash -c 'set -a; . /etc/akses-bogor/backup.env; set +a
-    terbaru=$(rclone lsf "$BACKUP_R2_REMOTE" | sort | tail -n 1)
+    terbaru=$(rclone lsf --include "*.dump.age" "$BACKUP_R2_REMOTE" | sort | tail -n 1)
     echo "dump terbaru: $terbaru"
-    rclone copyto "$BACKUP_R2_REMOTE/$terbaru" "/var/tmp/uji-pulih/$terbaru"
-    chown postgres:postgres "/var/tmp/uji-pulih/$terbaru"
-    chmod 0600 "/var/tmp/uji-pulih/$terbaru"'
+    rclone copyto "$BACKUP_R2_REMOTE/$terbaru" "$1/$terbaru"
+    chown "$2": "$1/$terbaru"' _ ~/uji-pulih "$USER"
   ```
 
-- [ ] Buat database uji sebagai `postgres` dan pulihkan dump ke dalamnya. `--no-owner --no-privileges` dipakai karena role aplikasi tidak perlu dibuat ulang untuk uji ini:
+- [ ] Buat database uji sebagai `postgres`, lalu dekripsi salinan itu dan teruskan ke `pg_restore`. `age` membaca kunci privat sebagai admin, dan `pg_restore` berjalan sebagai `postgres`. `--no-owner --no-privileges` dipakai karena role aplikasi tidak perlu dibuat ulang untuk uji ini:
 
   ```bash
   sudo -u postgres createdb -p <port> aksesbogor_uji_pulih
-  sudo -u postgres pg_restore -p <port> --no-owner --no-privileges -d aksesbogor_uji_pulih /var/tmp/uji-pulih/<nama dump terbaru>
+  age -d -i ~/credentials/akses-bogor/age-cadangan.key ~/uji-pulih/<nama dump terbaru> \
+    | sudo -u postgres pg_restore -p <port> --no-owner --no-privileges -d aksesbogor_uji_pulih
   ```
+
+  `pg_restore` bisa membaca dump format custom dari pipa untuk pemulihan penuh seperti ini. Untuk pemulihan paralel (`pg_restore -j`), dekripsi dulu ke berkas di folder yang hanya bisa dibaca `postgres`.
 
 - [ ] Bandingkan jumlah baris tabel `places`, `reports`, `users`, `osm_places`, dan `knowledge_passages` di database hidup dan database uji:
 
@@ -166,14 +168,14 @@ Salinan baru berguna bila pemulihannya pernah dicoba. Dump berisi data pribadi (
 
   ```bash
   sudo -u postgres dropdb -p <port> aksesbogor_uji_pulih
-  sudo rm -rf /var/tmp/uji-pulih
+  rm -rf ~/uji-pulih
   ```
 
-Ulangi uji ini setelah token R2 diganti, rclone diperbarui, atau server dipindah.
+Ulangi uji ini setelah token R2 diganti, rclone diperbarui, server dipindah, atau kunci age diganti.
 
 ### Hasil 2026-11-27
 
-Uji pertama dijalankan di server produksi dengan dump terbaru dari R2. Hitungan baris sama persis dengan database hidup, dan database uji sudah dihapus setelahnya.
+Uji pertama dijalankan di server produksi dengan dump terbaru dari R2, sebelum enkripsi age. Hitungan baris sama persis dengan database hidup, dan database uji sudah dihapus setelahnya.
 
 | Tabel | Database hidup | Hasil pemulihan |
 | --- | --- | --- |
