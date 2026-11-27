@@ -164,3 +164,103 @@ hak scripts/hak-subjek/catat.ts --tolak <nomor> --alasan "<alasan tanpa data pri
 ```
 
 Tutup setelah balasan "selesai" atau "ditolak" terkirim. Penolakan wajib menyebut alasannya, dan alasan yang sama ditulis di balasan.
+
+## 8. Templat Balasan
+
+Subjek: `Re: <subjek asli> [Permintaan #<nomor>]`. Tulis apa adanya, tanpa data yang tidak perlu. Tutup setiap balasan dengan:
+
+```text
+Salam,
+Tim AksesBogor
+```
+
+### Diterima
+
+```text
+Halo,
+
+Permintaan Anda sudah kami terima pada <tanggal jam> WIB dan kami catat dengan nomor <nomor>. Kami menyelesaikannya paling lambat <tanggal jam tenggat> WIB.
+```
+
+### Perlu dikirim dari email akun
+
+```text
+Halo,
+
+Permintaan Anda sudah kami terima dan kami catat dengan nomor <nomor>. Supaya data tidak jatuh ke orang lain, kami hanya menjalankan permintaan atas data akun yang dikirim dari alamat email akun AksesBogor itu sendiri. Mohon kirim ulang permintaan ini dari alamat tersebut. Kami tidak meminta KTP atau dokumen lain.
+```
+
+### Tidak ada akun
+
+```text
+Halo,
+
+Kami tidak menemukan akun AksesBogor dengan alamat email ini, jadi kami tidak menyimpan akun, laporan, atau foto atas nama alamat ini. Log server (alamat IP, halaman yang dibuka, dan waktunya) disimpan paling lama 30 hari dan tidak dikaitkan dengan email.
+```
+
+### Selesai: salinan data
+
+```text
+Halo,
+
+Terlampir salinan data akun AksesBogor Anda dalam berkas JSON yang bisa dibaca komputer dan dibawa ke layanan lain. Bagian "catatan" di awal berkas menjelaskan isi setiap bagian. Berkas foto tidak ikut; balas email ini bila Anda juga ingin salinan foto laporan Anda.
+
+Catatan internal verifikator dan nama anggota tim yang memeriksa laporan tidak kami sertakan, karena berisi data pribadi orang lain. Salinan berkas ini sudah kami hapus dari komputer kami.
+```
+
+### Selesai: ganti email
+
+```text
+Halo,
+
+Email akun AksesBogor Anda sudah kami ganti ke <email baru>. Semua sesi masuk sudah berakhir. Silakan masuk lagi dengan kode yang kami kirim ke email baru.
+
+Bila sebelumnya Anda masuk dengan Google, tautan itu sudah kami lepas. Setelah sekali masuk dengan kode, Anda bisa memakai tombol Google lagi bila email baru itu akun Google.
+```
+
+### Selesai: laporan ditahan
+
+```text
+Halo,
+
+<jumlah> laporan Anda yang belum diperiksa sudah kami tahan sejak <tanggal jam> WIB. Selama ditahan, laporan itu tidak diperiksa verifikator dan tidak ditutup otomatis. Laporan yang Anda kirim setelah ini tidak ikut ditahan.
+
+Balas email ini bila Anda ingin pemeriksaan dilanjutkan. Tenggat menjawab pertanyaan klarifikasi akan kami perpanjang selama masa tahan.
+```
+
+### Selesai: email status laporan dihentikan
+
+```text
+Halo,
+
+Kami sudah berhenti mengirim email status laporan ke akun Anda. Status laporan dan pertanyaan dari verifikator tetap bisa Anda lihat di Akun Saya. Laporan yang pertanyaannya tidak dijawab dalam 7 hari akan ditutup, jadi periksa Akun Saya sesekali. Kode masuk tetap kami kirim setiap kali Anda masuk.
+```
+
+### Selesai: akun dihapus
+
+```text
+Halo,
+
+Akun AksesBogor Anda sudah kami hapus. Nama, email, waktu persetujuan, semua sesi, dan laporan yang belum terbit beserta fotonya sudah dihapus. Informasi tempat dan foto yang sudah terbit tetap tayang tanpa nama Anda. Salinan di cadangan database hilang paling lama 30 hari lagi.
+
+Email ini yang terakhir dari kami tentang akun tersebut. Bila Anda masuk lagi dengan email ini, akun baru yang kosong akan dibuat.
+```
+
+### Ditolak
+
+Hanya untuk alasan di Pasal 33: permintaan itu membahayakan keamanan, kesehatan fisik, atau kesehatan mental pemilik data atau orang lain; mengungkap data pribadi orang lain; atau bertentangan dengan kepentingan pertahanan dan keamanan nasional. Bila hanya sebagian yang ditolak, jalankan sisanya dan sebutkan keduanya.
+
+```text
+Halo,
+
+Kami tidak bisa menjalankan permintaan nomor <nomor> <seluruhnya / bagian ...> karena <alasan, mis. permintaan ini akan mengungkap data pribadi orang lain>. UU No. 27 Tahun 2022 Pasal 33 mewajibkan kami menolak permintaan seperti ini.
+
+Bila Anda tidak setuju, balas email ini. Anda juga bisa mengadu ke lembaga penyelenggara pelindungan data pribadi, seperti tertulis di bagian Hak Anda pada Kebijakan Privasi.
+```
+
+## 9. Catatan Teknis
+
+- Permintaan dicatat di tabel `data_subject_requests`: jenis, id akun, waktu diterima, admin yang menangani, waktu ditutup, hasil (`selesai` atau `ditolak`), dan alasan penolakan. Tanpa email, nama, atau isi permintaan. Id akun sengaja tanpa foreign key, jadi catatan tetap ada setelah akunnya dihapus.
+- Log audit mencatat `permintaan_dicatat`, `permintaan_selesai`, `permintaan_ditolak`, `data_diekspor`, `email_diubah`, `laporan_ditahan`, `laporan_dilepas`, `email_laporan_dimatikan`, `email_laporan_dinyalakan`, dan `akun_dihapus`, masing-masing dengan nomor permintaan dan admin pelakunya ([ADR-0038](../decisions/0038-log-audit-perubahan-data.md)). Email, alasan penahanan, dan isi permintaan tidak masuk log audit.
+- Laporan yang ditahan memakai kolom `reports.held_at` dan `reports.hold_reason`; email status laporan yang dimatikan memakai `users.report_emails_off_at`. Keduanya kolom nullable dari migrasi 0012, jadi versi API sebelumnya tetap berjalan.
+- Skrip hanya mencetak id akun, nomor permintaan, dan jumlah. Galat database dicetak tanpa parameter kuerinya.
