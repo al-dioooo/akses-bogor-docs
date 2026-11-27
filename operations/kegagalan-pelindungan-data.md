@@ -71,7 +71,7 @@ Simpan bukti dulu, lalu ubah sistem. Bukti yang hilang membuat isi pemberitahuan
 | Server fatir-mitya dibobol | Putuskan dari internet dengan menghentikan `cloudflared` (satu-satunya jalan masuk dari luar). Jangan pasang ulang server sebelum bukti disimpan. Ganti semua rahasia dari tempat lain, lalu bangun ulang dan pulihkan dari dump terakhir yang bersih |
 | Bug yang membuka data | Matikan fiturnya (flag di `api.env` bila ada) atau revert di `release`. Bila revert belum masuk, ikuti rollback manual di README akses-bogor-api atau akses-bogor-web |
 | Salah kirim email | Minta penerima menghapus email itu. Periksa apakah salahnya di data akun atau di kode |
-| Foto dengan wajah atau pelat jelas | Sembunyikan atau kaburkan foto itu lewat Kelola tempat, lalu nilai apakah orang di foto bisa dikenali |
+| Foto dengan wajah atau pelat jelas | Hapus foto itu lewat Kelola tempat ("Hapus foto ini"); Kelola tempat tidak bisa mengaburkan. Unggah ulang versi yang sudah dikaburkan bila fotonya masih dibutuhkan, lalu nilai apakah orang di foto bisa dikenali. Untuk foto Street View, pakai langkah hapus foto di [runbook verifikasi Street View](verifikasi-street-view.md) |
 | Data hilang atau rusak | Pulihkan dump terakhir yang utuh (README akses-bogor-api, bagian Cadangan dan Pemulihan). Laporan dan akun yang dibuat setelah dump itu ikut hilang, jadi pemiliknya termasuk yang terdampak |
 | Pemberitahuan dari penyedia | Minta rincian ke penyedia: data apa, rentang waktu, dan apakah data AksesBogor ikut. Jam ke-0 sudah berjalan sejak email penyedia diterima |
 
